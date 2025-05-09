@@ -1,0 +1,26 @@
+{
+  "name": "canvas-game",
+  "version": "1.0.0",
+  "description": "A pure JavaScript single-page game using Canvas and Vite.",
+  "keywords": [
+    "canvas",
+    "game",
+    "javascript",
+    "vite"
+  ],
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "src/index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "pixi.js": "^8.9.2"
+  }
+}
