@@ -18,9 +18,7 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-    "vite": "^6.3.5"
-  },
-  "dependencies": {
-    "pixi.js": "^8.9.2"
+    "vite": "^6.3.5",
+    "vite-plugin-singlefile": "^2.2.0"
   }
 }
