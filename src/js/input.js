@@ -1,5 +1,5 @@
 import Config from "./Config";
-import Scene from "./Scene";
+import Scene from "./gameObjs/Scene";
 
 const domControls = document.getElementById('controls');
 const l1 = document.getElementById('l1');
@@ -116,12 +116,20 @@ function setupKeyboardControls() {
     });
 }
 
-function dispatchInputEvent(key) {
-    for (const go of Scene.activeScene.getGameObjects()) {
-        for (const [name, comp] of go.getComponents().entries()) {
+function dispatchInputEventRecursive(root, key) {
+    if (root.getComponents) {
+        for (const [, comp] of root.getComponents().entries()) {
             comp.onInput?.(key);
         }
     }
+
+    for (const child of root.children) {
+        dispatchInputEventRecursive(child, key);
+    }
+}
+
+function dispatchInputEvent(key) {
+    dispatchInputEventRecursive(Scene.activeScene, key);
 }
 
 btnU.onclick = () => {

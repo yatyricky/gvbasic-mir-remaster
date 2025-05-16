@@ -1,5 +1,7 @@
-import Config from "./Config";
-import TextRenderer from "./TextRenderer";
+import Config from "../Config";
+import TextRenderer from "../components/TextRenderer";
+import { strIsEmpty } from "../utils";
+import Hierarchy from "./Hierarchy";
 
 const app = document.getElementById('app');
 app.style.fontSize = `${Math.round(Config.SIZE2 * 0.75)}px`;
@@ -52,12 +54,46 @@ function updateRender(dom, text) {
         td.style.display = 'none';
         i++;
     }
-
-    console.log("rerender");
-    
 }
 
-export default class Scene {
+function updateRecursive(root) {
+    if (!root.active) {
+        return;
+    }
+    root.update?.();
+    for (const child of root.children) {
+        updateRecursive(child);
+    }
+}
+
+function buildBufferRecursive(root, buffer) {
+    if (!root.active) {
+        return;
+    }
+    const renderer = root.getComponent?.(TextRenderer);
+    if (renderer != null) {
+        const { queue, pixels } = renderer.render();
+        if (!buffer.has(queue)) {
+            buffer.set(queue, []);
+        }
+        const canvas = buffer.get(queue);
+        for (const { x, y, text } of pixels) {
+            const w = text.charCodeAt(0) > 255 ? 2 : 1;
+            if (x + w > 20) {
+                continue;
+            }
+            canvas[y * 20 + x] = text;
+            if (w > 1) {
+                canvas[y * 20 + x + 1] = null;
+            }
+        }
+    }
+    for (const child of root.children) {
+        buildBufferRecursive(child, buffer);
+    }
+}
+
+export default class Scene extends Hierarchy {
     /**@type {Scene} */
     static activeScene = null;
     static setActiveScene(scene) {
@@ -67,53 +103,24 @@ export default class Scene {
     static _depthBuffer = [];
 
     constructor() {
-        this.gameObjects = [];
+        super();
         this._isRunning = false;
         this.start();
     }
 
-    addGameObject(gameObject) {
-        this.gameObjects.push(gameObject);
-    }
-
-    getGameObjects() {
-        return this.gameObjects;
-    }
-
     start() {
         this._isRunning = true;
-        this._updater = this.update.bind(this);
-        requestAnimationFrame(this._updater);
+        this._gameLooper = this.gameLoop.bind(this);
+        requestAnimationFrame(this._gameLooper);
     }
 
-    update() {
+    gameLoop() {
         // logic
-        for (const go of this.gameObjects) {
-            go.update?.();
-        }
+        updateRecursive(this);
         // render
         // 1. build depth buffer
         const buffer = new Map();
-        for (const go of this.gameObjects) {
-            const renderer = go.getComponent(TextRenderer);
-            if (renderer) {
-                const { queue, pixels } = renderer.render();
-                if (!buffer.has(queue)) {
-                    buffer.set(queue, []);
-                }
-                const canvas = buffer.get(queue);
-                for (const { x, y, text } of pixels) {
-                    const w = text.charCodeAt(0) > 255 ? 2 : 1;
-                    if (x + w > 20) {
-                        continue;
-                    }
-                    canvas[y * 20 + x] = text;
-                    if (w > 1) {
-                        canvas[y * 20 + x + 1] = null;
-                    }
-                }
-            }
-        }
+        buildBufferRecursive(this, buffer)
 
         // 2. sort buffer
         const pushBuffer = [];
@@ -132,26 +139,33 @@ export default class Scene {
                     sb.push(c);
                 }
             }
-            pushBuffer.push(sb.join(''));
+            pushBuffer.push({ str: sb.join(''), queue: k });
         }
 
         // 2. compare with depth buffer and render
         let i = 0;
         for (; i < pushBuffer.length; i++) {
-            const str = pushBuffer[i];
+            const { str, queue } = pushBuffer[i];
             const curr = Scene._depthBuffer[i];
-            if (curr == null) {
-                Scene._depthBuffer[i] = str;
-                const dc = document.createElement('div');
+            let dc = app.children[i];
+            if (dc == null) {
+                dc = document.createElement('div');
+                dc.style.width = `${Config.SIZE * 20}px`;
+                dc.style.height = `${Config.SIZE2 * 5}px`;
                 dc.className = 'queue';
                 app.appendChild(dc);
                 updateRender(dc, str)
             } else if (curr !== str) {
-                Scene._depthBuffer[i] = str;
-                updateRender(app.children[i], str);
+                updateRender(dc, str);
             }
+            Scene._depthBuffer[i] = str;
             if (app.children[i].style.display === 'none') {
                 app.children[i].style.display = 'block';
+            }
+            if (queue === Config.QUEUE_MODAL && !strIsEmpty(str)) {
+                dc.style.backgroundColor = 'rgba(51, 112, 72, 0.8)';
+            } else {
+                dc.style.backgroundColor = 'rgba(255, 255, 255, 0)';
             }
         }
         for (; i < Scene._depthBuffer.length; i++) {
@@ -161,7 +175,7 @@ export default class Scene {
 
         // 3. request next frame
         if (this._isRunning) {
-            requestAnimationFrame(this._updater);
+            requestAnimationFrame(this._gameLooper);
         }
     }
 }

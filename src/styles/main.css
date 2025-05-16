@@ -1,10 +1,10 @@
-@font-face {
+/* @font-face {
     font-family: 'VonwaonBitmap';
     src: url('../assets/fonts/VonwaonBitmap-16px.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
-}
+} */
 
 body {
     margin: 0;
@@ -41,7 +41,7 @@ button {
 }
 
 .queue {
-    position: relative;
+    position: absolute;
 }
 
 .pixel {

@@ -4,7 +4,7 @@ export default class TextRenderer {
      * @param {string} text 
      */
     constructor(text) {
-        this.text = text;
+        this.text = text ?? "";
         this.width = 0;
         this.queue = 0;
     }
@@ -23,7 +23,7 @@ export default class TextRenderer {
         const pixels = [];
         let x = 0;
         let y = 0;
-        const gox = this.gameObject.x;
+        const gox = Math.round(this.gameObject.x * 2);
         const goy = this.gameObject.y;
         for (const c of this.text) {
             if (c === '\n') {
