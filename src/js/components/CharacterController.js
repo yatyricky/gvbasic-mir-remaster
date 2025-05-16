@@ -33,11 +33,11 @@ export default class CharacterController {
         }
 
         if (key === "l") {
-            this.gameObject.x = Math.max(this.gameObject.x - 2, 0);
+            this.gameObject.x = Math.max(this.gameObject.x - 1, 0);
         }
 
         if (key === "r") {
-            this.gameObject.x = Math.min(this.gameObject.x + 2, 18);
+            this.gameObject.x = Math.min(this.gameObject.x + 1, 9);
         }
 
     }

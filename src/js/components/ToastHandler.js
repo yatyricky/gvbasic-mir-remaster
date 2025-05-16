@@ -28,13 +28,12 @@ export default class ToastHandler {
 ║                ║
 ║                ║
 ╚════════╝`;
-        this.backdrop.addComponent(new TextRenderer(base).setQueue(Config.QUEUE_MODAL));
+        this.backdrop.addComponent(TextRenderer).setText(base).setQueue(Config.QUEUE_MODAL);
     }
 
     addTextRenderer() {
         this.textObj = new GameObject("child", this.gameObject).setPosition(1, 1);
-        this.tr = new TextRenderer().setQueue(Config.QUEUE_MODAL);
-        this.textObj.addComponent(this.tr);
+        this.tr = this.textObj.addComponent(TextRenderer).setQueue(Config.QUEUE_MODAL);
     }
 
     onInput(key) {

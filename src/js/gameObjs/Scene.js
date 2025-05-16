@@ -98,7 +98,9 @@ export default class Scene extends Hierarchy {
     /**@type {Scene} */
     static activeScene = null;
     static setActiveScene(scene) {
+        Scene.activeScene?.stop();
         Scene.activeScene = scene;
+        scene.start();
     }
 
     static _depthBuffer = [];
@@ -106,13 +108,17 @@ export default class Scene extends Hierarchy {
     constructor() {
         super();
         this._isRunning = false;
-        this.start();
     }
 
     start() {
         this._isRunning = true;
         this._gameLooper = this.gameLoop.bind(this);
         requestAnimationFrame(this._gameLooper);
+    }
+
+    stop() {
+        this._isRunning = false;
+        this._gameLooper = null;
     }
 
     gameLoop() {

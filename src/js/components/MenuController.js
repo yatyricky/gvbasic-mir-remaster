@@ -1,31 +1,94 @@
 import userData from "../data/UserData";
 import { dispatch } from "../eventBus";
 import { arrLast } from "../utils";
+import Config from "../Config";
+import GameObject from "../gameObjs/GameObject";
+import TextRenderer from "./TextRenderer";
+import { HeroIden } from "../configData/Hero";
 
 export default class MenuController {
+    onInit() {
+        this.addMainMenu();
+        this.addNewHeroMenu();
+    }
+
     onInput(key) {
-        if (key === 'u') {
-            this.gameObject.y = Math.max(1, this.gameObject.y - 1);
-        } else if (key === 'd') {
-            this.gameObject.y = Math.min(3, this.gameObject.y + 1);
-        } else if (key === 'a') {
-            switch (this.gameObject.y) {
-                case 1:
-                    const last = arrLast(userData.chars);
-                    if (last == null) {
-                        dispatch("toast", "没有可使用的角色！");
-                    }
-                    break;
-                case 2:
+        if (this.mainMenu.active) {
+            if (key === 'u') {
+                this.mainMenuArror.y = Math.max(1, this.mainMenuArror.y - 1);
+            } else if (key === 'd') {
+                this.mainMenuArror.y = Math.min(3, this.mainMenuArror.y + 1);
+            } else if (key === 'a') {
+                switch (this.mainMenuArror.y) {
+                    case 1:
+                        const last = arrLast(userData.data.chars);
+                        if (last == null) {
+                            dispatch("toast", "没有可使用的角色！");
+                        } else {
+                            dispatch("scene:game");
+                        }
+                        break;
+                    case 2:
+                        this.newHero();
+                        break;
+                    case 3:
 
-                    break;
-                case 3:
+                        break;
 
-                    break;
+                    default:
+                        break;
+                }
+            }
+        } else if (this.newHeroMenu.active) {
+            if (key === 'u') {
+                this.newHeroArror.y = Math.max(1, this.newHeroArror.y - 1);
+            } else if (key === 'd') {
+                this.newHeroArror.y = Math.min(3, this.newHeroArror.y + 1);
+            } else if (key === 'a') {
+                switch (this.newHeroArror.y) {
+                    case 1:
+                        userData.addChar(HeroIden.warr);
+                        break;
+                    case 2:
+                        userData.addChar(HeroIden.mage);
+                        break;
+                    case 3:
+                        userData.addChar(HeroIden.wlk);
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
+                dispatch("scene:game");
+            } else if (key === 'b') {
+                this.newHeroMenu.active = false;
+                this.mainMenu.active = true;
             }
         }
+    }
+
+    addMainMenu() {
+        this.mainMenu = new GameObject("mainMenu", this.gameObject);
+        new GameObject("text1", this.mainMenu).setPosition(2.5, 1).addComponent(TextRenderer).setText("1.继续游戏").setQueue(Config.QUEUE_UI);
+        new GameObject("text2", this.mainMenu).setPosition(2.5, 2).addComponent(TextRenderer).setText("2.新 游 戏").setQueue(Config.QUEUE_UI);
+        new GameObject("text3", this.mainMenu).setPosition(2.5, 3).addComponent(TextRenderer).setText("3.加载存档").setQueue(Config.QUEUE_UI);
+        this.mainMenuArror = new GameObject("arrow", this.mainMenu).setPosition(1, 1)
+        this.mainMenuArror.addComponent(TextRenderer).setText("▶").setQueue(Config.QUEUE_UI);
+    }
+
+    addNewHeroMenu() {
+        this.newHeroMenu = new GameObject("newHeroMenu", this.gameObject);
+        new GameObject("text1", this.newHeroMenu).setPosition(3, 1).addComponent(TextRenderer).setText("1.武士").setQueue(Config.QUEUE_UI);
+        new GameObject("text2", this.newHeroMenu).setPosition(3, 2).addComponent(TextRenderer).setText("2.魔法师").setQueue(Config.QUEUE_UI);
+        new GameObject("text2", this.newHeroMenu).setPosition(3, 3).addComponent(TextRenderer).setText("3.道士").setQueue(Config.QUEUE_UI);
+        this.newHeroArror = new GameObject("arrow", this.newHeroMenu).setPosition(1, 1)
+        this.newHeroArror.addComponent(TextRenderer).setText("▶").setQueue(Config.QUEUE_UI);
+        this.newHeroMenu.active = false;
+    }
+
+    newHero() {
+        this.mainMenu.active = false;
+        this.newHeroMenu.active = true;
+        this.newHeroArror.y = 1;
     }
 }

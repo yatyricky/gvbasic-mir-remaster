@@ -1,10 +1,6 @@
 export default class TextRenderer {
-    /**
-     * 
-     * @param {string} text 
-     */
-    constructor(text) {
-        this.text = text ?? "";
+    constructor() {
+        this.text = "";
         this.width = 0;
         this.queue = 0;
     }

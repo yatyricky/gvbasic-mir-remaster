@@ -7,36 +7,39 @@ import MenuController from "./components/MenuController";
 import { subscribe } from "./eventBus";
 import ToastHandler from "./components/ToastHandler";
 import Config from "./Config";
+import userData from "./data/UserData";
+import { arrLast } from "./utils";
+import HeroComponent from "./components/HeroComponent";
 
 InitInput();
 
 let menuScene;
+let gameScene;
 
 function makeMenuScene() {
     menuScene = new Scene();
-    Scene.setActiveScene(menuScene);
+    new GameObject("mc", menuScene).addComponent(MenuController);
+    new GameObject("th", menuScene).addComponent(ToastHandler);
+}
 
-    new GameObject().addComponent(new TextRenderer("1.继续游戏").setQueue(Config. QUEUE_UI)).setPosition(2.5, 1);
-    new GameObject().addComponent(new TextRenderer("2.新 游 戏").setQueue(Config.QUEUE_UI)).setPosition(2.5, 2);
-    new GameObject().addComponent(new TextRenderer("3.加载存档").setQueue(Config.QUEUE_UI)).setPosition(2.5, 3);
-    new GameObject().addComponent(new TextRenderer("▶").setQueue(Config.QUEUE_UI)).setPosition(1, 1).addComponent(new MenuController());
-
-    new GameObject().addComponent(new ToastHandler());
+function makeGameScene() {
+    gameScene = new Scene();
 }
 
 async function main() {
     makeMenuScene();
+    makeGameScene();
+    Scene.setActiveScene(menuScene);
 
-    // const go = new GameObject("char");
-    // go.addComponent(new TextRenderer("Hello World").setText("🥷").setQueue(2));
-    // go.addComponent(new CharacterController());
+    subscribe("scene:game", () => {
+        const hero = arrLast(userData.data.chars);
 
-    // const grass = new GameObject("grass");
-    // grass.setPosition(1, 1);
-    // grass.addComponent(new TextRenderer("░      ░🌳🌳🌳🌳  🌳▓        🌳🌳🌳🌳  🌳  🌳     ▚   🌳🌳                🌳🌳🌳🌳"));
-
-    // const menu = new GameObject("menu");
-    // menu.addComponent(new TextRenderer("Menu").setText("菜单").setQueue(10));
+        const char = new GameObject("char", gameScene);
+        const heroComp = char.addComponent(HeroComponent).setId(hero.heroId);
+        char.addComponent(TextRenderer).setText(heroComp.config.image).setQueue(Config.QUEUE_NPC);
+        char.addComponent(CharacterController);
+        Scene.setActiveScene(gameScene);
+    })
 }
 
 main();

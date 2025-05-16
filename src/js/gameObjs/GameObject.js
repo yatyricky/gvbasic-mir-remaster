@@ -10,7 +10,7 @@ export default class GameObject extends Hierarchy {
      */
     constructor(name, parent) {
         super();
-        this.name = name ?? `GameObject (${Scene.activeScene.children.length})`;
+        this.name = name ?? `GameObject (${Scene.activeScene?.children.length})`;
         this.x = 0;
         this.y = 0;
         this.components = new Map();
@@ -24,15 +24,16 @@ export default class GameObject extends Hierarchy {
         return this;
     }
 
-    onInput(key) {
-        console.log(`${this.name}: Input received: ${key}`);
-    }
-
-    addComponent(component) {
+    addComponent(type) {
+        if (this.components.has(type)) {
+            console.warn(`Component of type ${type} already exists on ${this.name}`);
+            return this.components.get(type);
+        }
+        const component = new type();
         component.gameObject = this;
-        this.components.set(component.constructor, component);
+        this.components.set(type, component);
         component.onInit?.();
-        return this;
+        return component;
     }
 
     getComponent(type) {
