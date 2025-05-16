@@ -19,7 +19,7 @@ for (let i = 0; i < 5; i++) {
         }
         td.style.height = `${SIZE2}px`;
         td.style.lineHeight = `${SIZE2}px`;
-        td.style.fontSize = `${Math.round(SIZE2 * 0.64)}px`;
+        td.style.fontSize = `${Math.round(SIZE2 * 0.75)}px`;
         row.push(td);
         tr.appendChild(td);
     }
@@ -121,7 +121,12 @@ function render(text) {
 }
 
 // Example 1: Using the custom pixel text function
-const textDisplay = '   lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+const textDisplay = `   lore这是im veniam, quis nostrud exercitation ullam技术方案、施工质量及工程验收。
+协调与设计单位、监理单位的关系。
+​​乙方职责​​：
+​​第七条 退出机制​​
+​​自愿退出​​：
+需提前90日书面derit in voluptate v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱elid est laborum.`;
 
 function shuffleString(str) {
     // Use Array.from with a string to properly split by unicode characters

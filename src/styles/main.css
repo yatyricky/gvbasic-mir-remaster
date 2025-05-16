@@ -1,9 +1,18 @@
+@font-face {
+    font-family: 'VonwaonBitmap';
+    src: url('../assets/fonts/VonwaonBitmap-16px.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #8A8782;
     touch-action: manipulation;
+    font-family: 'VonwaonBitmap', 'Courier New', monospace;
 
     /* Disable text selection */
     user-select: none;
@@ -32,7 +41,7 @@ td {
     box-sizing: border-box;
     text-align: center;
     vertical-align: middle;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: inherit;
 }
 
 button {
