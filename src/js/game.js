@@ -1,3 +1,4 @@
+import GameObject from "./gameObject";
 import { setupKeyboardControls } from "./input";
 import { waitForSeconds } from "./utils";
 
@@ -27,6 +28,7 @@ for (let i = 0; i < 5; i++) {
     container.appendChild(tr);
 }
 
+const domControls = document.getElementById('controls');
 const l1 = document.getElementById('l1');
 const l2 = document.getElementById('l2');
 const c1 = document.getElementById('c1');
@@ -42,8 +44,8 @@ const btnY = document.getElementById('btn_y');
 
 const cu = Math.round(SIZE * 20 / 7);
 
-c1.style.top = `${SIZE2 * 5 + cu}px`;
-c2.style.top = `${SIZE2 * 5 + cu}px`;
+c1.style.top = `${cu}px`;
+c2.style.top = `${cu}px`;
 c2.style.left = `${cu * 3}px`;
 
 function setDOMRect(dom, x, y, w, h) {
@@ -53,6 +55,7 @@ function setDOMRect(dom, x, y, w, h) {
     dom.style.height = `${h}px`;
 }
 
+setDOMRect(domControls, 0, 0, SIZE * 20, cu * 3);
 setDOMRect(l1, cu * 0, cu, cu * 3, cu);
 setDOMRect(l2, cu * 1, 0, cu, cu * 3);
 setDOMRect(btnU, cu * 1, 0, cu, cu);
@@ -66,7 +69,7 @@ setDOMRect(btnB, cu * 3, cu, cu, cu);
 
 setupKeyboardControls(btnU, btnD, btnL, btnR, btnA, btnB, btnX, btnY);
 
-function render(text) {
+function _render(text) {
     for (const row of slots) {
         for (const td of row) {
             td.innerText = '';
@@ -120,66 +123,72 @@ function render(text) {
     }
 }
 
-// Example 1: Using the custom pixel text function
-const textDisplay = `   lore这是im veniam, quis nostrud exercitation ullam技术方案、施工质量及工程验收。
-协调与设计单位、监理单位的关系。
-​​乙方职责​​：
-​​第七条 退出机制​​
-​​自愿退出​​：
-需提前90日书面derit in voluptate v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱v😊☺😰😱elid est laborum.`;
+/**@type {GameObject[]} */
+const gos = [];
 
-function shuffleString(str) {
-    // Use Array.from with a string to properly split by unicode characters
-    // This correctly handles emojis and other surrogate pairs
-    const arr = Array.from(str);
-
-    // Fisher-Yates shuffle algorithm
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+function render() {
+    const buffer = [];
+    for (const go of gos) {
+        const pos = go.y * 20 + go.x;
+        buffer[pos] = go.text;
+        for (let i = 1; i < go.width; i++) {
+            
+        }
     }
-
-    return arr.join('');
 }
 
-render(textDisplay);
-
 btnU.onclick = () => {
-    let x = localStorage.getItem("save");
-    if (x == null) {
-        x = 0;
-    } else {
-        x = parseInt(x);
+    for (const go of gos) {
+        go.onInput('u');
     }
-    x++;
-    localStorage.setItem("save", x.toString());
-    
-    console.log('btnU');
+    render();
 };
 btnD.onclick = () => {
-    console.log('btnD');
+    for (const go of gos) {
+        go.onInput('d');
+    }
+    render();
 };
 btnL.onclick = () => {
-    console.log('btnL');
+    for (const go of gos) {
+        go.onInput('l');
+    }
+    render();
 };
 btnR.onclick = () => {
-    console.log('btnR');
+    for (const go of gos) {
+        go.onInput('r');
+    }
+    render();
 };
 btnA.onclick = () => {
-    render(localStorage.getItem("save") + ":" + shuffleString(textDisplay));
+    for (const go of gos) {
+        go.onInput('a');
+    }
+    render();
 };
 btnB.onclick = () => {
-    console.log('btnB');
+    for (const go of gos) {
+        go.onInput('b');
+    }
+    render();
 };
 btnX.onclick = () => {
-    console.log('btnX');
+    for (const go of gos) {
+        go.onInput('x');
+    }
+    render();
 };
 btnY.onclick = () => {
-    console.log('btnY');
+    for (const go of gos) {
+        go.onInput('y');
+    }
+    render();
 };
 
 async function main() {
-    
+    const hero = new GameObject("He");
+    gos.push(hero);
 }
 
 main();
