@@ -1,8 +1,50 @@
-export function setupKeyboardControls(btnU, btnD, btnL, btnR, btnA, btnB, btnX, btnY) {
+import Config from "./Config";
+import Scene from "./Scene";
+
+const domControls = document.getElementById('controls');
+const l1 = document.getElementById('l1');
+const l2 = document.getElementById('l2');
+const c1 = document.getElementById('c1');
+const c2 = document.getElementById('c2');
+const btnU = document.getElementById('btn_up');
+const btnD = document.getElementById('btn_down');
+const btnL = document.getElementById('btn_left');
+const btnR = document.getElementById('btn_right');
+const btnA = document.getElementById('btn_a');
+const btnB = document.getElementById('btn_b');
+const btnX = document.getElementById('btn_x');
+const btnY = document.getElementById('btn_y');
+
+const cu = Math.round(Config.SIZE * 20 / 7);
+
+c1.style.top = `${cu}px`;
+c2.style.top = `${cu}px`;
+c2.style.left = `${cu * 3}px`;
+
+function setDOMRect(dom, x, y, w, h) {
+    dom.style.left = `${x}px`;
+    dom.style.top = `${y}px`;
+    dom.style.width = `${w}px`;
+    dom.style.height = `${h}px`;
+}
+
+setDOMRect(domControls, 0, 0, Config.SIZE * 20, cu * 4);
+setDOMRect(l1, cu * 0, cu, cu * 3, cu);
+setDOMRect(l2, cu * 1, 0, cu, cu * 3);
+setDOMRect(btnU, cu * 1, 0, cu, cu);
+setDOMRect(btnD, cu * 1, cu * 2, cu, cu);
+setDOMRect(btnL, cu * 0, cu, cu, cu);
+setDOMRect(btnR, cu * 2, cu, cu, cu);
+setDOMRect(btnY, cu * 2, 0, cu, cu);
+setDOMRect(btnA, cu * 2, cu * 2, cu, cu);
+setDOMRect(btnX, cu, cu, cu, cu);
+setDOMRect(btnB, cu * 3, cu, cu, cu);
+
+function setupKeyboardControls() {
     const keyMapping = {
         'ArrowUp': btnU,
         'ArrowDown': btnD,
-        'ArrowLeft': btnL, 
+        'ArrowLeft': btnL,
         'ArrowRight': btnR,
         'a': btnA,
         'b': btnB,
@@ -13,14 +55,14 @@ export function setupKeyboardControls(btnU, btnD, btnL, btnR, btnA, btnB, btnX, 
     // Function to simulate button press/release
     function simulateButtonEvent(button, isPressed) {
         if (!button) return;
-        
+
         // Visual feedback
         if (isPressed) {
             button.style.opacity = '0.7';
         } else {
             button.style.opacity = '1.0';
         }
-        
+
         // Create and dispatch appropriate event
         const eventType = isPressed ? 'mousedown' : 'mouseup';
         const event = new MouseEvent(eventType, {
@@ -28,9 +70,9 @@ export function setupKeyboardControls(btnU, btnD, btnL, btnR, btnA, btnB, btnX, 
             cancelable: true,
             view: window
         });
-        
+
         button.dispatchEvent(event);
-        
+
         // Also dispatch click event on release
         if (!isPressed) {
             const clickEvent = new MouseEvent('click', {
@@ -41,10 +83,10 @@ export function setupKeyboardControls(btnU, btnD, btnL, btnR, btnA, btnB, btnX, 
             button.dispatchEvent(clickEvent);
         }
     }
-    
+
     // Track currently pressed keys to avoid repeat events
     const pressedKeys = new Set();
-    
+
     // Key down handler
     document.addEventListener('keydown', (e) => {
         const key = e.key;
@@ -54,7 +96,7 @@ export function setupKeyboardControls(btnU, btnD, btnL, btnR, btnA, btnB, btnX, 
             e.preventDefault(); // Prevent scrolling with arrow keys
         }
     });
-    
+
     // Key up handler
     document.addEventListener('keyup', (e) => {
         const key = e.key;
@@ -64,7 +106,7 @@ export function setupKeyboardControls(btnU, btnD, btnL, btnR, btnA, btnB, btnX, 
             e.preventDefault();
         }
     });
-    
+
     // When window loses focus, reset all pressed keys
     window.addEventListener('blur', () => {
         pressedKeys.forEach(key => {
@@ -72,4 +114,41 @@ export function setupKeyboardControls(btnU, btnD, btnL, btnR, btnA, btnB, btnX, 
         });
         pressedKeys.clear();
     });
+}
+
+function dispatchInputEvent(key) {
+    for (const go of Scene.activeScene.getGameObjects()) {
+        for (const [name, comp] of go.getComponents().entries()) {
+            comp.onInput?.(key);
+        }
+    }
+}
+
+btnU.onclick = () => {
+    dispatchInputEvent('u');
+};
+btnD.onclick = () => {
+    dispatchInputEvent('d');
+};
+btnL.onclick = () => {
+    dispatchInputEvent('l');
+};
+btnR.onclick = () => {
+    dispatchInputEvent('r');
+};
+btnA.onclick = () => {
+    dispatchInputEvent('a');
+};
+btnB.onclick = () => {
+    dispatchInputEvent('b');
+};
+btnX.onclick = () => {
+    dispatchInputEvent('x');
+};
+btnY.onclick = () => {
+    dispatchInputEvent('y');
+};
+
+export function InitInput() {
+    setupKeyboardControls();
 }

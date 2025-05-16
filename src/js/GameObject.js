@@ -1,24 +1,19 @@
+import Scene from "./Scene";
+
 export default class GameObject {
     /**
      * 
-     * @param {string} text 
+     * @param {string} name 
      * @param {number} x 
      * @param {number} y 
      */
-    constructor(text, x, y) {
+    constructor(name, x, y) {
+        this.name = name;
         this.x = x ?? 0;
         this.y = y ?? 0;
-        this.text = text;
-        this.width = 0;
-        this._updateWidth();
-    }
+        this.components = new Map();
 
-    _updateWidth() {
-        let s = 0;
-        for (const c of this.text) {
-            s += c.charCodeAt(0) > 255 ? 2 : 1;
-        }
-        this.width = s;
+        Scene.activeScene.addGameObject(this);
     }
 
     setPosition(x, y) {
@@ -26,12 +21,20 @@ export default class GameObject {
         this.y = y;
     }
 
-    setText(text) {
-        this.text = text;
-        this._updateWidth();
+    onInput(key) {
+        console.log(`${this.name}: Input received: ${key}`);
     }
 
-    onInput(key) {
+    addComponent(component) {
+        component.gameObject = this;
+        this.components.set(component.constructor, component);
+    }
 
+    getComponent(type) {
+        return this.components.get(type);
+    }
+
+    getComponents() {
+        return this.components;
     }
 }

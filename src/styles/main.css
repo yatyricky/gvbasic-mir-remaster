@@ -24,26 +24,6 @@ body {
     -webkit-touch-callout: none;
 }
 
-table {
-    border-spacing: 0;
-}
-
-tr {
-    position: relative;
-}
-
-td {
-    position: absolute;
-    padding: 0;
-    background-color: #306542;
-    /* border: 1px solid #8A8782; */
-    color: #011d01;
-    box-sizing: border-box;
-    text-align: center;
-    vertical-align: middle;
-    font-family: inherit;
-}
-
 button {
     position: absolute;
     width: 40px;
@@ -52,9 +32,23 @@ button {
 
 #app {
     margin: 0 auto;
+    background-color: #337048;
 }
 
 #controls {
     position: relative;
     margin: 0 auto;
+}
+
+.queue {
+    position: relative;
+}
+
+.pixel {
+    position: absolute;
+    color: #011d01;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    font-family: inherit;
 }
