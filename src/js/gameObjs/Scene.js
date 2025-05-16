@@ -1,5 +1,6 @@
 import Config from "../Config";
 import TextRenderer from "../components/TextRenderer";
+import { flushEvents } from "../eventBus";
 import { strIsEmpty } from "../utils";
 import Hierarchy from "./Hierarchy";
 
@@ -172,6 +173,8 @@ export default class Scene extends Hierarchy {
             Scene._depthBuffer[i] = null;
             app.children[i].style.display = 'none';
         }
+
+        flushEvents();
 
         // 3. request next frame
         if (this._isRunning) {

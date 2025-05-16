@@ -8,16 +8,15 @@ export default class ToastHandler {
     onInit() {
         this.addBackdrop();
         this.addTextRenderer();
+        this.show(false);
 
         this.timeout = -1;
         subscribe("toast", (message) => {
             this.tr.setText(strWrap(message, 16));
-            this.backdrop.active = true;
-            this.textObj.active = true;
+            this.show(true);
             clearTimeout(this.timeout);
             this.timeout = setTimeout(() => {
-                this.backdrop.active = false;
-                this.textObj.active = false;
+                this.show(false);
             }, 1000);
         });
     }
@@ -30,13 +29,20 @@ export default class ToastHandler {
 ║                ║
 ╚════════╝`;
         this.backdrop.addComponent(new TextRenderer(base).setQueue(Config.QUEUE_MODAL));
-        this.backdrop.active = false;
     }
 
     addTextRenderer() {
         this.textObj = new GameObject("child", this.gameObject).setPosition(1, 1);
         this.tr = new TextRenderer().setQueue(Config.QUEUE_MODAL);
         this.textObj.addComponent(this.tr);
-        this.textObj.active = false;
+    }
+
+    onInput(key) {
+        this.show(false);
+    }
+
+    show(flag) {
+        this.backdrop.active = flag;
+        this.textObj.active = flag;
     }
 }

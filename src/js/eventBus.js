@@ -21,10 +21,19 @@ export function subscribe(event, callback, fireImmediately = false) {
     };
 }
 
+const eventQueue = [];
+
 export function dispatch(event, detail) {
-    if (subscribers.has(event)) {
-        subscribers.get(event).forEach(callback => {
-            callback(detail);
-        });
+    eventQueue.push([event, detail]);
+}
+
+export function flushEvents() {
+    for (const [event, detail] of eventQueue) {
+        if (subscribers.has(event)) {
+            subscribers.get(event).forEach(callback => {
+                callback(detail);
+            });
+        }
     }
+    eventQueue.length = 0;
 }
