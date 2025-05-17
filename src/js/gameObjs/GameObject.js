@@ -105,6 +105,20 @@ export default class GameObject {
         return this.components;
     }
 
+    /**
+     * 
+     * @param {string} name 
+     * @returns {GameObject}
+     */
+    find(name) {
+        for (const child of this.children) {
+            if (child.name === name) {
+                return child;
+            }
+        }
+        return null;
+    }
+
     update() {
     }
 }

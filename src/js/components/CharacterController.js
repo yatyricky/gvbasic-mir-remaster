@@ -1,6 +1,14 @@
+import { subscribe } from "../EventBus";
 import Component from "./Component";
 
 export default class CharacterController extends Component {
+    constructor() {
+        super();
+        subscribe("game:menu", (active) => {
+            this.gameObject.setActive(!active);
+        });
+    }
+
     /**
      * @override 
      * @param {string} key

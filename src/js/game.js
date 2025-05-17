@@ -45,7 +45,15 @@ function main() {
 
     subscribe("scene:game", () => {
         loginScene.setActive(false);
-        initGameScene(gameScene);
+        gameScene.setActive(true);
+        if (gameScene.find("gameMenu") == null) {
+            initGameScene(gameScene);
+        }
+    })
+
+    subscribe("scene:menu", () => {
+        gameScene.setActive(false);
+        loginScene.setActive(true);
     })
 }
 

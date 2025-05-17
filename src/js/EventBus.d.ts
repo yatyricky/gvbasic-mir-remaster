@@ -2,7 +2,9 @@ import type { Component } from "svelte";
 
 interface EventBusDefine {
     "toast": string;
+    "scene:menu": null;
     "scene:game": null;
+    "game:menu": boolean;
 }
 
 export function subscribe<T extends keyof EventBusDefine>(event: T, callback: (data: EventBusDefine[T]) => void, fireImmediately = false): () => void;
