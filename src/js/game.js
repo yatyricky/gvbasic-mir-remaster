@@ -15,41 +15,37 @@ import GameMenuController from "./components/GameMenuController";
 
 InitInput();
 
-/**@type {Scene} */
-let menuScene;
-/**@type {Scene} */
-let gameScene;
-
-function makeMenuScene() {
-    menuScene = new Scene("menu");
-    new GameObject("mc", menuScene).addComponent(MenuController);
-    new GameObject("th", menuScene).addComponent(ToastHandler);
-}
-
-function makeGameScene() {
-    gameScene = new Scene("game");
-}
-
-function initGameScene() {
+/**
+ * 
+ * @param {GameObject} gameRoot 
+ */
+function initGameScene(gameRoot) {
     const hero = arrLast(userData.data.chars);
 
-    const char = new GameObject("char", gameScene);
+    const char = new GameObject("char", gameRoot);
     const heroComp = char.addComponent(HeroComponent).setId(hero.heroId);
     char.addComponent(TextRenderer).setText(heroComp.config.image).setQueue(Config.QUEUE_NPC);
     char.addComponent(CharacterController);
 
-    const gameMenu = new GameObject("gameMenu", gameScene);
+    const gameMenu = new GameObject("gameMenu", gameRoot);
     gameMenu.addComponent(GameMenuController);
 }
 
 function main() {
-    makeMenuScene();
-    makeGameScene();
-    SceneManager.setActiveScene(menuScene);
+    const scene = new Scene("menu");
+    SceneManager.setActiveScene(scene);
+
+    // general
+    new GameObject("toast", scene).addComponent(ToastHandler);
+    const loginScene = new GameObject("login", scene);
+    const gameScene = new GameObject("game");
+
+    // login
+    new GameObject("mainMenu", loginScene).addComponent(MenuController);
 
     subscribe("scene:game", () => {
-        initGameScene();
-        SceneManager.setActiveScene(gameScene);
+        loginScene.setActive(false);
+        initGameScene(gameScene);
     })
 }
 

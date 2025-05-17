@@ -140,7 +140,7 @@ function buildBufferRecursive(root, buffer) {
     if (!root.active) {
         return;
     }
-    const renderer = root.getComponent?.(TextRenderer);
+    const renderer = root.getComponent(TextRenderer);
     if (renderer != null) {
         const { queue, pixels, bgColor, color } = renderer.render();
         if (!buffer.has(queue)) {

@@ -8,7 +8,7 @@ export default class GameObject {
      * @param {GameObject} parent 
      * @param {boolean} orphan
      */
-    constructor(name, parent, orphan = false) {
+    constructor(name, parent = null, orphan = false) {
         this._active = true;
         /** @type {GameObject[]}*/
         this.children = [];

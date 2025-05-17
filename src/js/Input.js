@@ -136,10 +136,12 @@ function setupKeyboardControls() {
  * @param {string} key 
  */
 function dispatchInputEventRecursive(root, key) {
-    if (root.getComponents) {
-        for (const [, comp] of root.getComponents().entries()) {
-            comp.onInput?.(key);
-        }
+    if (!root.active) {
+        return;
+    }
+
+    for (const [, comp] of root.getComponents().entries()) {
+        comp.onInput(key);
     }
 
     for (const child of root.children) {
