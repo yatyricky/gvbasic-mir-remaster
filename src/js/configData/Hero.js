@@ -4,10 +4,6 @@ export const Hero = [
     { id: 3, iden: "wlk", name: "道士", description: "Hero1 Description", image: "🧝", baseStat: { exp: 0, maxhp: 36, hp: 36, mp: 19, maxmp: 19 } },
 ]
 
-if (new Set(Hero.map((e) => e.id)).size !== Hero.length) {
-    throw new Error("Hero id is not unique");
-}
-
 /** @type {Record<number, ElementTypeOf<Hero>>}*/
 export const HeroById = {};
 for (const e of Hero) {

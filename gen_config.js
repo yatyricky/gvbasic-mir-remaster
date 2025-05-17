@@ -23,12 +23,17 @@ for (const file of fs.readdirSync(cfgDir)) {
     }
     const exportsName = `${parsed.name}Iden`;
     let sb = `export const ${exportsName} = {};\n`;
+    const dupIdCheck = new Set();
     const dupCheck = new Set();
     for (const entry of config) {
         if (dupCheck.has(entry.iden)) {
-            throw new Error(`Duplicate iden found: ${entry.iden}`);
+            throw new Error(`Duplicate iden found: ${entry.iden} in ${file}`);
         }
         dupCheck.add(entry.iden);
+        if (dupIdCheck.has(entry.id)) {
+            throw new Error(`Duplicate id found: ${entry.id} in ${file}`);
+        }
+        dupIdCheck.add(entry.id);
         sb += `${exportsName}.${entry.iden} = ${entry.id};\n`;
     }
 
