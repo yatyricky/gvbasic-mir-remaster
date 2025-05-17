@@ -13,4 +13,8 @@ export default class Component {
     onInput(key) {
 
     }
+
+    toString() {
+        return this.constructor.name;
+    }
 }

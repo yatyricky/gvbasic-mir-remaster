@@ -23,7 +23,7 @@ export default class ToastHandler extends Component {
     }
 
     addBackdrop() {
-        this.backdrop = new GameObject("child", this.gameObject);
+        this.backdrop = new GameObject("back", this.gameObject);
         const base = `╔═══提示═══╗
 ║                ║
 ║                ║
@@ -33,7 +33,7 @@ export default class ToastHandler extends Component {
     }
 
     addTextRenderer() {
-        this.textObj = new GameObject("child", this.gameObject).setPosition(1, 1);
+        this.textObj = new GameObject("text", this.gameObject).setPosition(1, 1);
         this.tr = this.textObj.addComponent(TextRenderer).setBgColor('rgba(51, 112, 72, 0.75)').setQueue(Config.QUEUE_MODAL);
     }
 

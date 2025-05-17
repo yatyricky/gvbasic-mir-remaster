@@ -2,11 +2,66 @@ import Config from "../Config";
 import TextRenderer from "../components/TextRenderer";
 import { flushEvents } from "../EventBus";
 import GameObject from "./GameObject";
+import SceneManager from "../SceneManager";
 
 const app = document.getElementById('app');
 app.style.fontSize = `${Math.round(Config.SIZE2 * 0.75)}px`;
 app.style.width = `${Config.SIZE * 20}px`;
 app.style.height = `${Config.SIZE2 * 5}px`;
+
+const isDebug = true;
+/** @type {HTMLElement} */
+let domHierarchyTree;
+let prevTree = "";
+if (isDebug) {
+    domHierarchyTree = document.createElement('div');
+    document.body.appendChild(domHierarchyTree);
+    domHierarchyTree.style.fontFamily = "'Arial', sans-serif";
+}
+
+function buildHierarchyTreeText() {
+    let sb = ""
+    let indent = 0;
+    /**
+     * 
+     * @param {GameObject} curr 
+     */
+    function buildTreeRecursive(curr) {
+        if (curr == null) {
+            return;
+        }
+        let label = curr.name;
+        const comps = [];
+        for (const [, comp] of curr.getComponents().entries()) {
+            comps.push(comp.toString());
+        }
+        if (comps.length > 0) {
+            label += ` (${comps.join(', ')})`;
+        }
+        if (!curr.active) {
+            label = `<span style="color:#4f4f4f">${label}</span>`;
+        }
+
+        sb += `${'&nbsp;'.repeat(indent * 4)}${label}<br/>`;
+        for (const child of curr.children) {
+            indent++;
+            buildTreeRecursive(child);
+            indent--;
+        }
+    }
+    buildTreeRecursive(SceneManager.activeScene);
+    return sb;
+}
+
+function buildHierarchyTree() {
+    const latest = buildHierarchyTreeText();
+    if (prevTree === latest) {
+        return;
+    }
+    prevTree = latest;
+
+    domHierarchyTree.innerHTML = latest;
+}
 
 /**
  * 
@@ -245,6 +300,11 @@ export default class Scene extends GameObject {
         }
 
         flushEvents();
+
+        // debug tree
+        if (isDebug) {
+            buildHierarchyTree();
+        }
 
         // 3. request next frame
         if (this._isRunning) {

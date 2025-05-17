@@ -32,7 +32,7 @@ function initGameScene(gameRoot) {
 }
 
 function main() {
-    const scene = new Scene("menu");
+    const scene = new Scene("root");
     SceneManager.setActiveScene(scene);
 
     // general

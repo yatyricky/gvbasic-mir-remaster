@@ -83,4 +83,8 @@ export default class TextRenderer extends Component {
             color: this.color,
         };
     }
+
+    toString() {
+        return `TextRenderer{q:${this.queue}}`
+    }
 }
