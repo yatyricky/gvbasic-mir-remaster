@@ -6,9 +6,9 @@ export default class GameObject {
      * 
      * @param {string} name 
      * @param {GameObject} parent 
-     * @param {boolean} isolated
+     * @param {boolean} orphan
      */
-    constructor(name, parent, isolated = false) {
+    constructor(name, parent, orphan = false) {
         this.active = true;
         /** @type {GameObject[]}*/
         this.children = [];
@@ -19,7 +19,7 @@ export default class GameObject {
         /** @type {Map<new() => Component, Component>} */
         this.components = new Map();
 
-        if (!isolated) {
+        if (!orphan) {
             this.setParent(parent ?? SceneManager.activeScene);
         }
     }

@@ -29,18 +29,22 @@ function makeGameScene() {
     gameScene = new Scene("game");
 }
 
-async function main() {
+function initGameScene() {
+    const hero = arrLast(userData.data.chars);
+
+    const char = new GameObject("char", gameScene);
+    const heroComp = char.addComponent(HeroComponent).setId(hero.heroId);
+    char.addComponent(TextRenderer).setText(heroComp.config.image).setQueue(Config.QUEUE_NPC);
+    char.addComponent(CharacterController);
+}
+
+function main() {
     makeMenuScene();
     makeGameScene();
     SceneManager.setActiveScene(menuScene);
 
     subscribe("scene:game", () => {
-        const hero = arrLast(userData.data.chars);
-
-        const char = new GameObject("char", gameScene);
-        const heroComp = char.addComponent(HeroComponent).setId(hero.heroId);
-        char.addComponent(TextRenderer).setText(heroComp.config.image).setQueue(Config.QUEUE_NPC);
-        char.addComponent(CharacterController);
+        initGameScene();
         SceneManager.setActiveScene(gameScene);
     })
 }
