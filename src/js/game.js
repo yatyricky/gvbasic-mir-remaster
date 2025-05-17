@@ -4,32 +4,35 @@ import Scene from "./gameObjs/Scene";
 import TextRenderer from "./components/TextRenderer";
 import CharacterController from "./components/CharacterController";
 import MenuController from "./components/MenuController";
-import { subscribe } from "./eventBus";
+import { subscribe } from "./EventBus";
 import ToastHandler from "./components/ToastHandler";
 import Config from "./Config";
 import userData from "./data/UserData";
-import { arrLast } from "./utils";
+import { arrLast } from "./Utils";
 import HeroComponent from "./components/HeroComponent";
+import SceneManager from "./SceneManager";
 
 InitInput();
 
+/**@type {Scene} */
 let menuScene;
+/**@type {Scene} */
 let gameScene;
 
 function makeMenuScene() {
-    menuScene = new Scene();
+    menuScene = new Scene("menu");
     new GameObject("mc", menuScene).addComponent(MenuController);
     new GameObject("th", menuScene).addComponent(ToastHandler);
 }
 
 function makeGameScene() {
-    gameScene = new Scene();
+    gameScene = new Scene("game");
 }
 
 async function main() {
     makeMenuScene();
     makeGameScene();
-    Scene.setActiveScene(menuScene);
+    SceneManager.setActiveScene(menuScene);
 
     subscribe("scene:game", () => {
         const hero = arrLast(userData.data.chars);
@@ -38,7 +41,7 @@ async function main() {
         const heroComp = char.addComponent(HeroComponent).setId(hero.heroId);
         char.addComponent(TextRenderer).setText(heroComp.config.image).setQueue(Config.QUEUE_NPC);
         char.addComponent(CharacterController);
-        Scene.setActiveScene(gameScene);
+        SceneManager.setActiveScene(gameScene);
     })
 }
 

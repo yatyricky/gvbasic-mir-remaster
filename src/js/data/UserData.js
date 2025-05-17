@@ -1,5 +1,4 @@
-import { Stat } from "../configData/Stat";
-import { Hero, HeroById } from "../configData/Hero";
+import { HeroById } from "../configData/Hero";
 
 class UserData {
     constructor() {
@@ -8,6 +7,7 @@ class UserData {
 
     loadFromDisk() {
         const json = localStorage.getItem('data');
+        /**@type {ISaveData} */
         let obj = {};
         try {
             obj = JSON.parse(json);
@@ -23,8 +23,13 @@ class UserData {
         localStorage.setItem('data', JSON.stringify(this.data));
     }
 
+    /**
+     * 
+     * @param {number} id 
+     */
     addChar(id) {
         const config = HeroById[id];
+        /**@type {IUnit} */
         const char = {
             heroId: config.id,
             stats: { ...config.baseStat },

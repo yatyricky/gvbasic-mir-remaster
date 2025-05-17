@@ -1,17 +1,22 @@
 import userData from "../data/UserData";
-import { dispatch } from "../eventBus";
-import { arrLast } from "../utils";
+import { dispatch } from "../EventBus";
+import { arrLast } from "../Utils";
 import Config from "../Config";
 import GameObject from "../gameObjs/GameObject";
 import TextRenderer from "./TextRenderer";
 import { HeroIden } from "../configData/Hero";
+import Component from "./Component";
 
-export default class MenuController {
+export default class MenuController extends Component {
     onInit() {
         this.addMainMenu();
         this.addNewHeroMenu();
     }
 
+    /**
+     * 
+     * @param {string} key 
+     */
     onInput(key) {
         if (this.mainMenu.active) {
             if (key === 'u') {
@@ -25,7 +30,7 @@ export default class MenuController {
                         if (last == null) {
                             dispatch("toast", "没有可使用的角色！");
                         } else {
-                            dispatch("scene:game");
+                            dispatch("scene:game", null);
                         }
                         break;
                     case 2:
@@ -59,7 +64,7 @@ export default class MenuController {
                     default:
                         break;
                 }
-                dispatch("scene:game");
+                dispatch("scene:game", null);
             } else if (key === 'b') {
                 this.newHeroMenu.active = false;
                 this.mainMenu.active = true;

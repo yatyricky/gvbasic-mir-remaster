@@ -1,14 +1,19 @@
 import Config from "../Config";
 import TextRenderer from "../components/TextRenderer";
-import { flushEvents } from "../eventBus";
-import { strIsEmpty } from "../utils";
-import Hierarchy from "./Hierarchy";
+import { flushEvents } from "../EventBus";
+import { strIsEmpty } from "../Utils";
+import GameObject from "./GameObject";
 
 const app = document.getElementById('app');
 app.style.fontSize = `${Math.round(Config.SIZE2 * 0.75)}px`;
 app.style.width = `${Config.SIZE * 20}px`;
 app.style.height = `${Config.SIZE2 * 5}px`;
 
+/**
+ * 
+ * @param {HTMLElement} dom 
+ * @param {string} text 
+ */
 function updateRender(dom, text) {
     let x = 0;
     let y = 0;
@@ -31,7 +36,7 @@ function updateRender(dom, text) {
             break;
         }
 
-        let td = dom.children[i];
+        let td = /**@type {HTMLElement} */(dom.children[i]);
         if (td == null) {
             td = document.createElement('div');
             td.className = 'pixel';
@@ -51,22 +56,33 @@ function updateRender(dom, text) {
         x += w;
     }
     while (i < dom.children.length) {
-        const td = dom.children[i];
+        const td = /**@type {HTMLElement} */(dom.children[i]);
         td.style.display = 'none';
         i++;
     }
 }
 
+/**
+ * 
+ * @param {GameObject} root 
+ * @returns 
+ */
 function updateRecursive(root) {
     if (!root.active) {
         return;
     }
-    root.update?.();
+    root.update();
     for (const child of root.children) {
         updateRecursive(child);
     }
 }
 
+/**
+ * 
+ * @param {GameObject} root 
+ * @param {Map<number, Array<string>>} buffer 
+ * @returns 
+ */
 function buildBufferRecursive(root, buffer) {
     if (!root.active) {
         return;
@@ -94,19 +110,16 @@ function buildBufferRecursive(root, buffer) {
     }
 }
 
-export default class Scene extends Hierarchy {
-    /**@type {Scene} */
-    static activeScene = null;
-    static setActiveScene(scene) {
-        Scene.activeScene?.stop();
-        Scene.activeScene = scene;
-        scene.start();
-    }
-
+export default class Scene extends GameObject {
+    /**@type {string[]} */
     static _depthBuffer = [];
 
-    constructor() {
-        super();
+    /**
+     * 
+     * @param {string} name 
+     */
+    constructor(name) {
+        super(name ?? "Scene", null, true);
         this._isRunning = false;
     }
 
@@ -154,7 +167,7 @@ export default class Scene extends Hierarchy {
         for (; i < pushBuffer.length; i++) {
             const { str, queue } = pushBuffer[i];
             const curr = Scene._depthBuffer[i];
-            let dc = app.children[i];
+            let dc = /**@type {HTMLElement}*/(app.children[i]);
             if (dc == null) {
                 dc = document.createElement('div');
                 dc.style.width = `${Config.SIZE * 20}px`;
@@ -166,8 +179,8 @@ export default class Scene extends Hierarchy {
                 updateRender(dc, str);
             }
             Scene._depthBuffer[i] = str;
-            if (app.children[i].style.display === 'none') {
-                app.children[i].style.display = 'block';
+            if (dc.style.display === 'none') {
+                dc.style.display = 'block';
             }
             if (queue === Config.QUEUE_MODAL && !strIsEmpty(str)) {
                 dc.style.backgroundColor = 'rgba(51, 112, 72, 0.8)';
@@ -177,7 +190,7 @@ export default class Scene extends Hierarchy {
         }
         for (; i < Scene._depthBuffer.length; i++) {
             Scene._depthBuffer[i] = null;
-            app.children[i].style.display = 'none';
+            /**@type {HTMLElement}*/(app.children[i]).style.display = 'none';
         }
 
         flushEvents();

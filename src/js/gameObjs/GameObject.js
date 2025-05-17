@@ -1,46 +1,96 @@
-import Scene from "../gameObjs/Scene";
-import Hierarchy from "./Hierarchy";
+import Component from "../components/Component";
+import SceneManager from "../SceneManager";
 
-export default class GameObject extends Hierarchy {
+export default class GameObject {
     /**
      * 
      * @param {string} name 
-     * @param {number} x 
-     * @param {number} y 
+     * @param {GameObject} parent 
+     * @param {boolean} isolated
      */
-    constructor(name, parent) {
-        super();
-        this.name = name ?? `GameObject (${Scene.activeScene?.children.length})`;
+    constructor(name, parent, isolated = false) {
+        this.active = true;
+        /** @type {GameObject[]}*/
+        this.children = [];
+        this.parent = null;
+        this.name = name ?? `GameObject (${SceneManager.activeScene?.children.length})`;
         this.x = 0;
         this.y = 0;
+        /** @type {Map<new() => Component, Component>} */
         this.components = new Map();
 
-        this.setParent(parent ?? Scene.activeScene);
+        if (!isolated) {
+            this.setParent(parent ?? SceneManager.activeScene);
+        }
     }
 
+    /**
+     * 
+     * @param {GameObject} parent 
+     * @returns 
+     */
+    setParent(parent) {
+        if (this.parent != null) {
+            this.parent.removeChild(this);
+        }
+        this.parent = parent;
+        parent.children.push(this);
+        return this;
+    }
+
+    /**
+     * 
+     * @param {GameObject} child 
+     */
+    removeChild(child) {
+        const index = this.children.indexOf(child);
+        if (index > -1) {
+            this.children.splice(index, 1);
+        }
+    }
+
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     * @returns 
+     */
     setPosition(x, y) {
         this.x = x;
         this.y = y;
         return this;
     }
 
+    /**
+     * @template {Component} T
+     * @param {new() => T} type 
+     * @returns {T}
+     */
     addComponent(type) {
         if (this.components.has(type)) {
             console.warn(`Component of type ${type} already exists on ${this.name}`);
-            return this.components.get(type);
+            return /**@type {T}*/(this.components.get(type));
         }
         const component = new type();
         component.gameObject = this;
         this.components.set(type, component);
-        component.onInit?.();
+        component.onInit();
         return component;
     }
 
+    /**
+     * @template {Component} T
+     * @param {new() => T} type 
+     * @returns {T}
+     */
     getComponent(type) {
-        return this.components.get(type);
+        return /**@type {T}*/(this.components.get(type));
     }
 
     getComponents() {
         return this.components;
+    }
+
+    update() {
     }
 }

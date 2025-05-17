@@ -12,11 +12,13 @@ if (new Set(Hero.map((e) => e.iden)).size !== Hero.length) {
     throw new Error("Hero iden is not unique");
 }
 
+/** @type {Record<string, number>}*/
 export const HeroIden = {};
 for (const e of Hero) {
     HeroIden[e.iden] = e.id;
 }
 
+/** @type {Record<number, ElementTypeOf<Hero>>}*/
 export const HeroById = {};
 for (const e of Hero) {
     HeroById[e.id] = e;

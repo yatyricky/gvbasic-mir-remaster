@@ -1,10 +1,11 @@
 import Config from "../Config";
-import { subscribe } from "../eventBus";
+import { subscribe } from "../EventBus";
 import GameObject from "../gameObjs/GameObject";
-import { strWrap } from "../utils";
+import { strWrap } from "../Utils";
+import Component from "./Component";
 import TextRenderer from "./TextRenderer";
 
-export default class ToastHandler {
+export default class ToastHandler extends Component {
     onInit() {
         this.addBackdrop();
         this.addTextRenderer();
@@ -36,10 +37,18 @@ export default class ToastHandler {
         this.tr = this.textObj.addComponent(TextRenderer).setQueue(Config.QUEUE_MODAL);
     }
 
+    /**
+     * 
+     * @param {string} key 
+     */
     onInput(key) {
         this.show(false);
     }
 
+    /**
+     * 
+     * @param {boolean} flag 
+     */
     show(flag) {
         this.backdrop.active = flag;
         this.textObj.active = flag;

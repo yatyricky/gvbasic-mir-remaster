@@ -1,5 +1,6 @@
 import Config from "./Config";
-import Scene from "./gameObjs/Scene";
+import GameObject from "./gameObjs/GameObject";
+import SceneManager from "./SceneManager";
 
 const domControls = document.getElementById('controls');
 const l1 = document.getElementById('l1');
@@ -21,6 +22,14 @@ c1.style.top = `${cu}px`;
 c2.style.top = `${cu}px`;
 c2.style.left = `${cu * 3}px`;
 
+/**
+ * 
+ * @param {HTMLElement} dom 
+ * @param {number} x 
+ * @param {number} y 
+ * @param {number} w 
+ * @param {number} h 
+ */
 function setDOMRect(dom, x, y, w, h) {
     dom.style.left = `${x}px`;
     dom.style.top = `${y}px`;
@@ -41,6 +50,7 @@ setDOMRect(btnX, cu, cu, cu, cu);
 setDOMRect(btnB, cu * 3, cu, cu, cu);
 
 function setupKeyboardControls() {
+    /**@type {Record<string, HTMLElement>} */
     const keyMapping = {
         'ArrowUp': btnU,
         'ArrowDown': btnD,
@@ -52,7 +62,11 @@ function setupKeyboardControls() {
         'y': btnY,
     };
 
-    // Function to simulate button press/release
+    /**
+     * Function to simulate button press/release
+     * @param {HTMLElement} button - The button element to simulate
+     * @param {boolean} isPressed - Whether the button is pressed or released
+     */
     function simulateButtonEvent(button, isPressed) {
         if (!button) return;
 
@@ -116,6 +130,11 @@ function setupKeyboardControls() {
     });
 }
 
+/**
+ * 
+ * @param {GameObject} root 
+ * @param {string} key 
+ */
 function dispatchInputEventRecursive(root, key) {
     if (root.getComponents) {
         for (const [, comp] of root.getComponents().entries()) {
@@ -128,8 +147,12 @@ function dispatchInputEventRecursive(root, key) {
     }
 }
 
+/**
+ * 
+ * @param {string} key 
+ */
 function dispatchInputEvent(key) {
-    dispatchInputEventRecursive(Scene.activeScene, key);
+    dispatchInputEventRecursive(SceneManager.activeScene, key);
 }
 
 btnU.onclick = () => {

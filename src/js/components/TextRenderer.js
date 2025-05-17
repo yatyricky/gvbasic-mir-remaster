@@ -1,15 +1,28 @@
-export default class TextRenderer {
+import Component from "./Component";
+
+export default class TextRenderer extends Component {
     constructor() {
+        super();
         this.text = "";
         this.width = 0;
         this.queue = 0;
     }
 
+    /**
+     * 
+     * @param {string} text 
+     * @returns 
+     */
     setText(text) {
         this.text = text;
         return this;
     }
 
+    /**
+     * 
+     * @param {number} queue 
+     * @returns 
+     */
     setQueue(queue) {
         this.queue = queue;
         return this;
