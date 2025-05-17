@@ -15,6 +15,12 @@ declare global {
     interface ISaveData {
         chars?: IUnit[];
     }
+
+    interface IPixel {
+        text: string;
+        bgColor?: string;
+        color?: string;
+    }
 }
 
 export { };

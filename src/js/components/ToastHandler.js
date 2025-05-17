@@ -29,12 +29,12 @@ export default class ToastHandler extends Component {
 ║                ║
 ║                ║
 ╚════════╝`;
-        this.backdrop.addComponent(TextRenderer).setText(base).setQueue(Config.QUEUE_MODAL);
+        this.backdrop.addComponent(TextRenderer).setText(base).setBgColor('rgba(51, 112, 72, 0.75)').setQueue(Config.QUEUE_MODAL);
     }
 
     addTextRenderer() {
         this.textObj = new GameObject("child", this.gameObject).setPosition(1, 1);
-        this.tr = this.textObj.addComponent(TextRenderer).setQueue(Config.QUEUE_MODAL);
+        this.tr = this.textObj.addComponent(TextRenderer).setBgColor('rgba(51, 112, 72, 0.75)').setQueue(Config.QUEUE_MODAL);
     }
 
     /**

@@ -11,6 +11,7 @@ import userData from "./data/UserData";
 import { arrLast } from "./Utils";
 import HeroComponent from "./components/HeroComponent";
 import SceneManager from "./SceneManager";
+import GameMenuController from "./components/GameMenuController";
 
 InitInput();
 
@@ -36,6 +37,9 @@ function initGameScene() {
     const heroComp = char.addComponent(HeroComponent).setId(hero.heroId);
     char.addComponent(TextRenderer).setText(heroComp.config.image).setQueue(Config.QUEUE_NPC);
     char.addComponent(CharacterController);
+
+    const gameMenu = new GameObject("gameMenu", gameScene);
+    gameMenu.addComponent(GameMenuController);
 }
 
 function main() {

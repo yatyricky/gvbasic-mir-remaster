@@ -1,7 +1,6 @@
 import Config from "../Config";
 import TextRenderer from "../components/TextRenderer";
 import { flushEvents } from "../EventBus";
-import { strIsEmpty } from "../Utils";
 import GameObject from "./GameObject";
 
 const app = document.getElementById('app');
@@ -12,21 +11,21 @@ app.style.height = `${Config.SIZE2 * 5}px`;
 /**
  * 
  * @param {HTMLElement} dom 
- * @param {string} text 
+ * @param {IPixel[]} pixels 
  */
-function updateRender(dom, text) {
+function updateRender(dom, pixels) {
     let x = 0;
     let y = 0;
 
     let i = 0;
-    for (const c of text) {
-        if (c === '\n') {
+    for (const c of pixels) {
+        if (c.text === '\n') {
             y++;
             x = 0;
             continue;
         }
 
-        const w = c.charCodeAt(0) > 255 ? 2 : 1;
+        const w = c.text.charCodeAt(0) > 255 ? 2 : 1;
         if (x + w > 20) {
             y++;
             x = 0;
@@ -42,12 +41,22 @@ function updateRender(dom, text) {
             td.className = 'pixel';
             dom.appendChild(td);
         }
-        td.textContent = c;
+        td.textContent = c.text;
         td.style.width = `${w * Config.SIZE}px`;
         td.style.height = `${Config.SIZE2}px`;
         td.style.top = `${y * Config.SIZE2}px`;
         td.style.left = `${x * Config.SIZE}px`;
         td.style.lineHeight = `${Config.SIZE2}px`;
+        if (c.bgColor != null) {
+            td.style.backgroundColor = c.bgColor;
+        } else {
+            td.style.backgroundColor = '';
+        }
+        if (c.color != null) {
+            td.style.color = c.color;
+        } else {
+            td.style.color = '';
+        }
         if (td.style.display === 'none') {
             td.style.display = 'block';
         }
@@ -79,8 +88,52 @@ function updateRecursive(root) {
 
 /**
  * 
+ * @param {IPixel[]} a 
+ * @param {IPixel[]} b 
+ */
+function comparePixels(a, b) {
+    if (a == null && b == null) {
+        return true;
+    }
+    if (a == null || b == null) {
+        return false;
+    }
+    if (a.length === 0 && b.length === 0) {
+        return true;
+    }
+    if (a.length !== b.length) {
+        return false;
+    }
+    for (let i = 0; i < a.length; i++) {
+        const c1 = a[i];
+        const c2 = b[i];
+        if (c1.text !== c2.text) {
+            return false;
+        }
+        const c1bgnull = c1.bgColor == null;
+        const c2bgnull = c2.bgColor == null;
+        if (c1bgnull !== c2bgnull) {
+            return false;
+        }
+        if (!c1bgnull && c1.bgColor !== c2.bgColor) {
+            return false;
+        }
+        const c1fgnull = c1.color == null;
+        const c2fgnull = c2.color == null;
+        if (c1fgnull !== c2fgnull) {
+            return false;
+        }
+        if (!c1fgnull && c1.color !== c2.color) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * 
  * @param {GameObject} root 
- * @param {Map<number, Array<string>>} buffer 
+ * @param {Map<number, Array<IPixel>>} buffer 
  * @returns 
  */
 function buildBufferRecursive(root, buffer) {
@@ -89,7 +142,7 @@ function buildBufferRecursive(root, buffer) {
     }
     const renderer = root.getComponent?.(TextRenderer);
     if (renderer != null) {
-        const { queue, pixels } = renderer.render();
+        const { queue, pixels, bgColor, color } = renderer.render();
         if (!buffer.has(queue)) {
             buffer.set(queue, []);
         }
@@ -99,7 +152,7 @@ function buildBufferRecursive(root, buffer) {
             if (x + w > 20) {
                 continue;
             }
-            canvas[y * 20 + x] = text;
+            canvas[y * 20 + x] = { text, bgColor, color };
             if (w > 1) {
                 canvas[y * 20 + x + 1] = null;
             }
@@ -111,7 +164,7 @@ function buildBufferRecursive(root, buffer) {
 }
 
 export default class Scene extends GameObject {
-    /**@type {string[]} */
+    /**@type {Array<IPixel[]>} */
     static _depthBuffer = [];
 
     /**
@@ -139,33 +192,36 @@ export default class Scene extends GameObject {
         updateRecursive(this);
         // render
         // 1. build depth buffer
+        /**@type {Map<number, Array<IPixel>>} */
         const buffer = new Map();
-        buildBufferRecursive(this, buffer)
+        buildBufferRecursive(this, buffer);
 
         // 2. sort buffer
+        /**@type {Array<{ pixels: IPixel[], queue: number }>} */
         const pushBuffer = [];
         const keys = Array.from(buffer.keys());
         keys.sort((a, b) => a - b);
         for (const k of keys) {
             const canvas = buffer.get(k);
+            /**@type {Array<IPixel>} */
             const sb = [];
             for (let i = 0; i < canvas.length; i++) {
                 const c = canvas[i];
                 if (c === undefined) {
-                    sb.push(' ');
+                    sb.push({ text: ' ' });
                 } else if (c === null) {
                     continue;
                 } else {
                     sb.push(c);
                 }
             }
-            pushBuffer.push({ str: sb.join(''), queue: k });
+            pushBuffer.push({ pixels: sb, queue: k });
         }
 
         // 2. compare with depth buffer and render
         let i = 0;
         for (; i < pushBuffer.length; i++) {
-            const { str, queue } = pushBuffer[i];
+            const { pixels } = pushBuffer[i];
             const curr = Scene._depthBuffer[i];
             let dc = /**@type {HTMLElement}*/(app.children[i]);
             if (dc == null) {
@@ -174,18 +230,13 @@ export default class Scene extends GameObject {
                 dc.style.height = `${Config.SIZE2 * 5}px`;
                 dc.className = 'queue';
                 app.appendChild(dc);
-                updateRender(dc, str)
-            } else if (curr !== str) {
-                updateRender(dc, str);
+                updateRender(dc, pixels)
+            } else if (!comparePixels(curr, pixels)) {
+                updateRender(dc, pixels);
             }
-            Scene._depthBuffer[i] = str;
+            Scene._depthBuffer[i] = pixels;
             if (dc.style.display === 'none') {
                 dc.style.display = 'block';
-            }
-            if (queue === Config.QUEUE_MODAL && !strIsEmpty(str)) {
-                dc.style.backgroundColor = 'rgba(51, 112, 72, 0.8)';
-            } else {
-                dc.style.backgroundColor = 'rgba(255, 255, 255, 0)';
             }
         }
         for (; i < Scene._depthBuffer.length; i++) {

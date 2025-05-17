@@ -6,6 +6,8 @@ export default class TextRenderer extends Component {
         this.text = "";
         this.width = 0;
         this.queue = 0;
+        this.bgColor = null;
+        this.color = null;
     }
 
     /**
@@ -15,6 +17,26 @@ export default class TextRenderer extends Component {
      */
     setText(text) {
         this.text = text;
+        return this;
+    }
+
+    /**
+     * 
+     * @param {string} color 
+     * @returns 
+     */
+    setBgColor(color) {
+        this.bgColor = color;
+        return this;
+    }
+
+    /**
+     * 
+     * @param {string} color 
+     * @returns 
+     */
+    setColor(color) {
+        this.color = color;
         return this;
     }
 
@@ -57,6 +79,8 @@ export default class TextRenderer extends Component {
         return {
             queue: this.queue,
             pixels,
+            bgColor: this.bgColor,
+            color: this.color,
         };
     }
 }
