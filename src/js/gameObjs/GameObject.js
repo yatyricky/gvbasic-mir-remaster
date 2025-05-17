@@ -9,7 +9,7 @@ export default class GameObject {
      * @param {boolean} orphan
      */
     constructor(name, parent, orphan = false) {
-        this.active = true;
+        this._active = true;
         /** @type {GameObject[]}*/
         this.children = [];
         this.parent = null;
@@ -59,6 +59,20 @@ export default class GameObject {
         this.x = x;
         this.y = y;
         return this;
+    }
+
+    /**
+     * 
+     * @param {boolean} active 
+     * @returns 
+     */
+    setActive(active) {
+        this._active = active;
+        return this;
+    }
+
+    get active() {
+        return this._active;
     }
 
     /**

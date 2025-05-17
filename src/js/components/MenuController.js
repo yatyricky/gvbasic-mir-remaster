@@ -66,8 +66,8 @@ export default class MenuController extends Component {
                 }
                 dispatch("scene:game", null);
             } else if (key === 'b') {
-                this.newHeroMenu.active = false;
-                this.mainMenu.active = true;
+                this.newHeroMenu.setActive(false);
+                this.mainMenu.setActive(true);
             }
         }
     }
@@ -88,12 +88,12 @@ export default class MenuController extends Component {
         new GameObject("text2", this.newHeroMenu).setPosition(3, 3).addComponent(TextRenderer).setText("3.道士").setQueue(Config.QUEUE_UI);
         this.newHeroArror = new GameObject("arrow", this.newHeroMenu).setPosition(1, 1)
         this.newHeroArror.addComponent(TextRenderer).setText("▶").setQueue(Config.QUEUE_UI);
-        this.newHeroMenu.active = false;
+        this.newHeroMenu.setActive(false);
     }
 
     newHero() {
-        this.mainMenu.active = false;
-        this.newHeroMenu.active = true;
+        this.mainMenu.setActive(false);
+        this.newHeroMenu.setActive(true);
         this.newHeroArror.y = 1;
     }
 }

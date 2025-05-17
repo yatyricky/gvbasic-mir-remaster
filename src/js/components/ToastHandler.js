@@ -50,7 +50,7 @@ export default class ToastHandler extends Component {
      * @param {boolean} flag 
      */
     show(flag) {
-        this.backdrop.active = flag;
-        this.textObj.active = flag;
+        this.backdrop.setActive(flag);
+        this.textObj.setActive(flag);
     }
 }
