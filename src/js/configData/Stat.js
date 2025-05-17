@@ -54,16 +54,6 @@ if (new Set(Stat.map((e) => e.id)).size !== Stat.length) {
     throw new Error("Stat id is not unique");
 }
 
-if (new Set(Stat.map((e) => e.iden)).size !== Stat.length) {
-    throw new Error("Stat iden is not unique");
-}
-
-/** @type {Record<string, number>}*/
-export const StatIden = {};
-for (const e of Stat) {
-    StatIden[e.iden] = e.id;
-}
-
 /** @type {Record<number, ElementTypeOf<Stat>>}*/
 export const StatById = {};
 for (const e of Stat) {

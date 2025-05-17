@@ -4,7 +4,7 @@ import { arrLast } from "../Utils";
 import Config from "../Config";
 import GameObject from "../gameObjs/GameObject";
 import TextRenderer from "./TextRenderer";
-import { HeroIden } from "../configData/Hero";
+import { HeroIden } from "../configIden/HeroIden";
 import Component from "./Component";
 
 export default class MenuController extends Component {
