@@ -1,6 +1,7 @@
 import Config from "../Config";
 import { subscribe } from "../EventBus";
 import GameObject from "../gameObjs/GameObject";
+import KeyEvent from "../KeyEvent";
 import { strWrap } from "../Utils";
 import Component from "./Component";
 import TextRenderer from "./TextRenderer";
@@ -39,7 +40,7 @@ export default class ToastHandler extends Component {
 
     /**
      * 
-     * @param {string} key 
+     * @param {KeyEvent} key 
      */
     onInput(key) {
         this.show(false);

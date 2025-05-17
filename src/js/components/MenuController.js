@@ -6,6 +6,7 @@ import GameObject from "../gameObjs/GameObject";
 import TextRenderer from "./TextRenderer";
 import { HeroIden } from "../configIden/HeroIden";
 import Component from "./Component";
+import KeyEvent from "../KeyEvent";
 
 export default class MenuController extends Component {
     onInit() {
@@ -15,15 +16,15 @@ export default class MenuController extends Component {
 
     /**
      * 
-     * @param {string} key 
+     * @param {KeyEvent} key 
      */
     onInput(key) {
         if (this.mainMenu.active) {
-            if (key === 'u') {
+            if (key.key === 'u') {
                 this.mainMenuArror.y = Math.max(1, this.mainMenuArror.y - 1);
-            } else if (key === 'd') {
+            } else if (key.key === 'd') {
                 this.mainMenuArror.y = Math.min(3, this.mainMenuArror.y + 1);
-            } else if (key === 'a') {
+            } else if (key.key === 'a') {
                 switch (this.mainMenuArror.y) {
                     case 1:
                         const last = arrLast(userData.data.chars);
@@ -45,11 +46,11 @@ export default class MenuController extends Component {
                 }
             }
         } else if (this.newHeroMenu.active) {
-            if (key === 'u') {
+            if (key.key === 'u') {
                 this.newHeroArror.y = Math.max(1, this.newHeroArror.y - 1);
-            } else if (key === 'd') {
+            } else if (key.key === 'd') {
                 this.newHeroArror.y = Math.min(3, this.newHeroArror.y + 1);
-            } else if (key === 'a') {
+            } else if (key.key === 'a') {
                 switch (this.newHeroArror.y) {
                     case 1:
                         userData.addChar(HeroIden.warr);
@@ -65,7 +66,7 @@ export default class MenuController extends Component {
                         break;
                 }
                 dispatch("scene:game", null);
-            } else if (key === 'b') {
+            } else if (key.key === 'b') {
                 this.newHeroMenu.setActive(false);
                 this.mainMenu.setActive(true);
             }

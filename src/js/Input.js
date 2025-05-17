@@ -1,5 +1,6 @@
 import Config from "./Config";
 import GameObject from "./gameObjs/GameObject";
+import KeyEvent from "./KeyEvent";
 import SceneManager from "./SceneManager";
 
 const domControls = document.getElementById('controls');
@@ -133,19 +134,26 @@ function setupKeyboardControls() {
 /**
  * 
  * @param {GameObject} root 
- * @param {string} key 
+ * @param {KeyEvent} key 
  */
 function dispatchInputEventRecursive(root, key) {
-    if (!root.active) {
+    if (!root.active || key.used) {
         return;
+    }
+
+    // Iterate through children in reverse order
+    for (let i = root.children.length - 1; i >= 0; i--) {
+        dispatchInputEventRecursive(root.children[i], key);
+        if (key.used) {
+            return;
+        }
     }
 
     for (const [, comp] of root.getComponents().entries()) {
         comp.onInput(key);
-    }
-
-    for (const child of root.children) {
-        dispatchInputEventRecursive(child, key);
+        if (key.used) {
+            return;
+        }
     }
 }
 
@@ -154,7 +162,7 @@ function dispatchInputEventRecursive(root, key) {
  * @param {string} key 
  */
 function dispatchInputEvent(key) {
-    dispatchInputEventRecursive(SceneManager.activeScene, key);
+    dispatchInputEventRecursive(SceneManager.activeScene, new KeyEvent(key));
 }
 
 btnU.onclick = () => {

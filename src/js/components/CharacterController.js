@@ -1,36 +1,33 @@
-import { subscribe } from "../EventBus";
+import KeyEvent from "../KeyEvent";
 import Component from "./Component";
 
 export default class CharacterController extends Component {
     constructor() {
         super();
-        subscribe("game:menu", (active) => {
-            this.gameObject.setActive(!active);
-        });
     }
 
     /**
      * @override 
-     * @param {string} key
+     * @param {KeyEvent} key
      */
     onInput(key) {
         // if (key === "a") {
         //     this.gameObject.getComponent("TextRenderer").setText(shuffleString(randomText));
         // }
 
-        if (key === "u") {
+        if (key.key === "u") {
             this.gameObject.y = Math.max(this.gameObject.y - 1, 0);
         }
 
-        if (key === "d") {
+        if (key.key === "d") {
             this.gameObject.y = Math.min(this.gameObject.y + 1, 4);
         }
 
-        if (key === "l") {
+        if (key.key === "l") {
             this.gameObject.x = Math.max(this.gameObject.x - 1, 0);
         }
 
-        if (key === "r") {
+        if (key.key === "r") {
             this.gameObject.x = Math.min(this.gameObject.x + 1, 9);
         }
     }

@@ -1,3 +1,5 @@
+import KeyEvent from "../KeyEvent";
+
 export default class Component {
     constructor() {
         this.gameObject = null;
@@ -8,7 +10,7 @@ export default class Component {
 
     /**
      * 
-     * @param {string} key 
+     * @param {KeyEvent} key 
      */
     onInput(key) {
 

@@ -1,6 +1,7 @@
 import Config from "../Config";
 import { dispatch } from "../EventBus";
 import GameObject from "../gameObjs/GameObject";
+import KeyEvent from "../KeyEvent";
 import Button from "./Button";
 import Component from "./Component";
 import TextRenderer from "./TextRenderer";
@@ -8,25 +9,29 @@ import TextRenderer from "./TextRenderer";
 export default class GameMenuController extends Component {
     /**
      * 
-     * @param {string} key 
+     * @param {KeyEvent} e 
      */
-    onInput(key) {
-        super.onInput(key);
-        switch (key) {
-            case "y":
-                this.toggleMenu();
-                break;
-            case "l":
-                this.updateActiveTab(-1);
-                break;
-            case "r":
-                this.updateActiveTab(1);
-                break;
-            case "a":
-                this.tabList[this.activeTab].getComponent(Button).onClick();
-                break;
-            default:
-                break;
+    onInput(e) {
+        if (this.menu.active) {
+            e.use();
+            switch (e.key) {
+                case "l":
+                    this.updateActiveTab(-1);
+                    break;
+                case "r":
+                    this.updateActiveTab(1);
+                    break;
+                case "a":
+                    this.tabList[this.activeTab].getComponent(Button)?.onClick();
+                    break;
+                case "b":
+                    this.toggleMenu(false);
+                    break;
+                default:
+                    break;
+            }
+        } else if (e.key === "y") {
+            this.toggleMenu(true);
         }
     }
 
@@ -51,7 +56,7 @@ export default class GameMenuController extends Component {
         this.tabExit = new GameObject("exit", this.tabs).setPosition(8, 0);
         this.tabExit.addComponent(TextRenderer).setText("退出").setBgColor(Config.COLOR_BG_04).setQueue(Config.QUEUE_UI);
         this.tabExit.addComponent(Button).setOnClick(() => {
-            this.toggleMenu();
+            this.toggleMenu(false);
             this.updateActiveTab(1);
             dispatch("scene:menu", null);
         });
@@ -66,9 +71,15 @@ export default class GameMenuController extends Component {
         this.updateActiveTab();
     }
 
-    toggleMenu() {
-        this.menu.setActive(!this.menu.active);
-        dispatch("game:menu", this.menu.active);
+    /**
+     * 
+     * @param {boolean} [flag]
+     */
+    toggleMenu(flag) {
+        if (flag === undefined) {
+            flag = !this.menu.active;
+        }
+        this.menu.setActive(flag);
     }
 
     updateActiveTab(offset = 0) {
