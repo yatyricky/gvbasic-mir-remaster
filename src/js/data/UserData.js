@@ -1,4 +1,4 @@
-import { HeroById } from "../configData/Hero";
+import { UnitById } from "../configData/Unit";
 
 class UserData {
     constructor() {
@@ -25,16 +25,17 @@ class UserData {
 
     /**
      * 
-     * @param {import("../configData/Hero").HeroId} id 
+     * @param {import("../configData/Unit").UnitId} id 
      */
     addChar(id) {
-        const config = HeroById[id];
+        const config = UnitById[id];
         /**@type {IUnit} */
         const char = {
-            heroId: id,
+            unitId: id,
             stats: { ...config.baseStat },
             inventory: [],
             bag: [],
+            skills: [],
         }
         let chars = this.data.chars;
         if (chars == null) {

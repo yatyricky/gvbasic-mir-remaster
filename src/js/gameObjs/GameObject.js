@@ -111,12 +111,24 @@ export default class GameObject {
      * @returns {GameObject}
      */
     find(name) {
-        for (const child of this.children) {
-            if (child.name === name) {
-                return child;
+        const explode = name.split("/");
+        if (explode.length === 1) {
+            for (const child of this.children) {
+                if (child.name === name) {
+                    return child;
+                }
+            }
+            return null;
+        }
+        let curr = /**@type {GameObject}*/(this);
+        for (const part of explode) {
+            curr = curr.find(part);
+            if (curr == null) {
+                return null;
             }
         }
-        return null;
+
+        return curr;
     }
 
     update() {

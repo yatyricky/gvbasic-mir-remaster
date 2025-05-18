@@ -2,9 +2,11 @@ import Config from "../Config";
 import { dispatch } from "../EventBus";
 import GameObject from "../gameObjs/GameObject";
 import KeyEvent from "../KeyEvent";
+import SceneManager from "../SceneManager";
 import Button from "./Button";
 import Component from "./Component";
 import TextRenderer from "./TextRenderer";
+import UnitComponent from "./UnitComponent";
 
 export default class GameMenuController extends Component {
     /**
@@ -32,6 +34,9 @@ export default class GameMenuController extends Component {
             }
         } else if (e.key === "y") {
             this.toggleMenu(true);
+        } else if (e.key === "x") {
+            const stat = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent).stat;
+            stat.setStat("mhex", Math.round(Math.random() * 100 - 50))
         }
     }
 

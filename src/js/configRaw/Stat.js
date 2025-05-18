@@ -1,31 +1,64 @@
-export const Stat = [
-    { id: "hp", name: "生命值", type: "number", description: "Hero1 Description" },
-    { id: "maxhp", name: "生命上限", type: "number", description: "Hero1 Description" },
-    { id: "exp", name: "经验值", type: "number", description: "Hero1 Description" },
+/**
+ * @typedef {"number" | "range" | "set"} StatValueType
+ */
 
-    { id: "mp", name: "魔法值", type: "number", description: "Hero1 Description" },
-    { id: "maxmp", name: "魔法上限", type: "number", description: "Hero1 Description" },
-    { id: "hreg", name: "恢复生命", type: "number", description: "Hero1 Description" },
-    { id: "mreg", name: "恢复魔法", type: "number", description: "Hero1 Description" },
+/**
+ * @typedef {object} StatConfig
+ * @property {import("../configData/Stat").StatId} id - The unique identifier for the stat.
+ * @property {string} name - The display name of the stat.
+ * @property {StatValueType} type - The type of the stat.
+ * @property {string} description - The description of the stat.
+ * @property {import("../configData/Stat").StatId[]} [depends] - An array of stat IDs that this stat depends on.
+ * @property {(d: import("../data/ReactStat").default) => void} [derived] - An array of stat IDs that this stat derives from.
+ * @property {string} [cgroup] - The image associated with the stat.
+ */
+
+/**@type {Array<StatConfig>} */
+export const Stat = [
+    { id: "rthp", name: "生命", type: "number", description: "Hero1 Description", depends: ["rtmaxhp"], derived: (d) => (d.setStat("rthp", Math.min(d.getStat("rtmaxhp"), d.getStat("rthp")))) },
+    { id: "rtmaxhp", name: "生命上限", type: "number", description: "Hero1 Description", depends: ["maxhp", "mhex"], derived: (d) => (d.setStat("rtmaxhp", Math.floor(d.getStat("maxhp") * (1 + d.getStat("mhex") / 100)))) },
+    { id: "maxhp", name: "基础生命上限", type: "number", description: "Hero1 Description" },
     { id: "mhex", name: "生命上限", type: "number", description: "Hero1 Description" },
+
+    { id: "rtmp", name: "魔法值", type: "number", description: "Hero1 Description", depends: ["rtmaxmp"], derived: (d) => (d.setStat("rtmp", Math.min(d.getStat("rtmaxmp"), d.getStat("rtmp")))) },
+    { id: "rtmaxmp", name: "魔法上限", type: "number", description: "Hero1 Description", depends: ["maxmp", "mpex"], derived: (d) => (d.setStat("rtmaxmp", Math.floor(d.getStat("maxmp") * (1 + d.getStat("mpex") / 100)))) },
+    { id: "maxmp", name: "基础魔法上限", type: "number", description: "Hero1 Description" },
     { id: "mpex", name: "魔法上限", type: "number", description: "Hero1 Description" },
 
-    { id: "dr", name: "物理减免", type: "range", description: "Hero1 Description" },
+    { id: "hreg", name: "恢复生命", type: "number", description: "Hero1 Description" },
+    { id: "mreg", name: "恢复魔法", type: "number", description: "Hero1 Description" },
+
+    { id: "exp", name: "经验值", type: "number", description: "Hero1 Description" },
+
+    { id: "xdr", name: "物理减免", type: "range", description: "Hero1 Description" },
     { id: "fdr", name: "火焰减免", type: "range", description: "Hero1 Description" },
     { id: "tdr", name: "风雷减免", type: "range", description: "Hero1 Description" },
     { id: "hdr", name: "神圣减免", type: "range", description: "Hero1 Description" },
     { id: "pdr", name: "毒素减免", type: "range", description: "Hero1 Description" },
 
-    { id: "res", name: "物理抗性", type: "number", description: "Hero1 Description" },
-    { id: "fres", name: "火焰抗性", type: "number", description: "Hero1 Description" },
-    { id: "tres", name: "风雷抗性", type: "number", description: "Hero1 Description" },
-    { id: "hres", name: "神圣抗性", type: "number", description: "Hero1 Description" },
-    { id: "pres", name: "毒素抗性", type: "number", description: "Hero1 Description" },
-    { id: "ures", name: "对不死抗性", type: "number", description: "Hero1 Description" },
-    { id: "dres", name: "对妖魔抗性", type: "number", description: "Hero1 Description" },
-    { id: "mres", name: "对近战抗性", type: "number", description: "Hero1 Description" },
-    { id: "rres", name: "对远程抗性", type: "number", description: "Hero1 Description" },
-    { id: "cres", name: "对精英抗性", type: "number", description: "Hero1 Description" },
+    { id: "xres", name: "基础物理抗性", type: "number", description: "Hero1 Description" },
+    { id: "fres", name: "基础火焰抗性", type: "number", description: "Hero1 Description" },
+    { id: "tres", name: "基础风雷抗性", type: "number", description: "Hero1 Description" },
+    { id: "hres", name: "基础神圣抗性", type: "number", description: "Hero1 Description" },
+    { id: "pres", name: "基础毒素抗性", type: "number", description: "Hero1 Description" },
+
+    { id: "mxxres", name: "最大物理抗性", type: "number", description: "Hero1 Description" },
+    { id: "mxfres", name: "最大火焰抗性", type: "number", description: "Hero1 Description" },
+    { id: "mxtres", name: "最大风雷抗性", type: "number", description: "Hero1 Description" },
+    { id: "mxhres", name: "最大神圣抗性", type: "number", description: "Hero1 Description" },
+    { id: "mxpres", name: "最大毒素抗性", type: "number", description: "Hero1 Description" },
+
+    { id: "rtxres", name: "物理抗性", type: "number", description: "Hero1 Description", depends: ["xres", "mxxres"], derived: (d) => (d.setStat("rtxres", Math.min(75 + d.getStat("mxxres"), d.getStat("xres")))) },
+    { id: "rtfres", name: "火焰抗性", type: "number", description: "Hero1 Description", depends: ["fres", "mxfres"], derived: (d) => (d.setStat("rtfres", Math.min(75 + d.getStat("mxfres"), d.getStat("fres")))) },
+    { id: "rttres", name: "风雷抗性", type: "number", description: "Hero1 Description", depends: ["tres", "mxtres"], derived: (d) => (d.setStat("rttres", Math.min(75 + d.getStat("mxtres"), d.getStat("tres")))) },
+    { id: "rthres", name: "神圣抗性", type: "number", description: "Hero1 Description", depends: ["hres", "mxhres"], derived: (d) => (d.setStat("rthres", Math.min(75 + d.getStat("mxhres"), d.getStat("hres")))) },
+    { id: "rtpres", name: "毒素抗性", type: "number", description: "Hero1 Description", depends: ["pres", "mxpres"], derived: (d) => (d.setStat("rtpres", Math.min(75 + d.getStat("mxpres"), d.getStat("pres")))) },
+
+    { id: "ures", name: "对不死减伤", type: "number", description: "Hero1 Description", cgroup: "undead/demon" },
+    { id: "dres", name: "对妖魔减伤", type: "number", description: "Hero1 Description", cgroup: "undead/demon" },
+    { id: "mres", name: "对近战减伤", type: "number", description: "Hero1 Description", cgroup: "melee/ranged" },
+    { id: "rres", name: "对远程减伤", type: "number", description: "Hero1 Description", cgroup: "melee/ranged" },
+    { id: "cres", name: "对精英减伤", type: "number", description: "Hero1 Description", cgroup: "elite" },
 
     { id: "curs", name: "诅咒", type: "number", description: "Hero1 Description" },
     { id: "bles", name: "祝福", type: "number", description: "Hero1 Description" },
@@ -35,12 +68,6 @@ export const Stat = [
     { id: "spd", name: "速度", type: "number", description: "Hero1 Description" },
     { id: "doge", name: "闪避", type: "number", description: "Hero1 Description" },
     { id: "mdoge", name: "法术闪避", type: "number", description: "Hero1 Description" },
-    
-    { id: "mxxres", name: "最大物理抗性", type: "number", description: "Hero1 Description" },
-    { id: "mxfres", name: "最大火焰抗性", type: "number", description: "Hero1 Description" },
-    { id: "mxtres", name: "最大风雷抗性", type: "number", description: "Hero1 Description" },
-    { id: "mxhres", name: "最大神圣抗性", type: "number", description: "Hero1 Description" },
-    { id: "mxpres", name: "最大毒素抗性", type: "number", description: "Hero1 Description" },
 
     { id: "atk", name: "攻击", type: "range", description: "Hero1 Description" },
     { id: "hit", name: "准确", type: "number", description: "Hero1 Description" },
@@ -79,7 +106,7 @@ export const Stat = [
     { id: "slvl", name: "召唤系技能等级", type: "number", description: "Hero1 Description" },
     { id: "glvl", name: "防护系技能等级", type: "number", description: "Hero1 Description" },
 
-    { id: "cate", name: "分类", type: "list", description: "Hero1 Description" },
+    { id: "cate", name: "分类", type: "set", description: "Hero1 Description" },
     { id: "cb", name: "粉碎性打击", type: "number", description: "Hero1 Description" },
     { id: "ow", name: "撕裂伤口", type: "number", description: "Hero1 Description" },
     { id: "ref", name: "反弹伤害", type: "number", description: "Hero1 Description" },

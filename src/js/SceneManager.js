@@ -11,5 +11,4 @@ export default class SceneManager {
         SceneManager.activeScene = scene;
         scene.start();
     }
-
 }

@@ -9,9 +9,9 @@ import ToastHandler from "./components/ToastHandler";
 import Config from "./Config";
 import userData from "./data/UserData";
 import { arrLast } from "./Utils";
-import HeroComponent from "./components/HeroComponent";
 import SceneManager from "./SceneManager";
 import GameMenuController from "./components/GameMenuController";
+import UnitComponent from "./components/UnitComponent";
 
 window.debug = true;
 
@@ -24,9 +24,10 @@ InitInput();
 function initGameScene(gameRoot) {
     const hero = arrLast(userData.data.chars);
 
-    const char = new GameObject("char", gameRoot);
-    const heroComp = char.addComponent(HeroComponent).setId(hero.heroId);
-    char.addComponent(TextRenderer).setText(heroComp.config.image).setQueue(Config.QUEUE_NPC);
+    const char = new GameObject("hero", gameRoot);
+    // char.addComponent(HeroComponent);
+    const unitComp = char.addComponent(UnitComponent).initData(hero);
+    char.addComponent(TextRenderer).setText(unitComp.config.image).setQueue(Config.QUEUE_NPC);
     char.addComponent(CharacterController);
 
     const gameMenu = new GameObject("gameMenu", gameRoot);

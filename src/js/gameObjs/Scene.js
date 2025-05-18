@@ -4,6 +4,8 @@ import { flushEvents } from "../EventBus";
 import GameObject from "./GameObject";
 import SceneManager from "../SceneManager";
 import userData from "../data/UserData";
+import UnitComponent from "../components/UnitComponent";
+import { Stat } from "../configRaw/Stat";
 
 const app = document.getElementById('app');
 app.style.fontSize = `${Math.round(Config.SIZE2 * 0.75)}px`;
@@ -12,6 +14,7 @@ app.style.height = `${Config.SIZE2 * 5}px`;
 
 const domHierarchyTree = document.getElementById('hierarchyTree');
 const domWatch = document.getElementById('watch');
+const domWatchStat = document.getElementById('stat');
 let prevTree = "";
 
 function buildHierarchyTreeText() {
@@ -68,6 +71,44 @@ function presentUserData() {
     prevUserData = latest;
 
     domWatch.innerHTML = `<pre>${prevUserData}</pre>`;
+}
+
+let prevReactStat = "";
+function watchReactStat() {
+    let latest = "";
+    const curr = SceneManager.activeScene.find("game/hero");
+    if (curr != null) {
+        const stat = curr.getComponent(UnitComponent).stat.data;
+        let rows = [];
+        for (const cfg of Stat) {
+            if (cfg.type === "number") {
+                rows.push(`${cfg.id}: ${stat[cfg.id]}`);
+            } else if (cfg.type === "set") {
+                rows.push(`${cfg.id}: [${stat[cfg.id].join(', ')}]`);
+            } else if (cfg.type === "range") {
+                rows.push(`${cfg.id}: ${stat[cfg.id].min}-${stat[cfg.id].max}`);
+            } else {
+                rows.push(`${cfg.id}: ${stat[cfg.id]}`);
+            }
+        }
+        // explode sb into arrays of array of 5
+        const cols = 4;
+        latest = "<table>";
+        for (let i = 0; i < rows.length; i += cols) {
+            latest += "<tr>";
+            for (let j = 0; j < cols; j++) {
+                latest += `<td>${rows[i + j] ?? ''}</td>`;
+            }
+            latest += "</tr>";
+        }
+        latest += "</table>";
+    }
+
+    if (prevReactStat === latest) {
+        return;
+    }
+    prevReactStat = latest;
+    domWatchStat.innerHTML = latest;
 }
 
 /**
@@ -312,6 +353,7 @@ export default class Scene extends GameObject {
         if (window.debug) {
             buildHierarchyTree();
             presentUserData();
+            watchReactStat();
         }
 
         // 3. request next frame

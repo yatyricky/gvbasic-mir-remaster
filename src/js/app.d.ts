@@ -1,4 +1,5 @@
-import { HeroId } from "./configData/Hero";
+import { StatId } from "./configData/Stat";
+import { UnitId } from "./configData/Unit";
 
 declare global {
     type ElementTypeOf<T> = T extends Array<infer U> ? U : never;
@@ -7,11 +8,21 @@ declare global {
 
     }
 
+    interface IRange {
+        min: number;
+        max: number;
+    }
+
+    interface ISkill {
+
+    }
+
     interface IUnit {
-        heroId: HeroId;
-        stats: Record<string, number>;
+        unitId: UnitId;
+        stats: any;
         inventory: IItem[];
         bag: IItem[];
+        skills: ISkill;
     }
 
     interface ISaveData {
