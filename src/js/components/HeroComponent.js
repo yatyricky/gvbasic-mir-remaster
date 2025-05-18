@@ -4,7 +4,7 @@ import Component from "./Component";
 export default class HeroComponent extends Component {
     /**
      * 
-     * @param {number} id 
+     * @param {import("../configData/Hero").HeroId} id 
      * @returns 
      */
     setId(id) {

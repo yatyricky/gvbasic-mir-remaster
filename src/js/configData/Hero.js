@@ -1,11 +1,13 @@
-export const Hero = [
-    { id: 1, iden: "warr", name: "武士", description: "Hero1 Description", image: "🥷", baseStat: { exp: 0, maxhp: 52, hp: 52, mp: 0, maxmp: 0 } },
-    { id: 2, iden: "mage", name: "魔法师", description: "Hero1 Description", image: "🧙", baseStat: { exp: 0, maxhp: 29, hp: 29, mp: 30, maxmp: 30 } },
-    { id: 3, iden: "wlk", name: "道士", description: "Hero1 Description", image: "🧝", baseStat: { exp: 0, maxhp: 36, hp: 36, mp: 19, maxmp: 19 } },
-]
+// This file is auto-generated. Do not edit manually.
+import { Hero } from '../configRaw/Hero.js';
 
-/** @type {Record<number, ElementTypeOf<Hero>>}*/
-export const HeroById = {};
-for (const e of Hero) {
-    HeroById[e.id] = e;
+/**
+ * @typedef {"warr" | "mage" | "wlk"} HeroId
+ */
+
+const HeroById = /**@type {Record<HeroId, ElementTypeOf<typeof import("../configRaw/Hero.js").Hero>>} */({});
+for (const entry of Hero) {
+    HeroById[/**@type {HeroId}*/(entry.id)] = entry;
 }
+
+export { HeroById };

@@ -1,3 +1,5 @@
+import { HeroId } from "./configData/Hero";
+
 declare global {
     type ElementTypeOf<T> = T extends Array<infer U> ? U : never;
 
@@ -6,7 +8,7 @@ declare global {
     }
 
     interface IUnit {
-        heroId: number;
+        heroId: HeroId;
         stats: Record<string, number>;
         inventory: IItem[];
         bag: IItem[];
@@ -20,6 +22,10 @@ declare global {
         text: string;
         bgColor?: string;
         color?: string;
+    }
+
+    interface Window {
+        debug: boolean;
     }
 }
 

@@ -13,6 +13,8 @@ import HeroComponent from "./components/HeroComponent";
 import SceneManager from "./SceneManager";
 import GameMenuController from "./components/GameMenuController";
 
+window.debug = true;
+
 InitInput();
 
 /**

@@ -4,7 +4,6 @@ import { arrLast } from "../Utils";
 import Config from "../Config";
 import GameObject from "../gameObjs/GameObject";
 import TextRenderer from "./TextRenderer";
-import { HeroIden } from "../configIden/HeroIden";
 import Component from "./Component";
 import KeyEvent from "../KeyEvent";
 
@@ -53,24 +52,30 @@ export default class MenuController extends Component {
             } else if (key.key === 'a') {
                 switch (this.newHeroArror.y) {
                     case 1:
-                        userData.addChar(HeroIden.warr);
+                        userData.addChar("warr");
                         break;
                     case 2:
-                        userData.addChar(HeroIden.mage);
+                        userData.addChar("mage");
                         break;
                     case 3:
-                        userData.addChar(HeroIden.wlk);
+                        userData.addChar("wlk");
                         break;
 
                     default:
                         break;
                 }
+                this.goBack();
                 dispatch("scene:game", null);
             } else if (key.key === 'b') {
                 this.newHeroMenu.setActive(false);
                 this.mainMenu.setActive(true);
             }
         }
+    }
+
+    goBack() {
+        this.newHeroMenu.setActive(false);
+        this.mainMenu.setActive(true);
     }
 
     addMainMenu() {

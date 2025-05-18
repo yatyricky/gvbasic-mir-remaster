@@ -52,3 +52,24 @@ button {
     vertical-align: middle;
     font-family: inherit;
 }
+
+#debugPanels {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#hierarchyTree {
+    flex: 1;
+    padding: 10px;
+    height: auto;
+    min-height: 100px;
+}
+
+#watch {
+    flex: 1;
+    padding: 10px;
+    height: auto;
+    min-height: 100px;
+}

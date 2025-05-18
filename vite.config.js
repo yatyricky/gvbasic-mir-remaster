@@ -32,7 +32,7 @@ export default defineConfig({
         viteSingleFile(),
         VitePluginRestart({
             restart: [
-                "js/configData/*.js",
+                "js/configRaw/*.js",
             ]
         }),
         {

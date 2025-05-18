@@ -3,21 +3,16 @@ import TextRenderer from "../components/TextRenderer";
 import { flushEvents } from "../EventBus";
 import GameObject from "./GameObject";
 import SceneManager from "../SceneManager";
+import userData from "../data/UserData";
 
 const app = document.getElementById('app');
 app.style.fontSize = `${Math.round(Config.SIZE2 * 0.75)}px`;
 app.style.width = `${Config.SIZE * 20}px`;
 app.style.height = `${Config.SIZE2 * 5}px`;
 
-const isDebug = true;
-/** @type {HTMLElement} */
-let domHierarchyTree;
+const domHierarchyTree = document.getElementById('hierarchyTree');
+const domWatch = document.getElementById('watch');
 let prevTree = "";
-if (isDebug) {
-    domHierarchyTree = document.createElement('div');
-    document.body.appendChild(domHierarchyTree);
-    domHierarchyTree.style.fontFamily = "'Arial', sans-serif";
-}
 
 function buildHierarchyTreeText() {
     let sb = ""
@@ -61,6 +56,18 @@ function buildHierarchyTree() {
     prevTree = latest;
 
     domHierarchyTree.innerHTML = latest;
+}
+
+let prevUserData = "";
+
+function presentUserData() {
+    const latest = JSON.stringify(userData.data, null, 2);
+    if (prevUserData === latest) {
+        return;
+    }
+    prevUserData = latest;
+
+    domWatch.innerHTML = `<pre>${prevUserData}</pre>`;
 }
 
 /**
@@ -302,8 +309,9 @@ export default class Scene extends GameObject {
         flushEvents();
 
         // debug tree
-        if (isDebug) {
+        if (window.debug) {
             buildHierarchyTree();
+            presentUserData();
         }
 
         // 3. request next frame

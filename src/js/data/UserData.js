@@ -25,13 +25,13 @@ class UserData {
 
     /**
      * 
-     * @param {number} id 
+     * @param {import("../configData/Hero").HeroId} id 
      */
     addChar(id) {
         const config = HeroById[id];
         /**@type {IUnit} */
         const char = {
-            heroId: config.id,
+            heroId: id,
             stats: { ...config.baseStat },
             inventory: [],
             bag: [],
