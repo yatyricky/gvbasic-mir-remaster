@@ -121,6 +121,17 @@ export default class TextRenderer extends Renderer {
     }
 
     toString() {
-        return `TextRenderer{q:${this.queue}}`
+        return `TextRenderer`
+    }
+
+    getInspector() {
+        return "[inherit]" + super.getInspector() + `<strong>TextRenderer</strong>
+        <table>
+            <tr><td>text</td><td>${this.text.replaceAll("\n", "\\n")}</td></tr>
+            <tr><td>width</td><td>${this.width}</td></tr>
+            <tr><td>bgColor</td><td><span style="color:${this.bgColor}">■</span>${this.bgColor}</td></tr>
+            <tr><td>color</td><td><span style="color:${this.color}">■</span>${this.color}</td></tr>
+        </table>
+        `
     }
 }

@@ -59,6 +59,7 @@ declare global {
 
     interface Window {
         debug: boolean;
+        gameObjs: Map<number, any>;
     }
 }
 

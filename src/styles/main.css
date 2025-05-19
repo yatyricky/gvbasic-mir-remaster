@@ -47,19 +47,25 @@ button {
     overflow: auto;
 }
 
-.watcher {
-    flex: 1;
-    padding: 10px;
-    height: auto;
-    min-height: 100px;
-}
-
 #hierarchyTree {
     position: absolute;
     bottom: 0;
     top: 0;
     left: 0;
     width: 33%;
+    height: 50%;
+    border: 1px solid #000;
+    overflow: auto;
+}
+
+#inspector {
+    position: absolute;
+    bottom: 0;
+    top: 50%;
+    left: 0;
+    width: 33%;
+    height: 50%;
+    border: 1px solid #000;
 }
 
 #watch {
@@ -67,7 +73,8 @@ button {
     bottom: 0;
     top: 450px;
     left: 33%;
-    width: 33%;
+    width: 33.9%;
+    border: 1px solid #000;
 }
 
 #stat {
@@ -76,4 +83,5 @@ button {
     top: 0;
     right: 0;
     width: 33%;
+    border: 1px solid #000;
 }

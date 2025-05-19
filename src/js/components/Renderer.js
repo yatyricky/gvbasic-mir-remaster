@@ -36,4 +36,15 @@ export default class Renderer extends Component {
      */
     render(buffer) {
     }
+
+    getInspector() {
+        return `<strong>Renderer</strong><br/>
+        <table>
+            <tr>
+                <td>Queue</td>
+                <td>${this.queue}</td>
+            </tr>
+        </table>
+        `
+    }
 }

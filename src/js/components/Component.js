@@ -26,4 +26,8 @@ export default class Component {
     toString() {
         return this.constructor.name;
     }
+
+    getInspector() {
+        return "";
+    }
 }

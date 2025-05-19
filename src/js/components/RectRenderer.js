@@ -77,4 +77,27 @@ export default class RectRenderer extends Renderer {
             })
         }
     }
+
+    getInspector() {
+        return "[inherit]" + super.getInspector() + `<strong>RectRenderer</strong><br/>
+        <table>
+            <tr>
+                <td>bgColor</td>
+                <td><span style="color:${this.bgColor}">■</span>${this.bgColor}</td>
+            </tr>
+            <tr>
+                <td>borderColor</td>
+                <td><span style="color:${this.borderColor}">■</span>${this.borderColor}</td>
+            </tr>
+            <tr>
+                <td>borderWidth</td>
+                <td>${this.borderWidth}</td>
+            </tr>
+            <tr>
+                <td>size</td>
+                <td>(${this.w}, ${this.h})</td>
+            </tr>
+        </table>
+        `;
+    }
 }

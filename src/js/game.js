@@ -1,3 +1,8 @@
+window.debug = true;
+const domDebugPanels = document.getElementById('debugPanels');
+if (!window.debug) {
+    domDebugPanels.style.display = "none";
+}
 import GameObject from "./gameObjs/GameObject";
 import { InitInput } from "./Input";
 import Scene from "./gameObjs/Scene";
@@ -12,8 +17,6 @@ import { arrLast } from "./Utils";
 import SceneManager from "./SceneManager";
 import GameMenuController from "./components/gameui/GameMenuController";
 import UnitComponent from "./components/UnitComponent";
-
-window.debug = true;
 
 InitInput();
 

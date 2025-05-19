@@ -151,7 +151,7 @@ function dispatchInputEventRecursive(root, key) {
         }
     }
 
-    for (const [, comp] of root.getComponents().entries()) {
+    for (const comp of root.getComponents()) {
         comp.onInput(key);
         if (key.used) {
             return;

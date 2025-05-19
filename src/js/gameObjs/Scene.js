@@ -17,11 +17,24 @@ const ctx = app.getContext('2d');
 const domHierarchyTree = document.getElementById('hierarchyTree');
 const domWatch = document.getElementById('watch');
 const domWatchStat = document.getElementById('stat');
+const domInspector = document.getElementById('inspector');
 
 let prevTree = "";
+const inspectTarget = new Map();
+let inspectorTarget = 0;
+/**
+ * 
+ * @param {number} i 
+ */
+// @ts-ignore
+window.setTarget = function (i) {
+    inspectorTarget = i;
+}
+
 function buildHierarchyTreeText() {
     let sb = ""
     let indent = 0;
+    let id = 1;
     /**
      * 
      * @param {GameObject} curr 
@@ -32,17 +45,19 @@ function buildHierarchyTreeText() {
         }
         let label = curr.name;
         const comps = [];
-        for (const [, comp] of curr.getComponents().entries()) {
+        for (const comp of curr.getComponents()) {
             comps.push(comp.toString());
         }
         if (comps.length > 0) {
             label += ` (${comps.join(', ')})`;
         }
-        if (!curr.active) {
-            label = `<span style="color:#4f4f4f">${label}</span>`;
-        }
-
-        sb += `${'&nbsp;'.repeat(indent * 4)}${label}<br/>`;
+        inspectTarget.set(id, curr);
+        sb += `<div
+                onclick="window.setTarget(${id})"
+                style="${curr.active ? "" : "color:#4f4f4f;"} ${id === inspectorTarget ? "background-color: #999;" : ""}
+                display:flex;"
+                ><div style="width:${indent * 16}px;"></div>${label}</div>`;
+        id++;
         for (const child of curr.children) {
             indent++;
             buildTreeRecursive(child);
@@ -110,6 +125,20 @@ function watchReactStat() {
     }
     prevReactStat = latest;
     domWatchStat.innerHTML = latest;
+}
+
+let prevInspector = "";
+function updateInspector() {
+    const target = inspectTarget.get(inspectorTarget);
+    if (target == null) {
+        return;
+    }
+    const latest = target.getInspector();
+    if (prevInspector === latest) {
+        return;
+    }
+    prevInspector = latest;
+    domInspector.innerHTML = latest;
 }
 
 /**
@@ -253,6 +282,7 @@ export default class Scene extends GameObject {
             buildHierarchyTree();
             presentUserData();
             watchReactStat();
+            updateInspector();
         }
 
         // 3. request next frame

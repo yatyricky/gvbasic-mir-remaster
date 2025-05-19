@@ -1,7 +1,20 @@
 import Component from "../components/Component";
 import SceneManager from "../SceneManager";
+import { uuid } from "../Utils";
+
+window.gameObjs = new Map();
+// @ts-ignore
+window.toggleActive = function (uuid) {
+    const obj = window.gameObjs.get(uuid);
+    if (obj == null) {
+        console.warn(`GameObject ${uuid} not found`);
+        return;
+    }
+    obj.setActive(!obj.active);
+}
 
 export default class GameObject {
+
     /**
      * 
      * @param {string} name 
@@ -9,6 +22,7 @@ export default class GameObject {
      * @param {boolean} orphan
      */
     constructor(name, parent = null, orphan = false) {
+        this.uuid = uuid();
         this._active = true;
         /** @type {GameObject[]}*/
         this.children = [];
@@ -21,6 +35,10 @@ export default class GameObject {
 
         if (!orphan) {
             this.setParent(parent ?? SceneManager.activeScene);
+        }
+
+        if (window.debug) {
+            window.gameObjs.set(this.uuid, this);
         }
     }
 
@@ -140,7 +158,7 @@ export default class GameObject {
     }
 
     getComponents() {
-        return this.components;
+        return this.components.values();
     }
 
     /**
@@ -170,5 +188,18 @@ export default class GameObject {
     }
 
     update() {
+    }
+
+    getInspector() {
+        let sb = [`<strong>GameObject</strong><br/>
+            <table>
+                <tr><td>uuid</td><td>${this.uuid}</td></tr>
+                <tr><td>active</td><td onclick="toggleActive(${this.uuid})">${this.active ? "✅" : "⬛️"}</td></tr>
+                <tr><td>position</td><td>(${this.x}, ${this.y})</td></tr>
+            </table>`];
+        for (const comp of this.getComponents()) {
+            sb.push(comp.getInspector());
+        }
+        return sb.join("<br/>");
     }
 }
