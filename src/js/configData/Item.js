@@ -2,7 +2,7 @@
 import { Item } from '../configRaw/Item.js';
 
 /**
- * @typedef {"woodsword" | "dagger" | "ebonywoodsword" | "bronzesword" | "shortsword" | "ironsword" | "mattock" | "bronzeaxe" | "rakshasa" | "eightwilderness" | "overwind" | "brokensoul" | "horsecleaver" | "shura" | "condensefrost" | "inferno" | "wellmoon" | "judgestaff" | "dragonslayer"} ItemId
+ * @typedef {"woodsword" | "dagger" | "ebonywoodsword" | "bronzesword" | "shortsword" | "ironsword" | "mattock" | "bronzeaxe" | "rakshasa" | "eightwilderness" | "overwind" | "brokensoul" | "horsecleaver" | "shura" | "condensefrost" | "inferno" | "wellmoon" | "judgestaff" | "dragonslayer" | "halfmoon" | "subduedemon" | "silverserpent" | "nullstaff" | "dragonsword" | "seasoul" | "siezemoon" | "magicstaff" | "blooddrink" | "bonescepter" | "cloth"} ItemId
  */
 
 const ItemById = /**@type {Record<ItemId, ElementTypeOf<typeof import("../configRaw/Item.js").Item>>} */({});
