@@ -1,22 +1,24 @@
 import Config from "../Config";
-import TextRenderer from "../components/TextRenderer";
 import { flushEvents } from "../EventBus";
 import GameObject from "./GameObject";
 import SceneManager from "../SceneManager";
 import userData from "../data/UserData";
 import UnitComponent from "../components/UnitComponent";
 import { Stat } from "../configRaw/Stat";
+import Renderer from "../components/Renderer";
 
-const app = document.getElementById('app');
-app.style.fontSize = `${Math.round(Config.SIZE2 * 0.75)}px`;
+const app = /**@type {HTMLCanvasElement}*/(document.getElementById('app'));
 app.style.width = `${Config.SIZE * 20}px`;
 app.style.height = `${Config.SIZE2 * 5}px`;
+app.width = Config.SIZE * 20;
+app.height = Config.SIZE2 * 5;
+const ctx = app.getContext('2d');
 
 const domHierarchyTree = document.getElementById('hierarchyTree');
 const domWatch = document.getElementById('watch');
 const domWatchStat = document.getElementById('stat');
-let prevTree = "";
 
+let prevTree = "";
 function buildHierarchyTreeText() {
     let sb = ""
     let indent = 0;
@@ -62,7 +64,6 @@ function buildHierarchyTree() {
 }
 
 let prevUserData = "";
-
 function presentUserData() {
     const latest = JSON.stringify(userData.data, null, 2);
     if (prevUserData === latest) {
@@ -113,69 +114,6 @@ function watchReactStat() {
 
 /**
  * 
- * @param {HTMLElement} dom 
- * @param {IPixel[]} pixels 
- */
-function updateRender(dom, pixels) {
-    let x = 0;
-    let y = 0;
-
-    let i = 0;
-    for (const c of pixels) {
-        if (c.text === '\n') {
-            y++;
-            x = 0;
-            continue;
-        }
-
-        const w = c.text.charCodeAt(0) > 255 ? 2 : 1;
-        if (x + w > 20) {
-            y++;
-            x = 0;
-        }
-
-        if (y >= 5) {
-            break;
-        }
-
-        let td = /**@type {HTMLElement} */(dom.children[i]);
-        if (td == null) {
-            td = document.createElement('div');
-            td.className = 'pixel';
-            dom.appendChild(td);
-        }
-        td.textContent = c.text;
-        td.style.width = `${w * Config.SIZE}px`;
-        td.style.height = `${Config.SIZE2}px`;
-        td.style.top = `${y * Config.SIZE2}px`;
-        td.style.left = `${x * Config.SIZE}px`;
-        td.style.lineHeight = `${Config.SIZE2}px`;
-        if (c.bgColor != null) {
-            td.style.backgroundColor = c.bgColor;
-        } else {
-            td.style.backgroundColor = '';
-        }
-        if (c.color != null) {
-            td.style.color = c.color;
-        } else {
-            td.style.color = '';
-        }
-        if (td.style.display === 'none') {
-            td.style.display = 'block';
-        }
-
-        i++;
-        x += w;
-    }
-    while (i < dom.children.length) {
-        const td = /**@type {HTMLElement} */(dom.children[i]);
-        td.style.display = 'none';
-        i++;
-    }
-}
-
-/**
- * 
  * @param {GameObject} root 
  * @returns 
  */
@@ -191,75 +129,17 @@ function updateRecursive(root) {
 
 /**
  * 
- * @param {IPixel[]} a 
- * @param {IPixel[]} b 
- */
-function comparePixels(a, b) {
-    if (a == null && b == null) {
-        return true;
-    }
-    if (a == null || b == null) {
-        return false;
-    }
-    if (a.length === 0 && b.length === 0) {
-        return true;
-    }
-    if (a.length !== b.length) {
-        return false;
-    }
-    for (let i = 0; i < a.length; i++) {
-        const c1 = a[i];
-        const c2 = b[i];
-        if (c1.text !== c2.text) {
-            return false;
-        }
-        const c1bgnull = c1.bgColor == null;
-        const c2bgnull = c2.bgColor == null;
-        if (c1bgnull !== c2bgnull) {
-            return false;
-        }
-        if (!c1bgnull && c1.bgColor !== c2.bgColor) {
-            return false;
-        }
-        const c1fgnull = c1.color == null;
-        const c2fgnull = c2.color == null;
-        if (c1fgnull !== c2fgnull) {
-            return false;
-        }
-        if (!c1fgnull && c1.color !== c2.color) {
-            return false;
-        }
-    }
-    return true;
-}
-
-/**
- * 
  * @param {GameObject} root 
- * @param {Map<number, Array<IPixel>>} buffer 
+ * @param {Array<IRenderInstruction>} buffer 
  * @returns 
  */
 function buildBufferRecursive(root, buffer) {
     if (!root.active) {
         return;
     }
-    const renderer = root.getComponent(TextRenderer);
+    const renderer = root.getComponent(Renderer);
     if (renderer != null) {
-        const { queue, pixels, bgColor, color } = renderer.render();
-        if (!buffer.has(queue)) {
-            buffer.set(queue, []);
-        }
-        const canvas = buffer.get(queue);
-        for (const { x, y, text } of pixels) {
-            const w = text.charCodeAt(0) > 255 ? 2 : 1;
-            if (x + w > 20) {
-                continue;
-            }
-            canvas[y * 20 + x] = { text, bgColor, color };
-            if (w > 1) {
-                canvas[y * 20 + x + 1] = null;
-            }
-        }
+        renderer.render(buffer);
     }
     for (const child of root.children) {
         buildBufferRecursive(child, buffer);
@@ -267,7 +147,7 @@ function buildBufferRecursive(root, buffer) {
 }
 
 export default class Scene extends GameObject {
-    /**@type {Array<IPixel[]>} */
+    /**@type {Array<IRenderInstruction[]>} */
     static _depthBuffer = [];
 
     /**
@@ -295,56 +175,59 @@ export default class Scene extends GameObject {
         updateRecursive(this);
         // render
         // 1. build depth buffer
-        /**@type {Map<number, Array<IPixel>>} */
-        const buffer = new Map();
+        /**@type {Array<IRenderInstruction>} */
+        const buffer = [];
         buildBufferRecursive(this, buffer);
 
         // 2. sort buffer
-        /**@type {Array<{ pixels: IPixel[], queue: number }>} */
-        const pushBuffer = [];
-        const keys = Array.from(buffer.keys());
-        keys.sort((a, b) => a - b);
-        for (const k of keys) {
-            const canvas = buffer.get(k);
-            /**@type {Array<IPixel>} */
-            const sb = [];
-            for (let i = 0; i < canvas.length; i++) {
-                const c = canvas[i];
-                if (c === undefined) {
-                    sb.push({ text: ' ' });
-                } else if (c === null) {
-                    continue;
-                } else {
-                    sb.push(c);
-                }
+        /**@type {Array<{ pixels: IRenderInstruction[], queue: number }>} */
+        buffer.sort((a, b) => {
+            if (a.queue === b.queue) {
+                return 0;
             }
-            pushBuffer.push({ pixels: sb, queue: k });
-        }
+            return a.queue < b.queue ? -1 : 1;
+        });
 
-        // 2. compare with depth buffer and render
-        let i = 0;
-        for (; i < pushBuffer.length; i++) {
-            const { pixels } = pushBuffer[i];
-            const curr = Scene._depthBuffer[i];
-            let dc = /**@type {HTMLElement}*/(app.children[i]);
-            if (dc == null) {
-                dc = document.createElement('div');
-                dc.style.width = `${Config.SIZE * 20}px`;
-                dc.style.height = `${Config.SIZE2 * 5}px`;
-                dc.className = 'queue';
-                app.appendChild(dc);
-                updateRender(dc, pixels)
-            } else if (!comparePixels(curr, pixels)) {
-                updateRender(dc, pixels);
+        // 2. render
+        ctx.clearRect(0, 0, app.width, app.height);
+        
+        let fillStyle = ctx.fillStyle;
+        let font = ctx.font;
+        let textBaseline = ctx.textBaseline;
+        let textAlign = ctx.textAlign;
+
+        for (const instruction of buffer) {
+            if (instruction.type === "fillRect") {
+                const args = /**@type {IFillRectArgs} */ (instruction.args);
+                if (fillStyle !== args.fillStyle) {
+                    fillStyle = args.fillStyle;
+                    ctx.fillStyle = fillStyle;
+                }
+                ctx.fillRect(args.x, args.y, args.w, args.h);
+                continue;
             }
-            Scene._depthBuffer[i] = pixels;
-            if (dc.style.display === 'none') {
-                dc.style.display = 'block';
+
+            if (instruction.type === "fillText") {
+                const args = /**@type {IFillTextArgs} */ (instruction.args);
+                if (font !== args.font) {
+                    font = args.font;
+                    ctx.font = font;
+                }
+                if (textBaseline !== args.textBaseline) {
+                    textBaseline = args.textBaseline;
+                    ctx.textBaseline = textBaseline;
+                }
+                if (textAlign !== args.textAlign) {
+                    textAlign = args.textAlign;
+                    ctx.textAlign = textAlign;
+                }
+                if (fillStyle !== args.fillStyle) {
+                    fillStyle = args.fillStyle;
+                    ctx.fillStyle = fillStyle;
+                }
+                ctx.fillText(args.text, args.x, args.y);
+                continue;
             }
-        }
-        for (; i < Scene._depthBuffer.length; i++) {
-            Scene._depthBuffer[i] = null;
-            /**@type {HTMLElement}*/(app.children[i]).style.display = 'none';
         }
 
         flushEvents();

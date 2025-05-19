@@ -1,11 +1,12 @@
-import Component from "./Component";
+import Config from "../Config";
+import { strIsEmpty } from "../Utils";
+import Renderer from "./Renderer";
 
-export default class TextRenderer extends Component {
+export default class TextRenderer extends Renderer {
     constructor() {
         super();
         this.text = "";
         this.width = 0;
-        this.queue = 0;
         this.bgColor = null;
         this.color = null;
     }
@@ -41,21 +42,36 @@ export default class TextRenderer extends Component {
     }
 
     /**
-     * 
-     * @param {number} queue 
-     * @returns 
+     * @override
+     * @param {Array<IRenderInstruction>} buffer
      */
-    setQueue(queue) {
-        this.queue = queue;
-        return this;
-    }
+    render(buffer) {
+        if (strIsEmpty(this.text)) {
+            return;
+        }
 
-    render() {
-        const pixels = [];
-        let x = 0;
-        let y = 0;
         const gox = Math.round(this.gameObject.x * 2);
         const goy = this.gameObject.y;
+        // Set text properties
+        /**@type {Partial<IFillTextArgs>} */
+        const textArgs = {
+            font: `${Math.round(Config.SIZE2 * 0.75)}px 'Courier New', Courier, monospace`,
+            textBaseline: "middle",
+            textAlign: "center",
+            fillStyle: "",
+        }
+
+        // Set colors
+        if (strIsEmpty(this.color)) {
+            textArgs.fillStyle = Config.COLOR_FG;
+        } else {
+            textArgs.fillStyle = this.color;
+        }
+
+        // Process and render each character
+        let x = 0;
+        let y = 0;
+
         for (const c of this.text) {
             if (c === '\n') {
                 y++;
@@ -73,15 +89,35 @@ export default class TextRenderer extends Component {
                 break;
             }
 
-            pixels.push({ x: x + gox, y: y + goy, text: c });
+            // Draw background if specified
+            if (!strIsEmpty(this.bgColor)) {
+                buffer.push({
+                    queue: this.queue,
+                    type: "fillRect",
+                    args: {
+                        fillStyle: this.bgColor,
+                        x: (x + gox) * Config.SIZE,
+                        y: (y + goy) * Config.SIZE2,
+                        w: w * Config.SIZE,
+                        h: Config.SIZE2
+                    }
+                })
+            }
+
+            // Draw the character
+            buffer.push({
+                queue: this.queue,
+                type: "fillText",
+                args: {
+                    ...textArgs,
+                    text: c,
+                    x: (x + gox) * Config.SIZE + (w * Config.SIZE / 2),
+                    y: (y + goy) * Config.SIZE2 + (Config.SIZE2 / 2)
+                }
+            })
+
             x += w;
         }
-        return {
-            queue: this.queue,
-            pixels,
-            bgColor: this.bgColor,
-            color: this.color,
-        };
     }
 
     toString() {

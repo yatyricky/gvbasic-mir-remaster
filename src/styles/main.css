@@ -7,9 +7,6 @@
 } */
 
 body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
     background-color: #8A8782;
     touch-action: manipulation;
     font-family: 'VonwaonBitmap', 'Courier New', monospace;
@@ -33,24 +30,12 @@ button {
 #app {
     margin: 0 auto;
     background-color: #337048;
+    display: block;
 }
 
 #controls {
     position: relative;
     margin: 0 auto;
-}
-
-.queue {
-    position: absolute;
-}
-
-.pixel {
-    position: absolute;
-    color: rgba(1, 29, 1, 1);
-    box-sizing: border-box;
-    text-align: center;
-    vertical-align: middle;
-    font-family: inherit;
 }
 
 #debugPanels {

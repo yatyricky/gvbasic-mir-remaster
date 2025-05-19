@@ -98,7 +98,12 @@ export default class GameObject {
      * @returns {T}
      */
     getComponent(type) {
-        return /**@type {T}*/(this.components.get(type));
+        for (const [key, value] of this.components.entries()) {
+            if (key === type || key.prototype instanceof type) {
+                return /**@type {T}*/(value);
+            }
+        }
+        return null;
     }
 
     getComponents() {

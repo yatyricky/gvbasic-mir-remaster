@@ -29,10 +29,28 @@ declare global {
         chars?: IUnit[];
     }
 
-    interface IPixel {
+    interface IFillRectArgs {
+        fillStyle: string;
+        x: number;
+        y: number;
+        w: number;
+        h: number;
+    }
+
+    interface IFillTextArgs {
+        font?: string;
+        textBaseline?: CanvasTextBaseline;
+        textAlign?: CanvasTextAlign;
+        fillStyle?: string;
         text: string;
-        bgColor?: string;
-        color?: string;
+        x: number;
+        y: number;
+    }
+
+    interface IRenderInstruction {
+        queue: number;
+        type: "fillRect" | "fillText";
+        args: IFillRectArgs | IFillTextArgs;
     }
 
     interface Window {
