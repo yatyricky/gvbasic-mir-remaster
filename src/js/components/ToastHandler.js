@@ -4,6 +4,7 @@ import GameObject from "../gameObjs/GameObject";
 import KeyEvent from "../KeyEvent";
 import { strWrap } from "../Utils";
 import Component from "./Component";
+import RectRenderer from "./RectRenderer";
 import TextRenderer from "./TextRenderer";
 
 export default class ToastHandler extends Component {
@@ -24,18 +25,13 @@ export default class ToastHandler extends Component {
     }
 
     addBackdrop() {
-        this.backdrop = new GameObject("back", this.gameObject);
-        const base = `╔═══提示═══╗
-║                ║
-║                ║
-║                ║
-╚════════╝`;
-        this.backdrop.addComponent(TextRenderer).setText(base).setBgColor('rgba(51, 112, 72, 0.75)').setQueue(Config.QUEUE_MODAL);
+        this.backdrop = new GameObject("back", this.gameObject).setPosition(5, 2.5);
+        this.backdrop.addComponent(RectRenderer).setBgColor(Config.COLOR_BG).setBorder(Config.COLOR_FG, 1).setSize(9, 4).setQueue(Config.QUEUE_MODAL);
     }
 
     addTextRenderer() {
         this.textObj = new GameObject("text", this.gameObject).setPosition(1, 1);
-        this.tr = this.textObj.addComponent(TextRenderer).setBgColor('rgba(51, 112, 72, 0.75)').setQueue(Config.QUEUE_MODAL);
+        this.tr = this.textObj.addComponent(TextRenderer).setQueue(Config.QUEUE_MODAL);
     }
 
     /**

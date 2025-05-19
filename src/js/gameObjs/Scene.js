@@ -190,8 +190,10 @@ export default class Scene extends GameObject {
 
         // 2. render
         ctx.clearRect(0, 0, app.width, app.height);
-        
+
         let fillStyle = ctx.fillStyle;
+        let strokeStyle = ctx.strokeStyle;
+        let lineWidth = ctx.lineWidth;
         let font = ctx.font;
         let textBaseline = ctx.textBaseline;
         let textAlign = ctx.textAlign;
@@ -226,6 +228,20 @@ export default class Scene extends GameObject {
                     ctx.fillStyle = fillStyle;
                 }
                 ctx.fillText(args.text, args.x, args.y);
+                continue;
+            }
+
+            if (instruction.type === "strokeRect") {
+                const args = /**@type {IStrokeRectArgs} */ (instruction.args);
+                if (strokeStyle !== args.strokeStyle) {
+                    strokeStyle = args.strokeStyle;
+                    ctx.strokeStyle = strokeStyle;
+                }
+                if (lineWidth !== args.lineWidth) {
+                    lineWidth = args.lineWidth;
+                    ctx.lineWidth = lineWidth;
+                }
+                ctx.strokeRect(args.x, args.y, args.w, args.h);
                 continue;
             }
         }

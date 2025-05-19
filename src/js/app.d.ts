@@ -37,6 +37,15 @@ declare global {
         h: number;
     }
 
+    interface IStrokeRectArgs {
+        strokeStyle: string;
+        lineWidth: number;
+        x: number;
+        y: number;
+        w: number;
+        h: number;
+    }
+
     interface IFillTextArgs {
         font?: string;
         textBaseline?: CanvasTextBaseline;
@@ -49,8 +58,8 @@ declare global {
 
     interface IRenderInstruction {
         queue: number;
-        type: "fillRect" | "fillText";
-        args: IFillRectArgs | IFillTextArgs;
+        type: "fillRect" | "fillText" | "strokeRect" | "drawImage";
+        args: IFillRectArgs | IFillTextArgs | IStrokeRectArgs;
     }
 
     interface Window {

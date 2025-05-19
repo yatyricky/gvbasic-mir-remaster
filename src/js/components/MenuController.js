@@ -80,18 +80,18 @@ export default class MenuController extends Component {
 
     addMainMenu() {
         this.mainMenu = new GameObject("mainMenu", this.gameObject);
-        new GameObject("text1", this.mainMenu).setPosition(2.5, 1).addComponent(TextRenderer).setText("1.继续游戏").setQueue(Config.QUEUE_UI);
-        new GameObject("text2", this.mainMenu).setPosition(2.5, 2).addComponent(TextRenderer).setText("2.新 游 戏").setQueue(Config.QUEUE_UI);
-        new GameObject("text3", this.mainMenu).setPosition(2.5, 3).addComponent(TextRenderer).setText("3.加载存档").setQueue(Config.QUEUE_UI);
+        new GameObject("text1", this.mainMenu).setPosition(3, 1).addComponent(TextRenderer).setText("继续游戏").setQueue(Config.QUEUE_UI);
+        new GameObject("text2", this.mainMenu).setPosition(3, 2).addComponent(TextRenderer).setText("新 游 戏").setQueue(Config.QUEUE_UI);
+        new GameObject("text3", this.mainMenu).setPosition(3, 3).addComponent(TextRenderer).setText("加载存档").setQueue(Config.QUEUE_UI);
         this.mainMenuArror = new GameObject("arrow", this.mainMenu).setPosition(1, 1)
         this.mainMenuArror.addComponent(TextRenderer).setText("▶").setQueue(Config.QUEUE_UI);
     }
 
     addNewHeroMenu() {
         this.newHeroMenu = new GameObject("newHeroMenu", this.gameObject);
-        new GameObject("text1", this.newHeroMenu).setPosition(3, 1).addComponent(TextRenderer).setText("1.武士").setQueue(Config.QUEUE_UI);
-        new GameObject("text2", this.newHeroMenu).setPosition(3, 2).addComponent(TextRenderer).setText("2.魔法师").setQueue(Config.QUEUE_UI);
-        new GameObject("text2", this.newHeroMenu).setPosition(3, 3).addComponent(TextRenderer).setText("3.道士").setQueue(Config.QUEUE_UI);
+        new GameObject("text1", this.newHeroMenu).setPosition(4, 1).addComponent(TextRenderer).setText("战士").setQueue(Config.QUEUE_UI);
+        new GameObject("text2", this.newHeroMenu).setPosition(4, 2).addComponent(TextRenderer).setText("法师").setQueue(Config.QUEUE_UI);
+        new GameObject("text2", this.newHeroMenu).setPosition(4, 3).addComponent(TextRenderer).setText("道士").setQueue(Config.QUEUE_UI);
         this.newHeroArror = new GameObject("arrow", this.newHeroMenu).setPosition(1, 1)
         this.newHeroArror.addComponent(TextRenderer).setText("▶").setQueue(Config.QUEUE_UI);
         this.newHeroMenu.setActive(false);
