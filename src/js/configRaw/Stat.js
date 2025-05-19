@@ -69,12 +69,12 @@ export const Stat = [
     { id: "doge", name: "闪避", type: "number", description: "Hero1 Description" },
     { id: "mdoge", name: "法术闪避", type: "number", description: "Hero1 Description" },
 
-    { id: "atk", name: "攻击", type: "range", description: "Hero1 Description" },
+    { id: "xatk", name: "力量", type: "range", description: "Hero1 Description" },
     { id: "hit", name: "准确", type: "number", description: "Hero1 Description" },
-    { id: "matk", name: "魔法", type: "range", description: "Hero1 Description" },
+    { id: "matk", name: "魔力", type: "range", description: "Hero1 Description" },
     { id: "watk", name: "道术", type: "range", description: "Hero1 Description" },
 
-    { id: "ed", name: "物理增伤", type: "number", description: "Hero1 Description" },
+    { id: "xed", name: "物理增伤", type: "number", description: "Hero1 Description" },
     { id: "fed", name: "火焰增伤", type: "number", description: "Hero1 Description" },
     { id: "ted", name: "风雷增伤", type: "number", description: "Hero1 Description" },
     { id: "hed", name: "神圣增伤", type: "number", description: "Hero1 Description" },
