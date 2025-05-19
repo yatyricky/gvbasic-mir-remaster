@@ -2,10 +2,17 @@ import KeyEvent from "../KeyEvent";
 
 export default class Component {
     constructor() {
+        /**@type {import("../gameObjs/GameObject").default} */
         this.gameObject = null;
     }
 
     onInit() {
+    }
+
+    onEnable() {
+    }
+
+    onDisable() {
     }
 
     /**

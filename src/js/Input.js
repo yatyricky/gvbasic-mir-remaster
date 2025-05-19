@@ -61,6 +61,8 @@ function setupKeyboardControls() {
         'b': btnB,
         'x': btnX,
         'y': btnY,
+        'Escape': btnB,
+        'Enter': btnA,
     };
 
     /**

@@ -61,13 +61,43 @@ export default class GameObject {
         return this;
     }
 
+    _onEnableComp() {
+        if (this.active) {
+            for (const comp of this.components.values()) {
+                comp.onEnable();
+            }
+            for (const child of this.children) {
+                child._onEnableComp();
+            }
+        }
+    }
+
+    _onDisableComp(execOnce = false) {
+        if (this.active || execOnce) {
+            for (let i = this.children.length - 1; i >= 0; i--) {
+                const child = this.children[i];
+                child._onDisableComp();
+            }
+            for (const comp of this.components.values()) {
+                comp.onDisable();
+            }
+        }
+    }
+
     /**
      * 
      * @param {boolean} active 
      * @returns 
      */
     setActive(active) {
+        const prev = this.active;
         this._active = active;
+        if (!prev && active) {
+            this._onEnableComp();
+        }
+        if (prev && !active) {
+            this._onDisableComp(true);
+        }
         return this;
     }
 
@@ -89,6 +119,9 @@ export default class GameObject {
         component.gameObject = this;
         this.components.set(type, component);
         component.onInit();
+        if (this.active) {
+            component.onEnable();
+        }
         return component;
     }
 

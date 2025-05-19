@@ -10,7 +10,7 @@ import Config from "./Config";
 import userData from "./data/UserData";
 import { arrLast } from "./Utils";
 import SceneManager from "./SceneManager";
-import GameMenuController from "./components/GameMenuController";
+import GameMenuController from "./components/gameui/GameMenuController";
 import UnitComponent from "./components/UnitComponent";
 
 window.debug = true;

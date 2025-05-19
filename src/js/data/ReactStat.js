@@ -1,5 +1,6 @@
 import { StatById } from "../configData/Stat";
 import { Stat } from "../configRaw/Stat";
+import Range from "./Range";
 
 export default class ReactStat {
     /**
@@ -16,10 +17,7 @@ export default class ReactStat {
                     this.data[statConfig.id] = 0;
                     break;
                 case "range":
-                    this.data[statConfig.id] = {
-                        min: 0,
-                        max: 0,
-                    };
+                    this.data[statConfig.id] = new Range(0, 0);
                     break;
                 case "set":
                     this.data[statConfig.id] = [];

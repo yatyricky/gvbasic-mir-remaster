@@ -44,6 +44,9 @@ export function arrLast(arr) {
 export function strWidth(text) {
     let s = 0;
     for (const c of text) {
+        if (c === '\n') {
+            continue;
+        }
         s += c.charCodeAt(0) > 255 ? 2 : 1;
     }
     return s;
@@ -61,7 +64,7 @@ export function strIsEmpty(str) {
 /**
  * 
  * @param {string} str 
- * @param {number} width 
+ * @param {number} [width] 
  * @returns 
  */
 export function strWrap(str, width) {
@@ -70,6 +73,12 @@ export function strWrap(str, width) {
     let row = [];
     let s = 0;
     for (const c of str) {
+        if (c === '\n') {
+            rows.push(row.join(''));
+            row = [];
+            s = 0;
+            continue;
+        }
         const w = strWidth(c);
         if (s + w > width) {
             rows.push(row.join(''));

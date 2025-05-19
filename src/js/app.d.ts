@@ -8,11 +8,6 @@ declare global {
 
     }
 
-    interface IRange {
-        min: number;
-        max: number;
-    }
-
     interface ISkill {
 
     }
