@@ -88,11 +88,6 @@ export const Stat = [
     { id: "doted", name: "持续性效果增伤", type: "number", description: "Hero1 Description" },
     { id: "hled", name: "治疗增强", type: "number", description: "Hero1 Description" },
 
-    // { id: "", name: "物理攻击", type: "range", description: "Hero1 Description" },
-    // { id: "", name: "火焰攻击", type: "range", description: "Hero1 Description" },
-    // { id: "", name: "风雷攻击", type: "range", description: "Hero1 Description" },
-    // { id: "", name: "神圣攻击", type: "range", description: "Hero1 Description" },
-    // { id: "", name: "毒素攻击", type: "range", description: "Hero1 Description" },
     { id: "flvl", name: "火焰系技能等级", type: "number", description: "Hero1 Description" },
     { id: "tlvl", name: "风雷系技能等级", type: "number", description: "Hero1 Description" },
     { id: "magelvl", name: "魔法师技能等级", type: "number", description: "Hero1 Description" },

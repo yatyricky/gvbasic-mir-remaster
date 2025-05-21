@@ -1,4 +1,4 @@
-import Config from "../../Config";
+import Const from "../../Const";
 import GameObject from "../../../js/gameObjs/GameObject";
 import SceneManager from "../../SceneManager";
 import Component from "../Component";
@@ -16,7 +16,7 @@ export default class StatPanel extends Component {
         this.stat = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent).stat;
 
         this.objStat = new GameObject("hp", this.gameObject).setPosition(0, 1);
-        this.tr = this.objStat.addComponent(TextRenderer).setBgColor(Config.COLOR_BG);
+        this.tr = this.objStat.addComponent(TextRenderer).setBgColor(Const.COLOR_BG);
         this.scrollY = 0;
         /**@type {string[]} */
         this.lines = [];

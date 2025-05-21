@@ -1,4 +1,4 @@
-import Config from "../Config";
+import Const from "../Const";
 import Renderer from "./Renderer";
 
 export default class RectRenderer extends Renderer {
@@ -56,10 +56,10 @@ export default class RectRenderer extends Renderer {
             return;
         }
 
-        const w = Math.round(this.w * Config.SIZE2);
-        const h = Math.round(this.h * Config.SIZE2);
-        const x = Math.round(this.gameObject.x * Config.SIZE2 - w / 2);
-        const y = Math.round(this.gameObject.y * Config.SIZE2 - h / 2);
+        const w = Math.round(this.w * Const.SIZE2);
+        const h = Math.round(this.h * Const.SIZE2);
+        const x = Math.round(this.gameObject.x * Const.SIZE2 - w / 2);
+        const y = Math.round(this.gameObject.y * Const.SIZE2 - h / 2);
 
         if (this.bgColor != null) {
             buffer.push({

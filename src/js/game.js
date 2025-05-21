@@ -11,7 +11,7 @@ import CharacterController from "./components/CharacterController";
 import MenuController from "./components/MenuController";
 import { subscribe } from "./EventBus";
 import ToastHandler from "./components/ToastHandler";
-import Config from "./Config";
+import Const from "./Const";
 import userData from "./data/UserData";
 import { arrLast } from "./Utils";
 import SceneManager from "./SceneManager";
@@ -30,7 +30,7 @@ function initGameScene(gameRoot) {
     const char = new GameObject("hero", gameRoot);
     // char.addComponent(HeroComponent);
     const unitComp = char.addComponent(UnitComponent).initData(hero);
-    char.addComponent(TextRenderer).setText(unitComp.config.image).setQueue(Config.QUEUE_NPC);
+    char.addComponent(TextRenderer).setText(unitComp.config.image).setQueue(Const.QUEUE_NPC);
     char.addComponent(CharacterController);
 
     const gameMenu = new GameObject("gameMenu", gameRoot);

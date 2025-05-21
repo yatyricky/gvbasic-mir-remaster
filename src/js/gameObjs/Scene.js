@@ -1,4 +1,4 @@
-import Config from "../Config";
+import Const from "../Const";
 import { flushEvents } from "../EventBus";
 import GameObject from "./GameObject";
 import SceneManager from "../SceneManager";
@@ -8,10 +8,10 @@ import { Stat } from "../configRaw/Stat";
 import Renderer from "../components/Renderer";
 
 const app = /**@type {HTMLCanvasElement}*/(document.getElementById('app'));
-app.style.width = `${Config.SIZE * 20}px`;
-app.style.height = `${Config.SIZE2 * 5}px`;
-app.width = Config.SIZE * 20;
-app.height = Config.SIZE2 * 5;
+app.style.width = `${Const.SIZE * 20}px`;
+app.style.height = `${Const.SIZE2 * 5}px`;
+app.width = Const.SIZE * 20;
+app.height = Const.SIZE2 * 5;
 const ctx = app.getContext('2d');
 
 const domHierarchyTree = document.getElementById('hierarchyTree');

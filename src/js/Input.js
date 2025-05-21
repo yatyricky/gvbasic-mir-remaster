@@ -1,4 +1,4 @@
-import Config from "./Config";
+import Const from "./Const";
 import GameObject from "./gameObjs/GameObject";
 import KeyEvent from "./KeyEvent";
 import SceneManager from "./SceneManager";
@@ -17,7 +17,7 @@ const btnB = document.getElementById('btn_b');
 const btnX = document.getElementById('btn_x');
 const btnY = document.getElementById('btn_y');
 
-const cu = Math.round(Config.SIZE * 20 / 7);
+const cu = Math.round(Const.SIZE * 20 / 7);
 
 c1.style.top = `${cu}px`;
 c2.style.top = `${cu}px`;
@@ -38,7 +38,7 @@ function setDOMRect(dom, x, y, w, h) {
     dom.style.height = `${h}px`;
 }
 
-setDOMRect(domControls, 0, 0, Config.SIZE * 20, cu * 4);
+setDOMRect(domControls, 0, 0, Const.SIZE * 20, cu * 4);
 setDOMRect(l1, cu * 0, cu, cu * 3, cu);
 setDOMRect(l2, cu * 1, 0, cu, cu * 3);
 setDOMRect(btnU, cu * 1, 0, cu, cu);

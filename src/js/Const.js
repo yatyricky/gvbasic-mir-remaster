@@ -1,4 +1,4 @@
-const Config = {
+const Const = {
     SIZE: Math.min(Math.floor(window.innerWidth / 20), 20),
     SIZE2: 0,
     QUEUE_MODAL: 20,
@@ -12,6 +12,6 @@ const Config = {
     COLOR_BG_04: "rgb(42, 94, 60)",
 }
 
-Config.SIZE2 = Config.SIZE * 2;
+Const.SIZE2 = Const.SIZE * 2;
 
-export default Config;
+export default Const;

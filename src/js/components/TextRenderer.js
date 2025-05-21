@@ -1,4 +1,4 @@
-import Config from "../Config";
+import Const from "../Const";
 import { strIsEmpty } from "../Utils";
 import Renderer from "./Renderer";
 
@@ -55,7 +55,7 @@ export default class TextRenderer extends Renderer {
         // Set text properties
         /**@type {Partial<IFillTextArgs>} */
         const textArgs = {
-            font: `${Math.round(Config.SIZE2 * 0.75)}px 'Courier New', Courier, monospace`,
+            font: `${Math.round(Const.SIZE2 * 0.75)}px 'Courier New', Courier, monospace`,
             textBaseline: "middle",
             textAlign: "center",
             fillStyle: "",
@@ -63,7 +63,7 @@ export default class TextRenderer extends Renderer {
 
         // Set colors
         if (strIsEmpty(this.color)) {
-            textArgs.fillStyle = Config.COLOR_FG;
+            textArgs.fillStyle = Const.COLOR_FG;
         } else {
             textArgs.fillStyle = this.color;
         }
@@ -96,10 +96,10 @@ export default class TextRenderer extends Renderer {
                     type: "fillRect",
                     args: {
                         fillStyle: this.bgColor,
-                        x: (x + gox) * Config.SIZE,
-                        y: (y + goy) * Config.SIZE2,
-                        w: w * Config.SIZE,
-                        h: Config.SIZE2
+                        x: (x + gox) * Const.SIZE,
+                        y: (y + goy) * Const.SIZE2,
+                        w: w * Const.SIZE,
+                        h: Const.SIZE2
                     }
                 })
             }
@@ -111,8 +111,8 @@ export default class TextRenderer extends Renderer {
                 args: {
                     ...textArgs,
                     text: c,
-                    x: (x + gox) * Config.SIZE + (w * Config.SIZE / 2),
-                    y: (y + goy) * Config.SIZE2 + (Config.SIZE2 / 2)
+                    x: (x + gox) * Const.SIZE + (w * Const.SIZE / 2),
+                    y: (y + goy) * Const.SIZE2 + (Const.SIZE2 / 2)
                 }
             })
 
