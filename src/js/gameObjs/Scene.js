@@ -4,7 +4,7 @@ import GameObject from "./GameObject";
 import SceneManager from "../SceneManager";
 import userData from "../data/UserData";
 import UnitComponent from "../components/UnitComponent";
-import { Stat } from "../configRaw/Stat";
+import { Stat } from "../config/Stat";
 import Renderer from "../components/Renderer";
 
 const app = /**@type {HTMLCanvasElement}*/(document.getElementById('app'));

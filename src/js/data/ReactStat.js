@@ -1,5 +1,5 @@
 import { StatById } from "../configData/Stat";
-import { Stat } from "../configRaw/Stat";
+import { Stat } from "../config/Stat";
 import Range from "./Range";
 
 export default class ReactStat {
