@@ -4,24 +4,24 @@ import { UnitId } from "./configData/Unit";
 declare global {
     type ElementTypeOf<T> = T extends Array<infer U> ? U : never;
 
-    interface IItem {
+    interface ItemSaveData {
 
     }
 
-    interface ISkill {
+    interface SkillSaveData {
 
     }
 
-    interface IUnit {
+    interface UnitSaveData {
         unitId: UnitId;
         stats: any;
-        inventory: IItem[];
-        bag: IItem[];
-        skills: ISkill;
+        inventory: ItemSaveData[];
+        bag: ItemSaveData[];
+        skills: SkillSaveData;
     }
 
     interface ISaveData {
-        chars?: IUnit[];
+        chars?: UnitSaveData[];
     }
 
     interface IFillRectArgs {

@@ -9,7 +9,7 @@ export default class UnitComponent extends Component {
 
     /**
      * 
-     * @param {IUnit} persistantData 
+     * @param {UnitSaveData} persistantData 
      */
     initData(persistantData) {
         this.config = UnitById[persistantData.unitId];

@@ -29,7 +29,7 @@ class UserData {
      */
     addChar(id) {
         const config = UnitById[id];
-        /**@type {IUnit} */
+        /**@type {UnitSaveData} */
         const char = {
             unitId: id,
             stats: { ...config.baseStat },
