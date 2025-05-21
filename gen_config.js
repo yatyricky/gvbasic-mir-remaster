@@ -9,26 +9,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const cfgDir = path.join(__dirname, 'configs')
 const dataDir = path.join(__dirname, 'src', 'js', 'config')
 
-/**
- * type:
- *  - string
- *  - number
- *  - enum
- *  - type[]
- *  - Map<type, type>
- * 
- * <start>
- *   - identifier
- *     - []
- *       - <end>
- *   - <end>
- *   - Map
- *     - <
- *       - <start>
- *         ,
- *           - <start>
- *             - >
- */
 class TypeLexer {
     /**
      * Parses a type string into a structured type object
@@ -36,9 +16,11 @@ class TypeLexer {
      * @returns {object} A structured representation of the type
      */
     static parse(typeStr) {
-        if (!typeStr) {
+        if (typeStr == null || typeStr.trim() === '') {
             throw new Error('Type string cannot be empty');
         }
+
+        typeStr = typeStr.trim();
         
         // Handle array types (e.g., "string[]", "number[]", "CustomType[]")
         if (typeStr.endsWith('[]')) {
@@ -99,6 +81,7 @@ class TypeLexer {
      * @private
      */
     static _extractGenericArgs(argsStr) {
+        argsStr = argsStr.trim();
         const args = [];
         let currentArg = '';
         let depth = 0;
