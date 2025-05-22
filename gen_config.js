@@ -167,8 +167,13 @@ class TypeLexer {
         }
     }
 
+    static splitters = [",", ":", ";", "|", "#"];
+
     static trySplit(str, depth) {
-        const splitter = (",:;|")[depth - 1];
+        const splitter = TypeLexer.splitters[depth - 1];
+        if (typeof str === "number") {
+            str = str.toString();
+        }
         return str.split(splitter);
     }
 
@@ -323,8 +328,14 @@ for (const file of fs.readdirSync(cfgDir)) {
     dts += `declare const ${configArrayName}: Array<${configTypeName}>;\n`;
     dtsExports.push(configArrayName)
 
-    for (const e of entryType) {
+    for (let i = 0; i < entryType.length; i++) {
+        const e = entryType[i];
         if (e.meta.includes("Index")) {
+            // dup check
+            if (new Set(rows.map(row => row[i])).size !== rows.length) {
+                throw new Error(`Duplicate index ${e.name} in ${parsed.name}`);
+            }
+
             const queryName = `${parsed.name}By${Utils.strCapitalizeFirst(e.name)}`;
             dts += `declare const ${queryName}: Partial<Record<${e.dtsType}, ${configTypeName}>>;\n`;
             dtsExports.push(queryName)
