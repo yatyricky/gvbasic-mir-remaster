@@ -5,9 +5,9 @@ declare global {
         name: string;
         description: string;
         image: string;
-        baseStat: Map<StatId, number[]>;
+        baseStat: Partial<Record<StatId, number[]>>;
     }
 }
 declare const Units: Array<IUnitConfig>;
-declare const UnitById: Record<UnitId, IUnitConfig>;
+declare const UnitById: Partial<Record<UnitId, IUnitConfig>>;
 export { Units, UnitById }

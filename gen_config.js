@@ -151,7 +151,7 @@ class TypeLexer {
                 return `${TypeLexer.toTypeScriptType(typeObj.elementType)}[]`;
 
             case 'map':
-                return `Map<${TypeLexer.toTypeScriptType(typeObj.keyType)}, ${TypeLexer.toTypeScriptType(typeObj.valueType)}>`;
+                return `Partial<Record<${TypeLexer.toTypeScriptType(typeObj.keyType)}, ${TypeLexer.toTypeScriptType(typeObj.valueType)}>>`;
 
             case 'enum':
                 return typeObj.enumName;
@@ -161,35 +161,6 @@ class TypeLexer {
 
             case "js":
                 return typeObj.jsTypeName;
-
-            default:
-                throw new Error(`Unknown type: ${typeObj.type}`);
-        }
-    }
-
-    /**
-     * Converts a parsed type object to a JSDoc type string
-     * @param {object} typeObj - The parsed type object
-     * @returns {string} The JSDoc type string
-     */
-    static toJSDocType(typeObj) {
-        switch (typeObj.type) {
-            case 'string':
-            case 'number':
-            case 'boolean':
-                return typeObj.type;
-
-            case 'array':
-                return `Array<${TypeLexer.toJSDocType(typeObj.elementType)}>`;
-
-            case 'map':
-                return `Map<${TypeLexer.toJSDocType(typeObj.keyType)}, ${TypeLexer.toJSDocType(typeObj.valueType)}>`;
-
-            case 'enum':
-                return typeObj.enumName;
-
-            case 'custom':
-                return typeObj.typeName;
 
             default:
                 throw new Error(`Unknown type: ${typeObj.type}`);
@@ -282,7 +253,6 @@ for (const file of fs.readdirSync(cfgDir)) {
 
     const parsed = path.parse(file)
     const wb = xlsx.readFile(path.join(cfgDir, file))
-    const wbTypes = [];
     const entryType = [];
     const rows = [];
     for (const sheetName of wb.SheetNames) {
@@ -356,7 +326,7 @@ for (const file of fs.readdirSync(cfgDir)) {
     for (const e of entryType) {
         if (e.meta.includes("Index")) {
             const queryName = `${parsed.name}By${Utils.strCapitalizeFirst(e.name)}`;
-            dts += `declare const ${queryName}: Record<${e.dtsType}, ${configTypeName}>;\n`;
+            dts += `declare const ${queryName}: Partial<Record<${e.dtsType}, ${configTypeName}>>;\n`;
             dtsExports.push(queryName)
         }
     }
@@ -387,6 +357,13 @@ for (const [name, payload] of Object.entries(allData)) {
         js += `    { ${fields.join(", ")} },\n`;
     }
     js += `]\n\n`;
+
+    for (const typeObj of entryType) {
+        if (typeObj.meta.includes("Index")) {
+            const queryName = `${name}By${Utils.strCapitalizeFirst(typeObj.name)}`;
+            js += `export const ${queryName} = Object.fromEntries(${configArrayName}.map(e => [e.${typeObj.name}, e]))\n`;
+        }
+    }
 
     const jsOutPath = path.join(dataDir, `${name}.js`);
     fs.writeFileSync(jsOutPath, js);

@@ -1,17 +1,18 @@
-import { StatById } from "../configData/Stat";
-import { Stat } from "../config/Stat";
+import { StatById, Stats } from "../config/Stat";
+import { arrGetClamped } from "../Utils";
+import { mathRandomIncl } from "./MathLab";
 import Range from "./Range";
 
 export default class ReactStat {
     /**
      * 
-     * @param {Record<import("../configData/Stat").StatId, any>} baseStat 
+     * @param {Partial<Record<StatId, any>>} baseStat 
      */
     constructor(baseStat) {
         this.eventMap = new Map();
 
-        this.data = /**@type {Record<import("../configData/Stat").StatId, any>} */ ({});
-        for (const statConfig of Stat) {
+        this.data = /**@type {Record<StatId, any>} */ ({});
+        for (const statConfig of Stats) {
             switch (statConfig.type) {
                 case "number":
                     this.data[statConfig.id] = 0;
@@ -20,7 +21,7 @@ export default class ReactStat {
                     this.data[statConfig.id] = new Range(0, 0);
                     break;
                 case "set":
-                    this.data[statConfig.id] = [];
+                    this.data[statConfig.id] = new Set();
                     break;
                 default:
                     break;
@@ -37,7 +38,7 @@ export default class ReactStat {
             }
         }
         for (const [key, value] of Object.entries(baseStat)) {
-            this.setStat(/**@type {import("../configData/Stat").StatId} */(key), value);
+            this.setStat(/**@type {StatId} */(key), value);
         }
 
         if (this.data.rthp === 0) {
@@ -50,7 +51,39 @@ export default class ReactStat {
 
     /**
      * 
-     * @param {import("../configData/Stat").StatId} key 
+     * @param {Partial<Record<StatId, any>>} statConfig 
+     */
+    static collapseConfig(statConfig) {
+        const ret = /**@type {Record<StatId, any>} */ ({});
+        for (const [id, arr] of Object.entries(statConfig)) {
+            const config = StatById[/**@type {StatId}*/(id)];
+            if (config == null) {
+                console.error(`Stat ${id} not found`);
+                continue;
+            }
+            switch (config.type) {
+                case "number":
+                    ret[/**@type {StatId}*/(id)] = mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1));
+                    break;
+                case "range":
+                    ret[/**@type {StatId}*/(id)] = new Range(mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)), mathRandomIncl(arrGetClamped(arr, 2), arrGetClamped(arr, 3)));
+                    break;
+                case "set":
+                    ret[/**@type {StatId}*/(id)] = new Set();
+                    for (const s of arr) {
+                        ret[/**@type {StatId}*/(id)].add(s.toString());
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        return ret;
+    }
+
+    /**
+     * 
+     * @param {StatId} key 
      */
     getStat(key) {
         return this.data[key];
@@ -58,7 +91,7 @@ export default class ReactStat {
 
     /**
      * 
-     * @param {import("../configData/Stat").StatId} key 
+     * @param {StatId} key 
      * @param {any} value 
      * @param {boolean} [fireOnly] value is already set, only fire event
      */
@@ -80,7 +113,7 @@ export default class ReactStat {
 
     /**
      * 
-     * @param {import("../configData/Stat").StatId} key 
+     * @param {StatId} key 
      * @param {any} value 
      */
     addStat(key, value) {
@@ -97,22 +130,10 @@ export default class ReactStat {
                 this.setStat(key, undefined, true);
                 break;
             case "set":
-                let s = /**@type {string} */(value);
-                let insert = true;
-                if (s.startsWith("-")) {
-                    insert = false;
-                    s = s.substring(1);
+                if (curr.has(value)) {
+                    return;
                 }
-                const index = curr.indexOf(s);
-                if (insert) {
-                    if (index === -1) {
-                        curr.push(s);
-                    }
-                } else {
-                    if (index > -1) {
-                        curr.splice(index, 1);
-                    }
-                }
+                curr.add(value);
                 this.setStat(key, undefined, true);
                 break;
 
@@ -123,8 +144,37 @@ export default class ReactStat {
 
     /**
      * 
-     * @param {import("../configData/Stat").StatId} key 
-     * @param {(d: Record<import("../configData/Stat").StatId, any>) => void} callback 
+     * @param {StatId} key 
+     * @param {any} value 
+     */
+    subStat(key, value) {
+        const curr = this.data[key];
+        const type = StatById[key].type;
+        switch (type) {
+            case "number":
+                this.setStat(key, curr - value);
+                break;
+            case "range":
+                curr.min -= value.min;
+                curr.max -= value.max;
+                this.setStat(key, undefined, true);
+                break;
+            case "set":
+                if (!curr.has(value)) {
+                    return;
+                }
+                curr.delete(value);
+                this.setStat(key, undefined, true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 
+     * @param {StatId} key 
+     * @param {(d: Record<StatId, number[]>) => void} callback 
      */
     on(key, callback) {
         if (!this.eventMap.has(key)) {
@@ -136,8 +186,8 @@ export default class ReactStat {
 
     /**
      * 
-     * @param {import("../configData/Stat").StatId} key 
-     * @param {(d: Record<import("../configData/Stat").StatId, any>) => void} callback 
+     * @param {StatId} key 
+     * @param {(d: Record<StatId, number[]>) => void} callback 
      */
     off(key, callback) {
         if (this.eventMap.has(key)) {
@@ -147,5 +197,9 @@ export default class ReactStat {
                 callbacks.splice(index, 1);
             }
         }
+    }
+
+    toJson() {
+
     }
 }

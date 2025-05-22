@@ -12,9 +12,9 @@ declare global {
         type: ItemType;
         slot: SlotType;
         size: number;
-        stat: Map<StatId, number[]>;
+        stat: Partial<Record<StatId, number[]>>;
     }
 }
 declare const Items: Array<IItemConfig>;
-declare const ItemById: Record<ItemId, IItemConfig>;
+declare const ItemById: Partial<Record<ItemId, IItemConfig>>;
 export { Items, ItemById }

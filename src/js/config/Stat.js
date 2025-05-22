@@ -154,3 +154,5 @@ export const Stats = [
     { id: "skpcbl", name: "降魔剑术", type: "number" },
     { id: "skpsdm", name: "召唤神兽", type: "number" },
 ]
+
+export const StatById = Object.fromEntries(Stats.map(e => [e.id, e]))

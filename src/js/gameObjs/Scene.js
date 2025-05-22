@@ -4,7 +4,7 @@ import GameObject from "./GameObject";
 import SceneManager from "../SceneManager";
 import userData from "../data/UserData";
 import UnitComponent from "../components/UnitComponent";
-import { Stat } from "../config/Stat";
+import { Stats } from "../config/Stat";
 import Renderer from "../components/Renderer";
 
 const app = /**@type {HTMLCanvasElement}*/(document.getElementById('app'));
@@ -96,11 +96,11 @@ function watchReactStat() {
     if (curr != null) {
         const stat = curr.getComponent(UnitComponent).stat.data;
         let rows = [];
-        for (const cfg of Stat) {
+        for (const cfg of Stats) {
             if (cfg.type === "number") {
                 rows.push(`${cfg.id}: ${stat[cfg.id]}`);
             } else if (cfg.type === "set") {
-                rows.push(`${cfg.id}: [${stat[cfg.id].join(', ')}]`);
+                rows.push(`${cfg.id}: [${Array.from(stat[cfg.id]).join(', ')}]`);
             } else if (cfg.type === "range") {
                 rows.push(`${cfg.id}: ${stat[cfg.id].min}-${stat[cfg.id].max}`);
             } else {

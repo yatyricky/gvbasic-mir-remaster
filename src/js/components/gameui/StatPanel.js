@@ -7,7 +7,7 @@ import UnitComponent from "../UnitComponent";
 
 import KeyEvent from "../../KeyEvent";
 import { strWrap } from "../../Utils";
-import { StatById } from "../../configData/Stat";
+import { StatById } from "../../config/Stat";
 
 export default class StatPanel extends Component {
     onInit() {

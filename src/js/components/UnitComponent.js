@@ -1,4 +1,4 @@
-import { UnitById } from "../configData/Unit";
+import { UnitById } from "../config/Unit";
 import ReactStat from "../data/ReactStat";
 import Component from "./Component";
 

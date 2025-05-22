@@ -12,5 +12,5 @@ declare global {
     }
 }
 declare const Stats: Array<IStatConfig>;
-declare const StatById: Record<StatId, IStatConfig>;
+declare const StatById: Partial<Record<StatId, IStatConfig>>;
 export { Stats, StatById }

@@ -1,5 +1,4 @@
-import { StatId } from "./configData/Stat";
-import { UnitId } from "./configData/Unit";
+import { StatId } from "./config/Stat";
 
 declare global {
     type ElementTypeOf<T> = T extends Array<infer U> ? U : never;

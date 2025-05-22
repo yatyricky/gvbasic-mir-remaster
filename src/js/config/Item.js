@@ -23,10 +23,12 @@ export const Items = [
     { id: "silverserpent", name: "银蛇", level: 15, classOnly: ["wlk"], description: "银蛇描述", image: "🗡️", type: "equip", slot: "weapon", size: 1, stat: { ["xatk"]: [4, 8, 16, 24], ["watk"]: [0.5, 1, 3, 4.5], ["hit"]: [1, 2] } },
     { id: "nullstaff", name: "无极棍", level: 15, classOnly: ["wlk"], description: "无极棍描述", image: "🗡️", type: "equip", slot: "weapon", size: 2, stat: { ["xatk"]: [4, 8, 16, 24], ["watk"]: [1.5, 3, 5, 7.5] } },
     { id: "dragonsword", name: "龙纹剑", level: 35, classOnly: ["wlk"], description: "龙纹剑描述", image: "🗡️", type: "equip", slot: "weapon", size: 1, stat: { ["xatk"]: [4, 8, 20, 30], ["watk"]: [1.5, 3, 6, 9], ["hit"]: [1, 2] } },
-    { id: "seasoul", name: "海魂", level: 35, classOnly: ["mage"], description: "海魂描述", image: "🗡️", type: "equip", slot: "weapon", size: 2, stat: { ["xatk"]: [1.5, 3, 10, 15], ["matk"]: [1, 1.1, 2, 3] } },
+    { id: "seasoul", name: "海魂", level: 15, classOnly: ["mage"], description: "海魂描述", image: "🗡️", type: "equip", slot: "weapon", size: 2, stat: { ["xatk"]: [1.5, 3, 10, 15], ["matk"]: [1, 1.1, 2, 3] } },
     { id: "siezemoon", name: "偃月", level: 35, classOnly: ["mage"], description: "偃月描述", image: "🗡️", type: "equip", slot: "weapon", size: 2, stat: { ["xatk"]: [2, 4, 10, 15], ["matk"]: [1, 1.1, 3, 4.5] } },
     { id: "magicstaff", name: "魔杖", level: 35, classOnly: ["mage"], description: "魔杖描述", image: "🗡️", type: "equip", slot: "weapon", size: 2, stat: { ["xatk"]: [2.5, 5, 9, 13.5], ["matk"]: [1, 2, 5, 7.5] } },
     { id: "blooddrink", name: "血饮", level: 35, classOnly: ["mage"], description: "血饮描述", image: "🗡️", type: "equip", slot: "weapon", size: 1, stat: { ["xatk"]: [1.5, 3, 14, 21], ["matk"]: [1.5, 3, 5, 7.5], ["hit"]: [5, 7.5] } },
     { id: "bonescepter", name: "骨玉权杖", level: 35, classOnly: ["mage"], description: "骨玉权杖描述", image: "🗡️", type: "equip", slot: "weapon", size: 2, stat: { ["xatk"]: [3, 6, 12, 18], ["matk"]: [1, 2, 6, 9] } },
     { id: "cloth", name: "布衣", level: 1, description: "布衣描述", image: "🗡️", type: "equip", slot: "armor", size: 1, stat: { ["xdr"]: [2, 2.1, 2, 2.1], ["matk"]: [1, 2, 6, 9] } },
 ]
+
+export const ItemById = Object.fromEntries(Items.map(e => [e.id, e]))

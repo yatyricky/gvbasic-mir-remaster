@@ -1,4 +1,5 @@
-import { UnitById } from "../configData/Unit";
+import { UnitById } from "../config/Unit";
+import ReactStat from "./ReactStat";
 
 class UserData {
     constructor() {
@@ -25,14 +26,14 @@ class UserData {
 
     /**
      * 
-     * @param {import("../configData/Unit").UnitId} id 
+     * @param {UnitId} id 
      */
     addChar(id) {
         const config = UnitById[id];
         /**@type {UnitSaveData} */
         const char = {
             unitId: id,
-            stats: { ...config.baseStat },
+            stats: ReactStat.collapseConfig(config.baseStat),
             inventory: [],
             bag: [],
             skills: [],

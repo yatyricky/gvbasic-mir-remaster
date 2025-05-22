@@ -37,6 +37,25 @@ export function arrLast(arr) {
 }
 
 /**
+ * @template T
+ * @param {Array<T>} arr 
+ * @param {number} index 
+ * @returns {T}
+ */
+export function arrGetClamped(arr, index) {
+    if (arrIsEmpty(arr)) {
+        return undefined;
+    }
+    if (index < 0) {
+        index = 0;
+    }
+    if (index >= arr.length) {
+        index = arr.length - 1;
+    }
+    return arr[index];
+}
+
+/**
  * 
  * @param {string} text 
  * @returns 
