@@ -9,6 +9,23 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const cfgDir = path.join(__dirname, 'configs')
 const dataDir = path.join(__dirname, 'src', 'js', 'config')
 
+class Utils {
+    static strIsEmpty(str) {
+        return str == null || str.trim().length === 0;
+    }
+
+    /**
+     * 
+     * @param {string} str 
+     * @returns 
+     */
+    static strCapitalizeFirst(str) {
+        return str[0].toUpperCase() + str.slice(1);
+    }
+}
+
+const enumTypes = {};
+
 class TypeLexer {
     /**
      * Parses a type string into a structured type object
@@ -21,7 +38,7 @@ class TypeLexer {
         }
 
         typeStr = typeStr.trim();
-        
+
         // Handle array types (e.g., "string[]", "number[]", "CustomType[]")
         if (typeStr.endsWith('[]')) {
             const elementType = TypeLexer.parse(typeStr.slice(0, -2));
@@ -30,27 +47,27 @@ class TypeLexer {
                 elementType
             };
         }
-        
+
         // Handle Map types (e.g., "Map<string, number>", "Map<CustomType, string[]>")
         if (typeStr.startsWith('Map<')) {
             if (!typeStr.endsWith('>')) {
                 throw new Error(`Invalid Map type: ${typeStr}`);
             }
-            
+
             // Extract the generic arguments
             const genericArgs = TypeLexer._extractGenericArgs(typeStr.slice(4, -1));
-            
+
             if (genericArgs.length !== 2) {
                 throw new Error(`Map requires exactly 2 type arguments, got ${genericArgs.length} in "${typeStr}"`);
             }
-            
+
             return {
                 type: 'map',
                 keyType: TypeLexer.parse(genericArgs[0]),
                 valueType: TypeLexer.parse(genericArgs[1])
             };
         }
-        
+
         // Handle Enum types (e.g., "Enum:ItemType")
         if (typeStr.startsWith('Enum:')) {
             const enumName = typeStr.slice(5);
@@ -59,21 +76,29 @@ class TypeLexer {
                 enumName
             };
         }
-        
+
+        if (typeStr.startsWith("js:")) {
+            const jsTypeName = typeStr.slice(3);
+            return {
+                type: "js",
+                jsTypeName,
+            }
+        }
+
         // Handle primitive types
         if (typeStr === 'string' || typeStr === 'number' || typeStr === 'boolean') {
             return {
                 type: typeStr
             };
         }
-        
+
         // Handle custom types (assume they're identifiers)
         return {
             type: 'custom',
             typeName: typeStr
         };
     }
-    
+
     /**
      * Extracts generic arguments from a type parameter string, handling nested generics
      * @param {string} argsStr - The string containing generic arguments (e.g., "string, number[]")
@@ -85,10 +110,10 @@ class TypeLexer {
         const args = [];
         let currentArg = '';
         let depth = 0;
-        
+
         for (let i = 0; i < argsStr.length; i++) {
             const char = argsStr[i];
-            
+
             if (char === '<') {
                 depth++;
                 currentArg += char;
@@ -102,14 +127,14 @@ class TypeLexer {
                 currentArg += char;
             }
         }
-        
+
         if (currentArg.trim()) {
             args.push(currentArg.trim());
         }
-        
+
         return args;
     }
-    
+
     /**
      * Converts a parsed type object to a TypeScript type string
      * @param {object} typeObj - The parsed type object
@@ -121,24 +146,27 @@ class TypeLexer {
             case 'number':
             case 'boolean':
                 return typeObj.type;
-                
+
             case 'array':
                 return `${TypeLexer.toTypeScriptType(typeObj.elementType)}[]`;
-                
+
             case 'map':
                 return `Map<${TypeLexer.toTypeScriptType(typeObj.keyType)}, ${TypeLexer.toTypeScriptType(typeObj.valueType)}>`;
-                
+
             case 'enum':
                 return typeObj.enumName;
-                
+
             case 'custom':
                 return typeObj.typeName;
-                
+
+            case "js":
+                return typeObj.jsTypeName;
+
             default:
                 throw new Error(`Unknown type: ${typeObj.type}`);
         }
     }
-    
+
     /**
      * Converts a parsed type object to a JSDoc type string
      * @param {object} typeObj - The parsed type object
@@ -150,26 +178,97 @@ class TypeLexer {
             case 'number':
             case 'boolean':
                 return typeObj.type;
-                
+
             case 'array':
                 return `Array<${TypeLexer.toJSDocType(typeObj.elementType)}>`;
-                
+
             case 'map':
                 return `Map<${TypeLexer.toJSDocType(typeObj.keyType)}, ${TypeLexer.toJSDocType(typeObj.valueType)}>`;
-                
+
             case 'enum':
                 return typeObj.enumName;
-                
+
             case 'custom':
                 return typeObj.typeName;
-                
+
             default:
                 throw new Error(`Unknown type: ${typeObj.type}`);
         }
     }
+
+    static trySplit(str, depth) {
+        const splitter = (",:;|")[depth - 1];
+        return str.split(splitter);
+    }
+
+    static measureTypeDepth(typeObj) {
+        let depth = 0;
+        switch (typeObj.type) {
+            case 'array':
+                depth = 1 + TypeLexer.measureTypeDepth(typeObj.elementType);
+                break;
+            case 'map':
+                depth = 2 + TypeLexer.measureTypeDepth(typeObj.keyType) + TypeLexer.measureTypeDepth(typeObj.valueType);
+                break;
+            case 'custom':
+            case 'enum':
+            case 'number':
+            case 'js':
+                depth = 0;
+                break;
+            default:
+                throw new Error(`Unknown type: ${typeObj.type}`);
+        }
+        return depth;
+    }
+
+    static toJs(typeObj, cell) {
+        if (cell == null) {
+            return null;
+        }
+        if (typeof cell === "string") {
+            cell = cell.trim();
+        }
+        switch (typeObj.type) {
+            case "string":
+            case "enum":
+                return `"${cell}"`;
+
+            case "number":
+            case "js":
+                return cell;
+
+            case "map":
+                const depths = TypeLexer.measureTypeDepth(typeObj);
+                const entries = TypeLexer.trySplit(cell, depths);
+                const subs = [];
+                for (const entry of entries) {
+                    const kvs = TypeLexer.trySplit(entry, depths - 1);
+                    if (kvs.length !== 2) {
+                        throw new Error("@@#@#@#@#");
+                    }
+                    subs.push(`[${TypeLexer.toJs(typeObj.keyType, kvs[0])}]: ${TypeLexer.toJs(typeObj.valueType, kvs[1])}`);
+                }
+                return `{ ${subs.join(", ")} }`;
+
+            case "array":
+                const arrDepths = TypeLexer.measureTypeDepth(typeObj);
+                return `[${TypeLexer.trySplit(cell, arrDepths).map(item => TypeLexer.toJs(typeObj.elementType, item)).join(", ")}]`;
+
+            case "custom":
+                if (enumTypes[typeObj.typeName]) {
+                    return `"${cell}"`;
+                } else {
+                    return `'NotImplemented ${JSON.stringify(typeObj)}>>${cell}'`;
+                }
+
+            default:
+                return `'NotImplemented ${JSON.stringify(typeObj)}>>${cell}'`;
+        }
+    }
 }
 
-const enumTypes = {};
+const allData = {};
 
 for (const file of fs.readdirSync(cfgDir)) {
     if (!file.endsWith('.xlsx')) {
@@ -184,14 +283,8 @@ for (const file of fs.readdirSync(cfgDir)) {
     const parsed = path.parse(file)
     const wb = xlsx.readFile(path.join(cfgDir, file))
     const wbTypes = [];
-    const entryType = [
-        {
-            name: "id",
-            type: {
-
-            }
-        }
-    ];
+    const entryType = [];
+    const rows = [];
     for (const sheetName of wb.SheetNames) {
         const ws = wb.Sheets[sheetName]
         const range = xlsx.utils.decode_range(ws['!ref'])
@@ -204,74 +297,97 @@ for (const file of fs.readdirSync(cfgDir)) {
             if (!entryTypeDef) {
                 entryTypeDef = {};
                 entryType.push(entryTypeDef);
-            }            entryTypeDef.name = fieldName;
-            if (fieldType.startsWith("Enum:")) {
-                entryTypeDef.type = {
-                    type: "string",
-                    enumName: fieldType.substring(5),
-                }
-            } else {
-                try {
-                    entryTypeDef.type = TypeLexer.parse(fieldType);
-                } catch (error) {
-                    console.error(`Error parsing type for ${fieldName}: ${error.message}`);
-                    entryTypeDef.type = { type: 'string' }; // Default to string on error
-                }
             }
+            entryTypeDef.name = fieldName;
+            entryTypeDef.type = TypeLexer.parse(fieldType);
+            entryTypeDef.dtsType = TypeLexer.toTypeScriptType(entryTypeDef.type);
+            entryTypeDef.meta = fieldMeta.split(' ').filter(e => !Utils.strIsEmpty(e)).map(m => m.trim());
 
-            console.log(`file: ${file}, sheet: ${sheetName}, field: ${fieldName}, type: ${fieldType}, meta: ${fieldMeta}`);
-              }
-    }
-
-    // Generate type definition for the Excel sheet
-    const typeDefs = entryType.filter(et => et.name && et.type).map(et => {
-        return `    ${et.name}: ${TypeLexer.toTypeScriptType(et.type)}`;
-    });
-
-    // Generate interface
-    let interfaceName = `${parsed.name}Entry`;
-    let interfaceContent = `export interface ${interfaceName} {\n${typeDefs.join(';\n')};\n}\n\n`;
-    
-    // Generate type definition file
-    const typeFilePath = path.join(dataDir, `${parsed.name}.d.ts`);
-    fs.writeFileSync(typeFilePath, interfaceContent);
-    
-    // Generate JS file to export the data
-    const jsContent = `// Auto-generated from ${file}
-export const ${parsed.name} = [];
-`;
-    const jsFilePath = path.join(dataDir, `${parsed.name}.js`);
-    fs.writeFileSync(jsFilePath, jsContent);
-    
-    console.log(`Generated type definition for ${parsed.name}`);
-
-    const module = await import(`./src/js/config/${parsed.name}.js`);
-    const config = module[parsed.name];
-
-    const exportsById = `${parsed.name}ById`;
-    const idType = `${parsed.name}Id`;
-    const dupIdCheck = new Set();
-    for (const entry of config) {
-        if (dupIdCheck.has(entry.id)) {
-            throw new Error(`Duplicate id found: ${entry.id} in ${file}`);
+            if (entryTypeDef.type.type === 'enum') {
+                if (entryTypeDef.enumValues == null) {
+                    entryTypeDef.enumValues = new Set();
+                }
+                for (let r = 4; r <= range.e.r; r++) {
+                    const enumValue = ws[xlsx.utils.encode_cell({ r, c })]?.v;
+                    if (Utils.strIsEmpty(enumValue)) {
+                        continue;
+                    }
+                    entryTypeDef.enumValues.add(enumValue);
+                }
+                enumTypes[entryTypeDef.dtsType] = entryTypeDef;
+            }
         }
-        dupIdCheck.add(entry.id);
+
+        for (let r = 4; r <= range.e.r; r++) {
+            const row = []
+            for (let c = 0; c <= range.e.c; c++) {
+                const cell = ws[xlsx.utils.encode_cell({ r, c })]?.v;
+                row.push(cell);
+            }
+            rows.push(row);
+        }
     }
-    let sb = `// This file is auto-generated. Do not edit manually.
-import { ${parsed.name} } from '../config/${parsed.name}.js';
 
-/**
- * @typedef {${Array.from(dupIdCheck.values()).map(e=>'"' + e + '"').join(" | ")}} ${idType}
- */
+    // .d.ts
+    let dts = `declare global {\n`;
+    for (const e of entryType) {
+        if (e.type.type === 'enum') {
+            dts += `    type ${e.type.enumName} = ${Array.from(e.enumValues).map(v => `"${v}"`).join(' | ')};\n`;
+        }
+        // sb += `    ${e.name}: ${TypeLexer.toTypeScriptType(e.type)};\n`;
+    }
 
-const ${exportsById} = /**@type {Record<${idType}, ElementTypeOf<typeof import("../config/${parsed.name}.js").${parsed.name}>>} */({});
-for (const entry of ${parsed.name}) {
-    ${exportsById}[/**@type {${idType}}*/(entry.id)] = entry;
+    const configTypeName = `I${parsed.name}Config`;
+
+    dts += `    interface ${configTypeName} {\n`;
+
+    for (const e of entryType) {
+        dts += `        ${e.name}: ${e.dtsType};\n`;
+    }
+
+    dts += `    }\n`;
+    dts += `}\n`;
+
+    const dtsExports = [];
+    const configArrayName = `${parsed.name}s`;
+    dts += `declare const ${configArrayName}: Array<${configTypeName}>;\n`;
+    dtsExports.push(configArrayName)
+
+    for (const e of entryType) {
+        if (e.meta.includes("Index")) {
+            const queryName = `${parsed.name}By${Utils.strCapitalizeFirst(e.name)}`;
+            dts += `declare const ${queryName}: Record<${e.dtsType}, ${configTypeName}>;\n`;
+            dtsExports.push(queryName)
+        }
+    }
+
+    dts += `export { ${dtsExports.join(", ")} }\n`;
+    const dtsOutPath = path.join(dataDir, `${parsed.name}.d.ts`);
+    fs.writeFileSync(dtsOutPath, dts);
+
+    allData[parsed.name] = {
+        rows,
+        configArrayName,
+        entryType
+    };
 }
 
-export { ${exportsById} };
-`;
+// .js
+for (const [name, payload] of Object.entries(allData)) {
+    const { rows, configArrayName, entryType } = payload;
+    let js = `export const ${configArrayName} = [\n`;
+    for (const row of rows) {
+        const fields = [];
+        for (let i = 0; i < entryType.length; i++) {
+            const val = TypeLexer.toJs(entryType[i].type, row[i]);
+            if (val != null) {
+                fields.push(`${entryType[i].name}: ${val}`);
+            }
+        }
+        js += `    { ${fields.join(", ")} },\n`;
+    }
+    js += `]\n\n`;
 
-    const outPath = path.join(dataDir, '..', 'configData', `${parsed.name}.js`);
-    fs.writeFileSync(outPath, sb);
+    const jsOutPath = path.join(dataDir, `${name}.js`);
+    fs.writeFileSync(jsOutPath, js);
 }
