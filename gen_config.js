@@ -11,7 +11,7 @@ const dataDir = path.join(__dirname, 'src', 'js', 'config')
 
 class Utils {
     static strIsEmpty(str) {
-        return str == null || str.trim().length === 0;
+        return str == null || typeof str !== "string" || str.trim().length === 0;
     }
 
     /**
@@ -21,6 +21,35 @@ class Utils {
      */
     static strCapitalizeFirst(str) {
         return str[0].toUpperCase() + str.slice(1);
+    }
+
+    /**
+     * $res1,1.5/fthp/:
+     * @param {string} str 
+     */
+    static strTemplate(str) {
+        if (Utils.strIsEmpty(str)) {
+            return str;
+        }
+        if (!str.match(/^.+\/.+\/.$/)) {
+            return str;
+        }
+        if (str.includes("/")) {
+            const parts = str.split("/");
+            if (parts.length !== 3) {
+                throw new Error(`Invalid template string: ${str}`);
+            }
+            const [template, args, splitter] = parts;
+            const argsArr = [];
+            if (args.includes(",")) {
+                argsArr.push(...args.split(","));
+            } else {
+                argsArr.push(...args.split(""));
+            }
+            return argsArr.map(arg => template.replace(/\$/g, arg)).join(splitter);
+        } else {
+            return str;
+        }
     }
 }
 
@@ -232,12 +261,14 @@ class TypeLexer {
                 return `[${TypeLexer.trySplit(cell, arrDepths).map(item => TypeLexer.toJs(typeObj.elementType, item)).join(", ")}]`;
 
             case "custom":
-                if (enumTypes[typeObj.typeName]) {
-                    return `"${cell}"`;
-                } else {
+                const enumDef = enumTypes[typeObj.typeName];
+                if (enumDef == null) {
                     return `'NotImplemented ${JSON.stringify(typeObj)}>>${cell}'`;
                 }
-
+                if (!enumDef.enumValues.has(cell)) {
+                    throw new Error(`Invalid enum value "${cell}" for type "${typeObj.typeName}"`);
+                }
+                return `"${cell}"`;
             default:
                 return `'NotImplemented ${JSON.stringify(typeObj)}>>${cell}'`;
         }
@@ -296,7 +327,7 @@ for (const file of fs.readdirSync(cfgDir)) {
         for (let r = 4; r <= range.e.r; r++) {
             const row = []
             for (let c = 0; c <= range.e.c; c++) {
-                const cell = ws[xlsx.utils.encode_cell({ r, c })]?.v;
+                const cell = Utils.strTemplate(ws[xlsx.utils.encode_cell({ r, c })]?.v);
                 row.push(cell);
             }
             rows.push(row);

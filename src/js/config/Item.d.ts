@@ -11,10 +11,10 @@ declare global {
         image: string;
         type: ItemType;
         size: number;
-        stat: Partial<Record<StatId, number[]>>;
-        randomStat: Partial<Record<StatId, number[]>>;
-        randomStatWeight: number[];
-        randomStatCount: number;
+        fixedAffix: Partial<Record<AffixId, number>>;
+        randomAffix: Partial<Record<AffixId, number>>;
+        randomAffixCount: number;
+        excludeAffix: AffixId[];
     }
 }
 declare const Items: Array<IItemConfig>;
