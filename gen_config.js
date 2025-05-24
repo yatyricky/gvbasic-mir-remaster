@@ -54,6 +54,7 @@ class Utils {
 }
 
 const enumTypes = {};
+const traceInfo = {};
 
 class TypeLexer {
     /**
@@ -238,7 +239,14 @@ class TypeLexer {
             case "string":
             case "enum":
                 return `"${cell}"`;
-
+            case "boolean":
+                if (typeof cell === "boolean") {
+                    return cell;
+                } else if (typeof cell === "string") {
+                    return cell.toLowerCase() === "true";
+                } else {
+                    return "Unknown boolean value";
+                }
             case "number":
             case "js":
                 return cell;
@@ -266,7 +274,7 @@ class TypeLexer {
                     return `'NotImplemented ${JSON.stringify(typeObj)}>>${cell}'`;
                 }
                 if (!enumDef.enumValues.has(cell)) {
-                    throw new Error(`Invalid enum value "${cell}" for type "${typeObj.typeName}"`);
+                    throw new Error(`${traceInfo.cellAddress}: Invalid enum value "${cell}" for type "${typeObj.typeName}"`);
                 }
                 return `"${cell}"`;
             default:
@@ -296,7 +304,10 @@ for (const file of fs.readdirSync(cfgDir)) {
         const range = xlsx.utils.decode_range(ws['!ref'])
         // decode types
         for (let c = range.s.c; c <= range.e.c; c++) {
-            const fieldName = ws[xlsx.utils.encode_cell({ r: 0, c })].v;
+            const fieldName = ws[xlsx.utils.encode_cell({ r: 0, c })]?.v;
+            if (fieldName == null) {
+                continue;
+            }
             const fieldType = ws[xlsx.utils.encode_cell({ r: 1, c })].v;
             const fieldMeta = ws[xlsx.utils.encode_cell({ r: 2, c })]?.v ?? "";
             let entryTypeDef = entryType.find(e => e.name === fieldName);
@@ -371,6 +382,12 @@ for (const file of fs.readdirSync(cfgDir)) {
             dts += `declare const ${queryName}: Partial<Record<${e.dtsType}, ${configTypeName}>>;\n`;
             dtsExports.push(queryName)
         }
+
+        if (e.meta.includes("Group")) {
+            const queryName = `${parsed.name}GroupBy${Utils.strCapitalizeFirst(e.name)}`;
+            dts += `declare const ${queryName}: Partial<Record<${TypeLexer.toTypeScriptType(e.type.elementType)}, Array<${configTypeName}>>>;\n`;
+            dtsExports.push(queryName)
+        }
     }
 
     dts += `export { ${dtsExports.join(", ")} }\n`;
@@ -388,22 +405,40 @@ for (const file of fs.readdirSync(cfgDir)) {
 for (const [name, payload] of Object.entries(allData)) {
     const { rows, configArrayName, entryType } = payload;
     let js = `export const ${configArrayName} = [\n`;
-    for (const row of rows) {
+    for (let r = 0; r < rows.length; r++) {
+        const row = rows[r];
         const fields = [];
-        for (let i = 0; i < entryType.length; i++) {
-            const val = TypeLexer.toJs(entryType[i].type, row[i]);
+        for (let c = 0; c < entryType.length; c++) {
+            traceInfo.cellAddress = `${name}!${xlsx.utils.encode_cell({ r: r + 4, c })}`;
+            const val = TypeLexer.toJs(entryType[c].type, row[c]);
             if (val != null) {
-                fields.push(`${entryType[i].name}: ${val}`);
+                fields.push(`${entryType[c].name}: ${val}`);
             }
         }
         js += `    { ${fields.join(", ")} },\n`;
     }
-    js += `]\n\n`;
+    js += `];\n\n`;
 
     for (const typeObj of entryType) {
         if (typeObj.meta.includes("Index")) {
             const queryName = `${name}By${Utils.strCapitalizeFirst(typeObj.name)}`;
-            js += `export const ${queryName} = Object.fromEntries(${configArrayName}.map(e => [e.${typeObj.name}, e]))\n`;
+            js += `export const ${queryName} = Object.fromEntries(${configArrayName}.map(e => [e.${typeObj.name}, e]));\n`;
+        }
+
+        if (typeObj.meta.includes("Group")) {
+            const queryName = `${name}GroupBy${Utils.strCapitalizeFirst(typeObj.name)}`;
+            js += `export const ${queryName} = Affixs.reduce((acc, e) => {
+    if (e.${typeObj.name} != null) {
+        e.${typeObj.name}.forEach(group => {
+            if (!acc[group]) {
+                acc[group] = [];
+            }
+            acc[group].push(e);
+        })
+    }
+    return acc;
+}, {})
+`;
         }
     }
 

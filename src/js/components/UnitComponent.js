@@ -16,4 +16,9 @@ export default class UnitComponent extends Component {
         this.stat = new ReactStat(persistantData.stats);
         return this;
     }
+
+    getItem() {
+        /**@type {ItemInstance} */
+        const x = null;
+    }
 }

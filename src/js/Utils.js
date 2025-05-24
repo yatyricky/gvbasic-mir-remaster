@@ -56,6 +56,57 @@ export function arrGetClamped(arr, index) {
 }
 
 /**
+ * Gets a random subset of elements from an array without modifying the original array
+ * Optimized for both small and large selection sizes
+ * @template T
+ * @param {Array<T>} arr - The array to sample from
+ * @param {number} count - The number of elements to get
+ * @returns {Array<T>} A new array containing random elements
+ */
+export function arrGetSome(arr, count) {
+    if (arrIsEmpty(arr)) {
+        return [];
+    }
+
+    count = Math.min(count, arr.length);
+
+    const indexes = Array(arr.length);
+    let len = arr.length;
+    for (let i = 0; i < len; i++) {
+        indexes[i] = i;
+    }
+    const result = Array(count);
+    for (let i = 0; i < count; i++) {
+        const randomIndex = Math.floor(Math.random() * len);
+        const index = indexes[randomIndex];
+        result[i] = arr[index];
+        len--;
+        indexes[randomIndex] = indexes[len]; // Swap with the last element
+    }
+
+    return result;
+}
+
+/**
+ * @template {object} T
+ * @param {T[]} arr 
+ * @param {string} groupField 
+ * @param {string} indexField
+ * @returns {Map<any, Map<any, T>>}
+ */
+export function arrGroupBy(arr, groupField, indexField) {
+    const map = new Map();
+    for (const item of arr) {
+        const key = /**@type {any}*/(item)[groupField];
+        if (!map.has(key)) {
+            map.set(key, new Map());
+        }
+        map.get(key).set(/**@type {any}*/(item)[indexField], item);
+    }
+    return map;
+}
+
+/**
  * 
  * @param {string} text 
  * @returns 

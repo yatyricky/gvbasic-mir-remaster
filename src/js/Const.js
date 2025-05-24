@@ -10,6 +10,14 @@ const Const = {
     COLOR_FG: "rgba(1, 29, 1, 1)",
     COLOR_BG_02: "rgba(1, 29, 1, 0.2)",
     COLOR_BG_04: "rgb(42, 94, 60)",
+
+    /** white, green, blue, purple, orange */
+    LOOT_WEIGHT_MOB: [1000, 100, 10, 5, 1],
+    LOOT_WEIGHT_ELITE: [0, 100, 10, 5, 1],
+    LOOT_WEIGHT_BOSS: [0, 38, 60, 15, 3],
+    LOOT_LUCK_COEFFICIENT: [0, 0.5, 1, 1, 1],
+    LOOT_AFFIX_COUNT_GREEN: [3, 1],
+    LOOT_AFFIX_COUNT_BLUE: [50, 39, 10, 1]
 }
 
 Const.SIZE2 = Const.SIZE * 2;

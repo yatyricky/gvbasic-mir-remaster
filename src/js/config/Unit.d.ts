@@ -1,8 +1,10 @@
 declare global {
-    type UnitId = "warr" | "mage" | "wlk";
+    type UnitId = "warr" | "mage" | "wlk" | "clawcat" | "corpseking" | "redmoondemon";
+    type UnitType = "hero" | "mob" | "elite" | "boss";
     interface IUnitConfig {
         id: UnitId;
         name: string;
+        type: UnitType;
         description: string;
         image: string;
         baseStat: Partial<Record<StatId, number[]>>;

@@ -4,7 +4,18 @@ declare global {
     type ElementTypeOf<T> = T extends Array<infer U> ? U : never;
 
     interface ItemSaveData {
-
+        id: ItemId;
+        /** affixed name */
+        name: string;
+        /** Item level */
+        ilvl: number;
+        /** Quality level */
+        quality: number;
+        stats: Record<StatId, number | [number, number]>;
+        /** key: 1,2,3,4,5 */
+        sockets: Record<string, ItemSaveData>;
+        runeWord: ItemId;
+        runeWordStats: Record<StatId, number | [number, number]>;
     }
 
     interface SkillSaveData {
