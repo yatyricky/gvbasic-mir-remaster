@@ -17,7 +17,8 @@ const Const = {
     LOOT_WEIGHT_BOSS: [0, 38, 60, 15, 3],
     LOOT_LUCK_COEFFICIENT: [0, 0.5, 1, 1, 1],
     LOOT_AFFIX_COUNT_GREEN: [3, 1],
-    LOOT_AFFIX_COUNT_BLUE: [50, 39, 10, 1]
+    LOOT_AFFIX_COUNT_BLUE: [50, 39, 10, 1],
+    MAX_ILVL_FACTOR: 4,
 }
 
 Const.SIZE2 = Const.SIZE * 2;

@@ -11,11 +11,11 @@ declare global {
         ilvl: number;
         /** Quality level */
         quality: number;
-        stats: Record<StatId, number | [number, number]>;
+        stats: Partial<Record<StatId, number | [number, number]>>;
         /** key: 1,2,3,4,5 */
         sockets: Record<string, ItemSaveData>;
-        runeWord: ItemId;
-        runeWordStats: Record<StatId, number | [number, number]>;
+        runeWord?: ItemId;
+        runeWordStats?: Record<StatId, number | [number, number]>;
     }
 
     interface SkillSaveData {
@@ -24,10 +24,10 @@ declare global {
 
     interface UnitSaveData {
         unitId: UnitId;
-        stats: any;
-        inventory: ItemSaveData[];
-        bag: ItemSaveData[];
-        skills: SkillSaveData;
+        stats?: any;
+        inventory?: ItemSaveData[];
+        bag?: ItemSaveData[];
+        skills?: SkillSaveData;
     }
 
     interface ISaveData {

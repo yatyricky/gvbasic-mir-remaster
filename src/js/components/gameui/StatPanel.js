@@ -53,9 +53,9 @@ export default class StatPanel extends Component {
         sb += `LV: 经验${this.stat.getStat("exp")}\n`;
         sb += `${StatById.rthp.name}:${this.stat.getStat("rthp")}/${this.stat.getStat("rtmaxhp")}\n`;
         sb += `${StatById.rtmp.name}:${this.stat.getStat("rtmp")}/${this.stat.getStat("rtmaxmp")}\n`;
-        sb += `${StatById.xatk.name}:${this.stat.getStat("xatk")}\n`;
-        sb += `${StatById.matk.name}:${this.stat.getStat("matk")}\n`;
-        sb += `${StatById.watk.name}:${this.stat.getStat("watk")}\n`;
+        sb += `${StatById.str.name}:${this.stat.getStat("str")}\n`;
+        sb += `${StatById.int.name}:${this.stat.getStat("int")}\n`;
+        sb += `${StatById.spi.name}:${this.stat.getStat("spi")}\n`;
         if (!this.stat.getStat("xdr").isZero()) sb += `${StatById.xdr.name}:${this.stat.getStat("xdr")}\n`;
         if (!this.stat.getStat("fdr").isZero()) sb += `${StatById.fdr.name}:${this.stat.getStat("fdr")}\n`;
         if (!this.stat.getStat("tdr").isZero()) sb += `${StatById.tdr.name}:${this.stat.getStat("tdr")}\n`;

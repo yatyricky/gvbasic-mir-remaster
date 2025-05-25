@@ -1,32 +1,71 @@
 import { AffixGroupByAvailOn } from "../config/Affix";
 import { ItemById } from "../config/Item";
+import { StatById } from "../config/Stat";
 import { UnitById } from "../config/Unit";
 import Const from "../Const";
 import { arrGetSome, arrGroupBy } from "../Utils";
-import { mathRandomInt, mathWeightedRandom } from "./MathLab";
+import { mathFluctuate, mathRandomIncl, mathRandomInt, mathWeightedRandom } from "./MathLab";
 
 export default class ItemSave {
 
-    static collapseAffix(affix, stats) {
+    /**
+     * 
+     * @param {IAffixConfig} affix 
+     * @param {Partial<Record<StatId, any>} stats 
+     * @param {number} ilvl 
+     * @param {number} qlvl 
+     */
+    static collapseAffix(affix, stats, ilvl, qlvl) {
+        const statConfig = StatById[affix.statId];
+        const ilvlFactor = Math.min(ilvl / 10, Const.MAX_ILVL_FACTOR);
+        const a = (affix.lo + affix.loIlvlDelta * ilvlFactor) * (1 + qlvl);
+        const b = (affix.hi + affix.hiIlvlDelta * ilvlFactor) * (1 + qlvl);
+        let val;
+        let val2;
+        if (statConfig.type === "number") {
+            val = mathRandomIncl(a, b);
+            if (stats[affix.statId] == null) {
+                stats[affix.statId] = val;
+            } else {
+                stats[affix.statId] += val;
+            }
+        } else if (statConfig.type === "range") {
+            val = mathFluctuate(a, affix.fluctuate);
+            val2 = mathFluctuate(b, affix.fluctuate);
+            if (stats[affix.statId] == null) {
+                stats[affix.statId] = [val, val2];
+            } else {
+                const tuple = stats[affix.statId];
+                tuple[0] += val;
+                tuple[1] += val2;
+            }
+        } else if (statConfig.type === "set") {
+            throw new Error(`Set stat not supported yet`);
+        } else {
+            throw new Error(`Unknown stat type ${statConfig.type}`);
+        }
     }
 
     /**
      * 
      * @param {ItemId} id
      * @param {number} ilvl 
+     * @param {number} qlvl
      * @param {number} luck
      * @param {UnitSaveData} dropper
      */
-    static drop(id, ilvl, luck, dropper) {
-        const config = ItemById[id];
-        if (config == null) {
+    static drop(id, ilvl, qlvl, luck, dropper) {
+        const itemConfig = ItemById[id];
+        if (itemConfig == null) {
             throw new Error(`Item with id ${id} not found`);
         }
 
         /**@type {IAffixConfig[]} */
         const affixesRaw = [];
+        let name = itemConfig.name;
+        let quality = itemConfig.quality;
         // normal magic items
-        if (config.quality === 0) {
+        if (itemConfig.quality === 0) {
             const dropperConfig = UnitById[dropper.unitId];
             if (dropperConfig == null) {
                 throw new Error(`Unit with id ${dropper.unitId} not found`);
@@ -42,7 +81,7 @@ export default class ItemSave {
             }
 
             qualityWeight = qualityWeight.slice(0, 3);
-            let quality = mathWeightedRandom(qualityWeight);
+            quality = mathWeightedRandom(qualityWeight);
             let affixCount = 0;
             if (quality === 1) {
                 affixCount = mathWeightedRandom(Const.LOOT_AFFIX_COUNT_GREEN) + 1;
@@ -50,29 +89,26 @@ export default class ItemSave {
                 affixCount = mathWeightedRandom(Const.LOOT_AFFIX_COUNT_BLUE) + 3;
             }
 
-            const candidates = AffixGroupByAvailOn[config.type];
-
-            const placeGroup = arrGroupBy(candidates, "affixType", "id");
+            const candidates = AffixGroupByAvailOn[itemConfig.type];
+            const placeGroup = arrGroupBy(candidates, "affixType");
             const prefixes = placeGroup.get("prefix");
             const suffixes = placeGroup.get("suffix");
             let pCount = 0;
             let sCount = 0;
             while (affixCount > 0) {
-                const pSize = prefixes.size;
-                const sSize = suffixes.size;
+                const pSize = prefixes.length;
+                const sSize = suffixes.length;
                 const allSize = pSize + sSize;
                 if (allSize === 0) {
                     break;
                 }
                 const index = mathRandomInt(0, allSize);
                 if (index < pSize) {
-                    const affix = Array.from(prefixes.values())[index];
-                    prefixes.delete(affix.id);
+                    const affix = prefixes.splice(index, 1)[0];
                     affixesRaw.push(affix);
                     pCount++;
                 } else {
-                    const affix = Array.from(suffixes.values())[index - pSize];
-                    suffixes.delete(affix.id);
+                    const affix = suffixes.splice(index - pSize, 1)[0];
                     affixesRaw.push(affix);
                     sCount++;
                 }
@@ -81,15 +117,13 @@ export default class ItemSave {
                 if (pCount + sCount === 1) {
                     if (pCount === 1 && sSize > 0) {
                         const index = mathRandomInt(0, sSize);
-                        const affix = Array.from(suffixes.values())[index];
-                        suffixes.delete(affix.id);
+                        const affix = suffixes.splice(index, 1)[0];
                         affixesRaw.push(affix);
                         sCount++;
                         affixCount--;
                     } else if (sCount === 1 && pSize > 0) {
                         const index = mathRandomInt(0, pSize);
-                        const affix = Array.from(prefixes.values())[index];
-                        prefixes.delete(affix.id);
+                        const affix = prefixes.splice(index, 1)[0];
                         affixesRaw.push(affix);
                         pCount++;
                         affixCount--;
@@ -104,24 +138,34 @@ export default class ItemSave {
             } else if (affixesRaw.length > 0) {
                 quality = 1;
             }
+
+            const addedAffixes = arrGroupBy(affixesRaw, "affixType");
+            const prefix = arrGetSome(addedAffixes.get("prefix"), 1)[0];
+            const suffix = arrGetSome(addedAffixes.get("suffix"), 1)[0];
+            if (prefix != null) {
+                name = `${prefix.name}${name}`;
+            }
+            if (suffix != null) {
+                name = `${suffix.name}${name}`;
+            }
         }
 
+        /**@type {Partial<Record<StatId, number | [number, number]>>} */
         const stats = {};
         for (const affix of affixesRaw) {
-            ItemSave.collapseAffix(affix, stats, qlvl);
+            ItemSave.collapseAffix(affix, stats, ilvl, qlvl);
         }
 
         /**@type {ItemSaveData} */
         const item = {
             id: id,
-
+            name,
             ilvl: ilvl,
-            stats: config.stats,
-            affixes: config.affixes,
-            set: config.set,
-            type: config.type,
-            name: config.name,
-            baseStat: config.baseStat,
+            quality,
+            stats,
+            sockets: {},
         };
+
+        return item;
     }
 }

@@ -49,3 +49,14 @@ export function mathWeightedRandom(weights) {
     }
     return -1;
 }
+
+/**
+ * 
+ * @param {number} value 
+ * @param {number} fluctuation 
+ * @returns 
+ */
+export function mathFluctuate(value, fluctuation) {
+    const f = value * fluctuation;
+    return mathRandomIncl(value - f, value + f);
+}

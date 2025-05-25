@@ -91,17 +91,16 @@ export function arrGetSome(arr, count) {
  * @template {object} T
  * @param {T[]} arr 
  * @param {string} groupField 
- * @param {string} indexField
- * @returns {Map<any, Map<any, T>>}
+ * @returns {Map<any, T[]>}
  */
-export function arrGroupBy(arr, groupField, indexField) {
+export function arrGroupBy(arr, groupField) {
     const map = new Map();
     for (const item of arr) {
         const key = /**@type {any}*/(item)[groupField];
         if (!map.has(key)) {
-            map.set(key, new Map());
+            map.set(key, []);
         }
-        map.get(key).set(/**@type {any}*/(item)[indexField], item);
+        map.get(key).push(item);
     }
     return map;
 }

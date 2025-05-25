@@ -2,16 +2,15 @@ import Const from "../../Const";
 import { dispatch } from "../../EventBus";
 import GameObject from "../../gameObjs/GameObject";
 import KeyEvent from "../../KeyEvent";
-import SceneManager from "../../SceneManager";
 import Button from "../Button";
 import Component from "../Component";
 import StatPanel from "./StatPanel";
 import TextRenderer from "../TextRenderer";
-import UnitComponent from "../UnitComponent";
 import InventoryPanel from "./InventoryPanel";
 import SkillPanel from "./SkillPanel";
 import BagPanel from "./BagPanel";
 import RectRenderer from "../RectRenderer";
+import ItemSave from "../../data/ItemSave";
 
 export default class GameMenuController extends Component {
     /**
@@ -40,8 +39,9 @@ export default class GameMenuController extends Component {
         } else if (e.key === "y") {
             this.toggleMenu(true);
         } else if (e.key === "x") {
-            const stat = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent).stat;
-            stat.setStat("mhex", Math.round(Math.random() * 100 - 50))
+            const item = ItemSave.drop("topaznecklace", 15, 0, 300, { unitId: "clawcat" });
+            console.log(item);
+            
         }
     }
 
