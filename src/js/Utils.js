@@ -106,6 +106,18 @@ export function arrGroupBy(arr, groupField) {
 }
 
 /**
+ * @template T
+ * @param {T[]} arr 
+ * @param {T} item 
+ */
+export function arrRemove(arr, item) {
+    const index = arr.indexOf(item);
+    if (index > -1) {
+        arr.splice(index, 1);
+    }
+}
+
+/**
  * 
  * @param {string} text 
  * @returns 

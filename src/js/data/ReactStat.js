@@ -1,5 +1,5 @@
 import { StatById, Stats } from "../config/Stat";
-import { arrGetClamped } from "../Utils";
+import { arrGetClamped, arrRemove } from "../Utils";
 import { mathRandomIncl } from "./MathLab";
 import Range from "./Range";
 
@@ -18,10 +18,10 @@ export default class ReactStat {
                     this.data[statConfig.id] = 0;
                     break;
                 case "range":
-                    this.data[statConfig.id] = new Range(0, 0);
+                    this.data[statConfig.id] = [0, 0];
                     break;
                 case "set":
-                    this.data[statConfig.id] = new Set();
+                    this.data[statConfig.id] = [];
                     break;
                 default:
                     break;
@@ -66,7 +66,7 @@ export default class ReactStat {
                     ret[/**@type {StatId}*/(id)] = mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1));
                     break;
                 case "range":
-                    ret[/**@type {StatId}*/(id)] = new Range(mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)), mathRandomIncl(arrGetClamped(arr, 2), arrGetClamped(arr, 3)));
+                    ret[/**@type {StatId}*/(id)] = [mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)), mathRandomIncl(arrGetClamped(arr, 2), arrGetClamped(arr, 3))];
                     break;
                 case "set":
                     ret[/**@type {StatId}*/(id)] = new Set();
@@ -125,15 +125,15 @@ export default class ReactStat {
                 break;
 
             case "range":
-                curr.min += value.min;
-                curr.max += value.max;
+                curr[0] += value[0];
+                curr[1] += value[1];
                 this.setStat(key, undefined, true);
                 break;
             case "set":
-                if (curr.has(value)) {
+                if (curr.includes(value)) {
                     return;
                 }
-                curr.add(value);
+                curr.push(value);
                 this.setStat(key, undefined, true);
                 break;
 
@@ -155,15 +155,15 @@ export default class ReactStat {
                 this.setStat(key, curr - value);
                 break;
             case "range":
-                curr.min -= value.min;
-                curr.max -= value.max;
+                curr[0] -= value[0];
+                curr[1] -= value[1];
                 this.setStat(key, undefined, true);
                 break;
             case "set":
-                if (!curr.has(value)) {
+                if (!curr.includes(value)) {
                     return;
                 }
-                curr.delete(value);
+                arrRemove(curr, value);
                 this.setStat(key, undefined, true);
                 break;
             default:
