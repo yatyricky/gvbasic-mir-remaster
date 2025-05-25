@@ -31,7 +31,11 @@ export default class ItemInstance {
             }
         } else if (statConfig.type === "range") {
             val = mathFluctuate(a, affix.fluctuate);
-            val2 = mathFluctuate(b, affix.fluctuate);
+            if (a === b) {
+                val2 = val;
+            } else {
+                val2 = mathFluctuate(b, affix.fluctuate);
+            }
             if (stats[affix.statId] == null) {
                 stats[affix.statId] = [val, val2];
             } else {
@@ -123,8 +127,8 @@ export default class ItemInstance {
             let sCount = 0;
             const randomedAffixes = [];
             while (affixCount > 0) {
-                const pSize = prefixes.length;
-                const sSize = suffixes.length;
+                const pSize = prefixes?.length ?? 0;
+                const sSize = suffixes?.length ?? 0;
                 const allSize = pSize + sSize;
                 if (allSize === 0) {
                     break;

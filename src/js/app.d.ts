@@ -22,7 +22,7 @@ declare global {
 
     }
 
-    type InvSlot = SlotType | "weapon2" | "ring2";
+    type InvSlot = SlotType | "arms2" | "ring2";
 
     interface UnitSaveData {
         unitId: UnitId;
