@@ -25,7 +25,7 @@ export default class ToastHandler extends Component {
     }
 
     addBackdrop() {
-        this.backdrop = new GameObject("back", this.gameObject).setPosition(5, 2.5);
+        this.backdrop = new GameObject("back", this.gameObject).setPosition(0.5, 0.5);
         this.backdrop.addComponent(RectRenderer).setBgColor(Const.COLOR_BG).setBorder(Const.COLOR_FG, 1).setSize(9, 4).setQueue(Const.QUEUE_MODAL);
     }
 

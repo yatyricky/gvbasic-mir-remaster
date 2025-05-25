@@ -1,6 +1,6 @@
 declare global {
-    type UnitId = "warr" | "mage" | "wlk" | "clawcat" | "corpseking" | "redmoondemon";
-    type UnitType = "hero" | "mob" | "elite" | "boss";
+    type UnitId = "warr" | "mage" | "wlk" | "clawcat" | "corpseking" | "redmoondemon" | "anya";
+    type UnitType = "hero" | "mob" | "elite" | "boss" | "npc";
     interface IUnitConfig {
         id: UnitId;
         name: string;

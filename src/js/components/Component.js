@@ -23,6 +23,9 @@ export default class Component {
 
     }
 
+    update() {
+    }
+
     toString() {
         return this.constructor.name;
     }

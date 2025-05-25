@@ -15,6 +15,23 @@ export function mathRandom01Incl() {
 
 /**
  * 
+ * @param {number} value 
+ * @param {number} min 
+ * @param {number} max 
+ * @returns 
+ */
+export function mathClamp(value, min, max) {
+    if (value < min) {
+        return min;
+    }
+    if (value > max) {
+        return max;
+    }
+    return value;
+}
+
+/**
+ * 
  * @param {number} from 
  * @param {number} to 
  * @returns 

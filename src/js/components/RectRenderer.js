@@ -58,8 +58,8 @@ export default class RectRenderer extends Renderer {
 
         const w = Math.round(this.w * Const.SIZE2);
         const h = Math.round(this.h * Const.SIZE2);
-        const x = Math.round(this.gameObject.x * Const.SIZE2 - w / 2);
-        const y = Math.round(this.gameObject.y * Const.SIZE2 - h / 2);
+        const x = Math.round(this.gameObject.x * Const.SIZE2);
+        const y = Math.round(this.gameObject.y * Const.SIZE2);
 
         if (this.bgColor != null) {
             buffer.push({

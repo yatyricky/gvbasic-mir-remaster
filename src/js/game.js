@@ -17,6 +17,9 @@ import { arrLast } from "./Utils";
 import SceneManager from "./SceneManager";
 import GameMenuController from "./components/gameui/GameMenuController";
 import UnitComponent from "./components/UnitComponent";
+import GameMap from "./components/GameMap";
+import Collider from "./components/Collider";
+import AnyaShop from "./components/gameui/AnyaShop";
 
 InitInput();
 
@@ -27,14 +30,19 @@ InitInput();
 function initGameScene(gameRoot) {
     const hero = arrLast(userData.data.chars);
 
-    const char = new GameObject("hero", gameRoot);
-    // char.addComponent(HeroComponent);
+    const char = new GameObject("hero", gameRoot).setPosition(5, 2);
+    char.addComponent(Collider);
     const unitComp = char.addComponent(UnitComponent).initData(hero);
     char.addComponent(TextRenderer).setText(unitComp.config.image).setQueue(Const.QUEUE_NPC);
     char.addComponent(CharacterController);
 
+    const gameMap = new GameObject("gameMap", gameRoot);
+    gameMap.addComponent(GameMap);
+
     const gameMenu = new GameObject("gameMenu", gameRoot);
     gameMenu.addComponent(GameMenuController);
+    const anyaShop = new GameObject("anyaShop", gameRoot);
+    anyaShop.addComponent(AnyaShop);
 }
 
 function main() {

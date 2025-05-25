@@ -1,4 +1,8 @@
+import Const from "../Const";
+import { mathClamp } from "../data/MathLab";
 import KeyEvent from "../KeyEvent";
+import SceneManager from "../SceneManager";
+import Collider from "./Collider";
 import Component from "./Component";
 
 export default class CharacterController extends Component {
@@ -14,21 +18,38 @@ export default class CharacterController extends Component {
         // if (key === "a") {
         //     this.gameObject.getComponent("TextRenderer").setText(shuffleString(randomText));
         // }
+        let ox = this.gameObject.x;
+        let oy = this.gameObject.y;
+
+        let tx = ox;
+        let ty = oy;
 
         if (key.key === "u") {
-            this.gameObject.y = Math.max(this.gameObject.y - 1, 0);
+            ty--;
         }
 
         if (key.key === "d") {
-            this.gameObject.y = Math.min(this.gameObject.y + 1, 4);
+            ty++;
         }
 
         if (key.key === "l") {
-            this.gameObject.x = Math.max(this.gameObject.x - 1, 0);
+            tx--;
         }
 
         if (key.key === "r") {
-            this.gameObject.x = Math.min(this.gameObject.x + 1, 9);
+            tx++;
         }
+
+        const collider = SceneManager.colliderMap.get(tx, ty);
+        if (collider != null) {
+            collider.onCollision(this.gameObject.getComponent(Collider));
+            if (collider.layer === Const.LAYER_NPC || collider.layer === Const.LAYER_WALL) {
+                tx = ox;
+                ty = oy;
+            }
+        }
+
+        this.gameObject.x = mathClamp(tx, 0, 9);
+        this.gameObject.y = mathClamp(ty, 0, 4);
     }
 }

@@ -151,6 +151,9 @@ function updateRecursive(root) {
         return;
     }
     root.update();
+    for (const comp of root.getComponents()) {
+        comp.update();
+    }
     for (const child of root.children) {
         updateRecursive(child);
     }
@@ -201,6 +204,7 @@ export default class Scene extends GameObject {
 
     gameLoop() {
         // logic
+        SceneManager.colliderMap.clear();
         updateRecursive(this);
         // render
         // 1. build depth buffer

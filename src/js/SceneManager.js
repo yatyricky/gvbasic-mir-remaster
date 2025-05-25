@@ -1,3 +1,5 @@
+import ColliderMap from "./data/ColliderMap";
+
 export default class SceneManager {
     /**@type {import("./gameObjs/Scene").default} */
     static activeScene = null;
@@ -11,4 +13,6 @@ export default class SceneManager {
         SceneManager.activeScene = scene;
         scene.start();
     }
+
+    static colliderMap = new ColliderMap();
 }

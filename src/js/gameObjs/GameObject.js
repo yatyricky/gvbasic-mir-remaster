@@ -30,6 +30,8 @@ export default class GameObject {
         this.name = name ?? `GameObject (${SceneManager.activeScene?.children.length})`;
         this.x = 0;
         this.y = 0;
+        this.w = 1;
+        this.h = 1;
         /** @type {Map<new() => Component, Component>} */
         this.components = new Map();
 
@@ -79,6 +81,18 @@ export default class GameObject {
         return this;
     }
 
+    /**
+     * 
+     * @param {number} w 
+     * @param {number} h 
+     * @returns 
+     */
+    setSize(w, h) {
+        this.w = w;
+        this.h = h;
+        return this;
+    }
+
     _onEnableComp() {
         if (this.active) {
             for (const comp of this.components.values()) {
@@ -119,8 +133,19 @@ export default class GameObject {
         return this;
     }
 
+    /**
+     * 
+     * @returns {boolean}
+     */
+    parentActive() {
+        if (this.parent == null) {
+            return true;
+        }
+        return this.parent.active;
+    }
+
     get active() {
-        return this._active;
+        return this._active && this.parentActive();
     }
 
     /**

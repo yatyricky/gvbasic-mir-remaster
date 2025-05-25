@@ -5,6 +5,7 @@ export const Units = [
     { id: "clawcat", name: "多钩猫", type: "mob" },
     { id: "corpseking", name: "尸王", type: "elite" },
     { id: "redmoondemon", name: "赤月恶魔", type: "boss" },
+    { id: "anya", name: "安雅", type: "npc", image: "🧕" },
 ];
 
 export const UnitById = Object.fromEntries(Units.map(e => [e.id, e]));
