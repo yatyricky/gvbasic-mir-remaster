@@ -18,7 +18,5 @@ export default class UnitComponent extends Component {
     }
 
     getItem() {
-        /**@type {ItemInstance} */
-        const x = null;
     }
 }

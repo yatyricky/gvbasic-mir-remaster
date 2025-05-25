@@ -4,7 +4,7 @@ import SceneManager from "../../SceneManager";
 import Component from "../Component";
 import TextRenderer from "../TextRenderer";
 import UnitComponent from "../UnitComponent";
-
+import Range from "../../data/Range";
 import KeyEvent from "../../KeyEvent";
 import { strWrap } from "../../Utils";
 import { StatById } from "../../config/Stat";
@@ -56,11 +56,11 @@ export default class StatPanel extends Component {
         sb += `${StatById.str.name}:${this.stat.getStat("str")}\n`;
         sb += `${StatById.int.name}:${this.stat.getStat("int")}\n`;
         sb += `${StatById.spi.name}:${this.stat.getStat("spi")}\n`;
-        if (!this.stat.getStat("xdr").isZero()) sb += `${StatById.xdr.name}:${this.stat.getStat("xdr")}\n`;
-        if (!this.stat.getStat("fdr").isZero()) sb += `${StatById.fdr.name}:${this.stat.getStat("fdr")}\n`;
-        if (!this.stat.getStat("tdr").isZero()) sb += `${StatById.tdr.name}:${this.stat.getStat("tdr")}\n`;
-        if (!this.stat.getStat("hdr").isZero()) sb += `${StatById.hdr.name}:${this.stat.getStat("hdr")}\n`;
-        if (!this.stat.getStat("pdr").isZero()) sb += `${StatById.pdr.name}:${this.stat.getStat("pdr")}\n`;
+        if (!Range.isZero(this.stat.getStat("xdr"))) sb += `${StatById.xdr.name}:${this.stat.getStat("xdr")}\n`;
+        if (!Range.isZero(this.stat.getStat("fdr"))) sb += `${StatById.fdr.name}:${this.stat.getStat("fdr")}\n`;
+        if (!Range.isZero(this.stat.getStat("tdr"))) sb += `${StatById.tdr.name}:${this.stat.getStat("tdr")}\n`;
+        if (!Range.isZero(this.stat.getStat("hdr"))) sb += `${StatById.hdr.name}:${this.stat.getStat("hdr")}\n`;
+        if (!Range.isZero(this.stat.getStat("pdr"))) sb += `${StatById.pdr.name}:${this.stat.getStat("pdr")}\n`;
         if (this.stat.getStat("rtxres") !== 0) sb += `${StatById.rtxres.name}:${this.stat.getStat("rtxres")}\n`;
         if (this.stat.getStat("rtfres") !== 0) sb += `${StatById.rtfres.name}:${this.stat.getStat("rtfres")}\n`;
         if (this.stat.getStat("rttres") !== 0) sb += `${StatById.rttres.name}:${this.stat.getStat("rttres")}\n`;

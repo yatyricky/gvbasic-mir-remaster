@@ -1,17 +1,17 @@
-import { AffixGroupByAvailOn } from "../config/Affix";
+import { AffixById, AffixGroupByAvailOn } from "../config/Affix";
 import { ItemById } from "../config/Item";
 import { StatById } from "../config/Stat";
 import { UnitById } from "../config/Unit";
 import Const from "../Const";
-import { arrGetSome, arrGroupBy } from "../Utils";
+import { arrGetSome, arrGroupBy, objIsEmpty } from "../Utils";
 import { mathFluctuate, mathRandomIncl, mathRandomInt, mathWeightedRandom } from "./MathLab";
 
-export default class ItemSave {
+export default class ItemInstance {
 
     /**
      * 
      * @param {IAffixConfig} affix 
-     * @param {Partial<Record<StatId, any>} stats 
+     * @param {Partial<Record<StatId, any>>} stats 
      * @param {number} ilvl 
      * @param {number} qlvl 
      */
@@ -40,7 +40,16 @@ export default class ItemSave {
                 tuple[1] += val2;
             }
         } else if (statConfig.type === "set") {
-            throw new Error(`Set stat not supported yet`);
+            let map = stats[affix.statId];
+            if (map == null) {
+                map = {};
+                stats[affix.statId] = map;
+            }
+            if (map[affix.skill] == null) {
+                map[affix.skill] = mathRandomIncl(a, b);
+            } else {
+                map[affix.skill] = Math.max(mathRandomIncl(a, b), map[affix.skill]);
+            }
         } else {
             throw new Error(`Unknown stat type ${statConfig.type}`);
         }
@@ -50,18 +59,35 @@ export default class ItemSave {
      * 
      * @param {ItemId} id
      * @param {number} ilvl 
-     * @param {number} qlvl
      * @param {number} luck
      * @param {UnitSaveData} dropper
      */
-    static drop(id, ilvl, qlvl, luck, dropper) {
+    static drop(id, ilvl, luck, dropper) {
         const itemConfig = ItemById[id];
         if (itemConfig == null) {
             throw new Error(`Item with id ${id} not found`);
         }
 
-        /**@type {IAffixConfig[]} */
+        /**@type {Array<{affix: IAffixConfig, qlvl: number}>} */
         const affixesRaw = [];
+
+        // base stats
+        if (!objIsEmpty(itemConfig.fixedAffix)) {
+            for (const [affixId, qlvl] of Object.entries(itemConfig.fixedAffix)) {
+                affixesRaw.push({ affix: AffixById[/**@type {AffixId}*/(affixId)], qlvl });
+            }
+        }
+
+        // random affixes
+        if (!objIsEmpty(itemConfig.randomAffix)) {
+            const randomAffixesKeys = Object.keys(itemConfig.randomAffix);
+            const randomAffixesCount = Math.min(itemConfig.randomAffixCount ?? 1, randomAffixesKeys.length);
+            const randomedKeys = arrGetSome(randomAffixesKeys, randomAffixesCount);
+            for (const affixId of randomedKeys) {
+                affixesRaw.push({ affix: AffixById[/**@type {AffixId}*/(affixId)], qlvl: itemConfig.randomAffix[/**@type {AffixId}*/(affixId)] });
+            }
+        }
+
         let name = itemConfig.name;
         let quality = itemConfig.quality;
         // normal magic items
@@ -95,6 +121,7 @@ export default class ItemSave {
             const suffixes = placeGroup.get("suffix");
             let pCount = 0;
             let sCount = 0;
+            const randomedAffixes = [];
             while (affixCount > 0) {
                 const pSize = prefixes.length;
                 const sSize = suffixes.length;
@@ -105,11 +132,11 @@ export default class ItemSave {
                 const index = mathRandomInt(0, allSize);
                 if (index < pSize) {
                     const affix = prefixes.splice(index, 1)[0];
-                    affixesRaw.push(affix);
+                    randomedAffixes.push({ affix, qlvl: 0 });
                     pCount++;
                 } else {
                     const affix = suffixes.splice(index - pSize, 1)[0];
-                    affixesRaw.push(affix);
+                    randomedAffixes.push({ affix, qlvl: 0 });
                     sCount++;
                 }
                 affixCount--;
@@ -118,42 +145,51 @@ export default class ItemSave {
                     if (pCount === 1 && sSize > 0) {
                         const index = mathRandomInt(0, sSize);
                         const affix = suffixes.splice(index, 1)[0];
-                        affixesRaw.push(affix);
+                        randomedAffixes.push({ affix, qlvl: 0 });
                         sCount++;
                         affixCount--;
                     } else if (sCount === 1 && pSize > 0) {
                         const index = mathRandomInt(0, pSize);
                         const affix = prefixes.splice(index, 1)[0];
-                        affixesRaw.push(affix);
+                        randomedAffixes.push({ affix, qlvl: 0 });
                         pCount++;
                         affixCount--;
                     }
                 }
             }
 
-            if (affixesRaw.length === 0) {
+            if (randomedAffixes.length === 0) {
                 quality = 0;
-            } else if (affixesRaw.length > 2) {
+            } else if (randomedAffixes.length > 2) {
                 quality = 2;
-            } else if (affixesRaw.length > 0) {
+            } else if (randomedAffixes.length > 0) {
                 quality = 1;
             }
 
-            const addedAffixes = arrGroupBy(affixesRaw, "affixType");
-            const prefix = arrGetSome(addedAffixes.get("prefix"), 1)[0];
-            const suffix = arrGetSome(addedAffixes.get("suffix"), 1)[0];
+            /**@type {any} */
+            const addedAffixes = randomedAffixes.reduce((acc, e) => {
+                if (acc[e.affix.affixType] == null) {
+                    acc[e.affix.affixType] = [];
+                }
+                acc[e.affix.affixType].push(e);
+                return acc;
+            }, /**@type {any} */({}));
+            const prefix = arrGetSome(addedAffixes["prefix"], 1)[0];
+            const suffix = arrGetSome(addedAffixes["suffix"], 1)[0];
             if (prefix != null) {
-                name = `${prefix.name}${name}`;
+                name = `${prefix.affix.name}${name}`;
             }
             if (suffix != null) {
-                name = `${suffix.name}${name}`;
+                name = `${suffix.affix.name}${name}`;
             }
+
+            affixesRaw.push(...randomedAffixes);
         }
 
         /**@type {Partial<Record<StatId, number | [number, number]>>} */
         const stats = {};
-        for (const affix of affixesRaw) {
-            ItemSave.collapseAffix(affix, stats, ilvl, qlvl);
+        for (const e of affixesRaw) {
+            ItemInstance.collapseAffix(e.affix, stats, ilvl, e.qlvl);
         }
 
         /**@type {ItemSaveData} */

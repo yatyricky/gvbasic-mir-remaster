@@ -1,7 +1,6 @@
 import { StatById, Stats } from "../config/Stat";
-import { arrGetClamped, arrRemove } from "../Utils";
+import { arrGetClamped } from "../Utils";
 import { mathRandomIncl } from "./MathLab";
-import Range from "./Range";
 
 export default class ReactStat {
     /**
@@ -21,7 +20,7 @@ export default class ReactStat {
                     this.data[statConfig.id] = [0, 0];
                     break;
                 case "set":
-                    this.data[statConfig.id] = [];
+                    this.data[statConfig.id] = {};
                     break;
                 default:
                     break;
@@ -69,9 +68,9 @@ export default class ReactStat {
                     ret[/**@type {StatId}*/(id)] = [mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)), mathRandomIncl(arrGetClamped(arr, 2), arrGetClamped(arr, 3))];
                     break;
                 case "set":
-                    ret[/**@type {StatId}*/(id)] = new Set();
+                    ret[/**@type {StatId}*/(id)] = {};
                     for (const s of arr) {
-                        ret[/**@type {StatId}*/(id)].add(s.toString());
+                        ret[/**@type {StatId}*/(id)][s.toString()] = 1;
                     }
                     break;
                 default:
@@ -130,10 +129,10 @@ export default class ReactStat {
                 this.setStat(key, undefined, true);
                 break;
             case "set":
-                if (curr.includes(value)) {
+                if (curr[value] != null) {
                     return;
                 }
-                curr.push(value);
+                curr[value] = 1;
                 this.setStat(key, undefined, true);
                 break;
 
@@ -160,10 +159,10 @@ export default class ReactStat {
                 this.setStat(key, undefined, true);
                 break;
             case "set":
-                if (!curr.includes(value)) {
+                if (curr[value] == null) {
                     return;
                 }
-                arrRemove(curr, value);
+                delete curr[value];
                 this.setStat(key, undefined, true);
                 break;
             default:

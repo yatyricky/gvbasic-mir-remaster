@@ -34,7 +34,7 @@ class UserData {
         const char = {
             unitId: id,
             stats: ReactStat.collapseConfig(config.baseStat),
-            inventory: [],
+            inventory: {},
             bag: [],
             skills: [],
         }

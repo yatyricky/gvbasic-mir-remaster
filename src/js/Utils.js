@@ -174,3 +174,12 @@ export function strWrap(str, width) {
     }
     return rows.join('\n');
 }
+
+/**
+ * 
+ * @param {object} obj 
+ * @returns 
+ */
+export function objIsEmpty(obj) {
+    return obj == null || Object.keys(obj).length === 0;
+}

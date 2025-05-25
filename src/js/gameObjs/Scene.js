@@ -100,7 +100,7 @@ function watchReactStat() {
             if (cfg.type === "number") {
                 rows.push(`${cfg.id}: ${stat[cfg.id]}`);
             } else if (cfg.type === "set") {
-                rows.push(`${cfg.id}: [${Array.from(stat[cfg.id]).join(', ')}]`);
+                rows.push(`${cfg.id}: [${Object.entries(stat[cfg.id]).map(e => `${e[0]}:${e[1]}`).join(', ')}]`);
             } else if (cfg.type === "range") {
                 rows.push(`${cfg.id}: ${stat[cfg.id].min}-${stat[cfg.id].max}`);
             } else {

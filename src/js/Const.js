@@ -19,6 +19,7 @@ const Const = {
     LOOT_AFFIX_COUNT_GREEN: [3, 1],
     LOOT_AFFIX_COUNT_BLUE: [50, 39, 10, 1],
     MAX_ILVL_FACTOR: 4,
+    QUALITY_COLOR: ["white", "green", "blue", "purple", "orange"],
 }
 
 Const.SIZE2 = Const.SIZE * 2;
