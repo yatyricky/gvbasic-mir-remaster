@@ -3,7 +3,7 @@ import { ItemById } from "../config/Item";
 import { StatById } from "../config/Stat";
 import { UnitById } from "../config/Unit";
 import Const from "../Const";
-import { arrGetSome, arrGroupBy, objIsEmpty } from "../Utils";
+import { arrGetOne, arrGetSome, arrGroupBy, objIsEmpty } from "../Utils";
 import { mathFluctuate, mathRandomIncl, mathRandomInt, mathWeightedRandom } from "./MathLab";
 
 export default class ItemInstance {
@@ -64,7 +64,7 @@ export default class ItemInstance {
      * @param {ItemId} id
      * @param {number} ilvl 
      * @param {number} luck
-     * @param {UnitSaveData} dropper
+     * @param {UnitSaveData} [dropper]
      */
     static drop(id, ilvl, luck, dropper) {
         const itemConfig = ItemById[id];
@@ -96,14 +96,19 @@ export default class ItemInstance {
         let quality = itemConfig.quality;
         // normal magic items
         if (itemConfig.quality === 0) {
-            const dropperConfig = UnitById[dropper.unitId];
-            if (dropperConfig == null) {
-                throw new Error(`Unit with id ${dropper.unitId} not found`);
+            let dropperType = "mob";
+            if (dropper != null) {
+                const dropperConfig = UnitById[dropper.unitId];
+                if (dropperConfig == null) {
+                    throw new Error(`Unit with id ${dropper.unitId} not found`);
+                }
+                dropperType = dropperConfig.type;
             }
+
             let qualityWeight = [...Const.LOOT_WEIGHT_MOB];
-            if (dropperConfig.type === "elite") {
+            if (dropperType === "elite") {
                 qualityWeight = [...Const.LOOT_WEIGHT_ELITE];
-            } else if (dropperConfig.type === "boss") {
+            } else if (dropperType === "boss") {
                 qualityWeight = [...Const.LOOT_WEIGHT_BOSS];
             }
             for (let i = 0; i < qualityWeight.length; i++) {
@@ -178,8 +183,8 @@ export default class ItemInstance {
                 acc[e.affix.affixType].push(e);
                 return acc;
             }, /**@type {any} */({}));
-            const prefix = arrGetSome(addedAffixes["prefix"], 1)[0];
-            const suffix = arrGetSome(addedAffixes["suffix"], 1)[0];
+            const prefix = arrGetOne(addedAffixes["prefix"]);
+            const suffix = arrGetOne(addedAffixes["suffix"]);
             if (prefix != null) {
                 name = `${prefix.affix.name}${name}`;
             }

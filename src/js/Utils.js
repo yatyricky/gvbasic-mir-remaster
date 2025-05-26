@@ -88,6 +88,15 @@ export function arrGetSome(arr, count) {
 }
 
 /**
+ * @template T
+ * @param {T[]} arr 
+ * @returns {T}
+ */
+export function arrGetOne(arr) {
+    return arrGetSome(arr, 1)[0];
+}
+
+/**
  * @template {object} T
  * @param {T[]} arr 
  * @param {string} groupField 

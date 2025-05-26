@@ -1,6 +1,9 @@
 import Const from "../Const";
+import { mathFuzzyEquals } from "../data/MathLab";
+import Vec2 from "../data/Vec2";
 import GameObject from "../gameObjs/GameObject";
 import KeyEvent from "../KeyEvent";
+import SceneManager from "../SceneManager";
 import Button from "./Button";
 import Component from "./Component";
 import RectRenderer from "./RectRenderer";
@@ -18,10 +21,37 @@ export default class UIFocus extends Component {
 
     onInit() {
         this.rectObj = new GameObject("rect", this.gameObject);
-        this.rectRenderer = this.rectObj.addComponent(RectRenderer).setBorder(Const.COLOR_FG, 2).setQueue(Const.QUEUE_OVERLAY);
+        this.rectRenderer = this.rectObj.addComponent(RectRenderer).setBorder(Const.COLOR_FG, 2);
+        this.target = this.gameObject;
     }
 
-    update() {
+    onEnable() {
+        this.focusable = [];
+        this.focus = null;
+        for (const child of this.target.children) {
+            if (child.active && child.getComponent(Button)) {
+                this.focusable.push(child);
+                if (this.focus == null) {
+                    this.focus = child; // Set the first active focusable element as the initial focus
+                }
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param {GameObject} target 
+     */
+    setTarget(target) {
+        this.target = target;
+    }
+
+    /**
+     * @override
+     * @param {number} dt 
+     * @returns 
+     */
+    update(dt) {
         if (this.focus == null || !this.focus.active) {
             this.focus = this.focusable.find((f) => f.active);
         }
@@ -30,7 +60,8 @@ export default class UIFocus extends Component {
             return;
         }
         this.rectRenderer.setSize(this.focus.w, this.focus.h);
-        this.rectObj.setPosition(this.focus.x, this.focus.y);
+        this.rectRenderer.setBorder(`rgba(1, 29, 1, ${Math.cos(SceneManager.activeScene.time * 3) * 0.5 + 0.5})`, 2);
+        this.rectObj.setPosition(this.target.x + this.focus.x, this.target.y + this.focus.y);
     }
 
     /**
@@ -57,10 +88,10 @@ export default class UIFocus extends Component {
             } else if (["u", "d", "l", "r"].includes(e.key)) {
                 // Define direction vectors
                 const dirVectors = {
-                    "u": { x: 0, y: -1 },
-                    "d": { x: 0, y: 1 },
-                    "l": { x: -1, y: 0 },
-                    "r": { x: 1, y: 0 }
+                    "u": new Vec2(0, -1),
+                    "d": new Vec2(0, 1),
+                    "l": new Vec2(-1, 0),
+                    "r": new Vec2(1, 0)
                 };
 
                 // Get the current direction vector
@@ -73,35 +104,35 @@ export default class UIFocus extends Component {
                     // Calculate scores for each element based on dot product and distance
                     const scoredElements = activeElements.map(element => {
                         // Vector from current focus to this element
-                        const dx = element.x - this.focus.x;
-                        const dy = element.y - this.focus.y;
+                        const v = new Vec2(element.x - this.focus.x, element.y - this.focus.y);
+                        const vNorm = v.normalize();
 
                         // Calculate dot product (indicates alignment with direction)
-                        const dotProduct = dx * dirVector.x + dy * dirVector.y;
+                        const score = vNorm.dot(dirVector);
 
                         // Square distance for normalization
-                        const distance = dx * dx + dy * dy;
-
-                        // Calculate angle penalization - the further from direction, the higher penalty
-                        // We use 3 here as a weighting factor for the angle penalty
-                        const anglePenalty = distance > 0 ? 3 * (1 - (dotProduct * dotProduct) / distance) : 0;
+                        const distance = v.magnitudeSqr();
 
                         // Final score: prefer elements in the right direction
                         // Only consider elements with positive dot product (in the general direction)
                         // Normalize by distance and penalize for deviation from direct line
-                        const score = dotProduct > 0 ? dotProduct / Math.sqrt(distance) - anglePenalty : -1000;
 
-                        return { element, score };
+                        return { element, score, distance };
                     });
 
-                    // Sort by score, descending (higher score = better match)
-                    scoredElements.sort((a, b) => b.score - a.score);
+                    // Sort by score decending, and distance ascending
+                    scoredElements.sort((a, b) => {
+                        if (mathFuzzyEquals(a.score, b.score, 0.01)) {
+                            return a.distance - b.distance; // If scores are equal, prefer closer elements
+                        }
+                        return b.score - a.score;
+                    });
 
                     // Select the highest scoring element
                     const bestMatch = scoredElements[0];
 
                     // Only change focus if we found a reasonable match
-                    if (bestMatch.score > -100) {
+                    if (bestMatch.score > 0.9) {
                         this.focus = bestMatch.element;
                     }
                 }
@@ -113,6 +144,18 @@ export default class UIFocus extends Component {
             }
         }
 
+        if (e.key === "b") {
+            this.gameObject.setActive(false);
+        }
+
         this.input?.(e.key);
+    }
+
+    getInspector() {
+        return `<strong>UIFocus</strong><br/>
+            <table>
+                <tr><td>focus</td><td>${this.focus ? this.focus.name : "null"}</td></tr>
+                <tr><td>focusable</td><td>${this.focusable.length}</td></tr>
+            </table>`;
     }
 }

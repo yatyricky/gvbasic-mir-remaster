@@ -17,13 +17,17 @@ export default class Component {
 
     /**
      * 
-     * @param {KeyEvent} key 
+     * @param {KeyEvent} e 
      */
-    onInput(key) {
+    onInput(e) {
 
     }
 
-    update() {
+    /**
+     * 
+     * @param {number} dt 
+     */
+    update(dt) {
     }
 
     toString() {

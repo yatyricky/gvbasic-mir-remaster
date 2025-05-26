@@ -50,12 +50,12 @@ export default class TextRenderer extends Renderer {
             return;
         }
 
-        const gox = Math.round(this.gameObject.x * 2);
-        const goy = this.gameObject.y;
+        const gox = Math.round(this.gameObject.gx * 2);
+        const goy = this.gameObject.gy;
         // Set text properties
         /**@type {Partial<IFillTextArgs>} */
         const textArgs = {
-            font: `${Math.round(Const.SIZE2 * 0.75)}px 'Courier New', Courier, monospace`,
+            font: `${Math.round(Const.SIZE2 * 0.8)}px 'Courier New', Courier, monospace`,
             textBaseline: "middle",
             textAlign: "center",
             fillStyle: "",

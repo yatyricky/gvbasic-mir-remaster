@@ -21,17 +21,14 @@ export default class GameMenuController extends Component {
         if (this.menu.active) {
             e.use();
             switch (e.key) {
-                case "l":
-                    this.updateActiveTab(-1);
-                    break;
-                case "r":
-                    this.updateActiveTab(1);
-                    break;
                 case "a":
                     this.tabList[this.activeTab].getComponent(Button)?.onClick();
                     break;
                 case "b":
                     this.toggleMenu(false);
+                    break;
+                case "y":
+                    this.updateActiveTab(1);
                     break;
                 default:
                     break;
@@ -49,7 +46,7 @@ export default class GameMenuController extends Component {
         this.menu.setActive(false);
         this.activeTab = 0;
         this.tabs = new GameObject("tabs", this.menu);
-        this.panels = new GameObject("panels", this.menu).setPosition(5, 3);
+        this.panels = new GameObject("panels", this.menu).setPosition(0, 1);
         this.panels.addComponent(RectRenderer).setBgColor(Const.COLOR_BG).setSize(10, 4).setQueue(Const.QUEUE_UI);
 
         this.addStatTab();

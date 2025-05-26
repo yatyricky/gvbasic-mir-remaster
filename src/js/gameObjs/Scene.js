@@ -102,7 +102,7 @@ function watchReactStat() {
             } else if (cfg.type === "set") {
                 rows.push(`${cfg.id}: [${Object.entries(stat[cfg.id]).map(e => `${e[0]}:${e[1]}`).join(', ')}]`);
             } else if (cfg.type === "range") {
-                rows.push(`${cfg.id}: ${stat[cfg.id].min}-${stat[cfg.id].max}`);
+                rows.push(`${cfg.id}: ${stat[cfg.id][0]}-${stat[cfg.id][1]}`);
             } else {
                 rows.push(`${cfg.id}: ${stat[cfg.id]}`);
             }
@@ -144,18 +144,19 @@ function updateInspector() {
 /**
  * 
  * @param {GameObject} root 
+ * @param {number} dt
  * @returns 
  */
-function updateRecursive(root) {
+function updateRecursive(root, dt) {
     if (!root.active) {
         return;
     }
-    root.update();
+    root.update(dt);
     for (const comp of root.getComponents()) {
-        comp.update();
+        comp.update(dt);
     }
     for (const child of root.children) {
-        updateRecursive(child);
+        updateRecursive(child, dt);
     }
 }
 
@@ -189,11 +190,15 @@ export default class Scene extends GameObject {
     constructor(name) {
         super(name ?? "Scene", null, true);
         this._isRunning = false;
+        this.prevTime = 0;
+        this.deltaTime = 0;
+        this.time = 0;
     }
 
     start() {
         this._isRunning = true;
         this._gameLooper = this.gameLoop.bind(this);
+        this.prevTime = Date.now();
         requestAnimationFrame(this._gameLooper);
     }
 
@@ -203,9 +208,11 @@ export default class Scene extends GameObject {
     }
 
     gameLoop() {
+        this.time = Date.now();
+        this.deltaTime = (this.time - this.prevTime) / 1000;
         // logic
         SceneManager.colliderMap.clear();
-        updateRecursive(this);
+        updateRecursive(this, this.deltaTime);
         // render
         // 1. build depth buffer
         /**@type {Array<IRenderInstruction>} */
@@ -291,6 +298,7 @@ export default class Scene extends GameObject {
 
         // 3. request next frame
         if (this._isRunning) {
+            this.prevTime = this.time;
             requestAnimationFrame(this._gameLooper);
         }
     }

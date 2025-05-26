@@ -77,3 +77,15 @@ export function mathFluctuate(value, fluctuation) {
     const f = value * fluctuation;
     return mathRandomIncl(value - f, value + f);
 }
+
+/**
+ * 
+ * @param {number} a 
+ * @param {number} b 
+ * @param {number} [epsilon] 
+ * @returns 
+ */
+export function mathFuzzyEquals(a, b, epsilon) {
+    epsilon = epsilon ?? 0.0001;
+    return Math.abs(a - b) < epsilon;
+}

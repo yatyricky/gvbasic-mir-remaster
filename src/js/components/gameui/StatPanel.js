@@ -15,7 +15,7 @@ export default class StatPanel extends Component {
 
         this.stat = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent).stat;
 
-        this.objStat = new GameObject("hp", this.gameObject).setPosition(0, 1);
+        this.objStat = new GameObject("hp", this.gameObject).setPosition(0, 0);
         this.tr = this.objStat.addComponent(TextRenderer).setBgColor(Const.COLOR_BG);
         this.scrollY = 0;
         /**@type {string[]} */

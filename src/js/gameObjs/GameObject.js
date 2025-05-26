@@ -45,6 +45,20 @@ export default class GameObject {
     }
 
     /**
+     * @returns {number}
+     */
+    get gx() {
+        return this.x + (this.parent != null ? this.parent.gx : 0);
+    }
+
+    /**
+     * @returns {number}
+     */
+    get gy() {
+        return this.y + (this.parent != null ? this.parent.gy : 0);
+    }
+
+    /**
      * 
      * @param {GameObject} parent 
      * @returns 
@@ -212,7 +226,11 @@ export default class GameObject {
         return curr;
     }
 
-    update() {
+    /**
+     * 
+     * @param {number} dt 
+     */
+    update(dt) {
     }
 
     getInspector() {
@@ -220,11 +238,30 @@ export default class GameObject {
             <table>
                 <tr><td>uuid</td><td>${this.uuid}</td></tr>
                 <tr><td>active</td><td onclick="toggleActive(${this.uuid})">${this.active ? "✅" : "⬛️"}</td></tr>
-                <tr><td>position</td><td>(${this.x}, ${this.y})</td></tr>
+                <tr><td>local position</td><td>(${this.x}, ${this.y})</td></tr>
+                <tr><td>global position</td><td>(${this.gx}, ${this.gy})</td></tr>
             </table>`];
         for (const comp of this.getComponents()) {
             sb.push(comp.getInspector());
         }
         return sb.join("<br/>");
+    }
+
+    destroy() {
+        this._onDisableComp();
+        if (this.parent != null) {
+            this.parent.removeChild(this);
+        }
+        this.components.clear();
+        if (window.debug) {
+            window.gameObjs.delete(this.uuid);
+        }
+    }
+
+    clearChildren() {
+        for (const child of this.children) {
+            child.destroy();
+        }
+        this.children = [];
     }
 }
