@@ -96,9 +96,9 @@ export default class TextRenderer extends Renderer {
                 x = 0;
             }
 
-            if (y >= 5) {
-                break;
-            }
+            // if (y >= 5) {
+            //     break;
+            // }
 
             const charRect = new Rect((x + gox) * Const.SIZE, (y + goy) * Const.SIZE2, w * Const.SIZE, Const.SIZE2);
             if (this.viewportRect.contains(charRect)) {

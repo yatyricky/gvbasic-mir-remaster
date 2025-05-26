@@ -10,6 +10,8 @@ import { arrGetOne } from "../../Utils";
 import { ItemById } from "../../config/Item";
 import Button from "../Button";
 import Rect from "../../data/Rect";
+import ItemComponent from "../ItemComponent";
+import { dispatch } from "../../EventBus";
 
 export default class AnyaBuyPanel extends Component {
     onInit() {
@@ -55,7 +57,10 @@ export default class AnyaBuyPanel extends Component {
                 .setText(itemConfig.image)
                 .setBgColor(Const.QUALITY_COLOR[item.quality])
                 .setViewport(new Rect(0, 1, 10, 4));
-            obj.addComponent(Button);
+            obj.addComponent(Button).setOnClick(() => {
+                dispatch("inspect:item", item);
+            });
+            obj.addComponent(ItemComponent).setItem(item);
             c++;
         }
     }

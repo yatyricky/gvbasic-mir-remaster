@@ -24,6 +24,7 @@ const Const = {
     LOOT_AFFIX_COUNT_BLUE: [50, 39, 10, 1],
     MAX_ILVL_FACTOR: 4,
     QUALITY_COLOR: ["rgba(51, 112, 72, 1)", "rgb(64, 138, 58)", "rgb(59, 75, 156)", "purple", "orange"],
+    QUALITY_TEXT: ["普通", "优秀", "精良", "史诗", "传说"],
 }
 
 Const.SIZE2 = Const.SIZE * 2;

@@ -20,6 +20,7 @@ import UnitComponent from "./components/UnitComponent";
 import GameMap from "./components/GameMap";
 import Collider from "./components/Collider";
 import AnyaShop from "./components/gameui/AnyaShop";
+import InspectItem from "./components/gameui/InspectItem";
 
 InitInput();
 
@@ -43,6 +44,9 @@ function initGameScene(gameRoot) {
     gameMenu.addComponent(GameMenuController);
     const anyaShop = new GameObject("anyaShop", gameRoot);
     anyaShop.addComponent(AnyaShop);
+
+    const inspectItem = new GameObject("inspectItem", gameRoot);
+    inspectItem.addComponent(InspectItem);
 }
 
 function main() {

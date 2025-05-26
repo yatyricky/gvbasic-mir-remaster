@@ -185,11 +185,11 @@ export default class ItemInstance {
             }, /**@type {any} */({}));
             const prefix = arrGetOne(addedAffixes["prefix"]);
             const suffix = arrGetOne(addedAffixes["suffix"]);
-            if (prefix != null) {
-                name = `${prefix.affix.name}${name}`;
-            }
             if (suffix != null) {
                 name = `${suffix.affix.name}${name}`;
+            }
+            if (prefix != null) {
+                name = `${prefix.affix.name}${name}`;
             }
 
             affixesRaw.push(...randomedAffixes);

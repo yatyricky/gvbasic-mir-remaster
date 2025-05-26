@@ -1,0 +1,88 @@
+import KeyEvent from "../../KeyEvent";
+import Const from "../../Const";
+import { subscribe } from "../../EventBus";
+import GameObject from "../../gameObjs/GameObject";
+import Component from "../Component";
+import RectRenderer from "../RectRenderer";
+import Renderer from "../Renderer";
+import TextRenderer from "../TextRenderer";
+import { StatById } from "../../config/Stat";
+import { strWrap } from "../../Utils";
+import { mathClamp } from "../../data/MathLab";
+
+export default class InspectItem extends Component {
+    onInit() {
+        this.gameObject.addComponent(Renderer).setQueue(Const.QUEUE_UI);
+        this.panel = new GameObject("inspectPanel", this.gameObject);
+        this.panel.setActive(false);
+
+        const backdrop = new GameObject("backdrop", this.panel);
+        backdrop.addComponent(RectRenderer).setBgColor(Const.COLOR_BG).setSize(10, 5);
+
+        this.textObj = new GameObject("text", this.panel);
+        this.textRenderer = this.textObj.addComponent(TextRenderer);
+        this.rows = 0;
+
+        subscribe("inspect:item", this.updateItem.bind(this));
+    }
+
+    /**
+     * 
+     * @param {ItemSaveData} item 
+     */
+    updateItem(item) {
+        this.panel.setActive(true);
+        // const config = ItemById[item.id];
+        let sb = `${item.name}
+装等:${item.ilvl}
+品质:${Const.QUALITY_TEXT[item.quality]}\n`;
+        for (const [k, v] of Object.entries(item.stats)) {
+            const statConfig = StatById[/**@type {StatId}*/(k)];
+            let val = Array.isArray(v) ? v.join('-') : v;
+            if (statConfig.format === "int") {
+                if (Array.isArray(v)) {
+                    val = v.map(v => Math.floor(v)).join("-");
+                } else {
+                    val = Math.floor(v);
+                }
+            } else if (statConfig.format === "percent") {
+                if (Array.isArray(v)) {
+                    val = v.map(v => `${v.toFixed(2)}%`).join("-");
+                } else {
+                    val = `${v.toFixed(2)}%`;
+                }
+            }
+            sb += `${statConfig.name} +${val}\n`;
+        }
+        this.rows = strWrap(sb).split("\n").length;
+
+        this.textRenderer.setText(sb);
+    }
+
+    /**
+     * 
+     * @param {KeyEvent} e 
+     */
+    onInput(e) {
+        if (!this.panel.active) {
+            return;
+        }
+        e.use();
+        if (e.key === "b") {
+            this.panel.setActive(false);
+        } else if (e.key === "u" || e.key === "d") {
+            if (this.rows <= 5) {
+                return; // No scrolling needed
+            }
+            // Scroll through the text
+            this.textObj.setPosition(0, mathClamp(this.textObj.y + (e.key === "u" ? 1 : -1), 5 - this.rows, 0));
+        }
+    }
+
+    getInspector() {
+        return `<strong>InspectItem</strong>
+        <table>
+        <tr><td>rows</td><td>${this.rows}</td></tr>
+        </table>`
+    }
+}
