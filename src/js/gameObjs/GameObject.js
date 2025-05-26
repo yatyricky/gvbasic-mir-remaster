@@ -240,6 +240,7 @@ export default class GameObject {
                 <tr><td>active</td><td onclick="toggleActive(${this.uuid})">${this.active ? "✅" : "⬛️"}</td></tr>
                 <tr><td>local position</td><td>(${this.x}, ${this.y})</td></tr>
                 <tr><td>global position</td><td>(${this.gx}, ${this.gy})</td></tr>
+                <tr><td>size</td><td>(${this.w}, ${this.h})</td></tr>
             </table>`];
         for (const comp of this.getComponents()) {
             sb.push(comp.getInspector());

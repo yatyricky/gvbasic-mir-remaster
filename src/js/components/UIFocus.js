@@ -1,5 +1,6 @@
 import Const from "../Const";
 import { mathFuzzyEquals } from "../data/MathLab";
+import Rect from "../data/Rect";
 import Vec2 from "../data/Vec2";
 import GameObject from "../gameObjs/GameObject";
 import KeyEvent from "../KeyEvent";
@@ -17,6 +18,7 @@ export default class UIFocus extends Component {
         this.focusable = [];
         /**@type {(key: string) => void} */
         this.input = null;
+        this.scrollViewport = new Rect(0, 0, 10, 5);
     }
 
     onInit() {
@@ -44,6 +46,8 @@ export default class UIFocus extends Component {
      */
     setTarget(target) {
         this.target = target;
+        this.scrollViewport = new Rect(this.target.gx, this.target.gy, this.target.w, this.target.h);
+        return this;
     }
 
     /**
@@ -62,6 +66,7 @@ export default class UIFocus extends Component {
         this.rectRenderer.setSize(this.focus.w, this.focus.h);
         this.rectRenderer.setBorder(`rgba(1, 29, 1, ${Math.cos(SceneManager.activeScene.time * 3) * 0.5 + 0.5})`, 2);
         this.rectObj.setPosition(this.target.x + this.focus.x, this.target.y + this.focus.y);
+
     }
 
     /**
@@ -132,8 +137,18 @@ export default class UIFocus extends Component {
                     const bestMatch = scoredElements[0];
 
                     // Only change focus if we found a reasonable match
-                    if (bestMatch.score > 0.9) {
+                    if (bestMatch.score > 0.99) {
                         this.focus = bestMatch.element;
+                    }
+                }
+
+                const myRect = new Rect(this.focus.gx, this.focus.gy, this.focus.w, this.focus.h);
+                // Check if the focus is within the target's bounds
+                if (!this.scrollViewport.contains(myRect)) {
+                    if (this.focus.gy >= this.scrollViewport.y + this.scrollViewport.h) {
+                        this.target.setPosition(this.target.x, this.target.y - 1);
+                    } else if (this.focus.gy < this.scrollViewport.y) {
+                        this.target.setPosition(this.target.x, this.target.y + 1);
                     }
                 }
             }
@@ -156,6 +171,7 @@ export default class UIFocus extends Component {
             <table>
                 <tr><td>focus</td><td>${this.focus ? this.focus.name : "null"}</td></tr>
                 <tr><td>focusable</td><td>${this.focusable.length}</td></tr>
+                <tr><td>target</td><td>${this.target ? this.target.name : "null"}</td></tr>
             </table>`;
     }
 }

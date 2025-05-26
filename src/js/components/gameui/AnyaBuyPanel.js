@@ -9,6 +9,7 @@ import ItemInstance from "../../data/ItemInstance";
 import { arrGetOne } from "../../Utils";
 import { ItemById } from "../../config/Item";
 import Button from "../Button";
+import Rect from "../../data/Rect";
 
 export default class AnyaBuyPanel extends Component {
     onInit() {
@@ -35,7 +36,7 @@ export default class AnyaBuyPanel extends Component {
 
         this.refreshGoods = false;
 
-        const count = mathRandomIncl(15, 25);
+        const count = mathRandomIncl(25, 65);
         this.goods = [];
         /**@type {ItemId[]} */
         const candidates = ["ebonywoodsword", "sandalnecklace", "whitetigernecklace", "dodgenecklace"];
@@ -50,7 +51,10 @@ export default class AnyaBuyPanel extends Component {
             const itemConfig = ItemById[item.id];
             const obj = new GameObject(item.id, this.container);
             obj.setPosition(c % 10, Math.floor(c / 10));
-            obj.addComponent(TextRenderer).setText(itemConfig.image).setColor(Const.QUALITY_COLOR[item.quality]);
+            obj.addComponent(TextRenderer)
+                .setText(itemConfig.image)
+                .setBgColor(Const.QUALITY_COLOR[item.quality])
+                .setViewport(new Rect(0, 1, 10, 4));
             obj.addComponent(Button);
             c++;
         }

@@ -1,4 +1,5 @@
 import Const from "../Const";
+import Rect from "../data/Rect";
 import { strIsEmpty } from "../Utils";
 import Renderer from "./Renderer";
 
@@ -9,6 +10,7 @@ export default class TextRenderer extends Renderer {
         this.width = 0;
         this.bgColor = null;
         this.color = null;
+        this.viewportRect = new Rect(0, 0, Const.SIZE2 * 10, Const.SIZE2 * 5); // Default viewport for 20x5 characters
     }
 
     /**
@@ -18,6 +20,15 @@ export default class TextRenderer extends Renderer {
      */
     setText(text) {
         this.text = text;
+        return this;
+    }
+
+    /**
+     * 
+     * @param {Rect} viewport 
+     */
+    setViewport(viewport) {
+        this.viewportRect = new Rect(viewport.x * Const.SIZE2, viewport.y * Const.SIZE2, viewport.w * Const.SIZE2, viewport.h * Const.SIZE2);
         return this;
     }
 
@@ -89,32 +100,35 @@ export default class TextRenderer extends Renderer {
                 break;
             }
 
-            // Draw background if specified
-            if (!strIsEmpty(this.bgColor)) {
+            const charRect = new Rect((x + gox) * Const.SIZE, (y + goy) * Const.SIZE2, w * Const.SIZE, Const.SIZE2);
+            if (this.viewportRect.contains(charRect)) {
+                // Draw background if specified
+                if (!strIsEmpty(this.bgColor)) {
+                    buffer.push({
+                        queue: this.queue,
+                        type: "fillRect",
+                        args: {
+                            fillStyle: this.bgColor,
+                            x: charRect.x,
+                            y: charRect.y,
+                            w: charRect.w,
+                            h: charRect.h,
+                        }
+                    })
+                }
+
+                // Draw the character
                 buffer.push({
                     queue: this.queue,
-                    type: "fillRect",
+                    type: "fillText",
                     args: {
-                        fillStyle: this.bgColor,
-                        x: (x + gox) * Const.SIZE,
-                        y: (y + goy) * Const.SIZE2,
-                        w: w * Const.SIZE,
-                        h: Const.SIZE2
+                        ...textArgs,
+                        text: c,
+                        x: charRect.x + (w * Const.SIZE / 2),
+                        y: charRect.y + (Const.SIZE2 / 2)
                     }
                 })
             }
-
-            // Draw the character
-            buffer.push({
-                queue: this.queue,
-                type: "fillText",
-                args: {
-                    ...textArgs,
-                    text: c,
-                    x: (x + gox) * Const.SIZE + (w * Const.SIZE / 2),
-                    y: (y + goy) * Const.SIZE2 + (Const.SIZE2 / 2)
-                }
-            })
 
             x += w;
         }
