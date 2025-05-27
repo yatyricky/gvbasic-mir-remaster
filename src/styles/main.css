@@ -9,7 +9,6 @@
 body {
     background-color: #8A8782;
     touch-action: manipulation;
-    font-family: 'VonwaonBitmap', 'Courier New', monospace;
 
     /* Disable text selection */
     user-select: none;
@@ -21,16 +20,59 @@ body {
     -webkit-touch-callout: none;
 }
 
-button {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-}
-
 #app {
     margin: 0 auto;
-    background-color: #337048;
+    width: 376px;
+    height: 752px;
+    background-color: #3f8a59;
     display: block;
+
+    font-size: 24px;
+    position: relative;
+}
+
+#LoginPanel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#NewHeroPanel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #3f8a59;
+}
+
+button {
+    display: block;
+    border: 2px solid #103f15;
+    box-sizing: border-box;
+    box-shadow: inset 0px 0px 2px #266025;
+    background: none;
+}
+
+button:active {
+    box-shadow: inset 0px 0px 2px #266025, inset 0px 0px 10px #266025;
+}
+
+.login-panel-button {
+    width: 160px;
+    height: 40px;
+    margin: 10px;
+}
+
+#GamePanel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
 }
 
 #controls {
@@ -72,8 +114,8 @@ button {
 #watch {
     position: absolute;
     bottom: 0;
-    top: 450px;
     left: 33%;
+    height: 39%;
     width: 33.9%;
     border: 1px solid #000;
 }
@@ -85,4 +127,8 @@ button {
     right: 0;
     width: 33%;
     border: 1px solid #000;
+}
+
+.shadow-dom {
+    display: none;
 }

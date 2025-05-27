@@ -192,3 +192,25 @@ export function strWrap(str, width) {
 export function objIsEmpty(obj) {
     return obj == null || Object.keys(obj).length === 0;
 }
+
+/**
+ * 
+ * @param {string} id 
+ * @param {(e: event) => void} callback 
+ */
+export function domClick(id, callback) {
+    /**@type {HTMLElement} */
+    const el = document.getElementById(id);
+    if (el) {
+        el.onclick = callback;
+    }
+}
+
+/**
+ * 
+ * @param {HTMLElement} dom 
+ * @param {boolean} show 
+ */
+export function domShow(dom, show) {
+    dom.style.display = show ? 'block' : 'none';
+}

@@ -10,28 +10,21 @@
 
 <body>
     <script type="module" src="./js/game.js"></script>
-    <canvas id="app"></canvas>
-
-    <div id="controls">
-        <div id="c1" style="position: absolute; top: 240px">
-            <div id="l1"
-                style="position: absolute; left:40px; top: 40px; width: 120px; height: 40px; background-color: white;">
-            </div>
-            <div id="l2"
-                style="position: absolute; left:80px; top: 0px; width: 40px; height: 120px; background-color: white;">
-            </div>
-            <button style="left: 80px; background: transparent;" id="btn_up">↑</button>
-            <button style="left: 40px; background: transparent; top: 40px;" id="btn_left">←</button>
-            <button style="left: 120px; background: transparent; top: 40px;" id="btn_right">→</button>
-            <button style="left: 80px; background: transparent; top: 80px;" id="btn_down">↓</button>
+    <div id="app">
+        <div id="LoginPanel">
+            <button class="login-panel-button" id="lp-continue">继续游戏</button>
+            <button class="login-panel-button" id="lp-new-hero">新英雄</button>
+            <button class="login-panel-button">加载存档</button>
         </div>
-
-        <div id="c2" style="position: absolute; top: 240px; left: 200px;">
-            <button style="left: 80px; border-radius: 100%;" id="btn_y">Y</button>
-            <button style="left: 40px; top: 40px; border-radius: 100%" id="btn_x">X</button>
-            <button style="left: 120px; top: 40px; border-radius: 100%" id="btn_b">B</button>
-            <button style="left: 80px; top: 80px; border-radius: 100%" id="btn_a">A</button>
+        <div id="NewHeroPanel">
+            <button class="login-panel-button" id="nhp-warr">战士</button>
+            <button class="login-panel-button" id="nhp-mage">法师</button>
+            <button class="login-panel-button" id="nhp-wlok">道士</button>
+            <button class="login-panel-button" id="nhp-close">返回</button>
         </div>
+        <!-- <div id="GamePanel">
+            hello
+        </div> -->
     </div>
 
     <div id="debugPanels">
@@ -41,6 +34,9 @@
         <div id="stat"></div>
     </div>
 
+    <div class="shadow-dom">
+
+    </div>
 </body>
 
 </html>

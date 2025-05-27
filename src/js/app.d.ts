@@ -69,11 +69,6 @@ declare global {
         type: "fillRect" | "fillText" | "strokeRect" | "drawImage";
         args: IFillRectArgs | IFillTextArgs | IStrokeRectArgs;
     }
-
-    interface Window {
-        debug: boolean;
-        gameObjs: Map<number, any>;
-    }
 }
 
 export { };

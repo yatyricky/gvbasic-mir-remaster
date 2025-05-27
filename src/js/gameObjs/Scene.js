@@ -7,13 +7,6 @@ import UnitComponent from "../components/UnitComponent";
 import { Stats } from "../config/Stat";
 import Renderer from "../components/Renderer";
 
-const app = /**@type {HTMLCanvasElement}*/(document.getElementById('app'));
-app.style.width = `${Const.SIZE * 20}px`;
-app.style.height = `${Const.SIZE2 * 5}px`;
-app.width = Const.SIZE * 20;
-app.height = Const.SIZE2 * 5;
-const ctx = app.getContext('2d');
-
 const domHierarchyTree = document.getElementById('hierarchyTree');
 const domWatch = document.getElementById('watch');
 const domWatchStat = document.getElementById('stat');
