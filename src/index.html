@@ -11,20 +11,45 @@
 <body>
     <script type="module" src="./js/game.js"></script>
     <div id="app">
-        <div id="LoginPanel">
-            <button class="login-panel-button" id="lp-continue">继续游戏</button>
-            <button class="login-panel-button" id="lp-new-hero">新英雄</button>
-            <button class="login-panel-button">加载存档</button>
+        <div id="PanelContainer"></div>
+        <div id="ModalContainerWrapper">
+            <div id="ModalContainer"></div>
         </div>
-        <div id="NewHeroPanel">
-            <button class="login-panel-button" id="nhp-warr">战士</button>
-            <button class="login-panel-button" id="nhp-mage">法师</button>
-            <button class="login-panel-button" id="nhp-wlok">道士</button>
-            <button class="login-panel-button" id="nhp-close">返回</button>
+        <div id="ToastContainer"></div>
+    </div>
+
+    <div id="ShadowDom" style="display: none;">
+        <div id="LoginPanel" class="panel"
+            style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <button id="lp-continue"
+                style="position: absolute; left: 30%; top: 300px; width: 40%; height: 36px;">继续游戏</button>
+            <button id="lp-new-hero"
+                style="position: absolute; left: 30%; top: 350px; width: 40%; height: 36px;">新英雄</button>
+            <button id="lp-load"
+                style="position: absolute; left: 30%; top: 400px; width: 40%; height: 36px;">加载存档</button>
         </div>
-        <!-- <div id="GamePanel">
-            hello
-        </div> -->
+        <div id="NewHeroPanel" class="panel">
+            <button id="nhp-close"
+                style="position: absolute; right: 10px; top: 10px; width: 24px; height: 24px;">X</button>
+            <button id="nhp-warr"
+                style="position: absolute; left: 30%; top: 250px; width: 40%; height: 36px;">战士</button>
+            <button id="nhp-mage"
+                style="position: absolute; left: 30%; top: 300px; width: 40%; height: 36px;">法师</button>
+            <button id="nhp-wlok"
+                style="position: absolute; left: 30%; top: 350px; width: 40%; height: 36px;">道士</button>
+        </div>
+        <div id="GamePanel">
+            <button id="game-stat"
+                style="position: absolute; left: 0px; bottom: 0px; width: 64px; height: 36px;">状态</button>
+            <button id="game-inventory"
+                style="position: absolute; left: 78px; bottom: 0px; width: 64px; height: 36px;">装备</button>
+            <button id="game-bag"
+                style="position: absolute; left: 156px; bottom: 0px; width: 64px; height: 36px;">背包</button>
+            <button id="game-skills"
+                style="position: absolute; left: 234px; bottom: 0px; width: 64px; height: 36px;">技能</button>
+            <button id="game-exit"
+                style="position: absolute; left: 312px; bottom: 0px; width: 64px; height: 36px;">退出</button>
+        </div>
     </div>
 
     <div id="debugPanels">
@@ -32,10 +57,6 @@
         <div id="inspector"></div>
         <div id="watch"></div>
         <div id="stat"></div>
-    </div>
-
-    <div class="shadow-dom">
-
     </div>
 </body>
 

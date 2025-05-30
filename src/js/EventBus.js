@@ -25,6 +25,7 @@ const eventQueue = [];
 
 export function dispatch(event, detail) {
     eventQueue.push([event, detail]);
+    flushEvents();
 }
 
 export function flushEvents() {

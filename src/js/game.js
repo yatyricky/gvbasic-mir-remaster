@@ -4,7 +4,7 @@ import TextRenderer from "./components/TextRenderer";
 import CharacterController from "./components/CharacterController";
 import Const from "./Const";
 import userData from "./data/UserData";
-import { arrLast } from "./Utils";
+import { arrLast, domShow } from "./Utils";
 import GameMenuController from "./components/gameui/GameMenuController";
 import UnitComponent from "./components/UnitComponent";
 import GameMap from "./components/GameMap";
@@ -12,6 +12,9 @@ import Collider from "./components/Collider";
 import AnyaShop from "./components/gameui/AnyaShop";
 import InspectItem from "./components/gameui/InspectItem";
 import LoginPanel from "./ui/LoginPanel";
+import ModalManager from "./ui/ModalManager";
+import { subscribe } from "./EventBus";
+import GamePanel from "./ui/GamePanel";
 
 const domDebugPanels = document.getElementById('debugPanels');
 if (!Global.debug) {
@@ -44,8 +47,19 @@ function initGameScene(gameRoot) {
 }
 
 function main() {
-    Global.domApp = document.getElementById('app');
+    new ModalManager("ModalContainerWrapper");
     new LoginPanel("LoginPanel");
+    new GamePanel("GamePanel");
+
+    subscribe("scene:game", () => {
+        domShow(LoginPanel.inst.dom, false);
+        domShow(GamePanel.inst.dom, true);
+    });
+
+    subscribe("scene:login", () => {
+        domShow(LoginPanel.inst.dom, true);
+        domShow(GamePanel.inst.dom, false);
+    });
 }
 
 main();
