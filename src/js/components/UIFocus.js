@@ -28,6 +28,10 @@ export default class UIFocus extends Component {
     }
 
     onEnable() {
+        this.initFocuses();
+    }
+
+    initFocuses() {
         this.focusable = [];
         this.focus = null;
         for (const child of this.target.children) {
@@ -47,6 +51,7 @@ export default class UIFocus extends Component {
     setTarget(target) {
         this.target = target;
         this.scrollViewport = new Rect(this.target.gx, this.target.gy, this.target.w, this.target.h);
+        this.initFocuses();
         return this;
     }
 

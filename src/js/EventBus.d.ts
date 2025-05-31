@@ -1,11 +1,13 @@
 import type { Component } from "svelte";
+import GameObject from "./gameObjs/GameObject";
 
 interface EventBusDefine {
     "toast": string;
     "scene:menu": null;
     "scene:game": null;
     "shop:anya": null;
-    "inspect:item": ItemSaveData;
+    "inspect:item": { item: ItemSaveData, actionX?: () => void };
+    "panel:show": () => GameObject;
 }
 
 export function subscribe<T extends keyof EventBusDefine>(event: T, callback: (data: EventBusDefine[T]) => void, fireImmediately = false): () => void;

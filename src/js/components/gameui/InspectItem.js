@@ -28,9 +28,11 @@ export default class InspectItem extends Component {
 
     /**
      * 
-     * @param {ItemSaveData} item 
+     * @param {{ item: ItemSaveData, actionX?: () => void }} e 
      */
-    updateItem(item) {
+    updateItem(e) {
+        const { item, actionX } = e;
+        this.actionX = actionX;
         this.panel.setActive(true);
         // const config = ItemById[item.id];
         let sb = `${item.name}
@@ -57,6 +59,7 @@ export default class InspectItem extends Component {
         this.rows = strWrap(sb).split("\n").length;
 
         this.textRenderer.setText(sb);
+        this.textObj.setPosition(0, 0);
     }
 
     /**
@@ -76,6 +79,8 @@ export default class InspectItem extends Component {
             }
             // Scroll through the text
             this.textObj.setPosition(0, mathClamp(this.textObj.y + (e.key === "u" ? 1 : -1), 5 - this.rows, 0));
+        } else if (e.key === "x" && this.actionX != null) {
+            this.actionX();
         }
     }
 

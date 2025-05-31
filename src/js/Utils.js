@@ -129,7 +129,7 @@ export function arrRemove(arr, item) {
 /**
  * 
  * @param {string} text 
- * @returns 
+ * @returns {number} 0-20
  */
 export function strWidth(text) {
     let s = 0;

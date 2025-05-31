@@ -21,6 +21,7 @@ import GameMap from "./components/GameMap";
 import Collider from "./components/Collider";
 import AnyaShop from "./components/gameui/AnyaShop";
 import InspectItem from "./components/gameui/InspectItem";
+import UIManager from "./components/UIManager";
 
 InitInput();
 
@@ -29,6 +30,9 @@ InitInput();
  * @param {GameObject} gameRoot 
  */
 function initGameScene(gameRoot) {
+    const uiManager = new GameObject("uiManager", gameRoot);
+    uiManager.addComponent(UIManager);
+
     const hero = arrLast(userData.data.chars);
 
     const char = new GameObject("hero", gameRoot).setPosition(5, 2);

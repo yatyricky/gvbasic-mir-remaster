@@ -12,6 +12,7 @@ import Button from "../Button";
 import Rect from "../../data/Rect";
 import ItemComponent from "../ItemComponent";
 import { dispatch } from "../../EventBus";
+import MessageBox from "../MessageBox";
 
 export default class AnyaBuyPanel extends Component {
     onInit() {
@@ -37,6 +38,7 @@ export default class AnyaBuyPanel extends Component {
         // }
 
         this.refreshGoods = false;
+        this.container.setPosition(0, 1);
 
         const count = mathRandomIncl(25, 65);
         this.goods = [];
@@ -58,7 +60,17 @@ export default class AnyaBuyPanel extends Component {
                 .setBgColor(Const.QUALITY_COLOR[item.quality])
                 .setViewport(new Rect(0, 1, 10, 4));
             obj.addComponent(Button).setOnClick(() => {
-                dispatch("inspect:item", item);
+                dispatch("inspect:item", {
+                    item, actionX: () => {
+                        dispatch("panel:show", () => {
+                            const panel = new GameObject("MessageBox");
+                            const msgBox = panel.addComponent(MessageBox);
+                            msgBox.setTitle("购买物品").setContent(`你确定要购买"${item.name}"吗?`);
+                            msgBox.setActions(["蒋经国", "取消", "校址X"])
+                            return panel;
+                        })
+                    }
+                });
             });
             obj.addComponent(ItemComponent).setItem(item);
             c++;
