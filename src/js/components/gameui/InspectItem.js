@@ -31,6 +31,11 @@ export default class InspectItem extends Component {
      * @param {{ item: ItemSaveData, actionX?: () => void }} e 
      */
     updateItem(e) {
+        if (e == null) {
+            this.panel.setActive(false);
+            return;
+        }
+
         const { item, actionX } = e;
         this.actionX = actionX;
         this.panel.setActive(true);

@@ -6,13 +6,15 @@ import RectRenderer from "../RectRenderer";
 import TextRenderer from "../TextRenderer";
 import UIFocus from "../UIFocus";
 import ItemInstance from "../../data/ItemInstance";
-import { arrGetOne } from "../../Utils";
+import { arrGetOne, arrRemove } from "../../Utils";
 import { ItemById } from "../../config/Item";
 import Button from "../Button";
 import Rect from "../../data/Rect";
 import ItemComponent from "../ItemComponent";
 import { dispatch } from "../../EventBus";
 import MessageBox from "../MessageBox";
+import SceneManager from "../../SceneManager";
+import UnitComponent from "../UnitComponent";
 
 export default class AnyaBuyPanel extends Component {
     onInit() {
@@ -40,15 +42,26 @@ export default class AnyaBuyPanel extends Component {
         this.refreshGoods = false;
         this.container.setPosition(0, 1);
 
-        const count = mathRandomIncl(25, 65);
+        const count = mathRandomIncl(4, 4);
         this.goods = [];
         /**@type {ItemId[]} */
         const candidates = ["ebonywoodsword", "sandalnecklace", "whitetigernecklace", "dodgenecklace"];
         for (let i = 0; i < count; i++) {
-            const item = ItemInstance.drop(arrGetOne(candidates), 15, 50);
+            const item = ItemInstance.drop(arrGetOne(candidates), 35, 250);
             this.goods.push(item);
         }
 
+        this.updateGoodsDisplay();
+    }
+
+    /**
+     * @override
+     * @param {number} dt 
+     */
+    update(dt) {
+    }
+
+    updateGoodsDisplay() {
         this.container.clearChildren();
         let c = 0;
         for (const item of this.goods) {
@@ -66,7 +79,32 @@ export default class AnyaBuyPanel extends Component {
                             const panel = new GameObject("MessageBox");
                             const msgBox = panel.addComponent(MessageBox);
                             msgBox.setTitle("购买物品").setContent(`你确定要购买"${item.name}"吗?`);
-                            msgBox.setActions(["蒋经国", "取消", "校址X"])
+                            msgBox.setActions([{
+                                text: "确定",
+                                action: () => {
+                                    const hero = SceneManager.activeScene.find("game/hero");
+                                    const heroComponent = hero.getComponent(UnitComponent);
+                                    // if (heroComponent.stat.getStat("gold") < itemConfig.price) {
+                                    //     dispatch("panel:show", () => {
+                                    //         const errorPanel = new GameObject("MessageBox");
+                                    //         errorPanel.addComponent(MessageBox).setTitle("错误").setContent("金币不足，无法购买。");
+                                    //     });
+                                    //     return;
+                                    // }
+                                    // heroComponent.stat.addStat("gold", -itemConfig.price);
+                                    heroComponent.addBagItem(item);
+                                    msgBox.close();
+                                    arrRemove(this.goods, item);
+                                    this.updateGoodsDisplay();
+                                    dispatch("toast", `购买成功，获得物品: ${item.name}`);
+                                    dispatch("inspect:item", null);
+                                }
+                            }, {
+                                text: "取消",
+                                action: () => {
+                                    msgBox.close();
+                                }
+                            }])
                             return panel;
                         })
                     }
@@ -75,12 +113,5 @@ export default class AnyaBuyPanel extends Component {
             obj.addComponent(ItemComponent).setItem(item);
             c++;
         }
-    }
-
-    /**
-     * @override
-     * @param {number} dt 
-     */
-    update(dt) {
     }
 }

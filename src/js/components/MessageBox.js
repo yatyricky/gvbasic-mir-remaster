@@ -60,33 +60,37 @@ export default class MessageBox extends Component {
     setTitle(title) {
         const text = title.substring(0, 10);
         const width = strWidth(text);
-        this.titleObj.setPosition((10 - width / 2) / 2, 0);
+        this.titleObj.setPosition(Math.floor(10 - width / 2) / 2, 0);
         this.titleRenderer.setText(text);
         return this;
     }
 
     /**
-     * @param {string[]} actions
+     * @param {Array<{ text: string, action: () => void }>} actions
      */
     setActions(actions) {
-        const allText = actions.join(" ");
+        const allText = actions.map(e => e.text).join(" ");
         const width = strWidth(allText);
         if (width >= 20) {
             throw new Error("Actions text too long, max width is 20 characters.");
         }
-        this.actionsContainer.setPosition((10 - width / 2) / 2, 4);
+        this.actionsContainer.setPosition(Math.floor(10 - width / 2) / 2, 4);
         let left = 0;
         for (let i = 0; i < actions.length; i++) {
             const action = actions[i];
-            const myWidth = strWidth(action);
+            const myWidth = strWidth(action.text);
 
             const buttonObj = new GameObject(`action-${i}`, this.actionsContainer).setPosition(left, 0).setSize(myWidth / 2, 1);
-            buttonObj.addComponent(TextRenderer).setText(action);
+            buttonObj.addComponent(TextRenderer).setText(action.text);
             left += myWidth / 2 + 0.5; // 0.5 for spacing
-            buttonObj.addComponent(Button);
+            buttonObj.addComponent(Button).setOnClick(action.action);
         }
 
         this.focus.setTarget(this.actionsContainer);
+    }
+
+    close() {
+        this.gameObject.destroy();
     }
 
     /**
@@ -95,10 +99,11 @@ export default class MessageBox extends Component {
      * @param {KeyEvent} e 
      */
     onInput(e) {
-        e.use();
         if (e.key === "b") {
-            this.gameObject.setActive(false);
+            e.use();
+            this.close();
         } else if (e.key === "u" || e.key === "d") {
+            e.use();
             const lines = strWrap(this.content).split("\n");
             if (lines.length <= 3) {
                 return; // No scrolling needed
