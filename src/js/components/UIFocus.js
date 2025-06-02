@@ -19,6 +19,8 @@ export default class UIFocus extends Component {
         /**@type {(key: string) => void} */
         this.input = null;
         this.scrollViewport = new Rect(0, 0, 10, 5);
+
+        this.disableKeyB = false;
     }
 
     onInit() {
@@ -85,17 +87,28 @@ export default class UIFocus extends Component {
 
     /**
      * 
+     * @param {boolean} disable 
+     * @returns 
+     */
+    setDisableKeyB(disable) {
+        this.disableKeyB = disable;
+        return this;
+    }
+
+    /**
+     * 
      * @param {KeyEvent} e
      */
     onInput(e) {
-        e.use();
         if (this.focus != null) {
             const old = this.focus;
 
             // Handle action button
             if (e.key === "a") {
+                e.use();
                 this.focus.getComponent(Button)?.onClick();
             } else if (["u", "d", "l", "r"].includes(e.key)) {
+                e.use();
                 // Define direction vectors
                 const dirVectors = {
                     "u": new Vec2(0, -1),
@@ -164,7 +177,8 @@ export default class UIFocus extends Component {
             }
         }
 
-        if (e.key === "b") {
+        if (e.key === "b" && !this.disableKeyB) {
+            e.use();
             this.gameObject.setActive(false);
         }
 

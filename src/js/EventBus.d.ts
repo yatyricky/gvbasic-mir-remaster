@@ -8,6 +8,7 @@ interface EventBusDefine {
     "shop:anya": null;
     "inspect:item": { item: ItemSaveData, actionX?: () => void };
     "panel:show": () => GameObject;
+    "bag:refresh": null;
 }
 
 export function subscribe<T extends keyof EventBusDefine>(event: T, callback: (data: EventBusDefine[T]) => void, fireImmediately = false): () => void;

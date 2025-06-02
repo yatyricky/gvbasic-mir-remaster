@@ -10,7 +10,6 @@ import InventoryPanel from "./InventoryPanel";
 import SkillPanel from "./SkillPanel";
 import BagPanel from "./BagPanel";
 import RectRenderer from "../RectRenderer";
-import ItemInstance from "../../data/ItemInstance";
 
 export default class GameMenuController extends Component {
     /**
@@ -35,9 +34,6 @@ export default class GameMenuController extends Component {
             }
         } else if (e.key === "y") {
             this.toggleMenu(true);
-        } else if (e.key === "x") {
-            const item = ItemInstance.drop("ebonywoodsword", 15, 300, { unitId: "clawcat" });
-            console.log(`${item.name} ${Const.QUALITY_COLOR[item.quality]} ${Object.entries(item.stats).map(([k, v]) => `${k}: ${v}`).join(", ")}`);
         }
     }
 

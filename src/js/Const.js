@@ -25,6 +25,23 @@ const Const = {
     MAX_ILVL_FACTOR: 4,
     QUALITY_COLOR: ["rgba(51, 112, 72, 1)", "rgb(64, 138, 58)", "rgb(59, 75, 156)", "purple", "orange"],
     QUALITY_TEXT: ["普通", "优秀", "精良", "史诗", "传说"],
+
+    SLOT_MAX_SIZE: {
+        head: 1,
+        neck: 1,
+        shoulder: 1,
+        torso: 1,
+        wrist: 1,
+        hand: 1,
+        waist: 1,
+        leg: 1,
+        foot: 1,
+        finger: 2,
+        accessory: 10,
+        arms: 2,
+        inherit: 0,
+        socket: 0,
+    }
 }
 
 Const.SIZE2 = Const.SIZE * 2;

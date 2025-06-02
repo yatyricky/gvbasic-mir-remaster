@@ -42,7 +42,7 @@ export default class AnyaBuyPanel extends Component {
         this.refreshGoods = false;
         this.container.setPosition(0, 1);
 
-        const count = mathRandomIncl(4, 4);
+        const count = mathRandomIncl(20, 40);
         this.goods = [];
         /**@type {ItemId[]} */
         const candidates = ["ebonywoodsword", "sandalnecklace", "whitetigernecklace", "dodgenecklace"];

@@ -22,12 +22,10 @@ declare global {
 
     }
 
-    type InvSlot = SlotType | "arms2" | "ring2";
-
     interface UnitSaveData {
         unitId: UnitId;
         stats?: any;
-        inventory?: Partial<Record<InvSlot, ItemSaveData>>;
+        inventory?: Partial<Record<SlotType, ItemSaveData[]>>;
         charmBag?: ItemSaveData[];
         bag?: ItemSaveData[];
         skills?: SkillSaveData;
