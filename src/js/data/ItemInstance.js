@@ -3,8 +3,8 @@ import { ItemById } from "../config/Item";
 import { StatById } from "../config/Stat";
 import { UnitById } from "../config/Unit";
 import Const from "../Const";
-import { arrGetOne, arrGetSome, arrGroupBy, objIsEmpty } from "../Utils";
-import { mathFluctuate, mathRandomIncl, mathRandomInt, mathWeightedRandom } from "./MathLab";
+import { arrGetOne, arrGetSome, arrGroupBy, arrRemove, objIsEmpty } from "../Utils";
+import { mathFluctuate, mathRandomIncl, mathWeightedRandom } from "./MathLab";
 
 export default class ItemInstance {
 
@@ -95,7 +95,7 @@ export default class ItemInstance {
         let name = itemConfig.name;
         let quality = itemConfig.quality;
         // normal magic items
-        if (itemConfig.quality === 0) {
+        if (itemConfig.maxQuality != null) {
             let dropperType = "mob";
             if (dropper != null) {
                 const dropperConfig = UnitById[dropper.unitId];
@@ -104,95 +104,70 @@ export default class ItemInstance {
                 }
                 dropperType = dropperConfig.type;
             }
-
-            let qualityWeight = [...Const.LOOT_WEIGHT_MOB];
+            let qualityWeight = Const.LOOT_WEIGHT_MOB.slice(quality, itemConfig.maxQuality + 1);
             if (dropperType === "elite") {
-                qualityWeight = [...Const.LOOT_WEIGHT_ELITE];
+                qualityWeight = Const.LOOT_WEIGHT_ELITE.slice(quality, itemConfig.maxQuality + 1);
             } else if (dropperType === "boss") {
-                qualityWeight = [...Const.LOOT_WEIGHT_BOSS];
+                qualityWeight = Const.LOOT_WEIGHT_BOSS.slice(quality, itemConfig.maxQuality + 1);
             }
             for (let i = 0; i < qualityWeight.length; i++) {
-                qualityWeight[i] = qualityWeight[i] * (100 + luck * Const.LOOT_LUCK_COEFFICIENT[i]) / 100;
+                qualityWeight[i] = qualityWeight[i] * (100 + luck * Const.LOOT_LUCK_COEFFICIENT[i + quality]) / 100;
             }
 
-            qualityWeight = qualityWeight.slice(0, 3);
-            quality = mathWeightedRandom(qualityWeight);
-            let affixCount = 0;
-            if (quality === 1) {
-                affixCount = mathWeightedRandom(Const.LOOT_AFFIX_COUNT_GREEN) + 1;
-            } else if (quality === 2) {
-                affixCount = mathWeightedRandom(Const.LOOT_AFFIX_COUNT_BLUE) + 3;
-            }
+            quality += mathWeightedRandom(qualityWeight);
 
-            const candidates = AffixGroupByAvailOn[itemConfig.type];
-            const placeGroup = arrGroupBy(candidates, "affixType");
-            const prefixes = placeGroup.get("prefix");
-            const suffixes = placeGroup.get("suffix");
-            let pCount = 0;
-            let sCount = 0;
-            const randomedAffixes = [];
-            while (affixCount > 0) {
-                const pSize = prefixes?.length ?? 0;
-                const sSize = suffixes?.length ?? 0;
-                const allSize = pSize + sSize;
-                if (allSize === 0) {
-                    break;
+            if (quality > 0) {
+                let affixCount = 0;
+                if (quality === 1) {
+                    affixCount = mathWeightedRandom(Const.LOOT_AFFIX_COUNT_GREEN) + 1;
+                } else if (quality === 2) {
+                    affixCount = mathWeightedRandom(Const.LOOT_AFFIX_COUNT_BLUE) + 3;
                 }
-                const index = mathRandomInt(0, allSize);
-                if (index < pSize) {
-                    const affix = prefixes.splice(index, 1)[0];
-                    randomedAffixes.push({ affix, qlvl: 0 });
-                    pCount++;
+
+                let prefixCount = 0;
+                if (Math.random() < 0.5) {
+                    prefixCount = Math.floor(affixCount / 2);
                 } else {
-                    const affix = suffixes.splice(index - pSize, 1)[0];
-                    randomedAffixes.push({ affix, qlvl: 0 });
-                    sCount++;
+                    prefixCount = Math.ceil(affixCount / 2);
                 }
-                affixCount--;
+                const suffixCount = affixCount - prefixCount;
 
-                if (pCount + sCount === 1) {
-                    if (pCount === 1 && sSize > 0) {
-                        const index = mathRandomInt(0, sSize);
-                        const affix = suffixes.splice(index, 1)[0];
+                const candidates = AffixGroupByAvailOn[itemConfig.type] ?? [];
+                const placeGroup = arrGroupBy(candidates, "affixType");
+                const loop = [{ type: "prefix", count: prefixCount }, { type: "suffix", count: suffixCount }];
+                const randomedAffixes = [];
+                for (const iter of loop) {
+                    const affixConfigs = placeGroup.get(iter.type);
+                    if (affixConfigs == null || affixConfigs.length === 0) {
+                        continue; // No affixes available for this type
+                    }
+                    for (let i = 0; i < iter.count; i++) {
+                        const affix = arrGetOne(affixConfigs);
+                        arrRemove(affixConfigs, affix);
                         randomedAffixes.push({ affix, qlvl: 0 });
-                        sCount++;
-                        affixCount--;
-                    } else if (sCount === 1 && pSize > 0) {
-                        const index = mathRandomInt(0, pSize);
-                        const affix = prefixes.splice(index, 1)[0];
-                        randomedAffixes.push({ affix, qlvl: 0 });
-                        pCount++;
-                        affixCount--;
                     }
                 }
-            }
 
-            if (randomedAffixes.length === 0) {
-                quality = 0;
-            } else if (randomedAffixes.length > 2) {
-                quality = 2;
-            } else if (randomedAffixes.length > 0) {
-                quality = 1;
-            }
 
-            /**@type {any} */
-            const addedAffixes = randomedAffixes.reduce((acc, e) => {
-                if (acc[e.affix.affixType] == null) {
-                    acc[e.affix.affixType] = [];
+                /**@type {any} */
+                const addedAffixes = randomedAffixes.reduce((acc, e) => {
+                    if (acc[e.affix.affixType] == null) {
+                        acc[e.affix.affixType] = [];
+                    }
+                    acc[e.affix.affixType].push(e);
+                    return acc;
+                }, /**@type {any} */({}));
+                const prefix = arrGetOne(addedAffixes["prefix"]);
+                const suffix = arrGetOne(addedAffixes["suffix"]);
+                if (suffix != null) {
+                    name = `${suffix.affix.name}${name}`;
                 }
-                acc[e.affix.affixType].push(e);
-                return acc;
-            }, /**@type {any} */({}));
-            const prefix = arrGetOne(addedAffixes["prefix"]);
-            const suffix = arrGetOne(addedAffixes["suffix"]);
-            if (suffix != null) {
-                name = `${suffix.affix.name}${name}`;
-            }
-            if (prefix != null) {
-                name = `${prefix.affix.name}${name}`;
-            }
+                if (prefix != null) {
+                    name = `${prefix.affix.name}${name}`;
+                }
 
-            affixesRaw.push(...randomedAffixes);
+                affixesRaw.push(...randomedAffixes);
+            }
         }
 
         /**@type {Partial<Record<StatId, number | [number, number]>>} */

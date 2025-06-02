@@ -41,7 +41,39 @@ const Const = {
         arms: 2,
         inherit: 0,
         socket: 0,
-    }
+    },
+    /**@type {SlotType[]} */
+    SLOT_SORT: [
+        "arms",
+        "head",
+        "neck",
+        "shoulder",
+        "torso",
+        "wrist",
+        "hand",
+        "waist",
+        "leg",
+        "foot",
+        "finger",
+        "accessory",
+    ],
+    /**@type {Record<SlotType, string>} */
+    SLOT_NAME: {
+        head: "头部",
+        neck: "颈部",
+        shoulder: "肩部",
+        torso: "胸部",
+        wrist: "手腕",
+        hand: "手部",
+        waist: "腰部",
+        leg: "腿部",
+        foot: "脚部",
+        finger: "指环",
+        accessory: "饰品",
+        arms: "武器",
+        inherit: "错01",
+        socket: "错02",
+    },
 }
 
 Const.SIZE2 = Const.SIZE * 2;

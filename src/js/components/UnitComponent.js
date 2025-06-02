@@ -53,6 +53,7 @@ export default class UnitComponent extends Component {
         equipped.splice(index, 1);
         this.persistantData.bag.push(item); // Add it back to the bag
         dispatch("bag:refresh", null);
+        dispatch("inventory:refresh", null);
         userData.saveToDisk();
         return true; // Successfully unequipped
     }
@@ -76,20 +77,27 @@ export default class UnitComponent extends Component {
             equipped = [];
             this.persistantData.inventory[itemConfig.slot] = equipped;
         }
+        let unequipped = false;
         for (let i = equipped.length - 1; i >= 0; i--) {
             const currentSize = equipped.reduce((acc, cur) => acc + ItemById[cur.id].size, 0);
             if (currentSize + itemConfig.size > Const.SLOT_MAX_SIZE[itemConfig.slot]) {
                 // unequip last item in slot
-                this.tryUnquip(equipped[i]);
+                const result = this.tryUnquip(equipped[i]);
+                unequipped = result || unequipped;
             } else {
                 break;
             }
+        }
+
+        if (unequipped) {
+            dispatch("toast", "已替换装备");
         }
 
         // Add the item to the equipped slot
         equipped.push(item);
         this.persistantData.bag.splice(indexInBag, 1); // Remove it from the bag
         dispatch("bag:refresh", null);
+        dispatch("inventory:refresh", null);
         userData.saveToDisk();
     }
 }

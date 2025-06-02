@@ -45,7 +45,7 @@ export default class AnyaBuyPanel extends Component {
         const count = mathRandomIncl(20, 40);
         this.goods = [];
         /**@type {ItemId[]} */
-        const candidates = ["ebonywoodsword", "sandalnecklace", "whitetigernecklace", "dodgenecklace"];
+        const candidates = ["clotharmor", "leatherarmor", "grandcharm", "largecharm", "smallcharm", "commonnecklace", "commonring"];
         for (let i = 0; i < count; i++) {
             const item = ItemInstance.drop(arrGetOne(candidates), 35, 1000);
             this.goods.push(item);
