@@ -28,7 +28,7 @@ export default class AnyaBuyPanel extends Component {
         this.container = new GameObject("container", this.gameObject);
         this.container.setPosition(0, 1).setSize(10, 4);
 
-        this.gameObject.addComponent(UIFocus).setTarget(this.container);
+        this.uiFocus = this.gameObject.addComponent(UIFocus).setTarget(this.container);
         this.refreshGoods = true;
         /**@type {ItemSaveData[]} */
         this.goods = [];
@@ -47,7 +47,7 @@ export default class AnyaBuyPanel extends Component {
         /**@type {ItemId[]} */
         const candidates = ["ebonywoodsword", "sandalnecklace", "whitetigernecklace", "dodgenecklace"];
         for (let i = 0; i < count; i++) {
-            const item = ItemInstance.drop(arrGetOne(candidates), 35, 250);
+            const item = ItemInstance.drop(arrGetOne(candidates), 35, 1000);
             this.goods.push(item);
         }
 
@@ -66,7 +66,7 @@ export default class AnyaBuyPanel extends Component {
         let c = 0;
         for (const item of this.goods) {
             const itemConfig = ItemById[item.id];
-            const obj = new GameObject(item.id, this.container);
+            const obj = new GameObject(item.id, this.container).setSize(1, 1);
             obj.setPosition(c % 10, Math.floor(c / 10));
             obj.addComponent(TextRenderer)
                 .setText(itemConfig.image)
@@ -113,5 +113,7 @@ export default class AnyaBuyPanel extends Component {
             obj.addComponent(ItemComponent).setItem(item);
             c++;
         }
+
+        this.uiFocus.setTarget(this.container);
     }
 }

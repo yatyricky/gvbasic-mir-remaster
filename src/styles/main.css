@@ -76,6 +76,7 @@ button {
     left: 33%;
     width: 33.9%;
     border: 1px solid #000;
+    overflow: auto;
 }
 
 #stat {
