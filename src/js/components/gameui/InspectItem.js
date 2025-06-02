@@ -75,16 +75,18 @@ export default class InspectItem extends Component {
         if (!this.panel.active) {
             return;
         }
-        e.use();
         if (e.key === "b") {
+            e.use();
             this.panel.setActive(false);
         } else if (e.key === "u" || e.key === "d") {
+            e.use();
             if (this.rows <= 5) {
                 return; // No scrolling needed
             }
             // Scroll through the text
             this.textObj.setPosition(0, mathClamp(this.textObj.y + (e.key === "u" ? 1 : -1), 5 - this.rows, 0));
         } else if (e.key === "x" && this.actionX != null) {
+            e.use();
             this.actionX();
         }
     }
