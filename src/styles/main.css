@@ -86,4 +86,5 @@ button {
     right: 0;
     width: 33%;
     border: 1px solid #000;
+    overflow: auto;
 }

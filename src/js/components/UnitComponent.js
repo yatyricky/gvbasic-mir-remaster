@@ -19,6 +19,7 @@ export default class UnitComponent extends Component {
         this.persistantData = persistantData;
         this.config = UnitById[persistantData.unitId];
         this.stat = new ReactStat(persistantData.stats);
+        this.stat.update(this.persistantData);
         return this;
     }
 
@@ -38,8 +39,9 @@ export default class UnitComponent extends Component {
     /**
      * 
      * @param {ItemSaveData} item 
+     * @param {boolean} [dontUpdateStat=false]
      */
-    tryUnquip(item) {
+    tryUnquip(item, dontUpdateStat) {
         const itemConfig = ItemById[item.id];
         const equipped = this.persistantData.inventory[itemConfig.slot];
         const index = equipped.findIndex(e => e === item);
@@ -51,6 +53,9 @@ export default class UnitComponent extends Component {
 
         // Remove the item from the equipped slot
         equipped.splice(index, 1);
+        if (!dontUpdateStat) {
+            this.stat.update(this.persistantData);
+        }
         this.persistantData.bag.push(item); // Add it back to the bag
         dispatch("bag:refresh", null);
         dispatch("inventory:refresh", null);
@@ -82,7 +87,7 @@ export default class UnitComponent extends Component {
             const currentSize = equipped.reduce((acc, cur) => acc + ItemById[cur.id].size, 0);
             if (currentSize + itemConfig.size > Const.SLOT_MAX_SIZE[itemConfig.slot]) {
                 // unequip last item in slot
-                const result = this.tryUnquip(equipped[i]);
+                const result = this.tryUnquip(equipped[i], true);
                 unequipped = result || unequipped;
             } else {
                 break;
@@ -95,6 +100,7 @@ export default class UnitComponent extends Component {
 
         // Add the item to the equipped slot
         equipped.push(item);
+        this.stat.update(this.persistantData);
         this.persistantData.bag.splice(indexInBag, 1); // Remove it from the bag
         dispatch("bag:refresh", null);
         dispatch("inventory:refresh", null);

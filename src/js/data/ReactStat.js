@@ -1,3 +1,4 @@
+import { ItemById } from "../config/Item";
 import { StatById, Stats } from "../config/Stat";
 import { arrGetClamped } from "../Utils";
 import { mathRandomIncl } from "./MathLab";
@@ -9,7 +10,14 @@ export default class ReactStat {
      */
     constructor(baseStat) {
         this.eventMap = new Map();
+        this.initBaseStat(baseStat);
+    }
 
+    /**
+     * 
+     * @param {Partial<Record<StatId, any>>} baseStat 
+     */
+    initBaseStat(baseStat) {
         this.data = /**@type {Record<StatId, any>} */ ({});
         for (const statConfig of Stats) {
             switch (statConfig.type) {
@@ -21,6 +29,9 @@ export default class ReactStat {
                     break;
                 case "set":
                     this.data[statConfig.id] = {};
+                    break;
+                case "skillList":
+                    this.data[statConfig.id] = [];
                     break;
                 default:
                     break;
@@ -135,7 +146,10 @@ export default class ReactStat {
                 curr[value] = 1;
                 this.setStat(key, undefined, true);
                 break;
-
+            case "skillList":
+                curr.push(...value);
+                this.setStat(key, undefined, true);
+                break;
             default:
                 break;
         }
@@ -200,5 +214,34 @@ export default class ReactStat {
 
     toJson() {
 
+    }
+
+    /**
+     * 
+     * @param {UnitSaveData} saveData 
+     */
+    update(saveData) {
+        const prevRtHp = this.data.rthp;
+        const prevRtMp = this.data.rtmp;
+        this.initBaseStat(saveData.stats);
+        // skill stats
+        // equip stats
+        for (const [, items] of Object.entries(saveData.inventory)) {
+            for (const item of items) {
+                if (item == null) {
+                    continue;
+                }
+                const itemConfig = ItemById[item.id];
+                if (itemConfig == null) {
+                    console.error(`Item ${item.id} not found`);
+                    continue;
+                }
+                for (const [statId, stat] of Object.entries(item.stats)) {
+                    this.addStat(/**@type {StatId} */(statId), stat);
+                }
+            }
+        }
+        this.data.rthp = Math.min(prevRtHp, this.data.rtmaxhp);
+        this.data.rtmp = Math.min(prevRtMp, this.data.rtmaxmp);
     }
 }

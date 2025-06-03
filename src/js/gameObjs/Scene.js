@@ -98,11 +98,13 @@ function watchReactStat() {
         let rows = [];
         for (const cfg of Stats) {
             if (cfg.type === "number") {
-                rows.push(`${cfg.id}: ${stat[cfg.id]}`);
+                rows.push(`${cfg.id}: ${stat[cfg.id].toFixed(2)}`);
             } else if (cfg.type === "set") {
                 rows.push(`${cfg.id}: [${Object.entries(stat[cfg.id]).map(e => `${e[0]}:${e[1]}`).join(', ')}]`);
             } else if (cfg.type === "range") {
-                rows.push(`${cfg.id}: ${stat[cfg.id][0]}-${stat[cfg.id][1]}`);
+                rows.push(`${cfg.id}: ${stat[cfg.id][0].toFixed(2)}-${stat[cfg.id][1].toFixed(2)}`);
+            } else if (cfg.type === "skillList") {
+                rows.push(`${cfg.id}: [${stat[cfg.id].map((/**@type {any}*/e) => `${e.skill}:${e.level.toFixed(2)}(${(e.chance * 100).toFixed(2)}%)`).join(', ')}]`);
             } else {
                 rows.push(`${cfg.id}: ${stat[cfg.id]}`);
             }

@@ -203,6 +203,7 @@ export const Stats = [
     { id: "stun", name: "昏迷", type: "number", format: "int" },
     { id: "prochit", name: "被击触发", type: "skillList", description: "被攻击时，有{0}%概率施展等级{1}的{2}", format: "int" },
     { id: "procatk", name: "攻击触发", type: "skillList", description: "攻击时，有{0}%概率施展等级{1}的{2}", format: "int" },
+    { id: "skpts", name: "技能点数", type: "number", format: "int" },
 ];
 
 export const StatById = Object.fromEntries(Stats.map(e => [e.id, e]));

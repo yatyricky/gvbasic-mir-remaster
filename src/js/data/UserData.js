@@ -43,6 +43,8 @@ class UserData {
             chars = [];
             this.data.chars = chars;
         }
+        // add 1 skill point
+        char.stats.skpts = 1;
         chars.push(char);
         this.saveToDisk();
     }

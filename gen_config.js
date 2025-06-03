@@ -427,7 +427,7 @@ for (const [name, payload] of Object.entries(allData)) {
 
         if (typeObj.meta.includes("Group")) {
             const queryName = `${name}GroupBy${Utils.strCapitalizeFirst(typeObj.name)}`;
-            js += `export const ${queryName} = Affixs.reduce((acc, e) => {
+            js += `export const ${queryName} = ${configArrayName}.reduce((acc, e) => {
     if (e.${typeObj.name} != null) {
         e.${typeObj.name}.forEach(group => {
             if (!acc[group]) {
