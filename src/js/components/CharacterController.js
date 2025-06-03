@@ -57,7 +57,7 @@ export default class CharacterController extends Component {
             const distance = this.myCollider.prevCollider.gameObject.distanceTo(this.gameObject);
             if (distance > 1) {
                 // If the previous collider is too far away, reset it
-                this.myCollider.prevCollider.onExitCollision();
+                this.myCollider.prevCollider.onExitCollision(this.myCollider);
             }
         }
 
