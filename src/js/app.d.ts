@@ -19,7 +19,8 @@ declare global {
     }
 
     interface SkillSaveData {
-
+        id: SkillId;
+        level: number;
     }
 
     interface UnitSaveData {
@@ -28,7 +29,7 @@ declare global {
         inventory?: Partial<Record<SlotType, ItemSaveData[]>>;
         charmBag?: ItemSaveData[];
         bag?: ItemSaveData[];
-        skills?: SkillSaveData;
+        skills?: SkillSaveData[];
     }
 
     interface ISaveData {

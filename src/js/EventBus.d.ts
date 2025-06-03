@@ -10,6 +10,7 @@ interface EventBusDefine {
     "panel:show": () => GameObject;
     "bag:refresh": null;
     "inventory:refresh": null;
+    "skill:refresh": null;
 }
 
 export function subscribe<T extends keyof EventBusDefine>(event: T, callback: (data: EventBusDefine[T]) => void, fireImmediately = false): () => void;
