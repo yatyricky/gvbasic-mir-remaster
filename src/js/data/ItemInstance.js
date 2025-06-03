@@ -43,17 +43,13 @@ export default class ItemInstance {
                 tuple[0] += val;
                 tuple[1] += val2;
             }
-        } else if (statConfig.type === "set") {
-            let map = stats[affix.statId];
-            if (map == null) {
-                map = {};
-                stats[affix.statId] = map;
+        } else if (statConfig.type === "skillList") {
+            let list = stats[affix.statId];
+            if (list == null) {
+                list = [];
+                stats[affix.statId] = list;
             }
-            if (map[affix.skill] == null) {
-                map[affix.skill] = mathRandomIncl(a, b);
-            } else {
-                map[affix.skill] = Math.max(mathRandomIncl(a, b), map[affix.skill]);
-            }
+            list.push({ skill: affix.skill, level: mathRandomIncl(a, b), chance: mathRandomIncl(affix.skillChance[0], affix.skillChance[1]) });
         } else {
             throw new Error(`Unknown stat type ${statConfig.type}`);
         }

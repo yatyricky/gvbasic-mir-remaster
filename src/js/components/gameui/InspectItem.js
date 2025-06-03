@@ -7,8 +7,9 @@ import RectRenderer from "../RectRenderer";
 import Renderer from "../Renderer";
 import TextRenderer from "../TextRenderer";
 import { StatById } from "../../config/Stat";
-import { strWrap } from "../../Utils";
+import { strFormat, strWrap } from "../../Utils";
 import { mathClamp } from "../../data/MathLab";
+import { SkillById } from "../../config/Skill";
 
 export default class InspectItem extends Component {
     onInit() {
@@ -45,21 +46,25 @@ export default class InspectItem extends Component {
 品质:${Const.QUALITY_TEXT[item.quality]}\n`;
         for (const [k, v] of Object.entries(item.stats)) {
             const statConfig = StatById[/**@type {StatId}*/(k)];
-            let val = Array.isArray(v) ? v.join('-') : v;
+            let val = `${statConfig.name}+${Array.isArray(v) ? v.join('-') : v}`;
             if (statConfig.format === "int") {
-                if (Array.isArray(v)) {
-                    val = v.map(v => Math.floor(v)).join("-");
+                if (statConfig.type === "skillList") {
+                    val = /**@type {any[]}*/(v).map(e => strFormat(statConfig.description, (e.chance * 100).toFixed(2), Math.floor(e.level), SkillById[/**@type {SkillId}*/(e.skill)].name)).join(";");
                 } else {
-                    val = Math.floor(v);
+                    if (Array.isArray(v)) {
+                        val = `${statConfig.name}+${v.map(v => Math.floor(v)).join("-")}`;
+                    } else {
+                        val = `${statConfig.name}+${Math.floor(v)}`;
+                    }
                 }
             } else if (statConfig.format === "percent") {
                 if (Array.isArray(v)) {
-                    val = v.map(v => `${v.toFixed(2)}%`).join("-");
+                    val = `${statConfig.name}+${v.map(v => `${v.toFixed(2)}%`).join("-")}`;
                 } else {
-                    val = `${v.toFixed(2)}%`;
+                    val = `${statConfig.name}+${v.toFixed(2)}%`;
                 }
             }
-            sb += `${statConfig.name} +${val}\n`;
+            sb += `${val}\n`;
         }
         this.rows = strWrap(sb).split("\n").length;
 

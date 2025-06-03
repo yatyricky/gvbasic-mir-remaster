@@ -201,8 +201,8 @@ export const Stats = [
     { id: "rw", name: "允许符文之语", type: "number", format: "int" },
     { id: "silent", name: "无法攻击", type: "number", format: "int" },
     { id: "stun", name: "昏迷", type: "number", format: "int" },
-    { id: "prochit", name: "被击触发", type: "set", format: "int" },
-    { id: "procatk", name: "攻击触发", type: "set", format: "int" },
+    { id: "prochit", name: "被击触发", type: "skillList", description: "被攻击时，有{0}%概率施展等级{1}的{2}", format: "int" },
+    { id: "procatk", name: "攻击触发", type: "skillList", description: "攻击时，有{0}%概率施展等级{1}的{2}", format: "int" },
 ];
 
 export const StatById = Object.fromEntries(Stats.map(e => [e.id, e]));

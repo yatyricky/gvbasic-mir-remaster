@@ -12,7 +12,8 @@ declare global {
         hiIlvlDelta: number;
         fluctuate: number;
         reversed: boolean;
-        skill: string;
+        skill: SkillId;
+        skillChance: number[];
         availOn: ItemType[];
     }
 }

@@ -186,6 +186,18 @@ export function strWrap(str, width) {
 
 /**
  * 
+ * @param {string} str 
+ * @param  {...any} args 
+ * @returns 
+ */
+export function strFormat(str, ...args) {
+    return str.replace(/{(\d+)}/g, (match, index) => {
+        return args[index] != null ? args[index] : match;
+    });
+}
+
+/**
+ * 
  * @param {object} obj 
  * @returns 
  */
