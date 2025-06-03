@@ -5,6 +5,8 @@ export default class Collider extends Component {
     onInit() {
         super.onInit();
         this.layer = 0;
+        /**@type {Collider} */
+        this.prevCollider = null;
     }
 
     /**
@@ -12,6 +14,12 @@ export default class Collider extends Component {
      */
     onCollision(other) {
         this.callback?.(other);
+    }
+    /**
+     * @param {Collider} other
+     */
+    onExitCollision(other) {
+        this.exitCollision?.(other);
     }
 
     update() {
@@ -25,6 +33,16 @@ export default class Collider extends Component {
      */
     setCallback(callback) {
         this.callback = callback;
+        return this;
+    }
+
+        /**
+     * 
+     * @param {(other: Collider) => void} callback 
+     * @returns 
+     */
+    setExitCollision(callback) {
+        this.exitCollision = callback;
         return this;
     }
 

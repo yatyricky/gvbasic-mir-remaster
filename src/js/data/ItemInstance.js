@@ -174,6 +174,7 @@ export default class ItemInstance {
 
         /**@type {ItemSaveData} */
         const item = {
+            uuid: crypto.randomUUID(),
             id: id,
             name,
             ilvl: ilvl,

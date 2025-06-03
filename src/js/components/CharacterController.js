@@ -18,6 +18,7 @@ export default class CharacterController extends Component {
         // if (key === "a") {
         //     this.gameObject.getComponent("TextRenderer").setText(shuffleString(randomText));
         // }
+        this.myCollider = this.gameObject.getComponent(Collider);
         let ox = this.gameObject.x;
         let oy = this.gameObject.y;
 
@@ -51,5 +52,15 @@ export default class CharacterController extends Component {
 
         this.gameObject.x = mathClamp(tx, 0, 9);
         this.gameObject.y = mathClamp(ty, 0, 4);
+
+        if (this.myCollider.prevCollider != null) {
+            const distance = this.myCollider.prevCollider.gameObject.distanceTo(this.gameObject);
+            if (distance > 1) {
+                // If the previous collider is too far away, reset it
+                this.myCollider.prevCollider.onExitCollision();
+            }
+        }
+
+        this.myCollider.prevCollider = collider;
     }
 }

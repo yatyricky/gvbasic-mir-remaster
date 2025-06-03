@@ -14,6 +14,10 @@ app.width = Const.SIZE * 20;
 app.height = Const.SIZE2 * 5;
 const ctx = app.getContext('2d');
 
+const domSvui = document.getElementById('svui');
+domSvui.style.width = `${Const.SIZE * 20}px`;
+domSvui.style.height = `${Const.SIZE * 20}px`;
+
 const domHierarchyTree = document.getElementById('hierarchyTree');
 const domWatch = document.getElementById('watch');
 const domWatchStat = document.getElementById('stat');

@@ -1,5 +1,4 @@
 import Const from "../../Const";
-import { subscribe } from "../../EventBus";
 import GameObject from "../../gameObjs/GameObject";
 import Component from "../Component";
 import TextRenderer from "../TextRenderer";
@@ -35,10 +34,10 @@ export default class AnyaShop extends Component {
         this.buyPanel.addComponent(AnyaBuyPanel);
         this.buyPanel.setActive(false);
 
-        subscribe("shop:anya", () => {
-            this.tradeType.setActive(true);
-            this.menu.setActive(true);
-        });
+        // subscribe("shop:anya", () => {
+        //     this.tradeType.setActive(true);
+        //     this.menu.setActive(true);
+        // });
     }
 
     /**

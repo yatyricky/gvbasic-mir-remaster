@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import VitePluginRestart from 'vite-plugin-restart';
 import { viteSingleFile } from 'vite-plugin-singlefile';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { execSync } from "child_process";
 
 export default defineConfig({
@@ -29,6 +30,7 @@ export default defineConfig({
         },
     },
     plugins: [
+        svelte(),
         viteSingleFile(),
         VitePluginRestart({
             restart: [

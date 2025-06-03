@@ -6,11 +6,14 @@ interface EventBusDefine {
     "scene:menu": null;
     "scene:game": null;
     "shop:anya": null;
+    "exit:anya": null;
     "inspect:item": { item: ItemSaveData, actionX?: () => void };
     "panel:show": () => GameObject;
     "bag:refresh": null;
     "inventory:refresh": null;
     "skill:refresh": null;
+    "modal:show": { component: any, props?: Record<string, any> };
+    "modal:close": any;
 }
 
 export function subscribe<T extends keyof EventBusDefine>(event: T, callback: (data: EventBusDefine[T]) => void, fireImmediately = false): () => void;

@@ -265,4 +265,14 @@ export default class GameObject {
         }
         this.children = [];
     }
+
+    /**
+     * 
+     * @param {GameObject} other 
+     */
+    distanceTo(other) {
+        const dx = this.gx - other.gx;
+        const dy = this.gy - other.gy;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
 }

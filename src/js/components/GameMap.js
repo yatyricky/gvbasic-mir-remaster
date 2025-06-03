@@ -13,7 +13,7 @@ export default class GameMap extends Component {
 
         this.anya = new GameObject("anya", this.town);
         this.anya.setPosition(8, 1);
-        this.anya.addComponent(Collider).setLayer(Const.LAYER_NPC).setCallback(this.onAnya.bind(this));
+        this.anya.addComponent(Collider).setLayer(Const.LAYER_NPC).setCallback(this.onAnya.bind(this)).setExitCollision(this.offAnya.bind(this));
         const anyaConfig = UnitById.anya;
         this.anya.addComponent(TextRenderer).setText(anyaConfig.image).setQueue(Const.QUEUE_NPC);
 
@@ -49,6 +49,10 @@ export default class GameMap extends Component {
 
     onAnya() {
         dispatch("shop:anya", null);
+    }
+
+    offAnya() {
+        dispatch("exit:anya", null);
     }
 
     onExit() {

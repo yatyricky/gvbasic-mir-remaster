@@ -18,6 +18,8 @@
     "serve": "vite preview"
   },
   "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.1.0",
+    "svelte": "^5.33.14",
     "vite": "^6.3.5",
     "vite-plugin-restart": "^0.4.2",
     "vite-plugin-singlefile": "^2.2.0",

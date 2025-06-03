@@ -4,6 +4,7 @@ declare global {
     type ElementTypeOf<T> = T extends Array<infer U> ? U : never;
 
     interface ItemSaveData {
+        uuid: string;
         id: ItemId;
         /** affixed name */
         name: string;
