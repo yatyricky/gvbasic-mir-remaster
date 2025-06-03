@@ -71,9 +71,8 @@ export default class UIFocus extends Component {
             return;
         }
         this.rectRenderer.setSize(this.focus.w, this.focus.h);
-        this.rectRenderer.setBorder(`rgba(1, 29, 1, ${Math.cos(SceneManager.activeScene.time * 3) * 0.5 + 0.5})`, 2);
+        this.rectRenderer.setBorder(`rgba(1, 29, 1, ${Math.floor(SceneManager.activeScene.time / 333) % 2 === 0 ? 1 : 0})`, 2);
         this.rectObj.setPosition(this.target.x + this.focus.x, this.target.y + this.focus.y);
-
     }
 
     /**
