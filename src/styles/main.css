@@ -19,8 +19,6 @@ body {
 
     /* Disable touch callout on iOS */
     -webkit-touch-callout: none;
-
-    color: #000;
 }
 
 #app {
