@@ -25,16 +25,12 @@ body {
     margin: 0 auto;
     background-color: #337048;
     display: block;
-    border: #000 solid 1px;
-    box-sizing: border-box;
 }
 
 #svui {
     margin: 0 auto;
     display: block;
-    border: #000 solid 1px;
     background-color: silver;
-    box-sizing: border-box;
     position: relative;
     font-size: 20px;
 }

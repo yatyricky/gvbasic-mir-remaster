@@ -5,7 +5,7 @@
     let sn = 0;
 
     /**
-     * 
+     *
      * @param {number} id
      */
     function closeModal(id) {
@@ -16,7 +16,7 @@
     }
 
     /**
-     * 
+     *
      * @param {any} comp
      */
     function closeByComponent(comp) {
@@ -27,11 +27,17 @@
     }
 
     subscribe("modal:show", (data) => {
-        if (modals.length > 0) {
-            for (let i = modals.length - 1; i >= 0; i--) {
-                closeModal(modals[i].id);
+        const index = modals.findIndex((m) => m.component === data.component);
+        if (index !== -1) {
+            // 如果已经存在，则不再添加
+            for (let i = index; i < modals.length - 1; i++) {
+                let swap = modals[i];
+                modals[i] = modals[i + 1];
+                modals[i + 1] = swap;
             }
+            return;
         }
+
         const id = ++sn;
         modals.push({
             ...data,

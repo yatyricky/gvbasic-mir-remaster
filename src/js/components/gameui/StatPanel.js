@@ -5,7 +5,6 @@ import Component from "../Component";
 import TextRenderer from "../TextRenderer";
 import UnitComponent from "../UnitComponent";
 import Range from "../../data/Range";
-import KeyEvent from "../../KeyEvent";
 import { strWrap } from "../../Utils";
 import { StatById } from "../../config/Stat";
 
@@ -28,7 +27,7 @@ export default class StatPanel extends Component {
 
     /**
      * 
-     * @param {KeyEvent} e 
+     * @param {any} e 
      */
     onInput(e) {
         if (e.key === "u" || e.key === "d") {

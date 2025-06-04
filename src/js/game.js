@@ -13,12 +13,9 @@ import Const from "./Const";
 import userData from "./data/UserData";
 import { arrLast } from "./Utils";
 import SceneManager from "./SceneManager";
-import GameMenuController from "./components/gameui/GameMenuController";
 import UnitComponent from "./components/UnitComponent";
 import GameMap from "./components/GameMap";
 import Collider from "./components/Collider";
-import InspectItem from "./components/gameui/InspectItem";
-import UIManager from "./components/UIManager";
 
 import Main from "./svui/Main.svelte";
 import { mount } from "svelte";
@@ -38,8 +35,6 @@ function initGameScene(gameRoot) {
         return;
     }
     initedGameScene = true;
-    const uiManager = new GameObject("uiManager", gameRoot);
-    uiManager.addComponent(UIManager);
 
     const hero = arrLast(userData.data.chars);
 
@@ -51,12 +46,6 @@ function initGameScene(gameRoot) {
 
     const gameMap = new GameObject("gameMap", gameRoot);
     gameMap.addComponent(GameMap);
-
-    const gameMenu = new GameObject("gameMenu", gameRoot);
-    gameMenu.addComponent(GameMenuController);
-
-    const inspectItem = new GameObject("inspectItem", gameRoot);
-    inspectItem.addComponent(InspectItem);
 }
 
 function main() {

@@ -1,14 +1,96 @@
 <script>
+    import { onDestroy, onMount } from "svelte";
     import UnitComponent from "../components/UnitComponent";
     import { ItemById } from "../config/Item";
+    import Const from "../Const";
+    import { dispatch, subscribe } from "../EventBus";
     import SceneManager from "../SceneManager";
+    import InspectItemModal from "./InspectItemModal.svelte";
+    import MessageBox from "./MessageBox.svelte";
 
     const { close } = $props();
 
-    const bagData = $derived((() => {
-        const hero = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent);
+    function getBagData() {
+        const hero = SceneManager.activeScene
+            .find("game/hero")
+            .getComponent(UnitComponent);
         return hero.persistantData.bag;
-    })())
+    }
+
+    let bagData = $state(getBagData());
+
+    let timerId = -1;
+
+    /**
+     *
+     * @param {ItemSaveData} item
+     */
+    function mouseDown(item) {
+        if (timerId !== -1) {
+            clearTimeout(timerId);
+        }
+        timerId = setTimeout(() => {
+            timerId = -1;
+            dispatch("modal:show", {
+                component: InspectItemModal,
+                props: { item },
+            });
+        }, 500);
+    }
+
+    /**
+     *
+     * @param {ItemSaveData} item
+     */
+    function mouseExit(item) {
+        if (timerId !== -1) {
+            clearTimeout(timerId);
+            timerId = -1;
+            onClickItem(item);
+        }
+    }
+
+    /**
+     *
+     * @param {ItemSaveData} item
+     */
+    function onClickItem(item) {
+        dispatch("modal:show", {
+            component: MessageBox,
+            props: {
+                content: `如何操作${item.name}？`,
+                actions: [
+                    {
+                        text: "装备",
+                        action: () => {
+                            const hero =
+                                SceneManager.activeScene.find("game/hero");
+                            const heroComponent =
+                                hero.getComponent(UnitComponent);
+                            heroComponent.tryEquipItemFromBag(item);
+                        },
+                        autoClose: true,
+                    },
+                ],
+            },
+        });
+    }
+
+    /**@type {any}*/
+    let unsub = null;
+    onMount(() => {
+        unsub = subscribe("bag:refresh", () => {
+            bagData = getBagData();
+        });
+    });
+
+    onDestroy(() => {
+        if (timerId !== -1) {
+            clearTimeout(timerId);
+        }
+        unsub?.();
+        unsub = null;
+    });
 </script>
 
 <div class="backdrop">
@@ -17,12 +99,17 @@
         <button onclick={close} class="close-btn">X</button>
     </div>
     <div class="container">
-        {#each bagData as item (item.uuid)}
-        {@const itemConfig = ItemById[item.id]}
-        
-            <div class="item">
+        {#each bagData as item, i (item.uuid)}
+            {@const itemConfig = ItemById[item.id]}
+            <button
+                class="item"
+                style={`width: ${Const.SIZE2}px; height: ${Const.SIZE2}px; left: ${(i % 9) * Const.SIZE2}px; top: ${Math.floor(i / 9) * Const.SIZE2}px; line-height: ${Const.SIZE2}px; background-color: ${Const.QUALITY_COLOR[item.quality]};`}
+                onmousedown={() => mouseDown(item)}
+                onmouseup={() => mouseExit(item)}
+                onmouseleave={() => mouseExit(item)}
+            >
                 <span>{itemConfig.image}</span>
-            </div>
+            </button>
         {/each}
     </div>
 </div>
@@ -58,5 +145,13 @@
         height: calc(100% - 24px);
         top: 24px;
         overflow-y: auto;
+    }
+    .item {
+        position: absolute;
+        vertical-align: middle;
+        text-align: center;
+        box-sizing: border-box;
+        border: #000 1px solid;
+        border-radius: 10%;
     }
 </style>

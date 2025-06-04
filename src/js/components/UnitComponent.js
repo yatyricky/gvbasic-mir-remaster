@@ -44,7 +44,7 @@ export default class UnitComponent extends Component {
     tryUnquip(item, dontUpdateStat) {
         const itemConfig = ItemById[item.id];
         const equipped = this.persistantData.inventory[itemConfig.slot];
-        const index = equipped.findIndex(e => e === item);
+        const index = equipped.findIndex(e => e.uuid === item.uuid);
         if (index === -1) {
             dispatch("toast", "物品未装备");
             console.error("Item not equipped:", item);
@@ -68,7 +68,7 @@ export default class UnitComponent extends Component {
      * @param {ItemSaveData} item 
      */
     tryEquipItemFromBag(item) {
-        const indexInBag = this.persistantData.bag.findIndex(e => e === item);
+        const indexInBag = this.persistantData.bag.findIndex(e => e.uuid === item.uuid);
         if (indexInBag === -1) {
             dispatch("toast", "物品不在背包中");
             console.error("Item not found in bag:", item);
