@@ -5,9 +5,29 @@
     import InventoryModal from "./InventoryModal.svelte";
     import BagModal from "./BagModal.svelte";
     import AnyaShop from "./AnyaShop.svelte";
+    import MessageBox from "./MessageBox.svelte";
 
     function exitGame() {
-        dispatch("scene:menu", null);
+        dispatch("modal:show", {
+            component: MessageBox,
+            props: {
+                title: "退出游戏",
+                content: "确定要退出游戏吗？",
+                actions: [
+                    {
+                        text: "取消",
+                        autoClose: true,
+                    },
+                    {
+                        text: "确定",
+                        action: () => {
+                            dispatch("scene:menu", null);
+                        },
+                        autoClose: true,
+                    },
+                ],
+            },
+        })
     }
 
     function openInventory() {
