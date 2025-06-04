@@ -6,7 +6,6 @@
     import { dispatch, subscribe } from "../EventBus";
     import SceneManager from "../SceneManager";
     import InspectItemModal from "./InspectItemModal.svelte";
-    import MessageBox from "./MessageBox.svelte";
 
     const { close } = $props();
 
@@ -19,46 +18,15 @@
 
     let bagData = $state(getBagData());
 
-    let timerId = -1;
-
-    /**
-     *
-     * @param {ItemSaveData} item
-     */
-    function mouseDown(item) {
-        if (timerId !== -1) {
-            clearTimeout(timerId);
-        }
-        timerId = setTimeout(() => {
-            timerId = -1;
-            dispatch("modal:show", {
-                component: InspectItemModal,
-                props: { item },
-            });
-        }, 500);
-    }
-
-    /**
-     *
-     * @param {ItemSaveData} item
-     */
-    function mouseExit(item) {
-        if (timerId !== -1) {
-            clearTimeout(timerId);
-            timerId = -1;
-            onClickItem(item);
-        }
-    }
-
     /**
      *
      * @param {ItemSaveData} item
      */
     function onClickItem(item) {
         dispatch("modal:show", {
-            component: MessageBox,
+            component: InspectItemModal,
             props: {
-                content: `如何操作${item.name}？`,
+                item,
                 actions: [
                     {
                         text: "装备",
@@ -85,9 +53,6 @@
     });
 
     onDestroy(() => {
-        if (timerId !== -1) {
-            clearTimeout(timerId);
-        }
         unsub?.();
         unsub = null;
     });
@@ -103,10 +68,8 @@
             {@const itemConfig = ItemById[item.id]}
             <button
                 class="item"
-                style={`width: ${Const.SIZE2}px; height: ${Const.SIZE2}px; left: ${(i % 9) * Const.SIZE2}px; top: ${Math.floor(i / 9) * Const.SIZE2}px; line-height: ${Const.SIZE2}px; background-color: ${Const.QUALITY_COLOR[item.quality]};`}
-                onmousedown={() => mouseDown(item)}
-                onmouseup={() => mouseExit(item)}
-                onmouseleave={() => mouseExit(item)}
+                style={`width: ${Const.SIZE2}px; height: ${Const.SIZE2}px; left: ${(i % 9) * Const.SIZE2}px; top: ${Math.floor(i / 9) * Const.SIZE2}px; line-height: ${Const.SIZE2}px; background-color: ${Const.QUALITY_COLOR_BG[item.quality]};`}
+                onclick={() => onClickItem(item)}
             >
                 <span>{itemConfig.image}</span>
             </button>

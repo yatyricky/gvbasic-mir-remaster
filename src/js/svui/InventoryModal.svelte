@@ -6,7 +6,6 @@
     import { dispatch, subscribe } from "../EventBus";
     import SceneManager from "../SceneManager";
     import InspectItemModal from "./InspectItemModal.svelte";
-    import MessageBox from "./MessageBox.svelte";
 
     const { close } = $props();
 
@@ -62,41 +61,6 @@
 
     let inventoryData = $state(getInventoryData());
 
-    let timerId = -1;
-
-    /**
-     *
-     * @param {ItemSaveData} item
-     */
-    function mouseDown(item) {
-        if (timerId !== -1) {
-            clearTimeout(timerId);
-        }
-        timerId = setTimeout(() => {
-            timerId = -1;
-            if (item == null) {
-                dispatch("toast", "未装备");
-                return;
-            }
-            dispatch("modal:show", {
-                component: InspectItemModal,
-                props: { item },
-            });
-        }, 500);
-    }
-
-    /**
-     *
-     * @param {ItemSaveData} item
-     */
-    function mouseExit(item) {
-        if (timerId !== -1) {
-            clearTimeout(timerId);
-            timerId = -1;
-            onClickItem(item);
-        }
-    }
-
     /**
      *
      * @param {ItemSaveData} item
@@ -106,9 +70,9 @@
             return;
         }
         dispatch("modal:show", {
-            component: MessageBox,
+            component: InspectItemModal,
             props: {
-                content: `卸下${item.name}？`,
+                item,
                 actions: [
                     {
                         text: "卸下",
@@ -137,9 +101,6 @@
     });
 
     onDestroy(() => {
-        if (timerId !== -1) {
-            clearTimeout(timerId);
-        }
         unsub?.();
         unsub = null;
     });
@@ -178,11 +139,9 @@
                         top: {pos.top + pos.topGrow * j}px;
                         width: {Const.SIZE2}px;
                         height: {Const.SIZE2}px;
-                        background-color: {Const.QUALITY_COLOR[item?.quality || 0]};
+                        background-color: {Const.QUALITY_COLOR_BG[item?.quality || 0]};
                     "
-                    onmousedown={() => mouseDown(item)}
-                    onmouseup={() => mouseExit(item)}
-                    onmouseleave={() => mouseExit(item)}
+                    onclick={() => onClickItem(item)}
                 >
                     {#if status === "occupied"}
                         <span>X</span>

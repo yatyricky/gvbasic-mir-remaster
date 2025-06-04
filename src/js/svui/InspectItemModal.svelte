@@ -5,9 +5,9 @@
     import { strFormat } from "../Utils";
 
     /**
-     * @type {{close: any, item: ItemSaveData}}
+     * @type {any}
      */
-    const { close, item } = $props();
+    const { close, item, actions } = $props();
 </script>
 
 <div class="backdrop">
@@ -16,47 +16,64 @@
             <span>查看物品</span>
             <button onclick={close} class="close-btn">X</button>
         </div>
-        <div
-            class="item-name"
-            style={`color: ${Const.QUALITY_COLOR[item.quality]}`}
-        >
-            {item.name}
+        <div class="content">
+            <div
+                class="item-name"
+                style={`color: ${Const.QUALITY_COLOR_FG[item.quality]}`}
+            >
+                {item.name}
+            </div>
+            <div class="ilvl">物品等级:{item.ilvl}</div>
+            {#each Object.entries(item.stats) as [k, v], i (i)}
+                {@const statConfig = StatById[/**@type {StatId}*/ (k)]}
+                {#if statConfig.format === "int"}
+                    {#if statConfig.type === "skillList"}
+                        <div>
+                            {/**@type {any[]}*/ (v)
+                                .map((e) =>
+                                    strFormat(
+                                        statConfig.description,
+                                        (e.chance * 100).toFixed(2),
+                                        Math.floor(e.level),
+                                        SkillById[
+                                            /**@type {SkillId}*/ (e.skill)
+                                        ].name,
+                                    ),
+                                )
+                                .join(";")}
+                        </div>
+                    {:else if Array.isArray(v)}
+                        <div>
+                            {`${statConfig.name}+${v.map((v) => Math.floor(v)).join("-")}`}
+                        </div>
+                    {:else}
+                        <div>{`${statConfig.name}+${Math.floor(v)}`}</div>
+                    {/if}
+                {:else if statConfig.format === "percent"}
+                    {#if Array.isArray(v)}
+                        <div>
+                            {`${statConfig.name}+${v.map((v) => `${v.toFixed(2)}%`).join("-")}`}
+                        </div>
+                    {:else}
+                        <div>{`${statConfig.name}+${v.toFixed(2)}%`}</div>
+                    {/if}
+                {/if}
+            {/each}
         </div>
-        <div class="ilvl">物品等级:{item.ilvl}</div>
-        {#each Object.entries(item.stats) as [k, v], i (i)}
-            {@const statConfig = StatById[/**@type {StatId}*/ (k)]}
-            {#if statConfig.format === "int"}
-                {#if statConfig.type === "skillList"}
-                    <div>
-                        {/**@type {any[]}*/ (v)
-                            .map((e) =>
-                                strFormat(
-                                    statConfig.description,
-                                    (e.chance * 100).toFixed(2),
-                                    Math.floor(e.level),
-                                    SkillById[/**@type {SkillId}*/ (e.skill)]
-                                        .name,
-                                ),
-                            )
-                            .join(";")}
-                    </div>
-                {:else if Array.isArray(v)}
-                    <div>
-                        {`${statConfig.name}+${v.map((v) => Math.floor(v)).join("-")}`}
-                    </div>
-                {:else}
-                    <div>{`${statConfig.name}+${Math.floor(v)}`}</div>
-                {/if}
-            {:else if statConfig.format === "percent"}
-                {#if Array.isArray(v)}
-                    <div>
-                        {`${statConfig.name}+${v.map((v) => `${v.toFixed(2)}%`).join("-")}`}
-                    </div>
-                {:else}
-                    <div>{`${statConfig.name}+${v.toFixed(2)}%`}</div>
-                {/if}
-            {/if}
-        {/each}
+        <div class="actions" style={`height: ${Const.SIZE2}px;`}>
+            {#each actions as { text, action, autoClose }, i (i)}
+                <button
+                    class="action-btn"
+                    style={`height: ${Const.SIZE2}px;`}
+                    onclick={() => {
+                        action?.();
+                        if (autoClose) {
+                            close();
+                        }
+                    }}>{text}</button
+                >
+            {/each}
+        </div>
     </div>
 </div>
 
@@ -89,5 +106,18 @@
         background: none;
         width: 24px;
         height: 24px;
+    }
+    .actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        gap: 16px;
+    }
+    .action-btn {
+        background: none;
     }
 </style>
