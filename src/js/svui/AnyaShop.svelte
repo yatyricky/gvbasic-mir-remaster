@@ -1,11 +1,11 @@
 <script>
-    import UnitComponent from "../components/UnitComponent";
-    import { ItemById } from "../config/Item";
-    import SceneManager from "../SceneManager";
+    // import UnitComponent from "../components/UnitComponent";
+    // import { ItemById } from "../config/Item";
+    // import SceneManager from "../SceneManager";
 
     const { close } = $props();
 
-
+    let page = $state(0);
 </script>
 
 <div class="backdrop">
@@ -14,6 +14,14 @@
         <button onclick={close} class="close-btn">X</button>
     </div>
     <div class="container">
+        {#if page === 0}
+            <button>购买</button>
+            <button>出售</button>
+        {:else}
+            <div class="item">
+                <span>已选择购买的物品</span>
+            </div>
+        {/if}
         <!-- {#each bagData as item (item.uuid)}
         {@const itemConfig = ItemById[item.id]}
         
@@ -46,8 +54,12 @@
         padding: 0 1%;
         border-bottom: 1px solid #000;
     }
-    .close-btn {
+    button {
+        position: absolute;
         background: none;
+    }
+    .close-btn {
+        
     }
     .container {
         position: absolute;
