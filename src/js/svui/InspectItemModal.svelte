@@ -1,13 +1,16 @@
 <script>
+    import { ItemById } from "../config/Item";
     import { SkillById } from "../config/Skill";
     import { StatById } from "../config/Stat";
     import Const from "../Const";
     import { strFormat } from "../Utils";
 
     /**
-     * @type {any}
+     * @type {{close: any, item: ItemSaveData, actions: any}}
      */
     const { close, item, actions } = $props();
+
+    const itemConfig = $derived(ItemById[item.id]);
 </script>
 
 <div class="backdrop">
@@ -23,24 +26,22 @@
             >
                 {item.name}
             </div>
+            <div>{Const.SLOT_NAME[itemConfig.slot]}</div>
             <div class="ilvl">物品等级:{item.ilvl}</div>
             {#each Object.entries(item.stats) as [k, v], i (i)}
                 {@const statConfig = StatById[/**@type {StatId}*/ (k)]}
                 {#if statConfig.format === "int"}
                     {#if statConfig.type === "skillList"}
                         <div>
-                            {/**@type {any[]}*/ (v)
-                                .map((e) =>
+                            {(/**@type {any}*/ (v)).map((/**@type {any}*/ e) =>
                                     strFormat(
                                         statConfig.description,
                                         (e.chance * 100).toFixed(2),
                                         Math.floor(e.level),
-                                        SkillById[
-                                            /**@type {SkillId}*/ (e.skill)
-                                        ].name,
-                                    ),
-                                )
-                                .join(";")}
+                                        SkillById[/**@type {SkillId}*/ (e.skill)].name
+                                    )
+                                ).join(";")
+                            }
                         </div>
                     {:else if Array.isArray(v)}
                         <div>

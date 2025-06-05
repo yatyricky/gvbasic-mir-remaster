@@ -73,7 +73,7 @@ const Const = {
         accessory: "饰品",
         arms: "武器",
         inherit: "错01",
-        socket: "错02",
+        socket: "宝石",
     },
 }
 

@@ -108,17 +108,47 @@
     /**@type {any}*/
     const positioning = {
         head: { left: 0, top: 0, leftGrow: 0, topGrow: 0 },
-        neck: {left: 0, top: Const.SIZE2 * 1, leftGrow: 0, topGrow: 0},
-        shoulder: {left: 0, top: Const.SIZE2 * 2, leftGrow: 0, topGrow: 0},
-        torso: {left: 0, top: Const.SIZE2 * 3, leftGrow: 0, topGrow: 0},
-        wrist: {left: 0, top: Const.SIZE2 * 4, leftGrow: 0, topGrow: 0},
+        neck: { left: 0, top: Const.SIZE2 * 1, leftGrow: 0, topGrow: 0 },
+        shoulder: { left: 0, top: Const.SIZE2 * 2, leftGrow: 0, topGrow: 0 },
+        torso: { left: 0, top: Const.SIZE2 * 3, leftGrow: 0, topGrow: 0 },
+        wrist: { left: 0, top: Const.SIZE2 * 4, leftGrow: 0, topGrow: 0 },
         hand: { left: Const.SIZE2 * 9, top: 0, leftGrow: 0, topGrow: 0 },
-        waist: { left: Const.SIZE2 * 9, top: Const.SIZE2 * 1, leftGrow: 0, topGrow: 0 },
-        leg: { left: Const.SIZE2 * 9, top: Const.SIZE2 * 2, leftGrow: 0, topGrow: 0 },
-        foot: { left: Const.SIZE2 * 9, top: Const.SIZE2 * 3, leftGrow: 0, topGrow: 0 },
-        finger: { left: Const.SIZE2 * 8, top: Const.SIZE2 * 4, leftGrow: Const.SIZE2, topGrow: 0 },
-        arms: { left: Const.SIZE2 * 4, top: Const.SIZE2 * 4, leftGrow: Const.SIZE2, topGrow: 0 },
-        accessory: { left: Const.SIZE2 * 0, top: Const.SIZE2 * 5, leftGrow: Const.SIZE2, topGrow: 0 },
+        waist: {
+            left: Const.SIZE2 * 9,
+            top: Const.SIZE2 * 1,
+            leftGrow: 0,
+            topGrow: 0,
+        },
+        leg: {
+            left: Const.SIZE2 * 9,
+            top: Const.SIZE2 * 2,
+            leftGrow: 0,
+            topGrow: 0,
+        },
+        foot: {
+            left: Const.SIZE2 * 9,
+            top: Const.SIZE2 * 3,
+            leftGrow: 0,
+            topGrow: 0,
+        },
+        finger: {
+            left: Const.SIZE2 * 8,
+            top: Const.SIZE2 * 4,
+            leftGrow: Const.SIZE2,
+            topGrow: 0,
+        },
+        arms: {
+            left: Const.SIZE2 * 4,
+            top: Const.SIZE2 * 4,
+            leftGrow: Const.SIZE2,
+            topGrow: 0,
+        },
+        accessory: {
+            left: Const.SIZE2 * 0,
+            top: Const.SIZE2 * 5,
+            leftGrow: Const.SIZE2,
+            topGrow: 0,
+        },
     };
 </script>
 
@@ -131,6 +161,7 @@
         {#each inventoryData as { slot, arrangement } (slot)}
             {#each arrangement as { status, item }, j (j)}
                 {@const pos = positioning[slot] || {}}
+                {@const itemConfig = ItemById[item?.id]}
 
                 <button
                     class="item"
@@ -139,15 +170,37 @@
                         top: {pos.top + pos.topGrow * j}px;
                         width: {Const.SIZE2}px;
                         height: {Const.SIZE2}px;
-                        background-color: {Const.QUALITY_COLOR_BG[item?.quality || 0]};
+                        border: 2px solid {Const.QUALITY_COLOR_FG[
+                        item?.quality || 0
+                    ]};
                     "
-                    onclick={() => onClickItem(item)}
+                    onclick={() => {
+                        if (status !== "equipped") {
+                            return;
+                        }
+                        onClickItem(item);
+                    }}
                 >
                     {#if status === "occupied"}
-                        <span>X</span>
+                        {#if itemConfig.image.length === 1}
+                            <span>{itemConfig.image}</span>
+                        {:else}
+                            <div
+                                style="width: 100%; height: 100%; background-color: black;"
+                            >
+                                <div
+                                    style={` background-image: url('${new URL(`../../assets/images/${itemConfig.image}.jpg`, import.meta.url).href}'); background-size: contain; background-repeat: no-repeat; background-position: center; width: 100%; height: 100%; opacity: 0.3;`}
+                                ></div>
+                            </div>
+                        {/if}
                     {:else if status === "equipped"}
-                        {@const itemConfig = ItemById[item.id]}
-                        <span>{itemConfig.image}</span>
+                        {#if itemConfig.image.length === 1}
+                            <span>{itemConfig.image}</span>
+                        {:else}
+                            <div
+                                style={`background-image: url('${new URL(`../../assets/images/${itemConfig.image}.jpg`, import.meta.url).href}'); background-size: contain; background-repeat: no-repeat; background-position: center; width: 100%; height: 100%;`}
+                            ></div>
+                        {/if}
                     {/if}
                 </button>
             {/each}
@@ -189,6 +242,7 @@
     }
     .item {
         position: absolute;
+        padding: 0;
         vertical-align: middle;
         text-align: center;
         box-sizing: border-box;
