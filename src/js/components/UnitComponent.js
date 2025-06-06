@@ -106,4 +106,24 @@ export default class UnitComponent extends Component {
         dispatch("inventory:refresh", null);
         userData.saveToDisk();
     }
+
+    getSocketFillers() {
+        const fillers = [];
+        for (const item of this.persistantData.bag) {
+            const itemConfig = ItemById[item.id];
+            if (itemConfig.type === "rune") {
+                fillers.push(item);
+            }
+        }
+        return fillers;
+    }
+
+    /**
+     * 
+     * @param {ItemSaveData} item 
+     * @param {ItemSaveData} socketItem 
+     */
+    trySocketItem(item, socketItem) {
+
+    }
 }

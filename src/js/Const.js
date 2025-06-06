@@ -75,6 +75,20 @@ const Const = {
         inherit: "错01",
         socket: "宝石",
     },
+    EQUIPABLE_TYPES: [
+        "armor",
+        "belt",
+        "boot",
+        "charm",
+        "glove",
+        "helm",
+        "necklace",
+        "pant",
+        "pauldron",
+        "ring",
+        "weapon",
+        "bracelet",
+    ]
 }
 
 Const.SIZE2 = Const.SIZE * 2;

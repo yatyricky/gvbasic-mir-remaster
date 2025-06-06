@@ -3,6 +3,7 @@
     import { SkillById } from "../config/Skill";
     import { StatById } from "../config/Stat";
     import Const from "../Const";
+    import ItemInstance from "../data/ItemInstance";
     import { strFormat } from "../Utils";
 
     /**
@@ -33,15 +34,18 @@
                 {#if statConfig.format === "int"}
                     {#if statConfig.type === "skillList"}
                         <div>
-                            {(/**@type {any}*/ (v)).map((/**@type {any}*/ e) =>
+                            {/**@type {any}*/ (v)
+                                .map((/**@type {any}*/ e) =>
                                     strFormat(
                                         statConfig.description,
                                         (e.chance * 100).toFixed(2),
                                         Math.floor(e.level),
-                                        SkillById[/**@type {SkillId}*/ (e.skill)].name
-                                    )
-                                ).join(";")
-                            }
+                                        SkillById[
+                                            /**@type {SkillId}*/ (e.skill)
+                                        ].name,
+                                    ),
+                                )
+                                .join(";")}
                         </div>
                     {:else if Array.isArray(v)}
                         <div>
@@ -60,6 +64,9 @@
                     {/if}
                 {/if}
             {/each}
+            {#if ItemInstance.getSocketCount(item) > 0}
+                <div>有插槽({ItemInstance.getSocketCount(item)})</div>
+            {/if}
         </div>
         <div class="actions" style={`height: ${Const.SIZE2}px;`}>
             {#each actions as { text, action, autoClose }, i (i)}

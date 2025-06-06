@@ -29,6 +29,13 @@ export default class ItemInstance {
             } else {
                 stats[affix.statId] += val;
             }
+        } else if (statConfig.type === "int") {
+            val = Math.round(mathRandomIncl(a, b));
+            if (stats[affix.statId] == null) {
+                stats[affix.statId] = val;
+            } else {
+                stats[affix.statId] += val;
+            }
         } else if (statConfig.type === "range") {
             val = mathFluctuate(a, affix.fluctuate);
             if (a === b) {
@@ -184,5 +191,19 @@ export default class ItemInstance {
         };
 
         return item;
+    }
+
+    /**
+     * 
+     * @param {ItemSaveData} item 
+     */
+    static getSocketCount(item) {
+        let count = 0;
+        for (const [k, v] of Object.entries(item.stats)) {
+            if (k === "sok") {
+                count += /**@type {number}*/(v);
+            }
+        }
+        return count;
     }
 }

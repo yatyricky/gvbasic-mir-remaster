@@ -20,6 +20,7 @@ declare global {
         excludeAffix: AffixId[];
         rwTypes: ItemType[];
         setCount: number;
+        sockets: number;
     }
 }
 declare const Items: Array<IItemConfig>;
