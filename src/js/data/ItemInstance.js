@@ -11,7 +11,7 @@ export default class ItemInstance {
     /**
      * 
      * @param {IAffixConfig} affix 
-     * @param {Partial<Record<StatId, StatValueSaveData>>} stats 
+     * @param {StatData} stats 
      * @param {number} ilvl 
      * @param {number} qlvl 
      */
@@ -172,7 +172,7 @@ export default class ItemInstance {
             }
         }
 
-        /**@type {Partial<Record<StatId, StatValueSaveData>>} */
+        /**@type {StatData} */
         const baseStats = {};
         for (const e of baseAffixesRaw) {
             ItemInstance.collapseAffix(e.affix, baseStats, ilvl, e.qlvl);

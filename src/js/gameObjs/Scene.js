@@ -2,9 +2,6 @@ import Const from "../Const";
 import { flushEvents } from "../EventBus";
 import GameObject from "./GameObject";
 import SceneManager from "../SceneManager";
-import userData from "../data/UserData";
-import UnitComponent from "../components/UnitComponent";
-import { Stats } from "../config/Stat";
 import Renderer from "../components/Renderer";
 
 const app = /**@type {HTMLCanvasElement}*/(document.getElementById('app'));
@@ -14,13 +11,7 @@ app.width = Const.SIZE * 20;
 app.height = Const.SIZE2 * 5;
 const ctx = app.getContext('2d');
 
-const domSvui = document.getElementById('svui');
-domSvui.style.width = `${Const.SIZE * 20}px`;
-domSvui.style.height = `${Const.SIZE * 20}px`;
-
 const domHierarchyTree = document.getElementById('hierarchyTree');
-const domWatch = document.getElementById('watch');
-const domWatchStat = document.getElementById('stat');
 const domInspector = document.getElementById('inspector');
 
 let prevTree = "";
@@ -80,59 +71,6 @@ function buildHierarchyTree() {
     prevTree = latest;
 
     domHierarchyTree.innerHTML = latest;
-}
-
-let prevUserData = "";
-function presentUserData() {
-    const latest = JSON.stringify(userData.data, null, 2);
-    if (prevUserData === latest) {
-        return;
-    }
-    prevUserData = latest;
-
-    domWatch.innerHTML = `<pre>${prevUserData}</pre>`;
-}
-
-let prevReactStat = "";
-function watchReactStat() {
-    let latest = "";
-    const curr = SceneManager.activeScene.find("game/hero");
-    if (curr != null) {
-        const stat = curr.getComponent(UnitComponent).stat.data;
-        let rows = [];
-        for (const cfg of Stats) {
-            if (cfg.type === "number") {
-                rows.push(`${cfg.id}: ${stat[cfg.id].toFixed(2)}`);
-            } else if (cfg.type === "int") {
-                rows.push(`${cfg.id}: ${stat[cfg.id]}`);
-            } else if (cfg.type === "set") {
-                rows.push(`${cfg.id}: [${Object.entries(stat[cfg.id]).map(e => `${e[0]}:${e[1]}`).join(', ')}]`);
-            } else if (cfg.type === "range") {
-                rows.push(`${cfg.id}: ${stat[cfg.id][0].toFixed(2)}-${stat[cfg.id][1].toFixed(2)}`);
-            } else if (cfg.type === "skillList") {
-                rows.push(`${cfg.id}: [${stat[cfg.id].map((/**@type {any}*/e) => `${e.skill}:${e.level.toFixed(2)}(${(e.chance * 100).toFixed(2)}%)`).join(', ')}]`);
-            } else {
-                throw new Error(`Unknown stat type: ${cfg.type}`);
-            }
-        }
-        // explode sb into arrays of array of 5
-        const cols = 4;
-        latest = "<table>";
-        for (let i = 0; i < rows.length; i += cols) {
-            latest += "<tr>";
-            for (let j = 0; j < cols; j++) {
-                latest += `<td>${rows[i + j] ?? ''}</td>`;
-            }
-            latest += "</tr>";
-        }
-        latest += "</table>";
-    }
-
-    if (prevReactStat === latest) {
-        return;
-    }
-    prevReactStat = latest;
-    domWatchStat.innerHTML = latest;
 }
 
 let prevInspector = "";
@@ -299,8 +237,6 @@ export default class Scene extends GameObject {
         // debug tree
         if (window.debug) {
             buildHierarchyTree();
-            presentUserData();
-            watchReactStat();
             updateInspector();
         }
 

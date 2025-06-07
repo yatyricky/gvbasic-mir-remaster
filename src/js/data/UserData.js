@@ -42,6 +42,7 @@ class UserData {
             unitId: id,
             stats: ReactStat.collapseConfig(config.baseStat),
             inventory: {},
+            charmBag: [],
             bag: [],
             skills: [],
         }
@@ -51,7 +52,7 @@ class UserData {
             this.data.chars = chars;
         }
         // add 1 skill point
-        char.stats.skpts = 1;
+        char.stats.skpts = { value: 1 };
         chars.push(char);
         this.saveToDisk();
     }

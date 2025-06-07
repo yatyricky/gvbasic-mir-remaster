@@ -1,12 +1,13 @@
 import { ItemById } from "../config/Item";
 import { StatById, Stats } from "../config/Stat";
-import { arrGetClamped } from "../Utils";
+import { arrGetClamped, objEntries, objKeys } from "../Utils";
 import { mathRandomIncl, mathRandomIntIncl } from "./MathLab";
+import Range from "./Range";
 
 export default class ReactStat {
     /**
      * 
-     * @param {Partial<Record<StatId, any>>} baseStat 
+     * @param {StatData} baseStat 
      */
     constructor(baseStat) {
         this.eventMap = new Map();
@@ -15,28 +16,28 @@ export default class ReactStat {
 
     /**
      * 
-     * @param {Partial<Record<StatId, any>>} baseStat 
+     * @param {StatData} baseStat 
      */
     initBaseStat(baseStat) {
-        this.data = /**@type {Record<StatId, any>} */ ({});
+        /**@type {StatData} */
+        this.data = {};
         for (const statConfig of Stats) {
             switch (statConfig.type) {
                 case "int":
                 case "number":
-                    this.data[statConfig.id] = 0;
+                    this.data[statConfig.id] = { value: 0 };
                     break;
                 case "range":
-                    this.data[statConfig.id] = [0, 0];
+                    this.data[statConfig.id] = { range: [0, 0] };
                     break;
                 case "set":
-                    this.data[statConfig.id] = {};
+                    this.data[statConfig.id] = { set: {} };
                     break;
                 case "skillList":
-                    this.data[statConfig.id] = [];
+                    this.data[statConfig.id] = { skillList: [] };
                     break;
                 default:
                     throw new Error(`Unknown stat type: ${statConfig.type}`);
-                    break;
             }
 
             if (statConfig.depends != null) {
@@ -49,49 +50,49 @@ export default class ReactStat {
                 }
             }
         }
-        for (const [key, value] of Object.entries(baseStat)) {
-            this.setStat(/**@type {StatId} */(key), value);
+        for (const [key, value] of objEntries(baseStat)) {
+            this.setStat(key, value);
         }
 
-        if (this.data.rthp === 0) {
-            this.data.rthp = this.data.rtmaxhp;
+        if (this.data.rthp.value === 0) {
+            this.data.rthp.value = this.data.rtmaxhp.value;
         }
-        if (this.data.rtmp === 0) {
-            this.data.rtmp = this.data.rtmaxmp;
+        if (this.data.rtmp.value === 0) {
+            this.data.rtmp.value = this.data.rtmaxmp.value;
         }
     }
 
     /**
      * 
-     * @param {Partial<Record<StatId, any>>} statConfig 
+     * @param {Partial<Record<StatId, number[]>>} statConfig 
      */
     static collapseConfig(statConfig) {
-        const ret = /**@type {Record<StatId, any>} */ ({});
-        for (const [id, arr] of Object.entries(statConfig)) {
-            const config = StatById[/**@type {StatId}*/(id)];
+        /**@type {StatData} */
+        const ret = {};
+        for (const [id, arr] of objEntries(statConfig)) {
+            const config = StatById[id];
             if (config == null) {
                 console.error(`Stat ${id} not found`);
                 continue;
             }
             switch (config.type) {
                 case "number":
-                    ret[/**@type {StatId}*/(id)] = mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1));
+                    ret[id] = { value: mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)) };
                     break;
                 case "int":
-                    ret[/**@type {StatId}*/(id)] = mathRandomIntIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1));
+                    ret[id] = { value: mathRandomIntIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)) };
                     break;
                 case "range":
-                    ret[/**@type {StatId}*/(id)] = [mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)), mathRandomIncl(arrGetClamped(arr, 2), arrGetClamped(arr, 3))];
+                    ret[id] = { range: [mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)), mathRandomIncl(arrGetClamped(arr, 2), arrGetClamped(arr, 3))] };
                     break;
                 case "set":
-                    ret[/**@type {StatId}*/(id)] = {};
+                    ret[id] = { set: {} };
                     for (const s of arr) {
-                        ret[/**@type {StatId}*/(id)][s.toString()] = 1;
+                        ret[id].set[s.toString()] = 1;
                     }
                     break;
                 default:
                     throw new Error(`Unknown stat type: ${config.type}`);
-                    break;
             }
         }
         return ret;
@@ -108,7 +109,7 @@ export default class ReactStat {
     /**
      * 
      * @param {StatId} key 
-     * @param {any} value 
+     * @param {StatValueSaveData} value 
      * @param {boolean} [fireOnly] value is already set, only fire event
      */
     setStat(key, value, fireOnly) {
@@ -130,7 +131,7 @@ export default class ReactStat {
     /**
      * 
      * @param {StatId} key 
-     * @param {any} value 
+     * @param {StatValueSaveData} value 
      */
     addStat(key, value) {
         const curr = this.data[key];
@@ -138,34 +139,45 @@ export default class ReactStat {
         switch (type) {
             case "int":
             case "number":
-                this.setStat(key, curr + value);
+                curr.value += value.value;
+                if (value.value !== 0) {
+                    this.setStat(key, undefined, true);
+                }
                 break;
             case "range":
-                curr[0] += value[0];
-                curr[1] += value[1];
-                this.setStat(key, undefined, true);
+                curr.range[0] += value.range[0];
+                curr.range[1] += value.range[1];
+                if (!Range.isZero(value.range)) {
+                    this.setStat(key, undefined, true);
+                }
                 break;
             case "set":
-                if (curr[value] != null) {
-                    return;
+                let changed = false;
+                for (const key of objKeys(value.set)) {
+                    if (curr.set[key] == null) {
+                        curr.set[key] = 1;
+                        changed = true;
+                    }
                 }
-                curr[value] = 1;
-                this.setStat(key, undefined, true);
+                if (changed) {
+                    this.setStat(key, undefined, true);
+                }
                 break;
             case "skillList":
-                curr.push(...value);
-                this.setStat(key, undefined, true);
+                curr.skillList.push(...value.skillList);
+                if (value.skillList.length > 0) {
+                    this.setStat(key, undefined, true);
+                }
                 break;
             default:
                 throw new Error(`Unknown stat type: ${type}`);
-                break;
         }
     }
 
     /**
      * 
      * @param {StatId} key 
-     * @param {any} value 
+     * @param {StatValueSaveData} value 
      */
     subStat(key, value) {
         const curr = this.data[key];
@@ -173,23 +185,32 @@ export default class ReactStat {
         switch (type) {
             case "int":
             case "number":
-                this.setStat(key, curr - value);
+                curr.value -= value.value;
+                if (value.value !== 0) {
+                    this.setStat(key, undefined, true);
+                }
                 break;
             case "range":
-                curr[0] -= value[0];
-                curr[1] -= value[1];
-                this.setStat(key, undefined, true);
+                curr.range[0] -= value.range[0];
+                curr.range[1] -= value.range[1];
+                if (!Range.isZero(value.range)) {
+                    this.setStat(key, undefined, true);
+                }
                 break;
             case "set":
-                if (curr[value] == null) {
-                    return;
+                let changed = false;
+                for (const key of objKeys(value.set)) {
+                    if (curr.set[key] != null) {
+                        delete curr.set[key];
+                        changed = true;
+                    }
                 }
-                delete curr[value];
-                this.setStat(key, undefined, true);
+                if (changed) {
+                    this.setStat(key, undefined, true);
+                }
                 break;
             default:
                 throw new Error(`Unknown stat type: ${type}`);
-                break;
         }
     }
 
@@ -221,21 +242,17 @@ export default class ReactStat {
         }
     }
 
-    toJson() {
-
-    }
-
     /**
      * 
      * @param {UnitSaveData} saveData 
      */
     update(saveData) {
-        const prevRtHp = this.data.rthp;
-        const prevRtMp = this.data.rtmp;
+        const prevRtHp = this.data.rthp.value;
+        const prevRtMp = this.data.rtmp.value;
         this.initBaseStat(saveData.stats);
         // skill stats
         // equip stats
-        for (const [, items] of Object.entries(saveData.inventory)) {
+        for (const [, items] of objEntries(saveData.inventory)) {
             for (const item of items) {
                 if (item == null) {
                     continue;
@@ -245,12 +262,15 @@ export default class ReactStat {
                     console.error(`Item ${item.id} not found`);
                     continue;
                 }
-                for (const [statId, stat] of Object.entries(item.stats)) {
-                    this.addStat(/**@type {StatId} */(statId), stat);
+                for (const [statId, stat] of objEntries(item.baseStats)) {
+                    this.addStat(statId, stat);
+                }
+                for (const [statId, stat] of objEntries(item.extStats)) {
+                    this.addStat(statId, stat);
                 }
             }
         }
-        this.data.rthp = Math.min(prevRtHp, this.data.rtmaxhp);
-        this.data.rtmp = Math.min(prevRtMp, this.data.rtmaxmp);
+        this.data.rthp.value = Math.min(prevRtHp, this.data.rtmaxhp.value);
+        this.data.rtmp.value = Math.min(prevRtMp, this.data.rtmaxmp.value);
     }
 }

@@ -3,6 +3,8 @@ import { StatId } from "./config/Stat";
 declare global {
     type ElementTypeOf<T> = T extends Array<infer U> ? U : never;
 
+    type StatData = Partial<Record<StatId, StatValueSaveData>>;
+
     interface IAddedAffix {
         affix: IAffixConfig;
         qlvl: number;
@@ -18,6 +20,7 @@ declare global {
     interface StatValueSaveData {
         value?: number;
         range?: [number, number];
+        set?: Record<string, 1>;
         skillList?: StatSkillItemSaveData[];
     }
 
@@ -30,12 +33,12 @@ declare global {
         ilvl: number;
         /** Quality level */
         quality: number;
-        baseStats: Partial<Record<StatId, StatValueSaveData>>;
-        extStats: Partial<Record<StatId, StatValueSaveData>>;
+        baseStats: StatData;
+        extStats: StatData;
         /** key: 1,2,3,4,5 */
         sockets: Record<string, ItemSaveData>;
         runeWord?: ItemId;
-        runeWordStats?: Record<StatId, StatValueSaveData>;
+        runeWordStats?: StatData;
     }
 
     interface SkillSaveData {
@@ -45,11 +48,11 @@ declare global {
 
     interface UnitSaveData {
         unitId: UnitId;
-        stats?: any;
-        inventory?: Partial<Record<SlotType, ItemSaveData[]>>;
-        charmBag?: ItemSaveData[];
-        bag?: ItemSaveData[];
-        skills?: SkillSaveData[];
+        stats: StatData;
+        inventory: Partial<Record<SlotType, ItemSaveData[]>>;
+        charmBag: ItemSaveData[];
+        bag: ItemSaveData[];
+        skills: SkillSaveData[];
     }
 
     interface ISaveData {

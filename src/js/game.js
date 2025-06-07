@@ -20,7 +20,10 @@ import Collider from "./components/Collider";
 import Main from "./svui/Main.svelte";
 import { mount } from "svelte";
 
-mount(Main, { target: document.getElementById('svui') });
+const domSvui = document.getElementById('svui');
+domSvui.style.width = `${Const.SIZE * 20}px`;
+domSvui.style.height = `${Const.SIZE * 20}px`;
+mount(Main, { target: domSvui });
 
 // InitInput();
 

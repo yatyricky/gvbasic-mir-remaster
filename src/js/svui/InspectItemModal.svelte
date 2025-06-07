@@ -4,7 +4,7 @@
     import { StatById } from "../config/Stat";
     import Const from "../Const";
     import ItemInstance from "../data/ItemInstance";
-    import { strFormat } from "../Utils";
+    import { objEntries, strFormat } from "../Utils";
 
     /**
      * @type {{close: any, item: ItemSaveData, actions: any}}
@@ -29,38 +29,36 @@
                 <div class="item-slot">{Const.SLOT_NAME[itemConfig.slot]}</div>
                 <div class="item-type">{Const.TYPE_NAME[itemConfig.type]}</div>
             </div>
-            {#each Object.entries(item.stats) as [k, v], i (i)}
+            {#each objEntries(item.baseStats) as [k, v], i (i)}
                 {@const statConfig = StatById[/**@type {StatId}*/ (k)]}
                 {#if statConfig.format === "int"}
                     {#if statConfig.type === "skillList"}
                         <div>
-                            {/**@type {any}*/ (v)
-                                .map((/**@type {any}*/ e) =>
+                            {v.skillList
+                                .map((e) =>
                                     strFormat(
                                         statConfig.description,
                                         (e.chance * 100).toFixed(2),
                                         Math.floor(e.level),
-                                        SkillById[
-                                            /**@type {SkillId}*/ (e.skill)
-                                        ].name,
+                                        SkillById[e.skill].name,
                                     ),
                                 )
                                 .join(";")}
                         </div>
-                    {:else if Array.isArray(v)}
+                    {:else if Array.isArray(v.range)}
                         <div>
-                            {`${statConfig.name}+${v.map((v) => Math.floor(v)).join("-")}`}
+                            {`${statConfig.name}+${v.range.map((v) => Math.floor(v)).join("-")}`}
                         </div>
                     {:else}
-                        <div>{`${statConfig.name}+${Math.floor(v)}`}</div>
+                        <div>{`${statConfig.name}+${Math.floor(v.value)}`}</div>
                     {/if}
                 {:else if statConfig.format === "percent"}
-                    {#if Array.isArray(v)}
+                    {#if Array.isArray(v.range)}
                         <div>
-                            {`${statConfig.name}+${v.map((v) => `${v.toFixed(2)}%`).join("-")}`}
+                            {`${statConfig.name}+${v.range.map((v) => `${v.toFixed(2)}%`).join("-")}`}
                         </div>
                     {:else}
-                        <div>{`${statConfig.name}+${v.toFixed(2)}%`}</div>
+                        <div>{`${statConfig.name}+${v.value.toFixed(2)}%`}</div>
                     {/if}
                 {/if}
             {/each}
@@ -151,5 +149,5 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-    }   
+    }
 </style>
