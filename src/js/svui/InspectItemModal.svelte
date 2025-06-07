@@ -15,11 +15,8 @@
 </script>
 
 <div class="backdrop">
-    <div class="container" style="display: block;">
-        <div class="title">
-            <span>查看物品</span>
-            <button onclick={close} class="close-btn">X</button>
-        </div>
+    <div class="container">
+        <button onclick={close} class="close-btn">X</button>
         <div class="content">
             <div
                 class="item-name"
@@ -27,8 +24,11 @@
             >
                 {item.name}
             </div>
-            <div>{Const.SLOT_NAME[itemConfig.slot]}</div>
-            <div class="ilvl">物品等级:{item.ilvl}</div>
+            <div class="ilvl">物品等级 {item.ilvl}</div>
+            <div class="item-info">
+                <div class="item-slot">{Const.SLOT_NAME[itemConfig.slot]}</div>
+                <div class="item-type">{Const.TYPE_NAME[itemConfig.type]}</div>
+            </div>
             {#each Object.entries(item.stats) as [k, v], i (i)}
                 {@const statConfig = StatById[/**@type {StatId}*/ (k)]}
                 {#if statConfig.format === "int"}
@@ -95,25 +95,32 @@
         background-color: rgba(0, 0, 0, 0.5);
     }
     .container {
+        display: block;
         position: absolute;
         width: 94%;
         height: 94%;
         left: 3%;
         top: 3%;
+        padding: 6px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        background-color: silver;
-    }
-    .title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 1%;
-        border-bottom: 1px solid #000;
+        background-color: rgba(0, 0, 0, 0.7);
+        box-sizing: border-box;
+        border-radius: 6px;
+        border: 2px solid #383231;
+        word-break: break-all;
     }
     .close-btn {
-        background: none;
+        position: absolute;
+        background-color: #680000;
         width: 24px;
         height: 24px;
+        box-sizing: border-box;
+        border-radius: 2px;
+        border: 2px solid #480000;
+        padding: 0;
+        color: #ceae0f;
+        top: 6px;
+        right: 6px;
     }
     .actions {
         display: flex;
@@ -128,4 +135,21 @@
     .action-btn {
         background: none;
     }
+    .item-name {
+        width: calc(100% - 32px);
+    }
+    .ilvl {
+        color: #e6bd00;
+    }
+    .item-slot {
+        color: #ffffff;
+    }
+    .item-type {
+        color: #ffffff;
+    }
+    .item-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }   
 </style>

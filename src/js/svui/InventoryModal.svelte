@@ -3,9 +3,9 @@
     import UnitComponent from "../components/UnitComponent";
     import { ItemById } from "../config/Item";
     import Const from "../Const";
-    import { dispatch, subscribe } from "../EventBus";
+    import { subscribe } from "../EventBus";
     import SceneManager from "../SceneManager";
-    import InspectItemModal from "./InspectItemModal.svelte";
+    import ItemFragment from "./ItemFragment.svelte";
 
     const { close } = $props();
 
@@ -60,36 +60,6 @@
     }
 
     let inventoryData = $state(getInventoryData());
-
-    /**
-     *
-     * @param {ItemSaveData} item
-     */
-    function onClickItem(item) {
-        if (item == null) {
-            return;
-        }
-        dispatch("modal:show", {
-            component: InspectItemModal,
-            props: {
-                item,
-                actions: [
-                    {
-                        text: "卸下",
-                        action: () => {
-                            const hero =
-                                SceneManager.activeScene.find("game/hero");
-                            const heroComponent =
-                                hero.getComponent(UnitComponent);
-                            heroComponent.tryUnquip(item);
-                            inventoryData = getInventoryData();
-                        },
-                        autoClose: true,
-                    },
-                ],
-            },
-        });
-    }
 
     /** @type {any}*/
     let unsub = null;
@@ -161,48 +131,15 @@
         {#each inventoryData as { slot, arrangement } (slot)}
             {#each arrangement as { status, item }, j (j)}
                 {@const pos = positioning[slot] || {}}
-                {@const itemConfig = ItemById[item?.id]}
-
-                <button
-                    class="item"
-                    style="
-                        left: {pos.left + pos.leftGrow * j}px;
-                        top: {pos.top + pos.topGrow * j}px;
-                        width: {Const.SIZE2}px;
-                        height: {Const.SIZE2}px;
-                        border: 2px solid {Const.QUALITY_COLOR_FG[
-                        item?.quality || 0
-                    ]};
-                    "
-                    onclick={() => {
-                        if (status !== "equipped") {
-                            return;
-                        }
-                        onClickItem(item);
-                    }}
-                >
-                    {#if status === "occupied"}
-                        {#if itemConfig.image.length === 1}
-                            <span>{itemConfig.image}</span>
-                        {:else}
-                            <div
-                                style="width: 100%; height: 100%; background-color: black;"
-                            >
-                                <div
-                                    style={` background-image: url('${new URL(`../../assets/images/${itemConfig.image}.jpg`, import.meta.url).href}'); background-size: contain; background-repeat: no-repeat; background-position: center; width: 100%; height: 100%; opacity: 0.3;`}
-                                ></div>
-                            </div>
-                        {/if}
-                    {:else if status === "equipped"}
-                        {#if itemConfig.image.length === 1}
-                            <span>{itemConfig.image}</span>
-                        {:else}
-                            <div
-                                style={`background-image: url('${new URL(`../../assets/images/${itemConfig.image}.jpg`, import.meta.url).href}'); background-size: contain; background-repeat: no-repeat; background-position: center; width: 100%; height: 100%;`}
-                            ></div>
-                        {/if}
-                    {/if}
-                </button>
+                <ItemFragment
+                    {item}
+                    left={pos.left + pos.leftGrow * j}
+                    top={pos.top + pos.topGrow * j}
+                    width={Const.SIZE2}
+                    height={Const.SIZE2}
+                    clickable={status === "equipped"}
+                    operations={["unequip", "socket"]}
+                />
             {/each}
         {/each}
     </div>
@@ -239,14 +176,5 @@
         height: calc(100% - 24px);
         top: 24px;
         overflow-y: auto;
-    }
-    .item {
-        position: absolute;
-        padding: 0;
-        vertical-align: middle;
-        text-align: center;
-        box-sizing: border-box;
-        border: #000 1px solid;
-        border-radius: 10%;
     }
 </style>

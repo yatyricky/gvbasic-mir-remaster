@@ -103,6 +103,8 @@ function watchReactStat() {
         for (const cfg of Stats) {
             if (cfg.type === "number") {
                 rows.push(`${cfg.id}: ${stat[cfg.id].toFixed(2)}`);
+            } else if (cfg.type === "int") {
+                rows.push(`${cfg.id}: ${stat[cfg.id]}`);
             } else if (cfg.type === "set") {
                 rows.push(`${cfg.id}: [${Object.entries(stat[cfg.id]).map(e => `${e[0]}:${e[1]}`).join(', ')}]`);
             } else if (cfg.type === "range") {
@@ -110,7 +112,7 @@ function watchReactStat() {
             } else if (cfg.type === "skillList") {
                 rows.push(`${cfg.id}: [${stat[cfg.id].map((/**@type {any}*/e) => `${e.skill}:${e.level.toFixed(2)}(${(e.chance * 100).toFixed(2)}%)`).join(', ')}]`);
             } else {
-                rows.push(`${cfg.id}: ${stat[cfg.id]}`);
+                throw new Error(`Unknown stat type: ${cfg.type}`);
             }
         }
         // explode sb into arrays of array of 5

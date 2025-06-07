@@ -24,7 +24,7 @@ const Const = {
     LOOT_AFFIX_COUNT_BLUE: [50, 39, 10, 1],
     MAX_ILVL_FACTOR: 4,
     QUALITY_COLOR_BG: ["rgba(51, 112, 72, 0)", "rgb(64, 138, 58)", "rgb(59, 75, 156)", "purple", "orange"],
-    QUALITY_COLOR_FG: ["rgba(0, 0, 0, 1)", "rgb(64, 138, 58)", "rgb(59, 75, 156)", "purple", "orange"],
+    QUALITY_COLOR_FG: ["rgb(255,255,255)", "rgb(30,255,0)", "rgb(0,112,221)", "rgb(163,53,238)", "rgb(255,128,0)"],
     QUALITY_TEXT: ["普通", "优秀", "精良", "史诗", "传说"],
 
     SLOT_MAX_SIZE: {
@@ -88,7 +88,24 @@ const Const = {
         "ring",
         "weapon",
         "bracelet",
-    ]
+    ],
+    TYPE_NAME: {
+        armor: "护甲",
+        belt: "腰带",
+        boot: "靴子",
+        charm: "护身符",
+        glove: "手套",
+        helm: "头盔",
+        necklace: "项链",
+        pant: "腿甲",
+        pauldron: "肩甲",
+        ring: "戒指",
+        weapon: "武器",
+        bracelet: "护腕",
+        rune: "符文",
+        runeword: "符文之语",
+        set: "套装",
+    }
 }
 
 Const.SIZE2 = Const.SIZE * 2;

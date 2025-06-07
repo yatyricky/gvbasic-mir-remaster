@@ -3,7 +3,7 @@ import { ItemById } from "../config/Item";
 import { StatById } from "../config/Stat";
 import { UnitById } from "../config/Unit";
 import Const from "../Const";
-import { arrGetOne, arrGetSome, arrGroupBy, arrRemove, objIsEmpty } from "../Utils";
+import { arrGetOne, arrGetSome, arrGroupBy, arrRemove, objEntries, objIsEmpty, objKeys } from "../Utils";
 import { mathFluctuate, mathRandomIncl, mathWeightedRandom } from "./MathLab";
 
 export default class ItemInstance {
@@ -11,7 +11,7 @@ export default class ItemInstance {
     /**
      * 
      * @param {IAffixConfig} affix 
-     * @param {Partial<Record<StatId, any>>} stats 
+     * @param {Partial<Record<StatId, StatValueSaveData>>} stats 
      * @param {number} ilvl 
      * @param {number} qlvl 
      */
@@ -25,16 +25,16 @@ export default class ItemInstance {
         if (statConfig.type === "number") {
             val = mathRandomIncl(a, b);
             if (stats[affix.statId] == null) {
-                stats[affix.statId] = val;
+                stats[affix.statId] = { value: val };
             } else {
-                stats[affix.statId] += val;
+                stats[affix.statId].value += val;
             }
         } else if (statConfig.type === "int") {
             val = Math.round(mathRandomIncl(a, b));
             if (stats[affix.statId] == null) {
-                stats[affix.statId] = val;
+                stats[affix.statId] = { value: val };
             } else {
-                stats[affix.statId] += val;
+                stats[affix.statId].value += val;
             }
         } else if (statConfig.type === "range") {
             val = mathFluctuate(a, affix.fluctuate);
@@ -44,19 +44,19 @@ export default class ItemInstance {
                 val2 = mathFluctuate(b, affix.fluctuate);
             }
             if (stats[affix.statId] == null) {
-                stats[affix.statId] = [val, val2];
+                stats[affix.statId] = { range: [val, val2] };
             } else {
-                const tuple = stats[affix.statId];
+                const tuple = stats[affix.statId].range;
                 tuple[0] += val;
                 tuple[1] += val2;
             }
         } else if (statConfig.type === "skillList") {
             let list = stats[affix.statId];
             if (list == null) {
-                list = [];
+                list = { skillList: [] };
                 stats[affix.statId] = list;
             }
-            list.push({ skill: affix.skill, level: mathRandomIncl(a, b), chance: mathRandomIncl(affix.skillChance[0], affix.skillChance[1]) });
+            list.skillList.push({ skill: affix.skill, level: mathRandomIncl(a, b), chance: mathRandomIncl(affix.skillChance[0], affix.skillChance[1]) });
         } else {
             throw new Error(`Unknown stat type ${statConfig.type}`);
         }
@@ -75,23 +75,25 @@ export default class ItemInstance {
             throw new Error(`Item with id ${id} not found`);
         }
 
-        /**@type {Array<{affix: IAffixConfig, qlvl: number}>} */
-        const affixesRaw = [];
+        /**@type {Array<IAddedAffix>} */
+        const baseAffixesRaw = [];
+        /**@type {Array<IAddedAffix>} */
+        const extAffixesRaw = [];
 
         // base stats
         if (!objIsEmpty(itemConfig.fixedAffix)) {
-            for (const [affixId, qlvl] of Object.entries(itemConfig.fixedAffix)) {
-                affixesRaw.push({ affix: AffixById[/**@type {AffixId}*/(affixId)], qlvl });
+            for (const [affixId, qlvl] of objEntries(itemConfig.fixedAffix)) {
+                baseAffixesRaw.push({ affix: AffixById[affixId], qlvl });
             }
         }
 
         // random affixes
         if (!objIsEmpty(itemConfig.randomAffix)) {
-            const randomAffixesKeys = Object.keys(itemConfig.randomAffix);
+            const randomAffixesKeys = objKeys(itemConfig.randomAffix);
             const randomAffixesCount = Math.min(itemConfig.randomAffixCount ?? 1, randomAffixesKeys.length);
             const randomedKeys = arrGetSome(randomAffixesKeys, randomAffixesCount);
             for (const affixId of randomedKeys) {
-                affixesRaw.push({ affix: AffixById[/**@type {AffixId}*/(affixId)], qlvl: itemConfig.randomAffix[/**@type {AffixId}*/(affixId)] });
+                baseAffixesRaw.push({ affix: AffixById[affixId], qlvl: itemConfig.randomAffix[affixId] });
             }
         }
 
@@ -99,6 +101,7 @@ export default class ItemInstance {
         let quality = itemConfig.quality;
         // normal magic items
         if (itemConfig.maxQuality != null) {
+            /**@type {UnitType} */
             let dropperType = "mob";
             if (dropper != null) {
                 const dropperConfig = UnitById[dropper.unitId];
@@ -138,7 +141,6 @@ export default class ItemInstance {
                 const candidates = AffixGroupByAvailOn[itemConfig.type] ?? [];
                 const placeGroup = arrGroupBy(candidates, "affixType");
                 const loop = [{ type: "prefix", count: prefixCount }, { type: "suffix", count: suffixCount }];
-                const randomedAffixes = [];
                 for (const iter of loop) {
                     const affixConfigs = placeGroup.get(iter.type);
                     if (affixConfigs == null || affixConfigs.length === 0) {
@@ -147,19 +149,18 @@ export default class ItemInstance {
                     for (let i = 0; i < iter.count; i++) {
                         const affix = arrGetOne(affixConfigs);
                         arrRemove(affixConfigs, affix);
-                        randomedAffixes.push({ affix, qlvl: 0 });
+                        extAffixesRaw.push({ affix, qlvl: 0 });
                     }
                 }
 
-
-                /**@type {any} */
-                const addedAffixes = randomedAffixes.reduce((acc, e) => {
+                /**@type {Record<AffixType, IAddedAffix[]>} */
+                const addedAffixes = extAffixesRaw.reduce((acc, e) => {
                     if (acc[e.affix.affixType] == null) {
                         acc[e.affix.affixType] = [];
                     }
                     acc[e.affix.affixType].push(e);
                     return acc;
-                }, /**@type {any} */({}));
+                }, /**@type {Record<AffixType, IAddedAffix[]>} */({}));
                 const prefix = arrGetOne(addedAffixes["prefix"]);
                 const suffix = arrGetOne(addedAffixes["suffix"]);
                 if (suffix != null) {
@@ -168,15 +169,18 @@ export default class ItemInstance {
                 if (prefix != null) {
                     name = `${prefix.affix.name}${name}`;
                 }
-
-                affixesRaw.push(...randomedAffixes);
             }
         }
 
-        /**@type {Partial<Record<StatId, number | [number, number]>>} */
-        const stats = {};
-        for (const e of affixesRaw) {
-            ItemInstance.collapseAffix(e.affix, stats, ilvl, e.qlvl);
+        /**@type {Partial<Record<StatId, StatValueSaveData>>} */
+        const baseStats = {};
+        for (const e of baseAffixesRaw) {
+            ItemInstance.collapseAffix(e.affix, baseStats, ilvl, e.qlvl);
+        }
+
+        const extStats = {};
+        for (const e of extAffixesRaw) {
+            ItemInstance.collapseAffix(e.affix, extStats, ilvl, e.qlvl);
         }
 
         /**@type {ItemSaveData} */
@@ -186,7 +190,8 @@ export default class ItemInstance {
             name,
             ilvl: ilvl,
             quality,
-            stats,
+            baseStats,
+            extStats,
             sockets: {},
         };
 
@@ -199,9 +204,14 @@ export default class ItemInstance {
      */
     static getSocketCount(item) {
         let count = 0;
-        for (const [k, v] of Object.entries(item.stats)) {
+        for (const [k, v] of Object.entries(item.baseStats)) {
             if (k === "sok") {
-                count += /**@type {number}*/(v);
+                count += v.value;
+            }
+        }
+        for (const [k, v] of Object.entries(item.extStats)) {
+            if (k === "sok") {
+                count += v.value;
             }
         }
         return count;

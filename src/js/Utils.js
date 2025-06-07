@@ -204,3 +204,23 @@ export function strFormat(str, ...args) {
 export function objIsEmpty(obj) {
     return obj == null || Object.keys(obj).length === 0;
 }
+
+/**
+ * @template {string} K
+ * @template T
+ * @param {Partial<Record<K, T>>} obj 
+ * @returns {Array<[K, T]>}
+ */
+export function objEntries(obj) {
+    return /**@type {any}*/(Object.entries(obj));
+}
+
+/**
+ * @template {string} K
+ * @template T
+ * @param {Partial<Record<K, T>>} obj 
+ * @returns {Array<K>}
+ */
+export function objKeys(obj) {
+    return /**@type {any}*/(Object.keys(obj));
+}

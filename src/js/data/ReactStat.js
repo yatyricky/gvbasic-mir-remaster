@@ -1,7 +1,7 @@
 import { ItemById } from "../config/Item";
 import { StatById, Stats } from "../config/Stat";
 import { arrGetClamped } from "../Utils";
-import { mathRandomIncl } from "./MathLab";
+import { mathRandomIncl, mathRandomIntIncl } from "./MathLab";
 
 export default class ReactStat {
     /**
@@ -21,6 +21,7 @@ export default class ReactStat {
         this.data = /**@type {Record<StatId, any>} */ ({});
         for (const statConfig of Stats) {
             switch (statConfig.type) {
+                case "int":
                 case "number":
                     this.data[statConfig.id] = 0;
                     break;
@@ -34,6 +35,7 @@ export default class ReactStat {
                     this.data[statConfig.id] = [];
                     break;
                 default:
+                    throw new Error(`Unknown stat type: ${statConfig.type}`);
                     break;
             }
 
@@ -75,6 +77,9 @@ export default class ReactStat {
                 case "number":
                     ret[/**@type {StatId}*/(id)] = mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1));
                     break;
+                case "int":
+                    ret[/**@type {StatId}*/(id)] = mathRandomIntIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1));
+                    break;
                 case "range":
                     ret[/**@type {StatId}*/(id)] = [mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)), mathRandomIncl(arrGetClamped(arr, 2), arrGetClamped(arr, 3))];
                     break;
@@ -85,6 +90,7 @@ export default class ReactStat {
                     }
                     break;
                 default:
+                    throw new Error(`Unknown stat type: ${config.type}`);
                     break;
             }
         }
@@ -130,10 +136,10 @@ export default class ReactStat {
         const curr = this.data[key];
         const type = StatById[key].type;
         switch (type) {
+            case "int":
             case "number":
                 this.setStat(key, curr + value);
                 break;
-
             case "range":
                 curr[0] += value[0];
                 curr[1] += value[1];
@@ -151,6 +157,7 @@ export default class ReactStat {
                 this.setStat(key, undefined, true);
                 break;
             default:
+                throw new Error(`Unknown stat type: ${type}`);
                 break;
         }
     }
@@ -164,6 +171,7 @@ export default class ReactStat {
         const curr = this.data[key];
         const type = StatById[key].type;
         switch (type) {
+            case "int":
             case "number":
                 this.setStat(key, curr - value);
                 break;
@@ -180,6 +188,7 @@ export default class ReactStat {
                 this.setStat(key, undefined, true);
                 break;
             default:
+                throw new Error(`Unknown stat type: ${type}`);
                 break;
         }
     }

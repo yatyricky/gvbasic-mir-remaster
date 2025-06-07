@@ -1,13 +1,10 @@
 <script>
     import { onDestroy, onMount } from "svelte";
     import UnitComponent from "../components/UnitComponent";
-    import { ItemById } from "../config/Item";
-    import Const from "../Const";
-    import { dispatch, subscribe } from "../EventBus";
+    import { subscribe } from "../EventBus";
     import SceneManager from "../SceneManager";
-    import InspectItemModal from "./InspectItemModal.svelte";
-    import ItemInstance from "../data/ItemInstance";
-    import SocketItemModal from "./SocketItemModal.svelte";
+    import ItemFragment from "./ItemFragment.svelte";
+    import Const from "../Const";
 
     const { close } = $props();
 
@@ -19,45 +16,6 @@
     }
 
     let bagData = $state(getBagData());
-
-    /**
-     *
-     * @param {ItemSaveData} item
-     */
-    function onClickItem(item) {
-        const actions = [];
-        const itemConfig = ItemById[item.id];
-        if (Const.EQUIPABLE_TYPES.includes(itemConfig.type)) {
-            actions.push({
-                text: "装备",
-                action: () => {
-                    const hero = SceneManager.activeScene.find("game/hero");
-                    const heroComponent = hero.getComponent(UnitComponent);
-                    heroComponent.tryEquipItemFromBag(item);
-                },
-                autoClose: true,
-            });
-        }
-        if (ItemInstance.getSocketCount(item) > 0) {
-            actions.push({
-                text: "镶嵌",
-                action: () => {
-                    const hero = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent);
-                    dispatch("modal:show", {
-                        component: SocketItemModal,
-                        props: { item, fillers: hero.getSocketFillers() },
-                    });
-                },
-            });
-        }
-        dispatch("modal:show", {
-            component: InspectItemModal,
-            props: {
-                item,
-                actions,
-            },
-        });
-    }
 
     /**@type {any}*/
     let unsub = null;
@@ -80,20 +38,12 @@
     </div>
     <div class="container">
         {#each bagData as item, i (item.uuid)}
-            {@const itemConfig = ItemById[item.id]}
-            <button
-                class="item"
-                style={`width: ${Const.SIZE2}px; height: ${Const.SIZE2}px; left: ${(i % 9) * (Const.SIZE2 + 2)}px; top: ${Math.floor(i / 9) * (Const.SIZE2 + 2)}px; line-height: ${Const.SIZE2}px; border: 2px ${ItemInstance.getSocketCount(item) > 0 ? "dashed" : "solid"} ${Const.QUALITY_COLOR_BG[item.quality]};`}
-                onclick={() => onClickItem(item)}
-            >
-                {#if itemConfig.image.length === 1}
-                    <span>{itemConfig.image}</span>
-                {:else}
-                    <div
-                        style={`background-image: url('${new URL(`../../assets/images/${itemConfig.image}.jpg`, import.meta.url).href}'); background-size: contain; background-repeat: no-repeat; background-position: center; width: 100%; height: 100%;`}
-                    ></div>
-                {/if}
-            </button>
+            <ItemFragment
+                {item}
+                left={(i % 9) * (Const.SIZE2 + 2)}
+                top={Math.floor(i / 9) * (Const.SIZE2 + 2)}
+                operations={["equip", "socket"]}
+            />
         {/each}
     </div>
 </div>
@@ -134,13 +84,5 @@
     }
     button {
         padding: 0;
-    }
-    .item {
-        position: absolute;
-        vertical-align: middle;
-        text-align: center;
-        box-sizing: border-box;
-        border: #000 1px solid;
-        border-radius: 10%;
     }
 </style>

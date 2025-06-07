@@ -1,11 +1,3 @@
-/* @font-face {
-    font-family: 'VonwaonBitmap';
-    src: url('../assets/fonts/VonwaonBitmap-16px.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-} */
-
 body {
     background-color: #8A8782;
     touch-action: manipulation;
@@ -33,6 +25,7 @@ body {
     background-color: silver;
     position: relative;
     font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #controls {

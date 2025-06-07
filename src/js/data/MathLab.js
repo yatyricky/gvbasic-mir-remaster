@@ -46,6 +46,16 @@ export function mathRandomInt(from, to) {
  * @param {number} to 
  * @returns 
  */
+export function mathRandomIntIncl(from, to) {
+    return Math.floor(Math.random() * (to - from + 1)) + from;
+}
+
+/**
+ * 
+ * @param {number} from 
+ * @param {number} to 
+ * @returns 
+ */
 export function mathRandomIncl(from, to) {
     return mathLerp(from, to, mathRandom01Incl());
 }
