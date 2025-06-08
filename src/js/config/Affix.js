@@ -72,7 +72,7 @@ export const Affixs = [
     { id: "sok3", name: "技工之", affixType: "prefix", statId: "sok", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0.5, availOn: ["helm", "pant", "weapon"] },
     { id: "sok4", name: "专家之", affixType: "prefix", statId: "sok", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0.75, availOn: ["armor", "weapon"] },
     { id: "sok5", name: "大师之", affixType: "prefix", statId: "sok", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 1, availOn: ["weapon"] },
-    { id: "rw1", name: "五行的", affixType: "suffix", statId: "rw", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0, availOn: ["armor", "belt", "boot", "glove", "helm", "necklace", "pant", "pauldron", "ring", "weapon", "bracelet"] },
+    { id: "rw1", name: "五行的", affixType: "suffix", statId: "rw", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0 },
     { id: "mhex1", name: "巨鲸的", affixType: "suffix", statId: "mhex", lo: 5, hi: 10, loIlvlDelta: 0, hiIlvlDelta: 5, availOn: ["necklace", "armor", "ring"] },
     { id: "mpex", name: "古龙的", affixType: "suffix", statId: "mpex", lo: 5, hi: 10, loIlvlDelta: 0, hiIlvlDelta: 5, availOn: ["necklace", "armor", "ring"] },
     { id: "hreg1", name: "巨魔的", affixType: "suffix", statId: "hreg", lo: 1, hi: 5, loIlvlDelta: 2, hiIlvlDelta: 6, availOn: ["necklace", "armor", "charm", "ring"] },
