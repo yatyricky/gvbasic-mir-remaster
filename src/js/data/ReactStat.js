@@ -114,7 +114,7 @@ export default class ReactStat {
      */
     setStat(key, value, fireOnly) {
         if (value !== undefined) {
-            this.data[key] = value;
+            this.data[key] = { ...value };
         }
         if (fireOnly || value !== undefined) {
             if (this.eventMap.has(key)) {

@@ -1,10 +1,12 @@
 <script>
     import { ItemById } from "../config/Item";
-    import { SkillById } from "../config/Skill";
-    import { StatById } from "../config/Stat";
     import Const from "../Const";
     import ItemInstance from "../data/ItemInstance";
-    import { objEntries, strFormat } from "../Utils";
+    import { arrIsEmpty, objEntries } from "../Utils";
+    import StatEntryFragment from "./StatEntryFragment.svelte";
+    import { UnitById } from "../config/Unit";
+    import SceneManager from "../SceneManager";
+    import UnitComponent from "../components/UnitComponent";
 
     /**
      * @type {{close: any, item: ItemSaveData, actions: any}}
@@ -12,11 +14,23 @@
     const { close, item, actions } = $props();
 
     const itemConfig = $derived(ItemById[item.id]);
+    const heroData = SceneManager.activeScene
+        .find("game/hero")
+        .getComponent(UnitComponent).persistantData;
 </script>
 
 <div class="backdrop">
     <div class="container">
-        <button onclick={close} class="close-btn">X</button>
+        <button
+            onclick={close}
+            class="btn"
+            style="
+            right: 6px;
+            top: 6px;
+            width: 24px;
+            height: 24px;
+        ">X</button
+        >
         <div class="content">
             <div
                 class="item-name"
@@ -30,47 +44,46 @@
                 <div class="item-type">{Const.TYPE_NAME[itemConfig.type]}</div>
             </div>
             {#each objEntries(item.baseStats) as [k, v], i (i)}
-                {@const statConfig = StatById[/**@type {StatId}*/ (k)]}
-                {#if statConfig.format === "int"}
-                    {#if statConfig.type === "skillList"}
-                        <div>
-                            {v.skillList
-                                .map((e) =>
-                                    strFormat(
-                                        statConfig.description,
-                                        (e.chance * 100).toFixed(2),
-                                        Math.floor(e.level),
-                                        SkillById[e.skill].name,
-                                    ),
-                                )
-                                .join(";")}
-                        </div>
-                    {:else if Array.isArray(v.range)}
-                        <div>
-                            {`${statConfig.name}+${v.range.map((v) => Math.floor(v)).join("-")}`}
-                        </div>
-                    {:else}
-                        <div>{`${statConfig.name}+${Math.floor(v.value)}`}</div>
-                    {/if}
-                {:else if statConfig.format === "percent"}
-                    {#if Array.isArray(v.range)}
-                        <div>
-                            {`${statConfig.name}+${v.range.map((v) => `${v.toFixed(2)}%`).join("-")}`}
-                        </div>
-                    {:else}
-                        <div>{`${statConfig.name}+${v.value.toFixed(2)}%`}</div>
-                    {/if}
-                {/if}
+                <StatEntryFragment
+                    style={`color: ${Const.QUALITY_COLOR_FG[0]}`}
+                    statId={k}
+                    val={v}
+                />
             {/each}
+            {#each objEntries(item.extStats) as [k, v], i (i)}
+                <StatEntryFragment
+                    style={`color: ${Const.QUALITY_COLOR_FG[1]}`}
+                    statId={k}
+                    val={v}
+                />
+            {/each}
+            {#if !arrIsEmpty(itemConfig.classOnly)}
+                <div
+                    style="color: {itemConfig.classOnly.includes(
+                        heroData.unitId,
+                    )
+                        ? Const.QUALITY_COLOR_FG[0]
+                        : '#DB333C'}"
+                >
+                    限定职业: {itemConfig.classOnly
+                        .map((e) => UnitById[e].name)
+                        .join(", ")}
+                </div>
+            {/if}
+            <div>需要等级 {itemConfig.level}</div>
             {#if ItemInstance.getSocketCount(item) > 0}
                 <div>有插槽({ItemInstance.getSocketCount(item)})</div>
             {/if}
         </div>
-        <div class="actions" style={`height: ${Const.SIZE2}px;`}>
+        <div class="actions" style={`height: ${Const.SIZE2}px;`} >
             {#each actions as { text, action, autoClose }, i (i)}
                 <button
-                    class="action-btn"
-                    style={`height: ${Const.SIZE2}px;`}
+                    class="btn"
+                    style="
+                        left: {(Const.SIZE2 * 10 * 0.94 - Const.SIZE2 * 1.8 * actions.length - 12 * (actions.length - 1)) / 2 + i * (Const.SIZE2 * 1.8 + 12)}px;
+                        width: {Const.SIZE2 * 1.8}px;
+                        height: {Const.SIZE2 * 0.8}px;
+                    "
                     onclick={() => {
                         action?.();
                         if (autoClose) {
@@ -101,24 +114,21 @@
         top: 3%;
         padding: 6px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(0, 0, 0, 0.8);
         box-sizing: border-box;
         border-radius: 6px;
         border: 2px solid #383231;
         word-break: break-all;
+
+        color: white;
     }
-    .close-btn {
+    .btn {
         position: absolute;
         background-color: #680000;
-        width: 24px;
-        height: 24px;
         box-sizing: border-box;
-        border-radius: 2px;
-        border: 2px solid #480000;
+        border-radius: 4px;
         padding: 0;
         color: #ceae0f;
-        top: 6px;
-        right: 6px;
     }
     .actions {
         display: flex;
@@ -129,9 +139,6 @@
         bottom: 0;
         left: 0;
         gap: 16px;
-    }
-    .action-btn {
-        background: none;
     }
     .item-name {
         width: calc(100% - 32px);

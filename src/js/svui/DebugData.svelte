@@ -10,7 +10,7 @@
 
     onMount(() => {
         timer = setInterval(() => {
-            // content = /**@type {any}*/ (userData.data);
+            content = { json: userData.data };
         }, 16);
     });
 
