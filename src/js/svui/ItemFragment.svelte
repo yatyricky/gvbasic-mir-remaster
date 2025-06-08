@@ -9,18 +9,6 @@
     import SocketItemModal from "./SocketItemModal.svelte";
 
     /**
-     * @typedef {Object} ItemFragmentProps
-     * @property {ItemSaveData} item - The item data to display.
-     * @property {number} left - The left position of the item in pixels.
-     * @property {number} top - The top position of the item in pixels.
-     * @property {number} [width=Const.SIZE2] - The width of the item in pixels, default is Const.SIZE2.
-     * @property {number} [height=Const.SIZE2] - The height of the item in pixels, default is Const.SIZE2.
-     * @property {Array<"equip" | "unequip" | "socket" | "buy">} [operations=[]] - The actions available for the item.
-     * @property {Partial<Record<"equip" | "unequip" | "socket" | "buy", () => void>>} [callbacks={}] - Callbacks for item operations.
-     * @property {boolean} [clickable=true]
-     */
-
-    /**
      * @type {ItemFragmentProps}
      */
     const {
@@ -98,6 +86,15 @@
                 },
             });
         }
+        if (operations.includes("socketFill")) {
+            actions.push({
+                text: "确认",
+                action: () => {
+                    callbacks.socketFill?.();
+                },
+                autoClose: true,
+            });
+        }
         if (operations.includes("buy")) {
             actions.push({
                 text: "购买",
@@ -114,6 +111,7 @@
         dispatch("modal:show", {
             component: InspectItemModal,
             props: { item, actions },
+            multiple: true,
         });
     }
 </script>

@@ -216,4 +216,18 @@ export default class ItemInstance {
         }
         return count;
     }
+
+    /**
+     * 
+     * @param {ItemSaveData} item 
+     */
+    static getFilledSocketCount(item) {
+        let count = 0;
+        for (const [, v] of objEntries(item.sockets)) {
+            if (v != null) {
+                count++;
+            }
+        }
+        return count;
+    }
 }

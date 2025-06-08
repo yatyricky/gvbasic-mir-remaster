@@ -20,22 +20,28 @@
      * @param {any} comp
      */
     function closeByComponent(comp) {
-        const index = modals.findIndex((m) => m.component === comp);
-        if (index !== -1) {
-            modals.splice(index, 1);
+        for (let i = modals.length - 1; i >= 0; i--) {
+            const e = modals[i];
+            if (e.component === comp) {
+                modals.splice(i, 1);
+            }
         }
     }
 
     subscribe("modal:show", (data) => {
-        const index = modals.findIndex((m) => m.component === data.component);
-        if (index !== -1) {
-            // 如果已经存在，则不再添加
-            for (let i = index; i < modals.length - 1; i++) {
-                let swap = modals[i];
-                modals[i] = modals[i + 1];
-                modals[i + 1] = swap;
+        if (!data.multiple) {
+            const index = modals.findIndex(
+                (m) => m.component === data.component,
+            );
+            if (index !== -1) {
+                // 如果已经存在，则不再添加
+                for (let i = index; i < modals.length - 1; i++) {
+                    let swap = modals[i];
+                    modals[i] = modals[i + 1];
+                    modals[i + 1] = swap;
+                }
+                return;
             }
-            return;
         }
 
         const id = ++sn;

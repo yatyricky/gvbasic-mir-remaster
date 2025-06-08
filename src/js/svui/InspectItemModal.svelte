@@ -11,7 +11,7 @@
     /**
      * @type {{close: any, item: ItemSaveData, actions: any}}
      */
-    const { close, item, actions } = $props();
+    let { close, item, actions } = $props();
 
     const itemConfig = $derived(ItemById[item.id]);
     const heroData = SceneManager.activeScene
@@ -21,16 +21,6 @@
 
 <div class="backdrop">
     <div class="container">
-        <button
-            onclick={close}
-            class="btn"
-            style="
-            right: 6px;
-            top: 6px;
-            width: 24px;
-            height: 24px;
-        ">X</button
-        >
         <div class="content">
             <div
                 class="item-name"
@@ -70,22 +60,57 @@
                         .join(", ")}
                 </div>
             {/if}
-            <div>需要等级 {itemConfig.level}</div>
             {#if ItemInstance.getSocketCount(item) > 0}
-                <div>有插槽({ItemInstance.getSocketCount(item)})</div>
+                <div>
+                    插槽({ItemInstance.getFilledSocketCount(
+                        item,
+                    )}/{ItemInstance.getSocketCount(item)})
+                </div>
             {/if}
+            {#each objEntries(item.sockets) as [, v], i (i)}
+                {#each objEntries(v.baseStats) as [kk, vv], j (j)}
+                    <StatEntryFragment
+                        style={`color: ${Const.QUALITY_COLOR_FG[1]}`}
+                        statId={kk}
+                        val={vv}
+                    />
+                {/each}
+                {#each objEntries(v.extStats) as [kk, vv], j (j)}
+                    <StatEntryFragment
+                        style={`color: ${Const.QUALITY_COLOR_FG[1]}`}
+                        statId={kk}
+                        val={vv}
+                    />
+                {/each}
+            {/each}
+            <div>需要等级 {itemConfig.level}</div>
         </div>
-        <div class="actions" style={`height: ${Const.SIZE2}px;`} >
+        <button
+            onclick={close}
+            class="btn"
+            style="
+            right: 6px;
+            top: 6px;
+            width: 24px;
+            height: 24px;
+        ">X</button
+        >
+        <div class="actions" style={`height: ${Const.SIZE2}px;`}>
             {#each actions as { text, action, autoClose }, i (i)}
                 <button
                     class="btn"
                     style="
-                        left: {(Const.SIZE2 * 10 * 0.94 - Const.SIZE2 * 1.8 * actions.length - 12 * (actions.length - 1)) / 2 + i * (Const.SIZE2 * 1.8 + 12)}px;
+                        left: {(Const.SIZE2 * 10 * 0.94 -
+                        Const.SIZE2 * 1.8 * actions.length -
+                        12 * (actions.length - 1)) /
+                        2 +
+                        i * (Const.SIZE2 * 1.8 + 12)}px;
                         width: {Const.SIZE2 * 1.8}px;
                         height: {Const.SIZE2 * 0.8}px;
                     "
                     onclick={() => {
                         action?.();
+                        item = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent).findItemByUuid(item.uuid);
                         if (autoClose) {
                             close();
                         }
@@ -119,8 +144,19 @@
         border-radius: 6px;
         border: 2px solid #383231;
         word-break: break-all;
-
-        color: white;
+        color: #ffffff;
+    }
+    .content {
+        position: absolute;
+        padding: 4px;
+        width: calc(100% - 8px);
+        height: calc(100% - 24px - 32px);
+        top: 24;
+        left: 0;
+        overflow: auto;
+    }
+    .content::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
     }
     .btn {
         position: absolute;

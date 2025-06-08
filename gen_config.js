@@ -336,6 +336,10 @@ for (const file of fs.readdirSync(cfgDir)) {
         }
 
         for (let r = 4; r <= range.e.r; r++) {
+            const firstCell = ws[xlsx.utils.encode_cell({ r, c: 0 })]?.v;
+            if (firstCell == null) {
+                continue;
+            }
             const row = []
             for (let c = 0; c <= range.e.c; c++) {
                 const cell = Utils.strTemplate(ws[xlsx.utils.encode_cell({ r, c })]?.v);
@@ -374,8 +378,20 @@ for (const file of fs.readdirSync(cfgDir)) {
         const e = entryType[i];
         if (e.meta.includes("Index")) {
             // dup check
-            if (new Set(rows.map(row => row[i])).size !== rows.length) {
-                throw new Error(`Duplicate index ${e.name} in ${parsed.name}`);
+            const dupCheckSet = new Set(rows.map(row => row[i]));
+            if (dupCheckSet.size !== rows.length) {
+                const counts = {};
+                for (const row of rows) {
+                    const val = row[i];
+                    if (val != null) {
+                        if (counts[val] == null) {
+                            counts[val] = 0;
+                        }
+                        counts[val]++;
+                    }
+                }
+                const duplicates = Object.entries(counts).filter(([_, count]) => count > 1);
+                throw new Error(`Duplicate index ${e.name}: ${duplicates.map(e => `${e[0]}x${e[1]}`)} in ${parsed.name}`);
             }
 
             const queryName = `${parsed.name}By${Utils.strCapitalizeFirst(e.name)}`;

@@ -268,6 +268,22 @@ export default class ReactStat {
                 for (const [statId, stat] of objEntries(item.extStats)) {
                     this.addStat(statId, stat);
                 }
+                for (const [, socketItem] of objEntries(item.sockets)) {
+                    if (socketItem == null) {
+                        continue;
+                    }
+                    const socketConfig = ItemById[socketItem.id];
+                    if (socketConfig == null) {
+                        console.error(`Socket item ${socketItem.id} not found`);
+                        continue;
+                    }
+                    for (const [statId, stat] of objEntries(socketItem.baseStats)) {
+                        this.addStat(statId, stat);
+                    }
+                    for (const [statId, stat] of objEntries(socketItem.extStats)) {
+                        this.addStat(statId, stat);
+                    }
+                }
             }
         }
         this.data.rthp.value = Math.min(prevRtHp, this.data.rtmaxhp.value);

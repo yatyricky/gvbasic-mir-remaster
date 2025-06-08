@@ -3,6 +3,19 @@ import { StatId } from "./config/Stat";
 declare global {
     type ElementTypeOf<T> = T extends Array<infer U> ? U : never;
 
+    type ItemFragmentOperation = "equip" | "unequip" | "socket" | "socketFill" | "buy";
+
+    interface ItemFragmentProps {
+        item: ItemSaveData;
+        left: number;
+        top: number;
+        width?: number;
+        height?: number;
+        operations?: Array<ItemFragmentOperation>;
+        callbacks?: Partial<Record<ItemFragmentOperation, () => void>>;
+        clickable?: boolean;
+    }
+
     type StatData = Partial<Record<StatId, StatValueSaveData>>;
 
     interface IAddedAffix {

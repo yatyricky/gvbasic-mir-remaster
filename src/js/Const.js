@@ -21,7 +21,7 @@ const Const = {
     LOOT_WEIGHT_BOSS: [0, 38, 60, 15, 3],
     LOOT_LUCK_COEFFICIENT: [0, 0.5, 1, 1, 1],
     LOOT_AFFIX_COUNT_GREEN: [3, 1],
-    LOOT_AFFIX_COUNT_BLUE: [50, 39, 10, 1],
+    LOOT_AFFIX_COUNT_BLUE: [100, 70, 5, 1],
     MAX_ILVL_FACTOR: 4,
     QUALITY_COLOR_BG: ["rgba(51, 112, 72, 0)", "rgb(64, 138, 58)", "rgb(59, 75, 156)", "purple", "orange"],
     QUALITY_COLOR_FG: ["rgb(255,255,255)", "rgb(30,255,0)", "rgb(0,112,221)", "rgb(163,53,238)", "rgb(255,128,0)"],

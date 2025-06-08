@@ -12,7 +12,7 @@ interface EventBusDefine {
     "bag:refresh": null;
     "inventory:refresh": null;
     "skill:refresh": null;
-    "modal:show": { component: any, props?: Record<string, any> };
+    "modal:show": { component: any, props?: Record<string, any>, multiple?: boolean };
     "modal:close": any;
 }
 

@@ -1,9 +1,11 @@
 import { ItemById } from "../config/Item";
 import { UnitById } from "../config/Unit";
 import Const from "../Const";
+import ItemInstance from "../data/ItemInstance";
 import ReactStat from "../data/ReactStat";
 import userData from "../data/UserData";
 import { dispatch } from "../EventBus";
+import { objEntries } from "../Utils";
 import Component from "./Component";
 
 export default class UnitComponent extends Component {
@@ -120,10 +122,56 @@ export default class UnitComponent extends Component {
 
     /**
      * 
-     * @param {ItemSaveData} item 
+     * @param {string} uuid 
+     * @returns {ItemSaveData}
+     */
+    findItemByUuid(uuid) {
+        let item = this.persistantData.bag.find(e => e.uuid === uuid);
+        if (item != null) {
+            return item;
+        }
+        for (const [, items] of objEntries(this.persistantData.inventory)) {
+            item = items.find(e => e.uuid === uuid);
+            if (item != null) {
+                return item;
+            }
+        }
+        for (const item of this.persistantData.charmBag) {
+            if (item.uuid === uuid) {
+                return item;
+            }
+        }
+        return null; // Item not found
+    }
+
+    /**
+     * 
+     * @param {ItemSaveData} svItem 
      * @param {ItemSaveData} socketItem 
      */
-    trySocketItem(item, socketItem) {
+    trySocketItem(svItem, socketItem) {
+        const item = this.findItemByUuid(svItem.uuid);
+        const allSockets = ItemInstance.getSocketCount(item);
+        const filledSockets = ItemInstance.getFilledSocketCount(item);
+        if (filledSockets >= allSockets) {
+            dispatch("toast", "插槽已满");
+            return false; // All sockets are filled
+        }
 
+        for (let i = 0; i < allSockets; i++) {
+            const k = i.toString();
+            const v = item.sockets[k];
+            if (v != null) {
+                continue;
+            }
+            item.sockets[k] = socketItem;
+            break;
+        }
+        const indexInBag = this.persistantData.bag.findIndex(e => e.uuid === socketItem.uuid);
+        this.persistantData.bag.splice(indexInBag, 1); // Remove it from the bag
+        this.stat.update(this.persistantData);
+        dispatch("bag:refresh", null);
+        dispatch("inventory:refresh", null);
+        userData.saveToDisk();
     }
 }

@@ -17,8 +17,10 @@ declare global {
         fixedAffix: Partial<Record<AffixId, number>>;
         randomAffix: Partial<Record<AffixId, number>>;
         randomAffixCount: number;
+        affixCount: number;
         excludeAffix: AffixId[];
         rwTypes: ItemType[];
+        rwOrder: ItemId[];
         setCount: number;
         sockets: number;
     }
