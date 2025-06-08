@@ -26,6 +26,7 @@ const Const = {
     QUALITY_COLOR_BG: ["rgba(51, 112, 72, 0)", "rgb(64, 138, 58)", "rgb(59, 75, 156)", "purple", "orange"],
     QUALITY_COLOR_FG: ["rgb(255,255,255)", "rgb(30,255,0)", "rgb(0,112,221)", "rgb(163,53,238)", "rgb(255,128,0)"],
     QUALITY_TEXT: ["普通", "优秀", "精良", "史诗", "传说"],
+    SOCKET_ITEM_CHANCE: 0.15,
 
     SLOT_MAX_SIZE: {
         head: 1,

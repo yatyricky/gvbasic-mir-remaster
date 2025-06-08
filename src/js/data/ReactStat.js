@@ -284,6 +284,9 @@ export default class ReactStat {
                         this.addStat(statId, stat);
                     }
                 }
+                for (const [statId, stat] of objEntries(item.runeWordStats)) {
+                    this.addStat(statId, stat);
+                }
             }
         }
         this.data.rthp.value = Math.min(prevRtHp, this.data.rtmaxhp.value);

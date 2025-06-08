@@ -207,7 +207,9 @@ export const Affixs = [
 export const AffixById = Object.fromEntries(Affixs.map(e => [e.id, e]));
 export const AffixGroupByAvailOn = Affixs.reduce((acc, e) => {
     if (e.availOn != null) {
-        e.availOn.forEach(group => {
+        let arr = e.availOn;
+        if (!Array.isArray(arr)) { arr = [arr]; }
+        arr.forEach(group => {
             if (!acc[group]) {
                 acc[group] = [];
             }

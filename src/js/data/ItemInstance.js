@@ -1,10 +1,10 @@
 import { AffixById, AffixGroupByAvailOn } from "../config/Affix";
-import { ItemById } from "../config/Item";
+import { ItemById, ItemGroupByType } from "../config/Item";
 import { StatById } from "../config/Stat";
 import { UnitById } from "../config/Unit";
 import Const from "../Const";
-import { arrGetOne, arrGetSome, arrGroupBy, arrRemove, objEntries, objIsEmpty, objKeys } from "../Utils";
-import { mathFluctuate, mathRandomIncl, mathWeightedRandom } from "./MathLab";
+import { arrGetOne, arrGetSome, arrGroupBy, arrIsEmpty, arrRemove, objEntries, objIsEmpty, objKeys } from "../Utils";
+import { mathFluctuate, mathRandomIncl, mathRandomIntIncl, mathWeightedRandom } from "./MathLab";
 
 export default class ItemInstance {
 
@@ -169,6 +169,12 @@ export default class ItemInstance {
                 if (prefix != null) {
                     name = `${prefix.affix.name}${name}`;
                 }
+            } else {
+                // socket items
+                if (Math.random() < Const.SOCKET_ITEM_CHANCE) {
+                    baseAffixesRaw.push({ affix: AffixById[itemConfig.sockets], qlvl: 0 });
+                    baseAffixesRaw.push({ affix: AffixById["rw1"], qlvl: 0 });
+                }
             }
         }
 
@@ -229,5 +235,73 @@ export default class ItemInstance {
             }
         }
         return count;
+    }
+
+    /**
+     * 
+     * @param {ItemSaveData} item 
+     */
+    static runeWordCarving(item) {
+        const allSockets = ItemInstance.getSocketCount(item);
+        if (allSockets === 0 || allSockets !== ItemInstance.getFilledSocketCount(item)) {
+            return;
+        }
+        const itemConfig = ItemById[item.id];
+        for (const rwConfig of ItemGroupByType.runeword) {
+            if (rwConfig.rwOrder.length !== allSockets) {
+                continue;
+            }
+            if (!rwConfig.rwTypes.includes(itemConfig.type)) {
+                continue;
+            }
+            if (rwConfig.rwOrder.some((runeId, seq) => {
+                const socketedItem = item.sockets[seq.toString()];
+                return socketedItem == null || socketedItem.id !== runeId;
+            })) {
+                continue;
+            }
+            item.runeWord = rwConfig.id;
+            item.runeWordStats = {};
+
+            for (const [statId, qlvl] of objEntries(rwConfig.fixedAffix)) {
+                const affix = AffixById[statId];
+                if (affix == null) {
+                    console.error(`Affix with id ${statId} not found`);
+                    continue;
+                }
+                ItemInstance.collapseAffix(affix, item.runeWordStats, item.ilvl, qlvl);
+            }
+
+            const randomAffixesKeys = objKeys(rwConfig.randomAffix);
+            if (randomAffixesKeys.length > 0) {
+                const randomKeys = arrGetSome(randomAffixesKeys, Math.min(rwConfig.randomAffixCount ?? 1, randomAffixesKeys.length));
+                for (const affixId of randomKeys) {
+                    const affix = AffixById[affixId];
+                    if (affix == null) {
+                        console.error(`Affix with id ${affixId} not found`);
+                        continue;
+                    }
+                    ItemInstance.collapseAffix(affix, item.runeWordStats, item.ilvl, rwConfig.randomAffix[affixId]);
+                }
+            }
+
+            const commonCount = mathRandomIntIncl(0, rwConfig.affixCount ?? 0);
+            if (commonCount > 0) {
+                const candidates = AffixGroupByAvailOn[itemConfig.type] ?? [];
+                if (!arrIsEmpty(rwConfig.excludeAffix)) {
+                    for (const forbid of rwConfig.excludeAffix) {
+                        const index = candidates.findIndex(e => e.id === forbid);
+                        if (index > -1) {
+                            candidates.splice(index, 1);
+                        }
+                    }
+                }
+                const affixes = arrGetSome(candidates, commonCount);
+                for (const affix of affixes) {
+                    ItemInstance.collapseAffix(affix, item.runeWordStats, item.ilvl, 0);
+                }
+            }
+            break;
+        }
     }
 }

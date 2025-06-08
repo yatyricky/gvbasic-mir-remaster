@@ -169,6 +169,7 @@ export default class UnitComponent extends Component {
         }
         const indexInBag = this.persistantData.bag.findIndex(e => e.uuid === socketItem.uuid);
         this.persistantData.bag.splice(indexInBag, 1); // Remove it from the bag
+        ItemInstance.runeWordCarving(item);
         this.stat.update(this.persistantData);
         dispatch("bag:refresh", null);
         dispatch("inventory:refresh", null);

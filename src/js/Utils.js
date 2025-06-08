@@ -212,6 +212,9 @@ export function objIsEmpty(obj) {
  * @returns {Array<[K, T]>}
  */
 export function objEntries(obj) {
+    if (objIsEmpty(obj)) {
+        return [];
+    }
     return /**@type {any}*/(Object.entries(obj));
 }
 
@@ -222,5 +225,8 @@ export function objEntries(obj) {
  * @returns {Array<K>}
  */
 export function objKeys(obj) {
+    if (objIsEmpty(obj)) {
+        return [];
+    }
     return /**@type {any}*/(Object.keys(obj));
 }

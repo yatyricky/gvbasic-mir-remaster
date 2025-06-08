@@ -12,8 +12,9 @@
      * @type {{close: any, item: ItemSaveData, actions: any}}
      */
     let { close, item, actions } = $props();
+    let it = $state(item); // Svelte 5 state
 
-    const itemConfig = $derived(ItemById[item.id]);
+    const itemConfig = $derived(ItemById[it.id]);
     const heroData = SceneManager.activeScene
         .find("game/hero")
         .getComponent(UnitComponent).persistantData;
@@ -22,25 +23,42 @@
 <div class="backdrop">
     <div class="container">
         <div class="content">
+            {#if it.runeWord != null}
+                {@const runeWord = ItemById[it.runeWord]}
+                <div
+                    class="item-name"
+                    style="color: {Const.QUALITY_COLOR_FG[runeWord.quality]}"
+                >
+                    {runeWord.name}
+                </div>
+                <!-- <div
+                    class="item-name"
+                    style="color: {Const.QUALITY_COLOR_FG[runeWord.quality]}"
+                >
+                    "{objEntries(it.sockets)
+                        .map(([, s]) => ItemById[s.id].name)
+                        .join(" + ")}"
+                </div> -->
+            {/if}
             <div
                 class="item-name"
-                style={`color: ${Const.QUALITY_COLOR_FG[item.quality]}`}
+                style={`color: ${Const.QUALITY_COLOR_FG[it.quality]}`}
             >
-                {item.name}
+                {it.name}
             </div>
-            <div class="ilvl">物品等级 {item.ilvl}</div>
+            <div class="ilvl">物品等级 {it.ilvl}</div>
             <div class="item-info">
                 <div class="item-slot">{Const.SLOT_NAME[itemConfig.slot]}</div>
                 <div class="item-type">{Const.TYPE_NAME[itemConfig.type]}</div>
             </div>
-            {#each objEntries(item.baseStats) as [k, v], i (i)}
+            {#each objEntries(it.baseStats) as [k, v], i (i)}
                 <StatEntryFragment
                     style={`color: ${Const.QUALITY_COLOR_FG[0]}`}
                     statId={k}
                     val={v}
                 />
             {/each}
-            {#each objEntries(item.extStats) as [k, v], i (i)}
+            {#each objEntries(it.extStats) as [k, v], i (i)}
                 <StatEntryFragment
                     style={`color: ${Const.QUALITY_COLOR_FG[1]}`}
                     statId={k}
@@ -60,14 +78,14 @@
                         .join(", ")}
                 </div>
             {/if}
-            {#if ItemInstance.getSocketCount(item) > 0}
+            {#if ItemInstance.getSocketCount(it) > 0}
                 <div>
                     插槽({ItemInstance.getFilledSocketCount(
-                        item,
-                    )}/{ItemInstance.getSocketCount(item)})
+                        it,
+                    )}/{ItemInstance.getSocketCount(it)})
                 </div>
             {/if}
-            {#each objEntries(item.sockets) as [, v], i (i)}
+            {#each objEntries(it.sockets) as [, v], i (i)}
                 {#each objEntries(v.baseStats) as [kk, vv], j (j)}
                     <StatEntryFragment
                         style={`color: ${Const.QUALITY_COLOR_FG[1]}`}
@@ -83,6 +101,17 @@
                     />
                 {/each}
             {/each}
+            {#if it.runeWord != null}
+                <div>符文之语</div>
+                {#each objEntries(it.runeWordStats) as [k, v], i (i)}
+                    <StatEntryFragment
+                        style={`color: ${Const.QUALITY_COLOR_FG[1]}`}
+                        statId={k}
+                        val={v}
+                    />
+                {/each}
+            {/if}
+
             <div>需要等级 {itemConfig.level}</div>
         </div>
         <button
@@ -110,7 +139,10 @@
                     "
                     onclick={() => {
                         action?.();
-                        item = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent).findItemByUuid(item.uuid);
+                        it = SceneManager.activeScene
+                            .find("game/hero")
+                            .getComponent(UnitComponent)
+                            .findItemByUuid(it.uuid);
                         if (autoClose) {
                             close();
                         }
@@ -177,7 +209,7 @@
         gap: 16px;
     }
     .item-name {
-        width: calc(100% - 32px);
+        width: 100%;
     }
     .ilvl {
         color: #e6bd00;

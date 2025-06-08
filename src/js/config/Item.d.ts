@@ -22,9 +22,10 @@ declare global {
         rwTypes: ItemType[];
         rwOrder: ItemId[];
         setCount: number;
-        sockets: number;
+        sockets: AffixId;
     }
 }
 declare const Items: Array<IItemConfig>;
 declare const ItemById: Partial<Record<ItemId, IItemConfig>>;
-export { Items, ItemById }
+declare const ItemGroupByType: Partial<Record<ItemType, Array<IItemConfig>>>;
+export { Items, ItemById, ItemGroupByType }

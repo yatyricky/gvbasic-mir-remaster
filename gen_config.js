@@ -401,7 +401,11 @@ for (const file of fs.readdirSync(cfgDir)) {
 
         if (e.meta.includes("Group")) {
             const queryName = `${parsed.name}GroupBy${Utils.strCapitalizeFirst(e.name)}`;
-            dts += `declare const ${queryName}: Partial<Record<${TypeLexer.toTypeScriptType(e.type.elementType)}, Array<${configTypeName}>>>;\n`;
+            if (e.type.type === "array") {
+                dts += `declare const ${queryName}: Partial<Record<${TypeLexer.toTypeScriptType(e.type.elementType)}, Array<${configTypeName}>>>;\n`;
+            } else {
+                dts += `declare const ${queryName}: Partial<Record<${e.dtsType}, Array<${configTypeName}>>>;\n`;
+            }
             dtsExports.push(queryName)
         }
     }
@@ -445,7 +449,9 @@ for (const [name, payload] of Object.entries(allData)) {
             const queryName = `${name}GroupBy${Utils.strCapitalizeFirst(typeObj.name)}`;
             js += `export const ${queryName} = ${configArrayName}.reduce((acc, e) => {
     if (e.${typeObj.name} != null) {
-        e.${typeObj.name}.forEach(group => {
+        let arr = e.${typeObj.name};
+        if (!Array.isArray(arr)) { arr = [arr]; }
+        arr.forEach(group => {
             if (!acc[group]) {
                 acc[group] = [];
             }
