@@ -95,6 +95,7 @@ const Const = {
         runeword: "inherit",
         set: "inherit",
     },
+    /**@type {Record<SlotType, number>} */
     SLOT_MAX_SIZE: {
         head: 1,
         neck: 1,
@@ -193,6 +194,46 @@ const Const = {
         rune: "五行符",
         runeword: "符文之语",
         set: "套装",
+    },
+    /**@type {Record<ItemType, ItemSubType>} */
+    ITEM_SUBTYPE: {
+        helm: "none",
+        pauldron: "none",
+        armor: "none",
+        bracelet: "none",
+        glove: "none",
+        belt: "none",
+        pant: "none",
+        boot: "none",
+
+        necklace: "none",
+        ring: "none",
+        charm1: "none",
+        charm2: "none",
+        charm3: "none",
+
+        sword: "1h",
+        sword2h: "2h",
+        dao: "1h",
+        dao2h: "2h",
+        axe: "1h",
+        axe2h: "2h",
+        mace: "1h",
+        mace2h: "2h",
+        dagger: "1h",
+        staff: "2h",
+        polearm: "2h",
+        instrument: "offhand",
+
+        rune: "none",
+        runeword: "none",
+        set: "none",
+    },
+    /**@type {Partial<Record<UnitId, Array<Array<ItemSubType>>>>} */
+    EQUIP_POLICY: {
+        warr: [[], ["1h"], ["offhand"], ["2h"], ["1h", "offhand"], ["offhand", "1h"], ["1h", "1h"]],
+        mage: [[], ["1h"], ["offhand"], ["2h"], ["1h", "offhand"], ["offhand", "1h"]],
+        wlk: [[], ["1h"], ["offhand"], ["2h"], ["1h", "offhand"], ["offhand", "1h"]],
     }
 }
 

@@ -127,6 +127,29 @@ export function arrRemove(arr, item) {
 }
 
 /**
+ * @template T
+ * @param {T[]} arr 
+ * @returns {Array<Array<T>>}
+ */
+export function arrCombinations(arr) {
+    /**@type {T[][]} */
+    const result = [[]];
+    /**
+     * 
+     * @param {T[]} prefix 
+     * @param {number} start 
+     */
+    const f = (prefix, start) => {
+        for (let i = start; i < arr.length; i++) {
+            result.push([...prefix, arr[i]]);
+            f([...prefix, arr[i]], i + 1);
+        }
+    };
+    f([], 0);
+    return result;
+}
+
+/**
  * 
  * @param {string} text 
  * @returns {number} 0-20

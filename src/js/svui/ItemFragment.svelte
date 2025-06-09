@@ -31,15 +31,20 @@
             return ItemInstance.getSocketCount(item) > 0 ? "dashed" : "solid";
         })(),
     );
-    const borderColor = $derived((() => {
-        if (item == null) {
-            return Const.QUALITY_COLOR_FG[0];
-        }
-        if (item.quality === 0 && ItemInstance.getSocketCount(item) > 0) {
-            return "gray";
-        }
-        return Const.QUALITY_COLOR_FG[item.quality];
-    })());
+    const borderColor = $derived(
+        (() => {
+            if (item == null) {
+                return Const.QUALITY_COLOR_FG[0];
+            }
+            if (item.runeWord != null) {
+                return Const.QUALITY_COLOR_FG[ItemById[item.runeWord].quality];
+            }
+            if (item.quality === 0 && ItemInstance.getSocketCount(item) > 0) {
+                return "gray";
+            }
+            return Const.QUALITY_COLOR_FG[item.quality];
+        })(),
+    );
 
     function onclick() {
         if (item == null || !clickable) {

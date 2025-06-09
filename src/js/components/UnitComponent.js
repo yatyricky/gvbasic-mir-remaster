@@ -5,7 +5,7 @@ import ItemInstance from "../data/ItemInstance";
 import ReactStat from "../data/ReactStat";
 import userData from "../data/UserData";
 import { dispatch } from "../EventBus";
-import { objEntries } from "../Utils";
+import { arrCombinations, objEntries } from "../Utils";
 import Component from "./Component";
 
 export default class UnitComponent extends Component {
@@ -78,21 +78,67 @@ export default class UnitComponent extends Component {
         }
 
         const itemConfig = ItemById[item.id];
-        let equipped = this.persistantData.inventory[Const.ITEM_TYPE_SLOT[itemConfig.type]];
+        const slotType = Const.ITEM_TYPE_SLOT[itemConfig.type];
+        let equipped = this.persistantData.inventory[slotType];
         if (equipped == null) {
             // Initialize the slot if it doesn't exist
             equipped = [];
-            this.persistantData.inventory[Const.ITEM_TYPE_SLOT[itemConfig.type]] = equipped;
+            this.persistantData.inventory[slotType] = equipped;
         }
         let unequipped = false;
-        for (let i = equipped.length - 1; i >= 0; i--) {
-            const currentSize = equipped.reduce((acc, cur) => acc + Const.ITEM_TYPE_SIZE[ItemById[cur.id].type], 0);
-            if (currentSize + Const.ITEM_TYPE_SIZE[itemConfig.type] > Const.SLOT_MAX_SIZE[Const.ITEM_TYPE_SLOT[itemConfig.type]]) {
-                // unequip last item in slot
-                const result = this.tryUnquip(equipped[i], true);
-                unequipped = result || unequipped;
-            } else {
-                break;
+
+        if (slotType === "arms") {
+            // 1. must equip current
+            const combinations = arrCombinations(equipped);
+
+            for (const combination of combinations) {
+                combination.push(item);
+            }
+            const policies = Const.EQUIP_POLICY[this.config.id];
+
+            /**@type {ItemSaveData[][]} */
+            let successes = [];
+            for (const combination of combinations) {
+                for (const policy of policies) {
+                    if (policy.length !== combination.length) {
+                        continue; // Skip if the policy length doesn't match the combination length
+                    }
+                    // compare each item in the combination with the policy
+                    let match = true;
+                    for (let i = 0; match && i < policy.length; i++) {
+                        if (policy[i] !== Const.ITEM_SUBTYPE[ItemById[combination[i].id].type]) {
+                            match = false;
+                        }
+                    }
+                    if (match) {
+                        successes.push(combination);
+                        break; // No need to check further policies
+                    }
+                }
+            }
+            if (successes.length === 0) {
+                dispatch("toast", "无法装备此武器");
+                return false; // No valid combination found
+            }
+            successes.sort((a, b) => b.length - a.length);
+            for (let i = equipped.length - 1; i >= 0; i--) {
+                const e = equipped[i];
+                if (!successes[0].includes(e)) {
+                    // unequip last item in slot
+                    const result = this.tryUnquip(e, true);
+                    unequipped = result || unequipped;
+                }
+            }
+        } else {
+            for (let i = equipped.length - 1; i >= 0; i--) {
+                const currentSize = equipped.reduce((acc, cur) => acc + Const.ITEM_TYPE_SIZE[ItemById[cur.id].type], 0);
+                if (currentSize + Const.ITEM_TYPE_SIZE[itemConfig.type] > Const.SLOT_MAX_SIZE[slotType]) {
+                    // unequip last item in slot
+                    const result = this.tryUnquip(equipped[i], true);
+                    unequipped = result || unequipped;
+                } else {
+                    break;
+                }
             }
         }
 
