@@ -1,8 +1,8 @@
 <script>
-    import { ItemById } from "../config/Item";
+    import { ItemById, ItemGroupBySetStat } from "../config/Item";
     import Const from "../Const";
     import ItemInstance from "../data/ItemInstance";
-    import { arrIsEmpty, objEntries, objIsEmpty } from "../Utils";
+    import { arrIsEmpty, objEntries, objIsEmpty, objKeys } from "../Utils";
     import StatEntryFragment from "./StatEntryFragment.svelte";
     import { UnitById } from "../config/Unit";
     import SceneManager from "../SceneManager";
@@ -21,6 +21,25 @@
         .find("game/hero")
         .getComponent(UnitComponent);
     const heroData = hero.persistantData;
+
+    const allSetIds = objKeys(ItemGroupBySetStat);
+
+    const xxx = $derived(
+        (() => {
+            const mySetIds = objKeys(it.baseStats);
+            const intersection = mySetIds.filter((id) =>
+                allSetIds.includes(id),
+            );
+            if (intersection.length !== 1) {
+                return null;
+            }
+            const setItemId = intersection[0];
+            const completion = ItemGroupBySetStat[/**@type {StatId}*/(setItemId)];
+            
+
+            return null;
+        })(),
+    );
 
     /**@type {any}*/
     let unsub = null;

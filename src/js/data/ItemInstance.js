@@ -178,6 +178,20 @@ export default class ItemInstance {
             }
         }
 
+        const commonCount = mathRandomIntIncl(itemConfig.affixCount ?? 0, itemConfig.maxAffixCount ?? 0);
+        if (commonCount > 0) {
+            const candidates = AffixGroupByAvailOn[itemConfig.type] ?? [];
+            if (!arrIsEmpty(itemConfig.excludeAffix)) {
+                for (const forbid of itemConfig.excludeAffix) {
+                    const index = candidates.findIndex(e => e.id === forbid);
+                    if (index > -1) {
+                        candidates.splice(index, 1);
+                    }
+                }
+            }
+            extAffixesRaw.push(...arrGetSome(candidates, commonCount).map(e => ({ affix: e, qlvl: 0 })));
+        }
+
         /**@type {StatData} */
         const baseStats = {};
         for (const e of baseAffixesRaw) {
@@ -298,15 +312,14 @@ export default class ItemInstance {
                 }
             }
 
-            const commonCount = mathRandomIntIncl(0, rwConfig.affixCount ?? 0);
+            const commonCount = mathRandomIntIncl(rwConfig.affixCount ?? 0, rwConfig.maxAffixCount ?? 0);
             if (commonCount > 0) {
                 const candidates = AffixGroupByAvailOn[itemConfig.type] ?? [];
-                if (!arrIsEmpty(rwConfig.excludeAffix)) {
-                    for (const forbid of rwConfig.excludeAffix) {
-                        const index = candidates.findIndex(e => e.id === forbid);
-                        if (index > -1) {
-                            candidates.splice(index, 1);
-                        }
+                const excludeAffix = [...rwConfig.excludeAffix, ...itemConfig.excludeAffix];
+                for (const forbid of excludeAffix) {
+                    const index = candidates.findIndex(e => e.id === forbid);
+                    if (index > -1) {
+                        candidates.splice(index, 1);
                     }
                 }
                 const affixes = arrGetSome(candidates, commonCount);

@@ -19,6 +19,7 @@ export const Items = [
     { id: "demonrobe", name: "恶魔长袍", level: 21, quality: 3, classOnly: ["mage"], image: "恶", type: "armor", fixedAffix: { ["xdr1"]: 0.5, ["int1"]: 1 }, randomAffix: { ["fres1"]: 0, ["tres1"]: 0, ["hres1"]: 0, ["pres1"]: 0 } },
     { id: "magegodarmor", name: "法神披风", level: 35, quality: 3, classOnly: ["mage"], image: "法", type: "armor", fixedAffix: { ["xdr1"]: 0.7, ["int1"]: 1 }, randomAffix: { ["fres1"]: 0, ["tres1"]: 0, ["hres1"]: 0, ["pres1"]: 0 } },
     { id: "colorarmor", name: "霓裳羽衣", level: 35, quality: 4, classOnly: ["mage"], image: "霓", type: "armor", fixedAffix: { ["xdr1"]: 1, ["int1"]: 1.5 }, randomAffix: { ["fres1"]: 0, ["tres1"]: 0, ["hres1"]: 0, ["pres1"]: 0 } },
+    { id: "vomaarmor", name: "沃玛战甲", level: 11, quality: 2, image: "INV_CHEST_LEATHER_15", type: "armor", fixedAffix: { ["setvoma"]: 0 }, affixCount: 3, maxAffixCount: 4 },
     { id: "dragonarmor", name: "龙之披挂", level: 1, quality: 3, image: "龙", type: "armor" },
     { id: "archonplate", name: "执政官铠甲", level: 1, quality: 3, image: "执", type: "armor" },
     { id: "ancientarmor", name: "古代装甲", level: 1, quality: 3, image: "古", type: "armor" },
@@ -293,6 +294,7 @@ export const Items = [
     { id: "dragontooth", name: "龙牙", level: 1, quality: 3, classOnly: ["mage"], image: "龙", type: "dagger" },
     { id: "elysianfan", name: "逍遥扇", level: 1, quality: 3, classOnly: ["wlk"], image: "逍", type: "instrument" },
     { id: "layingserpent", name: "卧龙", level: 1, quality: 3, image: "卧", type: "dao" },
+    { id: "vomaaxe", name: "沃玛战斧", level: 11, quality: 2, image: "INV_Axe_83", type: "axe", fixedAffix: { ["setvoma"]: 0, ["xdmg1"]: 0 }, affixCount: 2, maxAffixCount: 3 },
     { id: "clothwrist", name: "白布护臂", level: 1, quality: 0, maxQuality: 2, image: "白", type: "bracelet", sockets: "sok2" },
     { id: "leatherwrist", name: "软皮臂甲", level: 1, quality: 0, maxQuality: 2, image: "软", type: "bracelet", sockets: "sok2" },
     { id: "lightwrist", name: "轻型手镯", level: 1, quality: 0, maxQuality: 2, image: "轻", type: "bracelet", sockets: "sok2" },
@@ -300,7 +302,7 @@ export const Items = [
     { id: "mediumwrist", name: "中型手镯", level: 1, quality: 0, maxQuality: 2, image: "中", type: "bracelet", sockets: "sok2" },
     { id: "ironwrist", name: "铁护腕", level: 1, quality: 0, maxQuality: 2, image: "铁", type: "bracelet", sockets: "sok2" },
     { id: "platewrist", name: "钢制臂甲", level: 1, quality: 0, maxQuality: 2, image: "钢", type: "bracelet", sockets: "sok2" },
-    { id: "womawrist", name: "沃玛手镯", level: 1, quality: 3, image: "沃", type: "bracelet" },
+    { id: "womawrist", name: "沃玛手镯", level: 1, quality: 2, image: "INV_Bracer_28B", type: "bracelet", fixedAffix: { ["setvoma"]: 0 }, affixCount: 3, maxAffixCount: 4 },
     { id: "ironbracelet", name: "铁手镯", level: 1, quality: 3, image: "铁", type: "bracelet" },
     { id: "smallbracelet", name: "小手镯", level: 1, quality: 3, image: "小", type: "bracelet" },
     { id: "silverbracelet", name: "银手镯", level: 1, quality: 3, image: "银", type: "bracelet" },
@@ -344,14 +346,29 @@ export const Items = [
     { id: "rune23", name: "泄", level: 35, quality: 4, image: "INV_Jewelcrafting_Gem_17", type: "rune", fixedAffix: { ["tlr1"]: 0 } },
     { id: "rune24", name: "​​熄​", level: 35, quality: 4, image: "INV_Jewelcrafting_Gem_16", type: "rune", fixedAffix: { ["flr1"]: 0 } },
     { id: "rune25", name: "塌", level: 35, quality: 4, image: "INV_Jewelcrafting_Gem_14", type: "rune", fixedAffix: { ["plr1"]: 0 } },
-    { id: "infinity", name: "无限", level: 1, quality: 3, image: "无", type: "runeword", fixedAffix: { ["killbclv1"]: 0, ["spd1"]: 0, ["tlr1"]: 0 }, randomAffix: { ["xed1"]: 0, ["fed1"]: 0, ["ted1"]: 0, ["hed1"]: 0, ["ped1"]: 0 }, affixCount: 1, excludeAffix: ["sok1", "sok2", "sok3", "sok4", "sok5", "rw1"], rwTypes: ["polearm", "staff", "dao2h"], rwOrder: ["rune23", "rune17", "rune23", "rune18"] },
-    { id: "vomaset2", name: "沃玛套装", level: 1, quality: 3, image: "沃", type: "set", setCount: 2 },
+    { id: "steel", name: "钢铁", level: 1, quality: 3, image: "钢", type: "runeword", fixedAffix: { ["xed1"]: -0.7, ["xdmg1"]: 0, ["spd1"]: 0 }, excludeAffix: ["sok1", "sok2", "sok3", "sok4", "sok5", "rw1"], rwTypes: ["sword", "sword2h", "dao", "dao2h", "dagger", "axe", "axe2h", "mace", "mace2h", "polearm"], rwOrder: ["rune2", "rune1"] },
+    { id: "infinity", name: "无限", level: 1, quality: 3, image: "无", type: "runeword", fixedAffix: { ["killbclv1"]: 0, ["spd1"]: 0, ["tlr1"]: 0 }, randomAffix: { ["xed1"]: 0, ["fed1"]: 0, ["ted1"]: 0, ["hed1"]: 0, ["ped1"]: 0 }, affixCount: 0, maxAffixCount: 1, excludeAffix: ["sok1", "sok2", "sok3", "sok4", "sok5", "rw1"], rwTypes: ["polearm", "staff", "dao2h"], rwOrder: ["rune23", "rune17", "rune23", "rune18"] },
+    { id: "vomaset2", name: "沃玛套装", level: 1, quality: 3, image: "沃", type: "set", fixedAffix: { ["vits"]: -0.9 }, setStat: "setvoma", setCount: 2 },
+    { id: "vomaset3", name: "沃玛套装", level: 1, quality: 3, image: "沃", type: "set", fixedAffix: { ["strs"]: -0.8, ["xeds"]: -0.5 }, setStat: "setvoma", setCount: 3 },
 ];
 
 export const ItemById = Object.fromEntries(Items.map(e => [e.id, e]));
 export const ItemGroupByType = Items.reduce((acc, e) => {
     if (e.type != null) {
         let arr = e.type;
+        if (!Array.isArray(arr)) { arr = [arr]; }
+        arr.forEach(group => {
+            if (!acc[group]) {
+                acc[group] = [];
+            }
+            acc[group].push(e);
+        })
+    }
+    return acc;
+}, {})
+export const ItemGroupBySetStat = Items.reduce((acc, e) => {
+    if (e.setStat != null) {
+        let arr = e.setStat;
         if (!Array.isArray(arr)) { arr = [arr]; }
         arr.forEach(group => {
             if (!acc[group]) {

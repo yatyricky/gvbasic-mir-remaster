@@ -30,7 +30,7 @@
             <div>{`${statConfig.name}+${Math.floor(val.value)}`}</div>
         {:else if statConfig.format === "percent"}
             <div>{`${statConfig.name}+${val.value.toFixed(2)}%`}</div>
-        {:else}
+        {:else if statConfig.format === "none"}{:else}
             {new Error(`Unknown stat format: ${statConfig.format}`)}
         {/if}
     {:else if statConfig.type === "range"}
