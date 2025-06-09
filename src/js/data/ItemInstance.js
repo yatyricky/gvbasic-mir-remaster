@@ -207,6 +207,7 @@ export default class ItemInstance {
             id: id,
             name,
             ilvl: ilvl,
+            level: itemConfig.level,
             quality,
             baseStats,
             extStats,

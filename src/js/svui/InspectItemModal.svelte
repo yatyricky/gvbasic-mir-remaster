@@ -2,11 +2,13 @@
     import { ItemById } from "../config/Item";
     import Const from "../Const";
     import ItemInstance from "../data/ItemInstance";
-    import { arrIsEmpty, objEntries } from "../Utils";
+    import { arrIsEmpty, objEntries, objIsEmpty } from "../Utils";
     import StatEntryFragment from "./StatEntryFragment.svelte";
     import { UnitById } from "../config/Unit";
     import SceneManager from "../SceneManager";
     import UnitComponent from "../components/UnitComponent";
+    import { onDestroy, onMount } from "svelte";
+    import { subscribe } from "../EventBus";
 
     /**
      * @type {{close: any, item: ItemSaveData, actions: any}}
@@ -15,9 +17,25 @@
     let it = $state(item); // Svelte 5 state
 
     const itemConfig = $derived(ItemById[it.id]);
-    const heroData = SceneManager.activeScene
+    const hero = SceneManager.activeScene
         .find("game/hero")
-        .getComponent(UnitComponent).persistantData;
+        .getComponent(UnitComponent);
+    const heroData = hero.persistantData;
+
+    /**@type {any}*/
+    let unsub = null;
+    onMount(() => {
+        unsub = subscribe("item:refresh", (uuid) => {
+            if (it.uuid === uuid) {
+                it = hero.findItemByUuid(uuid);
+            }
+        });
+    });
+
+    onDestroy(() => {
+        unsub?.();
+        unsub = null;
+    });
 </script>
 
 <div class="backdrop">
@@ -31,14 +49,6 @@
                 >
                     {runeWord.name}
                 </div>
-                <div
-                    class="item-name"
-                    style="color: {Const.QUALITY_COLOR_FG[runeWord.quality]}"
-                >
-                    "{objEntries(it.sockets)
-                        .map(([, s]) => ItemById[s.id].name)
-                        .join("")}"
-                </div>
             {/if}
             <div
                 class="item-name"
@@ -46,6 +56,18 @@
             >
                 {it.name}
             </div>
+            {#if !objIsEmpty(it.sockets)}
+                <div
+                    class="item-name"
+                    style="color: {Const.QUALITY_COLOR_FG[
+                        it.runeWord != null ? ItemById[it.runeWord].quality : 0
+                    ]}"
+                >
+                    "{objEntries(it.sockets)
+                        .map(([, s]) => ItemById[s.id].name)
+                        .join("")}"
+                </div>
+            {/if}
             <div class="ilvl">物品等级 {it.ilvl}</div>
             <div class="item-info">
                 <div class="item-slot">
@@ -114,7 +136,7 @@
                 {/each}
             {/if}
 
-            <div>需要等级 {itemConfig.level}</div>
+            <div>需要等级 {it.level}</div>
         </div>
         <button
             onclick={close}
@@ -141,10 +163,6 @@
                     "
                     onclick={() => {
                         action?.();
-                        it = SceneManager.activeScene
-                            .find("game/hero")
-                            .getComponent(UnitComponent)
-                            .findItemByUuid(it.uuid);
                         if (autoClose) {
                             close();
                         }

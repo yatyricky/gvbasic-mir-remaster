@@ -14,6 +14,7 @@ interface EventBusDefine {
     "skill:refresh": null;
     "modal:show": { component: any, props?: Record<string, any>, multiple?: boolean };
     "modal:close": any;
+    "item:refresh": string;
 }
 
 export function subscribe<T extends keyof EventBusDefine>(event: T, callback: (data: EventBusDefine[T]) => void, fireImmediately = false): () => void;

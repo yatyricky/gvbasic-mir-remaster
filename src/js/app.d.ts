@@ -46,6 +46,7 @@ declare global {
         name: string;
         /** Item level */
         ilvl: number;
+        level: number;
         /** Quality level */
         quality: number;
         baseStats: StatData;
