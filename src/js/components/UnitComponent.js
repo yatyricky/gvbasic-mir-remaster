@@ -45,7 +45,7 @@ export default class UnitComponent extends Component {
      */
     tryUnquip(item, dontUpdateStat) {
         const itemConfig = ItemById[item.id];
-        const equipped = this.persistantData.inventory[itemConfig.slot];
+        const equipped = this.persistantData.inventory[Const.ITEM_TYPE_SLOT[itemConfig.type]];
         const index = equipped.findIndex(e => e.uuid === item.uuid);
         if (index === -1) {
             dispatch("toast", "物品未装备");
@@ -78,16 +78,16 @@ export default class UnitComponent extends Component {
         }
 
         const itemConfig = ItemById[item.id];
-        let equipped = this.persistantData.inventory[itemConfig.slot];
+        let equipped = this.persistantData.inventory[Const.ITEM_TYPE_SLOT[itemConfig.type]];
         if (equipped == null) {
             // Initialize the slot if it doesn't exist
             equipped = [];
-            this.persistantData.inventory[itemConfig.slot] = equipped;
+            this.persistantData.inventory[Const.ITEM_TYPE_SLOT[itemConfig.type]] = equipped;
         }
         let unequipped = false;
         for (let i = equipped.length - 1; i >= 0; i--) {
-            const currentSize = equipped.reduce((acc, cur) => acc + ItemById[cur.id].size, 0);
-            if (currentSize + itemConfig.size > Const.SLOT_MAX_SIZE[itemConfig.slot]) {
+            const currentSize = equipped.reduce((acc, cur) => acc + Const.ITEM_TYPE_SIZE[ItemById[cur.id].type], 0);
+            if (currentSize + Const.ITEM_TYPE_SIZE[itemConfig.type] > Const.SLOT_MAX_SIZE[Const.ITEM_TYPE_SLOT[itemConfig.type]]) {
                 // unequip last item in slot
                 const result = this.tryUnquip(equipped[i], true);
                 unequipped = result || unequipped;

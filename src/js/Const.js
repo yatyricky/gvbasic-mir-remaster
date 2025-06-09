@@ -27,7 +27,74 @@ const Const = {
     QUALITY_COLOR_FG: ["rgb(255,255,255)", "rgb(30,255,0)", "rgb(0,112,221)", "rgb(163,53,238)", "rgb(255,128,0)"],
     QUALITY_TEXT: ["普通", "优秀", "精良", "史诗", "传说"],
     SOCKET_ITEM_CHANCE: 0.15,
+    /**@type {Record<ItemType, number>} */
+    ITEM_TYPE_SIZE: {
+        helm: 1,
+        pauldron: 1,
+        armor: 1,
+        bracelet: 1,
+        glove: 1,
+        belt: 1,
+        pant: 1,
+        boot: 1,
 
+        necklace: 1,
+        ring: 1,
+        charm1: 1,
+        charm2: 2,
+        charm3: 3,
+
+        sword: 1,
+        sword2h: 2,
+        dao: 1,
+        dao2h: 2,
+        axe: 1,
+        axe2h: 2,
+        mace: 1,
+        mace2h: 2,
+        dagger: 1,
+        staff: 2,
+        polearm: 2,
+        instrument: 1,
+
+        rune: 1,
+        runeword: 1,
+        set: 1,
+    },
+    /**@type {Record<ItemType, SlotType>} */
+    ITEM_TYPE_SLOT: {
+        helm: "head",
+        pauldron: "shoulder",
+        armor: "torso",
+        bracelet: "wrist",
+        glove: "hand",
+        belt: "waist",
+        pant: "leg",
+        boot: "foot",
+
+        necklace: "neck",
+        ring: "finger",
+        charm1: "accessory",
+        charm2: "accessory",
+        charm3: "accessory",
+
+        sword: "arms",
+        sword2h: "arms",
+        dao: "arms",
+        dao2h: "arms",
+        axe: "arms",
+        axe2h: "arms",
+        mace: "arms",
+        mace2h: "arms",
+        dagger: "arms",
+        staff: "arms",
+        polearm: "arms",
+        instrument: "arms",
+
+        rune: "socket",
+        runeword: "inherit",
+        set: "inherit",
+    },
     SLOT_MAX_SIZE: {
         head: 1,
         neck: 1,
@@ -74,36 +141,56 @@ const Const = {
         accessory: "饰品",
         arms: "武器",
         inherit: "错01",
-        socket: "宝石",
+        socket: "镶嵌",
     },
+    /**@type {Array<ItemType>} */
     EQUIPABLE_TYPES: [
         "armor",
         "belt",
         "boot",
-        "charm",
+        "charm1",
+        "charm2",
+        "charm3",
         "glove",
         "helm",
         "necklace",
         "pant",
         "pauldron",
         "ring",
-        "weapon",
+        "sword", "sword2h", "dao", "dao2h", "dagger", "axe", "axe2h", "mace", "mace2h", "polearm", "staff", "instrument",
         "bracelet",
     ],
+    /**@type {Record<ItemType, string>} */
     TYPE_NAME: {
-        armor: "护甲",
-        belt: "腰带",
-        boot: "靴子",
-        charm: "护身符",
-        glove: "手套",
         helm: "头盔",
-        necklace: "项链",
-        pant: "腿甲",
         pauldron: "肩甲",
-        ring: "戒指",
-        weapon: "武器",
+        armor: "护甲",
         bracelet: "护腕",
-        rune: "符文",
+        glove: "手套",
+        belt: "腰带",
+        pant: "腿甲",
+        boot: "靴子",
+
+        necklace: "项链",
+        ring: "戒指",
+        charm1: "护身符",
+        charm2: "护身符",
+        charm3: "护身符",
+
+        sword: "单手剑",
+        sword2h: "双手剑",
+        dao: "单手刀",
+        dao2h: "双手刀",
+        axe: "单手斧",
+        axe2h: "双手斧",
+        mace: "单手锤",
+        mace2h: "双手锤",
+        dagger: "匕首",
+        staff: "法杖",
+        polearm: "长柄武器",
+        instrument: "法器",
+
+        rune: "五行符",
         runeword: "符文之语",
         set: "套装",
     }
@@ -112,3 +199,56 @@ const Const = {
 Const.SIZE2 = Const.SIZE * 2;
 
 export default Const;
+
+/**
+
+armor
+belt
+boot
+glove
+helm
+pant
+pauldron
+bracelet
+
+necklace
+ring
+charm1
+charm2
+charm3
+
+sword
+sword2h
+dao
+dao2h
+dagger
+axe
+axe2h
+mace
+mace2h
+polearm
+staff
+instrument
+
+# all physical items
+sword,sword2h,dao,dao2h,dagger,axe,axe2h,mace,mace2h,polearm
+
+# all magical items
+staff,instrument
+
+# all weapon items
+sword,sword2h,dao,dao2h,dagger,axe,axe2h,mace,mace2h,polearm,staff,instrument
+
+# all 2h weapon items
+sword2h,dao2h,axe2h,mace2h,polearm,staff
+
+# all armor items
+armor,belt,boot,glove,helm,pant,pauldron,bracelet
+
+# all accessory items
+necklace,ring,charm1,charm2,charm3
+
+# all charm items
+charm1,charm2,charm3
+
+ */

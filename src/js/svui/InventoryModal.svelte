@@ -35,7 +35,11 @@
                     continue;
                 }
                 arrangement[j] = { status: "equipped", item: equip };
-                for (let k = 1; k < itemConfig.size; k++) {
+                for (
+                    let k = 1;
+                    k < Const.ITEM_TYPE_SIZE[itemConfig.type];
+                    k++
+                ) {
                     if (j + k < arrangement.length) {
                         arrangement[j + k] = {
                             status: "occupied",
@@ -50,7 +54,7 @@
                         );
                     }
                 }
-                j += itemConfig.size;
+                j += Const.ITEM_TYPE_SIZE[itemConfig.type];
             }
 
             ret.push({ slot, arrangement });
@@ -75,7 +79,7 @@
         unsub = null;
     });
 
-    /**@type {any}*/
+    /**@type {Record<SlotType, any>}*/
     const positioning = {
         head: { left: 0, top: 0, leftGrow: 0, topGrow: 0 },
         neck: { left: 0, top: Const.SIZE2 * 1, leftGrow: 0, topGrow: 0 },
@@ -119,6 +123,8 @@
             leftGrow: Const.SIZE2,
             topGrow: 0,
         },
+        socket: undefined,
+        inherit: undefined,
     };
 </script>
 

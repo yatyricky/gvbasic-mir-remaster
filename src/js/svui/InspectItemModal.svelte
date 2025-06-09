@@ -48,7 +48,9 @@
             </div>
             <div class="ilvl">物品等级 {it.ilvl}</div>
             <div class="item-info">
-                <div class="item-slot">{Const.SLOT_NAME[itemConfig.slot]}</div>
+                <div class="item-slot">
+                    {Const.SLOT_NAME[Const.ITEM_TYPE_SLOT[itemConfig.type]]}
+                </div>
                 <div class="item-type">{Const.TYPE_NAME[itemConfig.type]}</div>
             </div>
             {#each objEntries(it.baseStats) as [k, v], i (i)}

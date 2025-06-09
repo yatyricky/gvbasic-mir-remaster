@@ -4,6 +4,7 @@ declare global {
     type ElementTypeOf<T> = T extends Array<infer U> ? U : never;
 
     type ItemFragmentOperation = "equip" | "unequip" | "socket" | "socketFill" | "buy";
+    type SlotType = "torso" | "waist" | "foot" | "accessory" | "hand" | "head" | "neck" | "leg" | "shoulder" | "finger" | "arms" | "wrist" | "socket" | "inherit";
 
     interface ItemFragmentProps {
         item: ItemSaveData;
