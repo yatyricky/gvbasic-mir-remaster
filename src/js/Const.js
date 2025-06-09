@@ -234,7 +234,16 @@ const Const = {
         warr: [[], ["1h"], ["offhand"], ["2h"], ["1h", "offhand"], ["offhand", "1h"], ["1h", "1h"]],
         mage: [[], ["1h"], ["offhand"], ["2h"], ["1h", "offhand"], ["offhand", "1h"]],
         wlk: [[], ["1h"], ["offhand"], ["2h"], ["1h", "offhand"], ["offhand", "1h"]],
-    }
+    },
+    /**@type {Partial<Record<AffixId, number>>} */
+    AFFIXID_2_SOCKET_COUNT: {
+        "sok1": 1,
+        "sok2": 2,
+        "sok3": 3,
+        "sok4": 4,
+        "sok5": 5,
+    },
+    QUALITY_SOCKET_COUNT: [99, 2, 1, 1, 1], // Normal, Magic, Rare, Epic, Legendary
 }
 
 Const.SIZE2 = Const.SIZE * 2;
