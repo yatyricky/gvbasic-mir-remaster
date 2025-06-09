@@ -31,14 +31,14 @@
                 >
                     {runeWord.name}
                 </div>
-                <!-- <div
+                <div
                     class="item-name"
                     style="color: {Const.QUALITY_COLOR_FG[runeWord.quality]}"
                 >
                     "{objEntries(it.sockets)
                         .map(([, s]) => ItemById[s.id].name)
-                        .join(" + ")}"
-                </div> -->
+                        .join("")}"
+                </div>
             {/if}
             <div
                 class="item-name"
