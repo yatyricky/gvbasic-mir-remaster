@@ -237,11 +237,11 @@
                     class="btn"
                     style="
                         left: {(Const.SIZE2 * 10 * 0.94 -
-                        Const.SIZE2 * 1.8 * actions.length -
+                        Const.SIZE2 * 2.4 * actions.length -
                         12 * (actions.length - 1)) /
                         2 +
-                        i * (Const.SIZE2 * 1.8 + 12)}px;
-                        width: {Const.SIZE2 * 1.8}px;
+                        i * (Const.SIZE2 * 2.4 + 12)}px;
+                        width: {Const.SIZE2 * 2.4}px;
                         height: {Const.SIZE2 * 0.8}px;
                     "
                     onclick={() => {

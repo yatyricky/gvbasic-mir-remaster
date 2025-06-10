@@ -34,15 +34,12 @@
     const borderColor = $derived(
         (() => {
             if (item == null) {
-                return Const.QUALITY_COLOR_FG[0];
+                return Const.QUALITY_COLOR_BG[0];
             }
             if (item.runeWord != null) {
-                return Const.QUALITY_COLOR_FG[ItemById[item.runeWord].quality];
+                return Const.QUALITY_COLOR_BG[ItemById[item.runeWord].quality];
             }
-            if (item.quality === 0 && ItemInstance.getSocketCount(item) > 0) {
-                return "gray";
-            }
-            return Const.QUALITY_COLOR_FG[item.quality];
+            return Const.QUALITY_COLOR_BG[item.quality];
         })(),
     );
 
@@ -163,6 +160,7 @@
         box-sizing: border-box;
         border-radius: 10%;
         padding: 0;
+        background-color: #33312B;
     }
     .icon {
         background-size: contain;

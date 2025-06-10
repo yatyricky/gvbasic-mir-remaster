@@ -23,7 +23,7 @@ const Const = {
     LOOT_AFFIX_COUNT_GREEN: [3, 1],
     LOOT_AFFIX_COUNT_BLUE: [100, 70, 5, 1],
     MAX_ILVL_FACTOR: 4,
-    QUALITY_COLOR_BG: ["rgba(51, 112, 72, 0)", "rgb(64, 138, 58)", "rgb(59, 75, 156)", "purple", "orange"],
+    QUALITY_COLOR_BG: ["#A3A3A1", "#368F28", "#437EA7", "#9651A8", "rgba(229, 142, 54, 0.95)"],
     QUALITY_COLOR_FG: ["rgb(255,255,255)", "rgb(30,255,0)", "rgb(0,112,221)", "rgb(163,53,238)", "rgb(255,128,0)"],
     QUALITY_TEXT: ["普通", "优秀", "精良", "史诗", "传说"],
     SOCKET_ITEM_CHANCE: 0.15,

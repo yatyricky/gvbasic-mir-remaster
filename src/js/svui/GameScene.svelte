@@ -28,7 +28,7 @@
                     },
                 ],
             },
-        })
+        });
     }
 
     function openInventory() {
@@ -62,30 +62,17 @@
 </script>
 
 <div>
-    <button
-    onclick={openStats}
-     style={`left: ${Const.SIZE2 * 0}px; top: ${Const.SIZE2 * 9}px;`}>
+    <button class="btn" onclick={openStats} style={`left: ${Const.SIZE2 * 0}px; top: ${Const.SIZE2 * 9}px;`}>
         状态
     </button>
-    <button
-        onclick={openInventory}
-        style={`left: ${Const.SIZE2 * 1.5}px; top: ${Const.SIZE2 * 9}px;`}
-    >
+    <button class="btn" onclick={openInventory} style={`left: ${Const.SIZE2 * 1.5}px; top: ${Const.SIZE2 * 9}px;`}>
         装备
     </button>
-    <button
-        onclick={openBag}
-        style={`left: ${Const.SIZE2 * 3}px; top: ${Const.SIZE2 * 9}px;`}
-    >
+    <button class="btn" onclick={openBag} style={`left: ${Const.SIZE2 * 3}px; top: ${Const.SIZE2 * 9}px;`}>
         背包
     </button>
-    <button style={`left: ${Const.SIZE2 * 4.5}px; top: ${Const.SIZE2 * 9}px;`}>
-        技能
-    </button>
-    <button
-        onclick={exitGame}
-        style={`left: ${Const.SIZE2 * 4.5}px; top: ${Const.SIZE2 * 8}px;`}
-    >
+    <button class="btn" style={`left: ${Const.SIZE2 * 4.5}px; top: ${Const.SIZE2 * 9}px;`}> 技能 </button>
+    <button class="btn" onclick={exitGame} style={`left: ${Const.SIZE2 * 4.5}px; top: ${Const.SIZE2 * 8}px;`}>
         退出
     </button>
 </div>
@@ -93,11 +80,14 @@
 <JoyStick />
 
 <style>
-    button {
+    .btn {
         position: absolute;
         width: 60px;
         height: 40px;
-        background: none;
-        font-size: 16px;
+        font-size: 14px;
+        background-color: #680000;
+        border-radius: 4px;
+        padding: 0px;
+        color: #ceae0f;
     }
 </style>

@@ -1,4 +1,4 @@
-window.debug = true;
+window.debug = false;
 const domDebugPanels = document.getElementById('debugPanels');
 if (!window.debug) {
     domDebugPanels.style.display = "none";
@@ -24,8 +24,6 @@ const domSvui = document.getElementById('svui');
 domSvui.style.width = `${Const.SIZE * 20}px`;
 domSvui.style.height = `${Const.SIZE * 20}px`;
 mount(Main, { target: domSvui });
-
-// InitInput();
 
 let initedGameScene = false;
 
