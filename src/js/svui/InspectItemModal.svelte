@@ -1,14 +1,19 @@
 <script>
-    import { ItemById, ItemGroupBySetStat } from "../config/Item";
+    import { ItemById } from "../config/Item";
     import Const from "../Const";
     import ItemInstance from "../data/ItemInstance";
-    import { arrIsEmpty, objEntries, objIsEmpty, objKeys } from "../Utils";
+    import { arrIsEmpty, objEntries, objIsEmpty } from "../Utils";
     import StatEntryFragment from "./StatEntryFragment.svelte";
     import { UnitById } from "../config/Unit";
     import SceneManager from "../SceneManager";
     import UnitComponent from "../components/UnitComponent";
     import { onDestroy, onMount } from "svelte";
     import { subscribe } from "../EventBus";
+    import {
+        ItemGroupBySetStat,
+        ItemSetGroupBySetStat,
+    } from "../config/ItemEx";
+    import { AffixById } from "../config/Affix";
 
     /**
      * @type {{close: any, item: ItemSaveData, actions: any}}
@@ -22,22 +27,60 @@
         .getComponent(UnitComponent);
     const heroData = hero.persistantData;
 
-    const allSetIds = objKeys(ItemGroupBySetStat);
-
-    const xxx = $derived(
+    const setEntries = $derived(
         (() => {
-            const mySetIds = objKeys(it.baseStats);
-            const intersection = mySetIds.filter((id) =>
-                allSetIds.includes(id),
-            );
-            if (intersection.length !== 1) {
-                return null;
+            const setItemId = itemConfig.setStat;
+            if (setItemId == null) {
+                return [];
             }
-            const setItemId = intersection[0];
-            const completion = ItemGroupBySetStat[/**@type {StatId}*/(setItemId)];
-            
-
-            return null;
+            /**@type {Array<Partial<{ text: string, color: string, indent: number, height: number; statId: StatId, val: StatValueSaveData, style: string, formatter: string }>>}*/
+            const ret = [{ height: 8 }];
+            const wholeSet = ItemGroupBySetStat[setItemId];
+            const setConfig = ItemSetGroupBySetStat[setItemId];
+            /**@type {Set<ItemId>}*/
+            const wornItems = new Set();
+            for (const [, v] of objEntries(heroData.inventory)) {
+                for (const vv of v) {
+                    if (ItemById[vv.id].setStat === setItemId) {
+                        wornItems.add(vv.id);
+                    }
+                }
+            }
+            ret.push({
+                text: `${setConfig[0].name}(${wornItems.size}/${wholeSet.length})`,
+                color: "#e6bd00",
+            });
+            for (const setPiece of wholeSet) {
+                ret.push({
+                    text: setPiece.name,
+                    indent: 8,
+                    color: wornItems.has(setPiece.id) ? "#FFFFA8" : "#807F86",
+                });
+            }
+            ret.push({ height: 8 });
+            for (const completion of setConfig) {
+                /**@type {StatData}*/
+                const tempStats = {};
+                for (const [affixId, qlvl] of objEntries(
+                    completion.fixedAffix,
+                )) {
+                    ItemInstance.collapseAffix(
+                        AffixById[affixId],
+                        tempStats,
+                        0,
+                        qlvl,
+                    );
+                }
+                for (const [statId, val] of objEntries(tempStats)) {
+                    ret.push({
+                        statId,
+                        val,
+                        style: `color: ${wornItems.size >= completion.setCount ? Const.QUALITY_COLOR_FG[1] : "#807F86"};`,
+                        formatter: `(${completion.setCount})套装: {0}`,
+                    });
+                }
+            }
+            return ret;
         })(),
     );
 
@@ -154,6 +197,27 @@
                     />
                 {/each}
             {/if}
+
+            {#each setEntries as setEntry, i (i)}
+                {#if setEntry.statId != null}
+                    <StatEntryFragment
+                        style={setEntry.style}
+                        statId={setEntry.statId}
+                        val={setEntry.val}
+                        formatter={setEntry.formatter}
+                    />
+                {:else}
+                    <div
+                        style={`
+                            ${setEntry.color != null ? `color:${setEntry.color};` : ""} 
+                            ${setEntry.indent != null ? `padding-left: ${setEntry.indent}px;` : ""} 
+                            ${setEntry.height != null ? `height: ${setEntry.height}px;` : ""} 
+                        `}
+                    >
+                        {setEntry.text}
+                    </div>
+                {/if}
+            {/each}
 
             <div>需要等级 {it.level}</div>
         </div>

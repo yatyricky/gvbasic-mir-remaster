@@ -1,6 +1,9 @@
+import { AffixById } from "../config/Affix";
 import { ItemById } from "../config/Item";
+import { ItemSetGroupBySetStat } from "../config/ItemEx";
 import { StatById, Stats } from "../config/Stat";
 import { arrGetClamped, objEntries, objKeys } from "../Utils";
+import ItemInstance from "./ItemInstance";
 import { mathRandomIncl, mathRandomIntIncl } from "./MathLab";
 import Range from "./Range";
 
@@ -252,6 +255,8 @@ export default class ReactStat {
         this.initBaseStat(saveData.stats);
         // skill stats
         // equip stats
+        /**@type {Map<StatId, number>}*/
+        const wornSets = new Map();
         for (const [, items] of objEntries(saveData.inventory)) {
             for (const item of items) {
                 if (item == null) {
@@ -268,6 +273,7 @@ export default class ReactStat {
                 for (const [statId, stat] of objEntries(item.extStats)) {
                     this.addStat(statId, stat);
                 }
+                // socket fillers
                 for (const [, socketItem] of objEntries(item.sockets)) {
                     if (socketItem == null) {
                         continue;
@@ -284,8 +290,34 @@ export default class ReactStat {
                         this.addStat(statId, stat);
                     }
                 }
+                // runeword stats
                 for (const [statId, stat] of objEntries(item.runeWordStats)) {
                     this.addStat(statId, stat);
+                }
+                // set items
+                if (itemConfig.setStat != null) {
+                    if (!wornSets.has(itemConfig.setStat)) {
+                        wornSets.set(itemConfig.setStat, 1);
+                    } else {
+                        wornSets.set(itemConfig.setStat, wornSets.get(itemConfig.setStat) + 1);
+                    }
+                }
+            }
+        }
+        // set item stats
+        for (const [setId, items] of wornSets) {
+            const completion = ItemSetGroupBySetStat[setId];
+            for (const entry of completion) {
+                if (items < entry.setCount) {
+                    continue; // not enough items to complete the set
+                }
+                /**@type {StatData}*/
+                const tempStats = {};
+                for (const [affixId, qlvl] of objEntries(entry.fixedAffix)) {
+                    ItemInstance.collapseAffix(AffixById[affixId], tempStats, 0, qlvl);
+                }
+                for (const [statId, val] of objEntries(tempStats)) {
+                    this.addStat(statId, val);
                 }
             }
         }

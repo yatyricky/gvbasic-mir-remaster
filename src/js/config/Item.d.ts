@@ -27,5 +27,4 @@ declare global {
 declare const Items: Array<IItemConfig>;
 declare const ItemById: Partial<Record<ItemId, IItemConfig>>;
 declare const ItemGroupByType: Partial<Record<ItemType, Array<IItemConfig>>>;
-declare const ItemGroupBySetStat: Partial<Record<StatId, Array<IItemConfig>>>;
-export { Items, ItemById, ItemGroupByType, ItemGroupBySetStat }
+export { Items, ItemById, ItemGroupByType }
