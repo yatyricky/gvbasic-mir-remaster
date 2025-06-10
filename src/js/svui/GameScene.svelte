@@ -4,6 +4,7 @@
     import JoyStick from "./JoyStick.svelte";
     import InventoryModal from "./InventoryModal.svelte";
     import BagModal from "./BagModal.svelte";
+    import StatModal from "./StatModal.svelte";
     import AnyaShop from "./AnyaShop.svelte";
     import MessageBox from "./MessageBox.svelte";
 
@@ -44,6 +45,13 @@
         });
     }
 
+    function openStats() {
+        dispatch("modal:show", {
+            component: StatModal,
+            props: {},
+        });
+    }
+
     subscribe("shop:anya", () => {
         dispatch("modal:show", { component: AnyaShop });
     });
@@ -54,7 +62,9 @@
 </script>
 
 <div>
-    <button style={`left: ${Const.SIZE2 * 0}px; top: ${Const.SIZE2 * 9}px;`}>
+    <button
+    onclick={openStats}
+     style={`left: ${Const.SIZE2 * 0}px; top: ${Const.SIZE2 * 9}px;`}>
         状态
     </button>
     <button

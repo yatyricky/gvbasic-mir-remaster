@@ -48,13 +48,9 @@
         {/if}
     {:else if statConfig.type === "range"}
         {#if statConfig.format === "int"}
-            {fmt(
-                `${statConfig.name}+${val.range.map((v) => Math.floor(v)).join("-")}`,
-            )}
+            {fmt(`${statConfig.name}+${val.range.map((v) => Math.floor(v)).join("-")}`)}
         {:else if statConfig.format === "percent"}
-            {fmt(
-                `${statConfig.name}+${val.range.map((v) => `${v.toFixed(2)}%`).join("-")}`,
-            )}
+            {fmt(`${statConfig.name}+${val.range.map((v) => `${v.toFixed(2)}%`).join("-")}`)}
         {:else}
             {new Error(`Unknown stat format: ${statConfig.format}`)}
         {/if}
