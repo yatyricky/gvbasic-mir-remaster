@@ -1,10 +1,6 @@
 <script>
-    import { onDestroy, onMount } from "svelte";
     import UnitComponent from "../components/UnitComponent";
-    import { subscribe } from "../EventBus";
     import SceneManager from "../SceneManager";
-    import ItemFragment from "./ItemFragment.svelte";
-    import Const from "../Const";
     import { StatById } from "../config/Stat";
     import { objKeys, strFormat } from "../Utils";
     import { SkillById } from "../config/Skill";

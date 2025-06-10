@@ -270,7 +270,7 @@ export default class ItemInstance {
      */
     static runeWordCarving(item) {
         const allSockets = ItemInstance.getSocketCount(item);
-        if (allSockets === 0 || allSockets !== ItemInstance.getFilledSocketCount(item)) {
+        if (allSockets === 0 || allSockets !== ItemInstance.getFilledSocketCount(item) || item.baseStats.rw == null) {
             return;
         }
         const itemConfig = ItemById[item.id];
