@@ -214,8 +214,16 @@ export function strWrap(str, width) {
  * @returns 
  */
 export function strFormat(str, ...args) {
-    return str.replace(/{(\d+)}/g, (match, index) => {
-        return args[index] != null ? args[index] : match;
+    const regex = /{(?<idx>\d+)(\.(?<pts>\d+))?}/g;
+    return str.replace(regex, (_0, _1, _2, _3, _4, _5, groups) => {
+        const idx = parseInt(groups?.idx);
+        const pts = parseInt(groups?.pts ?? "0");
+        const val = args[idx];
+        if (typeof val === "number") {
+            return val.toFixed(pts);
+        } else {
+            return val;
+        }
     });
 }
 

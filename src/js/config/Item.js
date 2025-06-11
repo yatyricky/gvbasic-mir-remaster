@@ -264,7 +264,7 @@ export const Items = [
     { id: "magicbag", name: "锦囊", level: 11, quality: 0, maxQuality: 2, image: "INV_Misc_Bag_09_Blue", type: "instrument", randomAffix: { ["int1"]: 0, ["spi1"]: 0 }, sockets: "sok3" },
     { id: "scriptures", name: "经书", level: 11, quality: 0, maxQuality: 2, image: "INV_Misc_Book_08", type: "instrument", randomAffix: { ["int1"]: 0, ["spi1"]: 0 }, sockets: "sok3" },
     { id: "mattock", name: "鹤嘴锄", level: 11, quality: 3, description: "鹤嘴锄描述", image: "INV_Pick_02", type: "axe", fixedAffix: { ["xdmg1"]: 0, ["luck1"]: 0 } },
-    { id: "rakshasa", name: "罗刹", level: 15, quality: 3, description: "罗刹描述", image: "INV_Axe_66", type: "axe2h", fixedAffix: { ["xdmg1rev"]: 0.5, ["curs1"]: 0 } },
+    { id: "rakshasa", name: "罗刹", level: 15, quality: 3, description: "罗刹描述", image: "INV_Axe_66", type: "axe2h", fixedAffix: { ["xdmglo1"]: 0.5, ["curs1"]: 0 } },
     { id: "eightwilderness", name: "八荒", level: 15, quality: 3, classOnly: ["warr"], description: "八荒描述", image: "INV_Sword_137", type: "dao", fixedAffix: { ["xdmg1"]: 2 } },
     { id: "overwind", name: "凌风", level: 19, quality: 3, classOnly: ["warr"], description: "凌风描述", image: "INV_Sword_122", type: "dao2h", fixedAffix: { ["xdmg1"]: 2.1 } },
     { id: "brokensoul", name: "破魂", level: 20, quality: 3, classOnly: ["warr"], description: "破魂", image: "INV_Sword_55", type: "dao", fixedAffix: { ["xdmg1"]: 2.1, ["hit1"]: 0 } },

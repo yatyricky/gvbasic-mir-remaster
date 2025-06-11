@@ -79,7 +79,7 @@ class UserData {
         // candidates.push("vomaarmor", "vomaaxe", "womawrist");
 
         for (let i = 0; i < count; i++) {
-            const item = ItemInstance.drop(arrGetOne(candidates), 35, 300);
+            const item = ItemInstance.drop(arrGetOne(candidates), 35, 30000);
             this.anyaGoods.push(item);
         }
 

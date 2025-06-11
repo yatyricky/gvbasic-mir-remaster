@@ -29,47 +29,22 @@
     }
 </script>
 
-<div {style}>
-    {#if statConfig.type === "int"}
-        {#if statConfig.format === "int"}
-            {fmt(`${statConfig.name}+${Math.floor(val.value)}`)}
-        {:else if statConfig.format === "percent"}
-            {fmt(`${statConfig.name}+${val.value.toFixed(0)}%`)}
-        {:else if statConfig.format === "none"}{:else}
-            {new Error(`Unknown stat format: ${statConfig.format}`)}
-        {/if}
-    {:else if statConfig.type === "number"}
-        {#if statConfig.format === "int"}
-            {fmt(`${statConfig.name}+${Math.floor(val.value)}`)}
-        {:else if statConfig.format === "percent"}
-            {fmt(`${statConfig.name}+${val.value.toFixed(2)}%`)}
-        {:else if statConfig.format === "none"}{:else}
-            {new Error(`Unknown stat format: ${statConfig.format}`)}
-        {/if}
-    {:else if statConfig.type === "range"}
-        {#if statConfig.format === "int"}
-            {fmt(`${statConfig.name}+${val.range.map((v) => Math.floor(v)).join("-")}`)}
-        {:else if statConfig.format === "percent"}
-            {fmt(`${statConfig.name}+${val.range.map((v) => `${v.toFixed(2)}%`).join("-")}`)}
+{#if statConfig.description != null}
+    <div {style}>
+        {#if statConfig.type === "int" || statConfig.type === "number"}
+            {fmt(strFormat(statConfig.description, val.value))}
+        {:else if statConfig.type === "range"}
+            {fmt(strFormat(statConfig.description, val.range[0], val.range[1]))}
+        {:else if statConfig.type === "set"}
+            {fmt(strFormat(statConfig.description, objKeys(val.set).join(",")))}
+        {:else if statConfig.type === "skillList"}
+            {#each val.skillList as e, i (i)}
+                <div>
+                    {fmt(strFormat(statConfig.description, e.chance * 100, e.level, SkillById[e.skill].name))}
+                </div>
+            {/each}
         {:else}
-            {new Error(`Unknown stat format: ${statConfig.format}`)}
+            {new Error(`Unknown stat type: ${statConfig.type}`)}
         {/if}
-    {:else if statConfig.type === "set"}
-        {fmt(`${statConfig.name} ${objKeys(val.set).join(",")}`)}
-    {:else if statConfig.type === "skillList"}
-        {fmt(
-            val.skillList
-                .map((e) =>
-                    strFormat(
-                        statConfig.description,
-                        (e.chance * 100).toFixed(2),
-                        Math.floor(e.level),
-                        SkillById[e.skill].name,
-                    ),
-                )
-                .join(";"),
-        )}
-    {:else}
-        {new Error(`Unknown stat type: ${statConfig.type}`)}
-    {/if}
-</div>
+    </div>
+{/if}

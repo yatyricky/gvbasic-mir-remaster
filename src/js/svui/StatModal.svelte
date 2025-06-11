@@ -2,9 +2,8 @@
     import UnitComponent from "../components/UnitComponent";
     import SceneManager from "../SceneManager";
     import { StatById } from "../config/Stat";
-    import { objKeys, strFormat } from "../Utils";
-    import { SkillById } from "../config/Skill";
-
+    import { strFormat } from "../Utils";
+    
     const { close } = $props();
 
     const hero = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent);
@@ -17,49 +16,10 @@
     function formatStat(statId) {
         const val = stat.getStat(statId);
         const statConfig = StatById[statId];
-        if (statConfig.type === "int") {
-            if (statConfig.format === "int") {
-                return Math.floor(val.value).toString();
-            } else if (statConfig.format === "percent") {
-                return `${val.value.toFixed(0)}%`;
-            } else if (statConfig.format === "none") {
-                return null;
-            } else {
-                throw new Error(`Unknown stat format: ${statConfig.format}`);
-            }
-        } else if (statConfig.type === "number") {
-            if (statConfig.format === "int") {
-                return Math.floor(val.value).toString();
-            } else if (statConfig.format === "percent") {
-                return `${val.value.toFixed(2)}%`;
-            } else if (statConfig.format === "none") {
-                return null;
-            } else {
-                throw new Error(`Unknown stat format: ${statConfig.format}`);
-            }
+        if (statConfig.type === "int" || statConfig.type === "number") {
+            return strFormat(statConfig.description, val.value);
         } else if (statConfig.type === "range") {
-            if (statConfig.format === "int") {
-                return `${val.range.map((v) => Math.floor(v)).join("-")}`;
-            } else if (statConfig.format === "percent") {
-                return `${val.range.map((v) => `${v.toFixed(2)}%`).join("-")}`;
-            } else if (statConfig.format === "none") {
-                return null;
-            } else {
-                throw new Error(`Unknown stat format: ${statConfig.format}`);
-            }
-        } else if (statConfig.type === "set") {
-            return `${objKeys(val.set).join(",")}`;
-        } else if (statConfig.type === "skillList") {
-            return val.skillList
-                .map((e) =>
-                    strFormat(
-                        statConfig.description,
-                        (e.chance * 100).toFixed(2),
-                        Math.floor(e.level),
-                        SkillById[e.skill].name,
-                    ),
-                )
-                .join(";");
+            return strFormat(statConfig.description, val.range[0], val.range[1]);
         } else {
             throw new Error(`Unknown stat type: ${statConfig.type}`);
         }
