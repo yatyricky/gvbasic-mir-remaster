@@ -16,12 +16,11 @@ const Const = {
     COLOR_BG_04: "rgb(42, 94, 60)",
 
     /** white, green, blue, purple, orange */
-    LOOT_WEIGHT_MOB: [1000, 100, 10, 5, 1],
-    LOOT_WEIGHT_ELITE: [0, 100, 10, 5, 1],
-    LOOT_WEIGHT_BOSS: [0, 38, 60, 15, 3],
-    LOOT_LUCK_COEFFICIENT: [0, 0.5, 1, 1, 1],
-    LOOT_AFFIX_COUNT_GREEN: [3, 1],
-    LOOT_AFFIX_COUNT_BLUE: [100, 70, 5, 1],
+    LOOT_AFFIX_COUNT_COMMON: [1000, 150, 50, 5, 3, 1, 1],
+    LOOT_AFFIX_COUNT_ELITE: [0, 150, 50, 5, 3, 1, 1],
+    LOOT_AFFIX_COUNT_BOSS: [0, 150, 50, 25, 15, 5, 5],
+    LOOT_AFFIX_COUNT_2_QUALITY: [0, 1, 1, 2, 2, 2, 2],
+    LOOT_MAX_AFFIX_BY_QUALITY: [0, 2, 6, 999, 999],
     MAX_ILVL_FACTOR: 4,
     QUALITY_COLOR_BG: ["#A3A3A1", "#368F28", "#437EA7", "#9651A8", "rgba(229, 142, 54, 0.95)"],
     QUALITY_COLOR_FG: ["rgb(255,255,255)", "rgb(30,255,0)", "rgb(0,112,221)", "rgb(163,53,238)", "rgb(255,128,0)"],

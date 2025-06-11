@@ -16,6 +16,9 @@ export default class ItemInstance {
      * @param {number} qlvl 
      */
     static collapseAffix(affix, stats, ilvl, qlvl) {
+        if (affix.ilvlScale != null) {
+            ilvl = affix.ilvlScale;
+        }
         const statConfig = StatById[affix.statId];
         const ilvlFactor = Math.min(ilvl / 10, Const.MAX_ILVL_FACTOR);
         const a = (affix.lo + affix.loIlvlDelta * ilvlFactor) * (1 + qlvl);
@@ -37,11 +40,11 @@ export default class ItemInstance {
                 stats[affix.statId].value += val;
             }
         } else if (statConfig.type === "range") {
-            val = mathFluctuate(a, affix.fluctuate);
+            val = mathFluctuate(a, affix.fluctuate ?? 0);
             if (a === b) {
                 val2 = val;
             } else {
-                val2 = mathFluctuate(b, affix.fluctuate);
+                val2 = mathFluctuate(b, affix.fluctuate ?? 0);
             }
             if (stats[affix.statId] == null) {
                 stats[affix.statId] = { range: [val, val2] };
@@ -110,26 +113,27 @@ export default class ItemInstance {
                 }
                 dropperType = dropperConfig.type;
             }
-            let qualityWeight = Const.LOOT_WEIGHT_MOB.slice(quality, itemConfig.maxQuality + 1);
+            let qualityWeight;
             if (dropperType === "elite") {
-                qualityWeight = Const.LOOT_WEIGHT_ELITE.slice(quality, itemConfig.maxQuality + 1);
+                qualityWeight = [...Const.LOOT_AFFIX_COUNT_ELITE];
             } else if (dropperType === "boss") {
-                qualityWeight = Const.LOOT_WEIGHT_BOSS.slice(quality, itemConfig.maxQuality + 1);
+                qualityWeight = [...Const.LOOT_AFFIX_COUNT_BOSS];
+            } else {
+                qualityWeight = [...Const.LOOT_AFFIX_COUNT_COMMON];
             }
             for (let i = 0; i < qualityWeight.length; i++) {
-                qualityWeight[i] = qualityWeight[i] * (100 + luck * Const.LOOT_LUCK_COEFFICIENT[i + quality]) / 100;
-            }
-
-            quality += mathWeightedRandom(qualityWeight);
-
-            if (quality > 0) {
-                let affixCount = 0;
-                if (quality === 1) {
-                    affixCount = mathWeightedRandom(Const.LOOT_AFFIX_COUNT_GREEN) + 1;
-                } else if (quality === 2) {
-                    affixCount = mathWeightedRandom(Const.LOOT_AFFIX_COUNT_BLUE) + 3;
+                const pow = Math.pow(10, i);
+                const val = qualityWeight[i];
+                const subtract = Math.min(Math.floor(luck / pow), val);
+                if (subtract <= 0) {
+                    break;
                 }
+                qualityWeight[i] = val - subtract;
+                luck -= subtract * pow;
+            }
+            let affixCount = Math.min(mathWeightedRandom(qualityWeight), Const.LOOT_MAX_AFFIX_BY_QUALITY[itemConfig.maxQuality ?? 4]);
 
+            if (affixCount > 0) {
                 let prefixCount = 0;
                 if (Math.random() < 0.5) {
                     prefixCount = Math.floor(affixCount / 2);
@@ -138,7 +142,7 @@ export default class ItemInstance {
                 }
                 const suffixCount = affixCount - prefixCount;
 
-                const candidates = AffixGroupByAvailOn[itemConfig.type] ?? [];
+                const candidates = AffixGroupByAvailOn[itemConfig.type].filter(e => (e.ilvl ?? 0) <= ilvl) ?? [];
                 const placeGroup = arrGroupBy(candidates, "affixType");
                 const loop = [{ type: "prefix", count: prefixCount }, { type: "suffix", count: suffixCount }];
                 for (const iter of loop) {
@@ -169,18 +173,25 @@ export default class ItemInstance {
                 if (prefix != null) {
                     name = `${prefix.affix.name}${name}`;
                 }
+
+                quality = Const.LOOT_AFFIX_COUNT_2_QUALITY[affixCount] ?? 0;
             } else {
                 // socket items
                 if (Math.random() < Const.SOCKET_ITEM_CHANCE) {
-                    baseAffixesRaw.push({ affix: AffixById[itemConfig.sockets], qlvl: 0 });
-                    baseAffixesRaw.push({ affix: AffixById["rw1"], qlvl: 0 });
+                    const candidates = AffixGroupByAvailOn[itemConfig.type]?.filter(e => e.statId === "sok" && ilvl >= (e.ilvl ?? 0)) ?? [];
+                    const sel = mathWeightedRandom(candidates.map(e => e.weight));
+                    const affix = candidates[sel];
+                    if (affix != null) {
+                        baseAffixesRaw.push({ affix, qlvl: 0 });
+                        baseAffixesRaw.push({ affix: AffixById["rw1"], qlvl: 0 });
+                    }
                 }
             }
         }
 
         const commonCount = mathRandomIntIncl(itemConfig.affixCount ?? 0, itemConfig.maxAffixCount ?? 0);
         if (commonCount > 0) {
-            const candidates = AffixGroupByAvailOn[itemConfig.type] ?? [];
+            const candidates = AffixGroupByAvailOn[itemConfig.type].filter(e => (e.ilvl ?? 0) <= ilvl) ?? [];
             if (!arrIsEmpty(itemConfig.excludeAffix)) {
                 for (const forbid of itemConfig.excludeAffix) {
                     const index = candidates.findIndex(e => e.id === forbid);
