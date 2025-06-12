@@ -35,15 +35,15 @@
         <div class="container">
             <div>{StatById.rthp.name}: {formatStat("rthp")}/{formatStat("rtmaxhp")}</div>
             <div>{StatById.rtmp.name}: {formatStat("rtmp")}/{formatStat("rtmaxmp")}</div>
-            <div>{StatById.str.name}: {formatStat("str")}</div>
-            <div>{StatById.int.name}: {formatStat("int")}</div>
-            <div>{StatById.spi.name}: {formatStat("spi")}</div>
-            <div>{StatById.vit.name}: {formatStat("vit")}</div>
-            <div>{StatById.xdmg.name}: {formatStat("xdmg")}</div>
-            <div>{StatById.fdmg.name}: {formatStat("fdmg")}</div>
-            <div>{StatById.tdmg.name}: {formatStat("tdmg")}</div>
-            <div>{StatById.hdmg.name}: {formatStat("hdmg")}</div>
-            <div>{StatById.pdmg.name}: {formatStat("pdmg")}</div>
+            <div>{formatStat("str")}</div>
+            <div>{formatStat("int")}</div>
+            <div>{formatStat("spi")}</div>
+            <div>{formatStat("vit")}</div>
+            <div>{formatStat("xdmg")}</div>
+            <div>{formatStat("fdmg")}</div>
+            <div>{formatStat("tdmg")}</div>
+            <div>{formatStat("hdmg")}</div>
+            <div>{formatStat("pdmg")}</div>
             <div>{StatById.rtxres.name}: {formatStat("rtxres")}</div>
             <div>{StatById.rtfres.name}: {formatStat("rtfres")}</div>
             <div>{StatById.rttres.name}: {formatStat("rttres")}</div>
