@@ -4,7 +4,7 @@ import { StatById } from "../config/Stat";
 import { UnitById } from "../config/Unit";
 import Const from "../Const";
 import { arrGetOne, arrGetSome, arrGroupBy, arrIsEmpty, arrRemove, objEntries, objIsEmpty, objKeys } from "../Utils";
-import { mathFluctuate, mathRandomIncl, mathRandomIntIncl, mathWeightedRandom } from "./MathLab";
+import { mathClamp, mathFluctuate, mathRandomIncl, mathRandomIntIncl, mathWeightedRandom } from "./MathLab";
 
 export default class ItemInstance {
 
@@ -102,6 +102,7 @@ export default class ItemInstance {
 
         let name = itemConfig.name;
         let quality = itemConfig.quality;
+        const minAffixCount = Const.LOOT_ITEM_QUALITY_2_MIN_AFFIX_COUNT[quality];
         // normal magic items
         if (itemConfig.maxQuality != null) {
             /**@type {UnitType} */
@@ -131,7 +132,7 @@ export default class ItemInstance {
                 qualityWeight[i] = val - subtract;
                 luck -= subtract * pow;
             }
-            let affixCount = Math.min(mathWeightedRandom(qualityWeight), Const.LOOT_MAX_AFFIX_BY_QUALITY[itemConfig.maxQuality ?? 4]);
+            let affixCount = Math.max(Math.min(mathWeightedRandom(qualityWeight), Const.LOOT_MAX_AFFIX_BY_QUALITY[itemConfig.maxQuality ?? 4]), minAffixCount);
 
             if (affixCount > 0) {
                 let prefixCount = 0;
@@ -154,6 +155,9 @@ export default class ItemInstance {
                         const affix = arrGetOne(affixConfigs);
                         arrRemove(affixConfigs, affix);
                         extAffixesRaw.push({ affix, qlvl: 0 });
+                        if (affixConfigs.length === 0) {
+                            break; // No more affixes available for this type
+                        }
                     }
                 }
 
@@ -174,7 +178,7 @@ export default class ItemInstance {
                     name = `${prefix.affix.name}${name}`;
                 }
 
-                quality = Const.LOOT_AFFIX_COUNT_2_QUALITY[affixCount] ?? 0;
+                quality = Const.LOOT_AFFIX_COUNT_2_QUALITY[mathClamp(extAffixesRaw.length, 0, Const.LOOT_AFFIX_COUNT_2_QUALITY.length - 1)] ?? 0;
             } else {
                 // socket items
                 if (Math.random() < Const.SOCKET_ITEM_CHANCE) {
@@ -203,16 +207,19 @@ export default class ItemInstance {
             extAffixesRaw.push(...arrGetSome(candidates, commonCount).map(e => ({ affix: e, qlvl: 0 })));
         }
 
+        let level = itemConfig.level;
         /**@type {StatData} */
         const baseStats = {};
         for (const e of baseAffixesRaw) {
             ItemInstance.collapseAffix(e.affix, baseStats, ilvl, e.qlvl);
+            level = Math.max(level, e.affix.level ?? 0);
         }
 
         /**@type {StatData} */
         const extStats = {};
         for (const e of extAffixesRaw) {
             ItemInstance.collapseAffix(e.affix, extStats, ilvl, e.qlvl);
+            level = Math.max(level, e.affix.level ?? 0);
         }
 
         if (quality >= 1 && quality <= 2 && extStats.sok != null) {
@@ -229,10 +236,10 @@ export default class ItemInstance {
         /**@type {ItemSaveData} */
         const item = {
             uuid: crypto.randomUUID(),
-            id: id,
+            id,
             name,
-            ilvl: ilvl,
-            level: itemConfig.level,
+            ilvl,
+            level,
             quality,
             baseStats,
             extStats,
