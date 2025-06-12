@@ -7,6 +7,7 @@
     import StatModal from "./StatModal.svelte";
     import AnyaShop from "./AnyaShop.svelte";
     import MessageBox from "./MessageBox.svelte";
+    import { onDestroy, onMount } from "svelte";
 
     function exitGame() {
         dispatch("modal:show", {
@@ -52,12 +53,35 @@
         });
     }
 
-    subscribe("shop:anya", () => {
-        dispatch("modal:show", { component: AnyaShop });
+    /**@type {any[]}*/
+    const subs = [];
+
+    onMount(() => {
+        subs.push(
+            subscribe("shop:anya", () => {
+                dispatch("modal:show", { component: AnyaShop });
+            }),
+
+            subscribe("exit:anya", () => {
+                dispatch("modal:close", AnyaShop);
+            }),
+
+            subscribe("key:click", (event) => {
+                if (event.key === "esc") {
+                    if (event.used) {
+                        return;
+                    }
+                    exitGame();
+                }
+            }, undefined, -1000)
+        );
     });
 
-    subscribe("exit:anya", () => {
-        dispatch("modal:close", AnyaShop);
+    onDestroy(() => {
+        while (subs.length > 0) {
+            const sub = subs.pop();
+            sub?.();
+        }
     });
 </script>
 

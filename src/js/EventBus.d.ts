@@ -1,5 +1,6 @@
 import type { Component } from "svelte";
 import GameObject from "./gameObjs/GameObject";
+import KeyEvent from "./KeyEvent";
 
 interface EventBusDefine {
     "toast": string;
@@ -15,8 +16,9 @@ interface EventBusDefine {
     "modal:show": { component: any, props?: Record<string, any>, multiple?: boolean };
     "modal:close": any;
     "item:refresh": string;
+    "key:click": KeyEvent;
 }
 
-export function subscribe<T extends keyof EventBusDefine>(event: T, callback: (data: EventBusDefine[T]) => void, fireImmediately = false): () => void;
+export function subscribe<T extends keyof EventBusDefine>(event: T, callback: (data: EventBusDefine[T]) => void, fireImmediately = false, priority = 0): () => void;
 export function dispatch<T extends keyof EventBusDefine>(event: T, data: EventBusDefine[T]): void;
 export function flushEvents(): void;

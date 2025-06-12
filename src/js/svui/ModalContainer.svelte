@@ -1,4 +1,5 @@
 <script>
+    import { onDestroy, onMount } from "svelte";
     import { subscribe } from "../EventBus";
 
     const modals = $state([]);
@@ -28,34 +29,59 @@
         }
     }
 
-    subscribe("modal:show", (data) => {
-        if (!data.multiple) {
-            const index = modals.findIndex(
-                (m) => m.component === data.component,
-            );
-            if (index !== -1) {
-                // 如果已经存在，则不再添加
-                for (let i = index; i < modals.length - 1; i++) {
-                    let swap = modals[i];
-                    modals[i] = modals[i + 1];
-                    modals[i + 1] = swap;
-                }
-                return;
-            }
-        }
+    /** @type {any}*/
+    let us1;
+    /** @type {any}*/
+    let us2;
+    /** @type {any}*/
+    let us3;
 
-        const id = ++sn;
-        modals.push({
-            ...data,
-            id,
-            close: () => {
-                closeModal(id);
-            },
+    onMount(() => {
+        us1 = subscribe("modal:show", (data) => {
+            if (!data.multiple) {
+                const index = modals.findIndex((m) => m.component === data.component);
+                if (index !== -1) {
+                    // 如果已经存在，则不再添加
+                    for (let i = index; i < modals.length - 1; i++) {
+                        let swap = modals[i];
+                        modals[i] = modals[i + 1];
+                        modals[i + 1] = swap;
+                    }
+                    return;
+                }
+            }
+
+            const id = ++sn;
+            modals.push({
+                ...data,
+                id,
+                close: () => {
+                    closeModal(id);
+                },
+            });
+        });
+
+        us2 = subscribe("modal:close", (comp) => {
+            closeByComponent(comp);
+        });
+
+        us3 = subscribe("key:click", (event) => {
+            if (event.key === "esc") {
+                const popped = modals.pop();
+                if (popped != null) {
+                    event.use();
+                }
+            }
         });
     });
 
-    subscribe("modal:close", (comp) => {
-        closeByComponent(comp);
+    onDestroy(() => {
+        us1?.();
+        us1 = null;
+        us2?.();
+        us2 = null;
+        us3?.();
+        us3 = null;
     });
 </script>
 

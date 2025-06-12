@@ -9,10 +9,7 @@
     import UnitComponent from "../components/UnitComponent";
     import { onDestroy, onMount } from "svelte";
     import { subscribe } from "../EventBus";
-    import {
-        ItemGroupBySetStat,
-        ItemSetGroupBySetStat,
-    } from "../config/ItemEx";
+    import { ItemGroupBySetStat, ItemSetGroupBySetStat } from "../config/ItemEx";
     import { AffixById } from "../config/Affix";
 
     /**
@@ -20,11 +17,10 @@
      */
     let { close, item, actions } = $props();
     let it = $state(item); // Svelte 5 state
+    let btns = $state([]);
 
     const itemConfig = $derived(ItemById[it.id]);
-    const hero = SceneManager.activeScene
-        .find("game/hero")
-        .getComponent(UnitComponent);
+    const hero = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent);
     const heroData = hero.persistantData;
 
     const setEntries = $derived(
@@ -61,15 +57,8 @@
             for (const completion of setConfig) {
                 /**@type {StatData}*/
                 const tempStats = {};
-                for (const [affixId, qlvl] of objEntries(
-                    completion.fixedAffix,
-                )) {
-                    ItemInstance.collapseAffix(
-                        AffixById[affixId],
-                        tempStats,
-                        0,
-                        qlvl,
-                    );
+                for (const [affixId, qlvl] of objEntries(completion.fixedAffix)) {
+                    ItemInstance.collapseAffix(AffixById[affixId], tempStats, 0, qlvl);
                 }
                 for (const [statId, val] of objEntries(tempStats)) {
                     ret.push({
@@ -84,19 +73,36 @@
         })(),
     );
 
-    /**@type {any}*/
-    let unsub = null;
+    /**@type {any[]}*/
+    let unsub = [];
     onMount(() => {
-        unsub = subscribe("item:refresh", (uuid) => {
-            if (it.uuid === uuid) {
-                it = hero.findItemByUuid(uuid);
-            }
-        });
+        unsub.push(
+            subscribe("item:refresh", (uuid) => {
+                if (it.uuid === uuid) {
+                    it = hero.findItemByUuid(uuid);
+                }
+            }),
+            subscribe("key:click", (event) => {
+                if (event.key === "enter") {
+                    const btn = btns[0];
+                    if (btn != null) {
+                        const clickEvent = new MouseEvent("click", {
+                            bubbles: true,
+                            cancelable: true,
+                            view: window,
+                        });
+                        btn.dispatchEvent(clickEvent);
+                    }
+                }
+            }),
+        );
     });
 
     onDestroy(() => {
-        unsub?.();
-        unsub = null;
+        while (unsub.length > 0) {
+            const sub = unsub.pop();
+            sub?.();
+        }
     });
 </script>
 
@@ -105,25 +111,17 @@
         <div class="content">
             {#if it.runeWord != null}
                 {@const runeWord = ItemById[it.runeWord]}
-                <div
-                    class="item-name"
-                    style="color: {Const.QUALITY_COLOR_FG[runeWord.quality]}"
-                >
+                <div class="item-name" style="color: {Const.QUALITY_COLOR_FG[runeWord.quality]}">
                     {runeWord.name}
                 </div>
             {/if}
-            <div
-                class="item-name"
-                style={`color: ${Const.QUALITY_COLOR_FG[it.quality]}`}
-            >
+            <div class="item-name" style={`color: ${Const.QUALITY_COLOR_FG[it.quality]}`}>
                 {it.name}
             </div>
             {#if !objIsEmpty(it.sockets)}
                 <div
                     class="item-name"
-                    style="color: {Const.QUALITY_COLOR_FG[
-                        it.runeWord != null ? ItemById[it.runeWord].quality : 0
-                    ]}"
+                    style="color: {Const.QUALITY_COLOR_FG[it.runeWord != null ? ItemById[it.runeWord].quality : 0]}"
                 >
                     "{objEntries(it.sockets)
                         .map(([, s]) => ItemById[s.id].name)
@@ -138,63 +136,37 @@
                 <div class="item-type">{Const.TYPE_NAME[itemConfig.type]}</div>
             </div>
             {#each objEntries(it.baseStats) as [k, v], i (i)}
-                <StatEntryFragment
-                    style={`color: ${Const.QUALITY_COLOR_FG[0]}`}
-                    statId={k}
-                    val={v}
-                />
+                <StatEntryFragment style={`color: ${Const.QUALITY_COLOR_FG[0]}`} statId={k} val={v} />
             {/each}
             {#each objEntries(it.extStats) as [k, v], i (i)}
-                <StatEntryFragment
-                    style={`color: ${Const.QUALITY_COLOR_FG[1]}`}
-                    statId={k}
-                    val={v}
-                />
+                <StatEntryFragment style={`color: ${Const.QUALITY_COLOR_FG[1]}`} statId={k} val={v} />
             {/each}
             {#if !arrIsEmpty(itemConfig.classOnly)}
                 <div
-                    style="color: {itemConfig.classOnly.includes(
-                        heroData.unitId,
-                    )
+                    style="color: {itemConfig.classOnly.includes(heroData.unitId)
                         ? Const.QUALITY_COLOR_FG[0]
                         : '#DB333C'}"
                 >
-                    限定职业: {itemConfig.classOnly
-                        .map((e) => UnitById[e].name)
-                        .join(", ")}
+                    限定职业: {itemConfig.classOnly.map((e) => UnitById[e].name).join(", ")}
                 </div>
             {/if}
             {#if ItemInstance.getSocketCount(it) > 0}
                 <div>
-                    插槽({ItemInstance.getFilledSocketCount(
-                        it,
-                    )}/{ItemInstance.getSocketCount(it)})
+                    插槽({ItemInstance.getFilledSocketCount(it)}/{ItemInstance.getSocketCount(it)})
                 </div>
             {/if}
             {#each objEntries(it.sockets) as [, v], i (i)}
                 {#each objEntries(v.baseStats) as [kk, vv], j (j)}
-                    <StatEntryFragment
-                        style={`color: ${Const.QUALITY_COLOR_FG[1]}`}
-                        statId={kk}
-                        val={vv}
-                    />
+                    <StatEntryFragment style={`color: ${Const.QUALITY_COLOR_FG[1]}`} statId={kk} val={vv} />
                 {/each}
                 {#each objEntries(v.extStats) as [kk, vv], j (j)}
-                    <StatEntryFragment
-                        style={`color: ${Const.QUALITY_COLOR_FG[1]}`}
-                        statId={kk}
-                        val={vv}
-                    />
+                    <StatEntryFragment style={`color: ${Const.QUALITY_COLOR_FG[1]}`} statId={kk} val={vv} />
                 {/each}
             {/each}
             {#if it.runeWord != null}
                 <div>符文之语</div>
                 {#each objEntries(it.runeWordStats) as [k, v], i (i)}
-                    <StatEntryFragment
-                        style={`color: ${Const.QUALITY_COLOR_FG[1]}`}
-                        statId={k}
-                        val={v}
-                    />
+                    <StatEntryFragment style={`color: ${Const.QUALITY_COLOR_FG[1]}`} statId={k} val={v} />
                 {/each}
             {/if}
 
@@ -234,6 +206,7 @@
         <div class="actions" style={`height: ${Const.SIZE2}px;`}>
             {#each actions as { text, action, autoClose }, i (i)}
                 <button
+                    bind:this={btns[i]}
                     class="btn"
                     style="
                         left: {(Const.SIZE2 * 10 * 0.94 -

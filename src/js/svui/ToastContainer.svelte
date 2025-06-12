@@ -41,6 +41,7 @@
         width: 100%;
         display: flex;
         justify-content: center;
+        pointer-events: none;
     }
     .toast {
         background: rgba(35, 35, 35, 0.7);

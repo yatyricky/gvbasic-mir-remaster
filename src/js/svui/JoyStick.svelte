@@ -3,11 +3,14 @@
     import Const from "../Const";
     import KeyEvent from "../KeyEvent";
     import SceneManager from "../SceneManager";
+    import { dispatch } from "../EventBus";
 
     let btnU = $state(null);
     let btnD = $state(null);
     let btnL = $state(null);
     let btnR = $state(null);
+    let btnEsc = $state(null);
+    let btnEnter = $state(null);
 
     function setupKeyboardControls() {
         /**@type {Record<string, HTMLElement>} */
@@ -16,6 +19,8 @@
             ArrowDown: btnD,
             ArrowLeft: btnL,
             ArrowRight: btnR,
+            Escape: btnEsc, // Use a virtual button for Escape
+            Enter: btnEnter, // Use a virtual button for Enter
         };
 
         /**
@@ -117,10 +122,8 @@
      * @param {string} key
      */
     function dispatchInputEvent(key) {
-        dispatchInputEventRecursive(
-            SceneManager.activeScene,
-            new KeyEvent(key),
-        );
+        dispatchInputEventRecursive(SceneManager.activeScene, new KeyEvent(key));
+        dispatch("key:click", new KeyEvent(key));
     }
 
     onMount(() => {
@@ -131,35 +134,40 @@
 <div>
     <button
         bind:this={btnU}
+        class="btn-arrow"
         onclick={() => dispatchInputEvent("u")}
-        style={`left: ${Const.SIZE2 * 8}px; top: ${Const.SIZE2 * 8}px;`}
-        >↑</button
+        style={`left: ${Const.SIZE2 * 8}px; top: ${Const.SIZE2 * 8}px;`}>↑</button
     >
     <button
         bind:this={btnL}
+        class="btn-arrow"
         onclick={() => dispatchInputEvent("l")}
-        style={`left: ${Const.SIZE2 * 7}px; top: ${Const.SIZE2 * 9}px;`}
-        >←</button
+        style={`left: ${Const.SIZE2 * 7}px; top: ${Const.SIZE2 * 9}px;`}>←</button
     >
     <button
         bind:this={btnD}
+        class="btn-arrow"
         onclick={() => dispatchInputEvent("d")}
-        style={`left: ${Const.SIZE2 * 8}px; top: ${Const.SIZE2 * 9}px;`}
-        >↓</button
+        style={`left: ${Const.SIZE2 * 8}px; top: ${Const.SIZE2 * 9}px;`}>↓</button
     >
     <button
         bind:this={btnR}
+        class="btn-arrow"
         onclick={() => dispatchInputEvent("r")}
-        style={`left: ${Const.SIZE2 * 9}px; top: ${Const.SIZE2 * 9}px;`}
-        >→</button
+        style={`left: ${Const.SIZE2 * 9}px; top: ${Const.SIZE2 * 9}px;`}>→</button
     >
+    <button bind:this={btnEsc} class="btn-hidden" onclick={() => dispatchInputEvent("esc")}>Escape</button>
+    <button bind:this={btnEnter} class="btn-hidden" onclick={() => dispatchInputEvent("enter")}>Escape</button>
 </div>
 
 <style>
-    button {
+    .btn-arrow {
         position: absolute;
         width: 40px;
         height: 40px;
         background: none;
+    }
+    .btn-hidden {
+        display: none;
     }
 </style>
