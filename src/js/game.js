@@ -1,10 +1,4 @@
-window.debug = false;
-const domDebugPanels = document.getElementById('debugPanels');
-if (!window.debug) {
-    domDebugPanels.style.display = "none";
-}
 import GameObject from "./gameObjs/GameObject";
-// import { InitInput } from "./Input";
 import Scene from "./gameObjs/Scene";
 import TextRenderer from "./components/TextRenderer";
 import CharacterController from "./components/CharacterController";

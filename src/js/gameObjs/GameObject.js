@@ -2,18 +2,8 @@ import Component from "../components/Component";
 import SceneManager from "../SceneManager";
 import { uuid } from "../Utils";
 
-window.gameObjs = new Map();
-// @ts-ignore
-window.toggleActive = function (uuid) {
-    const obj = window.gameObjs.get(uuid);
-    if (obj == null) {
-        console.warn(`GameObject ${uuid} not found`);
-        return;
-    }
-    obj.setActive(!obj.active);
-}
-
 export default class GameObject {
+    static allObjs = new Map();
 
     /**
      * 
@@ -23,6 +13,7 @@ export default class GameObject {
      */
     constructor(name, parent = null, orphan = false) {
         this.uuid = uuid();
+        GameObject.allObjs.set(this.uuid, this);
         this._active = true;
         /** @type {GameObject[]}*/
         this.children = [];
@@ -37,10 +28,6 @@ export default class GameObject {
 
         if (!orphan) {
             this.setParent(parent ?? SceneManager.activeScene);
-        }
-
-        if (window.debug) {
-            window.gameObjs.set(this.uuid, this);
         }
     }
 
@@ -254,9 +241,7 @@ export default class GameObject {
             this.parent.removeChild(this);
         }
         this.components.clear();
-        if (window.debug) {
-            window.gameObjs.delete(this.uuid);
-        }
+        GameObject.allObjs.delete(this.uuid);
     }
 
     clearChildren() {

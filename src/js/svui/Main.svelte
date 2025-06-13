@@ -3,7 +3,7 @@
     import GameScene from "./game/GameScene.svelte";
     import ModalContainer from "./ModalContainer.svelte";
     import ToastContainer from "./ToastContainer.svelte";
-    import DebugContainer from "./DebugContainer.svelte";
+    import DebugContainer from "./debug/DebugContainer.svelte";
     import { subscribe } from "../EventBus";
 
     let isLogin = true;

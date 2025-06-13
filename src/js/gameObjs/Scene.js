@@ -6,82 +6,6 @@ import Renderer from "../components/Renderer";
 const app = /**@type {HTMLCanvasElement}*/(document.getElementById('app'));
 const ctx = app.getContext('2d');
 
-const domHierarchyTree = document.getElementById('hierarchyTree');
-const domInspector = document.getElementById('inspector');
-
-let prevTree = "";
-const inspectTarget = new Map();
-let inspectorTarget = 0;
-/**
- * 
- * @param {number} i 
- */
-// @ts-ignore
-window.setTarget = function (i) {
-    inspectorTarget = i;
-}
-
-function buildHierarchyTreeText() {
-    let sb = ""
-    let indent = 0;
-    let id = 1;
-    /**
-     * 
-     * @param {GameObject} curr 
-     */
-    function buildTreeRecursive(curr) {
-        if (curr == null) {
-            return;
-        }
-        let label = curr.name;
-        const comps = [];
-        for (const comp of curr.getComponents()) {
-            comps.push(comp.toString());
-        }
-        if (comps.length > 0) {
-            label += ` (${comps.join(', ')})`;
-        }
-        inspectTarget.set(id, curr);
-        sb += `<div
-                onclick="window.setTarget(${id})"
-                style="${curr.active ? "" : "color:#4f4f4f;"} ${id === inspectorTarget ? "background-color: #999;" : ""}
-                display:flex;"
-                ><div style="width:${indent * 16}px;"></div>${label}</div>`;
-        id++;
-        for (const child of curr.children) {
-            indent++;
-            buildTreeRecursive(child);
-            indent--;
-        }
-    }
-    buildTreeRecursive(SceneManager.activeScene);
-    return sb;
-}
-
-function buildHierarchyTree() {
-    const latest = buildHierarchyTreeText();
-    if (prevTree === latest) {
-        return;
-    }
-    prevTree = latest;
-
-    domHierarchyTree.innerHTML = latest;
-}
-
-let prevInspector = "";
-function updateInspector() {
-    const target = inspectTarget.get(inspectorTarget);
-    if (target == null) {
-        return;
-    }
-    const latest = target.getInspector();
-    if (prevInspector === latest) {
-        return;
-    }
-    prevInspector = latest;
-    domInspector.innerHTML = latest;
-}
-
 /**
  * 
  * @param {GameObject} root 
@@ -228,12 +152,6 @@ export default class Scene extends GameObject {
         }
 
         flushEvents();
-
-        // debug tree
-        if (window.debug) {
-            buildHierarchyTree();
-            updateInspector();
-        }
 
         // 3. request next frame
         if (this._isRunning) {
