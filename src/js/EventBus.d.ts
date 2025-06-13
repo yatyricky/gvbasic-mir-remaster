@@ -5,7 +5,7 @@ import KeyEvent from "./KeyEvent";
 interface EventBusDefine {
     "toast": string;
     "scene:menu": null;
-    "scene:game": null;
+    "scene:game": number;
     "shop:anya": null;
     "exit:anya": null;
     "inspect:item": { item: ItemSaveData, actionX?: () => void };

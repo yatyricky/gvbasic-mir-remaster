@@ -1,6 +1,5 @@
 <script>
     import { onDestroy, onMount } from "svelte";
-    import Const from "../Const";
     import userData from "../data/UserData";
     import { JSONEditor } from "svelte-jsoneditor";
 

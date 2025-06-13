@@ -66,6 +66,8 @@
         });
 
         us3 = subscribe("key:click", (event) => {
+            console.log("why?");
+            
             if (event.key === "esc") {
                 const popped = modals.pop();
                 if (popped != null) {

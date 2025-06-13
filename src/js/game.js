@@ -11,7 +11,6 @@ import CharacterController from "./components/CharacterController";
 import { subscribe } from "./EventBus";
 import Const from "./Const";
 import userData from "./data/UserData";
-import { arrLast } from "./Utils";
 import SceneManager from "./SceneManager";
 import UnitComponent from "./components/UnitComponent";
 import GameMap from "./components/GameMap";
@@ -32,14 +31,15 @@ let initedGameScene = false;
 /**
  * 
  * @param {GameObject} gameRoot 
+ * @param {number} charIndex
  */
-function initGameScene(gameRoot) {
+function initGameScene(gameRoot, charIndex) {
     if (initedGameScene) {
         return;
     }
     initedGameScene = true;
 
-    const hero = arrLast(userData.data.chars);
+    const hero = userData.data.chars[charIndex];
 
     const char = new GameObject("hero", gameRoot).setPosition(5, 2);
     char.addComponent(Collider);
@@ -58,9 +58,9 @@ function main() {
     // general
     const gameScene = new GameObject("game");
 
-    subscribe("scene:game", () => {
+    subscribe("scene:game", (charIndex) => {
         gameScene.setActive(true);
-        initGameScene(gameScene);
+        initGameScene(gameScene, charIndex);
     })
 
     subscribe("scene:menu", () => {

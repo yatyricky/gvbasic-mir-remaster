@@ -1,6 +1,6 @@
 <script>
-    import LoginScene from "./LoginScene.svelte";
-    import GameScene from "./GameScene.svelte";
+    import LoginScene from "./login/LoginScene.svelte";
+    import GameScene from "./game/GameScene.svelte";
     import ModalContainer from "./ModalContainer.svelte";
     import ToastContainer from "./ToastContainer.svelte";
     import DebugContainer from "./DebugContainer.svelte";
@@ -8,7 +8,7 @@
 
     let isLogin = true;
 
-    subscribe("scene:game", () => {
+    subscribe("scene:game", (charIndex) => {
         isLogin = false;
     });
 
