@@ -4,8 +4,7 @@
     import { subscribe } from "../EventBus";
     import SceneManager from "../SceneManager";
     import ItemFragment from "./ItemFragment.svelte";
-    import Const from "../Const";
-
+    
     const { close } = $props();
 
     function getBagData() {
@@ -39,8 +38,8 @@
             {#each bagData as item, i (item.uuid)}
                 <ItemFragment
                     {item}
-                    left={(i % 9) * (Const.SIZE2 + 2)}
-                    top={Math.floor(i / 9) * (Const.SIZE2 + 2)}
+                    left={(i % 9) * (40 + 2)}
+                    top={Math.floor(i / 9) * (40 + 2)}
                     operations={["equip", "socket"]}
                 />
             {/each}

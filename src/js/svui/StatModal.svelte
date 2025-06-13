@@ -62,12 +62,6 @@
         top: 0;
         background-color: rgba(0, 0, 0, 0.5);
     }
-    .btn {
-        background-color: #680000;
-        border-radius: 4px;
-        padding: 0px;
-        color: #ceae0f;
-    }
     .wrapper {
         position: absolute;
         display: flex;

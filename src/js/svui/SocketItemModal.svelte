@@ -1,5 +1,4 @@
 <script>
-    import Const from "../Const";
     import SceneManager from "../SceneManager";
     import UnitComponent from "../components/UnitComponent";
     import ItemFragment from "./ItemFragment.svelte";
@@ -21,8 +20,8 @@
             {#each fillers as e, i (e.uuid)}
                 <ItemFragment
                     item={e}
-                    left={(i % 8) * (Const.SIZE2 + 2) + 4}
-                    top={Math.floor(i / 8) * (Const.SIZE2 + 2) + 4}
+                    left={(i % 8) * (40 + 2) + 4}
+                    top={Math.floor(i / 8) * (40 + 2) + 4}
                     operations={["socketFill"]}
                     callbacks={{
                         socketFill: () => {

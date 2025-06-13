@@ -1,6 +1,4 @@
 const Const = {
-    SIZE: Math.min(Math.floor(window.innerWidth / 20), 20),
-    SIZE2: 0,
     QUEUE_MODAL: 20,
     QUEUE_OVERLAY: 15,
     QUEUE_UI: 10,
@@ -245,8 +243,6 @@ const Const = {
     },
     QUALITY_SOCKET_COUNT: [99, 2, 1, 1, 1], // Normal, Magic, Rare, Epic, Legendary
 }
-
-Const.SIZE2 = Const.SIZE * 2;
 
 export default Const;
 

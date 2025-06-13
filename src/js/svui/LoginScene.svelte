@@ -16,12 +16,16 @@
     function newHero() {
         dispatch("modal:show", { component: NewHeroModal });
     }
+
+    function loadSaves() {
+        dispatch("modal:show", { component: NewHeroModal });
+    }
 </script>
 
 <div>
-    <button onclick={continueGame}>继续游戏</button>
-    <button onclick={newHero} style="top: 100px">新游戏</button>
-    <button style="top: 200px">加载存档</button>
+    <button class="btn" onclick={continueGame}>继续游戏</button>
+    <button class="btn" onclick={newHero} style="top: 100px">新游戏</button>
+    <button class="btn" onclick={loadSaves} style="top: 200px">加载存档</button>
 </div>
 
 <style>
@@ -40,5 +44,11 @@
         margin-top: 70px;
         background: none;
         font-size: 20px;
+    }
+    .btn {
+        background-color: #680000;
+        border-radius: 4px;
+        padding: 0px;
+        color: #ceae0f;
     }
 </style>

@@ -1,5 +1,4 @@
 <script>
-    import Const from "../Const";
     import { dispatch, subscribe } from "../EventBus";
     import JoyStick from "./JoyStick.svelte";
     import InventoryModal from "./InventoryModal.svelte";
@@ -86,17 +85,17 @@
 </script>
 
 <div>
-    <button class="btn" onclick={openStats} style={`left: ${Const.SIZE2 * 0}px; top: ${Const.SIZE2 * 9}px;`}>
+    <button class="btn" onclick={openStats} style={`left: ${40 * 0}px; top: ${40 * 9}px;`}>
         状态
     </button>
-    <button class="btn" onclick={openInventory} style={`left: ${Const.SIZE2 * 1.5}px; top: ${Const.SIZE2 * 9}px;`}>
+    <button class="btn" onclick={openInventory} style={`left: ${40 * 1.5}px; top: ${40 * 9}px;`}>
         装备
     </button>
-    <button class="btn" onclick={openBag} style={`left: ${Const.SIZE2 * 3}px; top: ${Const.SIZE2 * 9}px;`}>
+    <button class="btn" onclick={openBag} style={`left: ${40 * 3}px; top: ${40 * 9}px;`}>
         背包
     </button>
-    <button class="btn" style={`left: ${Const.SIZE2 * 4.5}px; top: ${Const.SIZE2 * 9}px;`}> 技能 </button>
-    <button class="btn" onclick={exitGame} style={`left: ${Const.SIZE2 * 4.5}px; top: ${Const.SIZE2 * 8}px;`}>
+    <button class="btn" style={`left: ${40 * 4.5}px; top: ${40 * 9}px;`}> 技能 </button>
+    <button class="btn" onclick={exitGame} style={`left: ${40 * 4.5}px; top: ${40 * 8}px;`}>
         退出
     </button>
 </div>

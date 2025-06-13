@@ -25,10 +25,10 @@
 <div
     class="container"
     style="
-        width: {Const.SIZE2 * 10}px;
-        height: {window.innerHeight - Const.SIZE2 * (5 + 10)}px;
-        top: {Const.SIZE2 * (5 + 10)}px;
-        left: {(window.innerWidth - Const.SIZE2 * 10) / 2}px;
+        width: {40 * 10}px;
+        height: {window.innerHeight - 40 * (5 + 10)}px;
+        top: {40 * (5 + 10)}px;
+        left: {(window.innerWidth - 40 * 10) / 2}px;
     "
 >
     <JSONEditor {content} />

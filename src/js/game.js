@@ -20,9 +20,11 @@ import Collider from "./components/Collider";
 import Main from "./svui/Main.svelte";
 import { mount } from "svelte";
 
+const topWrapper = document.getElementById('top-wrapper');
+topWrapper.style.transform = `scale(${Math.min(1, window.innerWidth / 400)})`;
+topWrapper.style.transformOrigin = "top center";
+
 const domSvui = document.getElementById('svui');
-domSvui.style.width = `${Const.SIZE * 20}px`;
-domSvui.style.height = `${Const.SIZE * 20}px`;
 mount(Main, { target: domSvui });
 
 let initedGameScene = false;

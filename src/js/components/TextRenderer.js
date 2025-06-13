@@ -10,7 +10,7 @@ export default class TextRenderer extends Renderer {
         this.width = 0;
         this.bgColor = null;
         this.color = null;
-        this.viewportRect = new Rect(0, 0, Const.SIZE2 * 10, Const.SIZE2 * 5); // Default viewport for 20x5 characters
+        this.viewportRect = new Rect(0, 0, 40 * 10, 40 * 5); // Default viewport for 20x5 characters
     }
 
     /**
@@ -28,7 +28,7 @@ export default class TextRenderer extends Renderer {
      * @param {Rect} viewport 
      */
     setViewport(viewport) {
-        this.viewportRect = new Rect(viewport.x * Const.SIZE2, viewport.y * Const.SIZE2, viewport.w * Const.SIZE2, viewport.h * Const.SIZE2);
+        this.viewportRect = new Rect(viewport.x * 40, viewport.y * 40, viewport.w * 40, viewport.h * 40);
         return this;
     }
 
@@ -66,7 +66,7 @@ export default class TextRenderer extends Renderer {
         // Set text properties
         /**@type {Partial<IFillTextArgs>} */
         const textArgs = {
-            font: `${Math.round(Const.SIZE2 * 0.8)}px 'Courier New', Courier, monospace`,
+            font: `${Math.round(40 * 0.8)}px 'Courier New', Courier, monospace`,
             textBaseline: "middle",
             textAlign: "center",
             fillStyle: "",
@@ -100,7 +100,7 @@ export default class TextRenderer extends Renderer {
             //     break;
             // }
 
-            const charRect = new Rect((x + gox) * Const.SIZE, (y + goy) * Const.SIZE2, w * Const.SIZE, Const.SIZE2);
+            const charRect = new Rect((x + gox) * 20, (y + goy) * 40, w * 20, 40);
             if (this.viewportRect.contains(charRect)) {
                 // Draw background if specified
                 if (!strIsEmpty(this.bgColor)) {
@@ -124,8 +124,8 @@ export default class TextRenderer extends Renderer {
                     args: {
                         ...textArgs,
                         text: c,
-                        x: charRect.x + (w * Const.SIZE / 2),
-                        y: charRect.y + (Const.SIZE2 / 2)
+                        x: charRect.x + (w * 20 / 2),
+                        y: charRect.y + (40 / 2)
                     }
                 })
             }

@@ -1,6 +1,5 @@
 <script>
     import { onDestroy } from "svelte";
-    import Const from "../Const";
     import userData from "../data/UserData";
     import ItemFragment from "./ItemFragment.svelte";
     import { arrRemove } from "../Utils";
@@ -12,7 +11,7 @@
     let goods = $state(userData.getAnyaShopGoods());
     let goodsHeight = $derived(
         (() => {
-            return Math.ceil(goods.length / 10) * Const.SIZE2;
+            return Math.ceil(goods.length / 10) * 40;
         })(),
     );
 
@@ -30,12 +29,12 @@
                 <div class="options">
                     <button
                         class="btn"
-                        style={`width: ${Const.SIZE2 * 3}px; height: ${Const.SIZE2 * 0.8}px;`}
+                        style={`width: ${40 * 3}px; height: ${40 * 0.8}px;`}
                         onclick={() => (page = 1)}>购买</button
                     >
                     <button
                         class="btn"
-                        style={`width: ${Const.SIZE2 * 3}px; height: ${Const.SIZE2 * 0.8}px;`}
+                        style={`width: ${40 * 3}px; height: ${40 * 0.8}px;`}
                         onclick={() => (page = 2)}>出售</button
                     >
                 </div>
@@ -44,10 +43,10 @@
                     {#each goods as item, i (item.uuid)}
                         <ItemFragment
                             {item}
-                            left={(i % 9) * (Const.SIZE2 + 2)}
-                            top={Math.floor(i / 9) * (Const.SIZE2 + 2)}
-                            width={Const.SIZE2}
-                            height={Const.SIZE2}
+                            left={(i % 9) * (40 + 2)}
+                            top={Math.floor(i / 9) * (40 + 2)}
+                            width={40}
+                            height={40}
                             operations={["buy"]}
                             callbacks={{
                                 buy: () => {

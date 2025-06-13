@@ -49,10 +49,10 @@
 <div
     class="container"
     style="
-        width: {(window.innerWidth - Const.SIZE2 * 10) / 2}px;
+        width: {(window.innerWidth - 40 * 10) / 2}px;
         height: {window.innerHeight}px;
         top: 0px;
-        left: {(window.innerWidth - Const.SIZE2 * 10) / 2 + Const.SIZE2 * 10}px;
+        left: {(window.innerWidth - 40 * 10) / 2 + 40 * 10}px;
     "
 >
     <JSONEditor {content} />

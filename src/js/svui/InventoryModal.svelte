@@ -71,45 +71,45 @@
     /**@type {Record<SlotType, any>}*/
     const positioning = {
         head: { left: 0, top: 0, leftGrow: 0, topGrow: 0 },
-        neck: { left: 0, top: Const.SIZE2 * 1, leftGrow: 0, topGrow: 0 },
-        shoulder: { left: 0, top: Const.SIZE2 * 2, leftGrow: 0, topGrow: 0 },
-        torso: { left: 0, top: Const.SIZE2 * 3, leftGrow: 0, topGrow: 0 },
-        wrist: { left: 0, top: Const.SIZE2 * 4, leftGrow: 0, topGrow: 0 },
-        hand: { left: Const.SIZE2 * 9, top: 0, leftGrow: 0, topGrow: 0 },
+        neck: { left: 0, top: 40 * 1, leftGrow: 0, topGrow: 0 },
+        shoulder: { left: 0, top: 40 * 2, leftGrow: 0, topGrow: 0 },
+        torso: { left: 0, top: 40 * 3, leftGrow: 0, topGrow: 0 },
+        wrist: { left: 0, top: 40 * 4, leftGrow: 0, topGrow: 0 },
+        hand: { left: 40 * 9, top: 0, leftGrow: 0, topGrow: 0 },
         waist: {
-            left: Const.SIZE2 * 9,
-            top: Const.SIZE2 * 1,
+            left: 40 * 9,
+            top: 40 * 1,
             leftGrow: 0,
             topGrow: 0,
         },
         leg: {
-            left: Const.SIZE2 * 9,
-            top: Const.SIZE2 * 2,
+            left: 40 * 9,
+            top: 40 * 2,
             leftGrow: 0,
             topGrow: 0,
         },
         foot: {
-            left: Const.SIZE2 * 9,
-            top: Const.SIZE2 * 3,
+            left: 40 * 9,
+            top: 40 * 3,
             leftGrow: 0,
             topGrow: 0,
         },
         finger: {
-            left: Const.SIZE2 * 8,
-            top: Const.SIZE2 * 4,
-            leftGrow: Const.SIZE2,
+            left: 40 * 8,
+            top: 40 * 4,
+            leftGrow: 40,
             topGrow: 0,
         },
         arms: {
-            left: Const.SIZE2 * 4,
-            top: Const.SIZE2 * 4,
-            leftGrow: Const.SIZE2,
+            left: 40 * 4,
+            top: 40 * 4,
+            leftGrow: 40,
             topGrow: 0,
         },
         accessory: {
-            left: Const.SIZE2 * 0,
-            top: Const.SIZE2 * 5,
-            leftGrow: Const.SIZE2,
+            left: 40 * 0,
+            top: 40 * 5,
+            leftGrow: 40,
             topGrow: 0,
         },
         socket: undefined,
@@ -132,8 +132,8 @@
                             {item}
                             left={pos.left + pos.leftGrow * j}
                             top={pos.top + pos.topGrow * j}
-                            width={Const.SIZE2}
-                            height={Const.SIZE2}
+                            width={40}
+                            height={40}
                             clickable={status === "equipped"}
                             operations={["unequip", "socket"]}
                         />

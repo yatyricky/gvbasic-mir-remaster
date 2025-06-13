@@ -203,19 +203,19 @@
             height: 24px;
         ">X</button
         >
-        <div class="actions" style={`height: ${Const.SIZE2}px;`}>
+        <div class="actions" style={`height: ${40}px;`}>
             {#each actions as { text, action, autoClose }, i (i)}
                 <button
                     bind:this={btns[i]}
                     class="btn"
                     style="
-                        left: {(Const.SIZE2 * 10 * 0.94 -
-                        Const.SIZE2 * 2.4 * actions.length -
+                        left: {(40 * 10 * 0.94 -
+                        40 * 2.4 * actions.length -
                         12 * (actions.length - 1)) /
                         2 +
-                        i * (Const.SIZE2 * 2.4 + 12)}px;
-                        width: {Const.SIZE2 * 2.4}px;
-                        height: {Const.SIZE2 * 0.8}px;
+                        i * (40 * 2.4 + 12)}px;
+                        width: {40 * 2.4}px;
+                        height: {40 * 0.8}px;
                     "
                     onclick={() => {
                         action?.();
