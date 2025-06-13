@@ -133,7 +133,7 @@
     <div
         class="container"
         style="
-        width: {(window.innerWidth - 400) / 2}px;
+        width: 100%;
         height: {window.innerHeight / 2}px;
         top: 0px;
         left: 0px;
@@ -172,7 +172,7 @@
     <div
         class="inspector"
         style="
-        width: {(window.innerWidth - 400) / 2}px;
+        width: 100%;
         height: {window.innerHeight / 2}px;
         top: {window.innerHeight / 2}px;
         left: 0px;
@@ -193,6 +193,7 @@
         box-sizing: border-box;
         font-size: 14px;
         color: #ffffff;
+        overflow: hidden; /* Prevent scrollbars at the wrapper level */
     }
     .container {
         display: block;
@@ -200,6 +201,7 @@
         border: 1px solid #000;
         box-sizing: border-box;
         overflow-y: auto;
+        overflow-x: hidden;
     }
     .inspector {
         display: block;
@@ -207,6 +209,7 @@
         border: 1px solid #000;
         box-sizing: border-box;
         overflow-y: auto;
+        overflow-x: hidden;
     }
     .tree-item {
         width: 100%;
@@ -215,6 +218,8 @@
         white-space: nowrap;
         padding: 2px 0;
         cursor: pointer;
+        box-sizing: border-box;
+        min-width: 0; /* Prevents flex items from overflowing */
     }
     .tree-item:hover {
         background-color: rgba(80, 80, 80, 1);
@@ -246,5 +251,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
         padding-left: 4px;
+        min-width: 0; /* Needed for text-overflow to work in flex items */
     }
 </style>

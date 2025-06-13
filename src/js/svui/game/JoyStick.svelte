@@ -133,30 +133,30 @@
 <div>
     <button
         bind:this={btnU}
-        class="btn-arrow"
+        class="btn btn-arrow"
         onclick={() => dispatchInputEvent("u")}
         style={`left: ${40 * 8}px; top: ${40 * 8}px;`}>↑</button
     >
     <button
         bind:this={btnL}
-        class="btn-arrow"
+        class="btn btn-arrow"
         onclick={() => dispatchInputEvent("l")}
         style={`left: ${40 * 7}px; top: ${40 * 9}px;`}>←</button
     >
     <button
         bind:this={btnD}
-        class="btn-arrow"
+        class="btn btn-arrow"
         onclick={() => dispatchInputEvent("d")}
         style={`left: ${40 * 8}px; top: ${40 * 9}px;`}>↓</button
     >
     <button
         bind:this={btnR}
-        class="btn-arrow"
+        class="btn btn-arrow"
         onclick={() => dispatchInputEvent("r")}
         style={`left: ${40 * 9}px; top: ${40 * 9}px;`}>→</button
     >
-    <button bind:this={btnEsc} class="btn-hidden" onclick={() => dispatchInputEvent("esc")}>Escape</button>
-    <button bind:this={btnEnter} class="btn-hidden" onclick={() => dispatchInputEvent("enter")}>Escape</button>
+    <button bind:this={btnEsc} class="btn btn-hidden" onclick={() => dispatchInputEvent("esc")}>Escape</button>
+    <button bind:this={btnEnter} class="btn btn-hidden" onclick={() => dispatchInputEvent("enter")}>Escape</button>
 </div>
 
 <style>
@@ -168,5 +168,11 @@
     }
     .btn-hidden {
         display: none;
+    }
+    .btn {
+        background-color: #680000;
+        border-radius: 4px;
+        padding: 0px;
+        color: #ceae0f;
     }
 </style>

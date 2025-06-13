@@ -142,7 +142,7 @@
         {:else}
             <div
                 class="icon"
-                style={`background-image: url('${new URL(`../../assets/images/${itemConfig.image}.jpg`, import.meta.url).href}');`}
+                style={`background-image: url('${new URL(`../../../assets/images/${itemConfig.image}.jpg`, import.meta.url).href}');`}
             >
                 {#if !clickable}
                     <div class="mask"></div>

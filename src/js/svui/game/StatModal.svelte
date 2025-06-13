@@ -94,7 +94,12 @@
         text-align: center;
         color: #ceae0f;
     }
-
+    .btn {
+        background-color: #680000;
+        border-radius: 4px;
+        padding: 0px;
+        color: #ceae0f;
+    }
     .close-btn {
         position: absolute;
         top: 0;
