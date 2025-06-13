@@ -52,6 +52,7 @@ export const Stats = [
     { id: "critd", name: "暴击伤害", type: "number", description: "暴击伤害+{0.2}%" },
     { id: "scrit", name: "法术暴击几率", type: "number", description: "法术暴击几率+{0.2}%" },
     { id: "scritd", name: "法术暴击伤害", type: "number", description: "法术暴击伤害+{0.2}%" },
+    { id: "d2m", name: "反馈", type: "number", description: "从受损的生命中恢复{0.2}%的魔法值" },
     { id: "str", name: "力量", type: "int", description: "力量+{0}" },
     { id: "int", name: "魔力", type: "int", description: "魔力+{0}" },
     { id: "spi", name: "道术", type: "int", description: "道术+{0}" },
@@ -218,8 +219,13 @@ export const Stats = [
     { id: "prochit", name: "被击触发", type: "skillList", description: "被攻击时，有{0.2}%概率施展等级{1}的{2}" },
     { id: "procatk", name: "攻击触发", type: "skillList", description: "攻击时，有{0.2}%概率施展等级{1}的{2}" },
     { id: "prockill", name: "击杀触发", type: "skillList", description: "杀死敌人时，有{0.2}%概率施展等级{1}的{2}" },
+    { id: "killhp", name: "击杀回血", type: "number", description: "杀死敌人后，恢复{0}点生命值" },
+    { id: "killmp", name: "击杀回蓝", type: "number", description: "杀死敌人后，恢复{0}点魔法值" },
     { id: "skpts", name: "技能点数", type: "int" },
+    { id: "debuffrd", name: "净化", type: "int", description: "负面效果持续时间-{0}回合" },
+    { id: "resil", name: "韧性", type: "number", description: "受到暴击几率降低{0.2}%" },
     { id: "setany", name: "任意套装效果", type: "number", description: "套装件数需求-1" },
+    { id: "barg", name: "商谈", type: "number", description: "商人物品售价降低{0.2}%" },
 ];
 
 export const StatById = Object.fromEntries(Stats.map(e => [e.id, e]));

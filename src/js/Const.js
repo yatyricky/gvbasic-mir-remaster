@@ -58,14 +58,22 @@ const Const = {
         rune: 1,
         runeword: 1,
         set: 1,
+        taorobe: 0,
+        woodsword: 1,
+        magesigil: 1,
+        magestaff: 2,
+        ugs: 2,
+        katana: 1,
     },
     /**@type {Record<ItemType, SlotType>} */
     ITEM_TYPE_SLOT: {
         helm: "head",
         pauldron: "shoulder",
         armor: "torso",
+        taorobe: "torso",
         bracelet: "wrist",
         glove: "hand",
+        magesigil: "hand",
         belt: "waist",
         pant: "leg",
         boot: "foot",
@@ -88,6 +96,10 @@ const Const = {
         staff: "arms",
         polearm: "arms",
         instrument: "arms",
+        woodsword: "arms",
+        ugs: "arms",
+        katana: "arms",
+        magestaff: "arms",
 
         rune: "socket",
         runeword: "inherit",
@@ -192,6 +204,12 @@ const Const = {
         rune: "五行符",
         runeword: "符文之语",
         set: "套装",
+        taorobe: "道袍",
+        magesigil: "法印",
+        woodsword: "仪式剑",
+        ugs: "巨剑",
+        katana: "武者刀",
+        magestaff: "魔杖"
     },
     /**@type {Record<ItemType, ItemSubType>} */
     ITEM_SUBTYPE: {
@@ -226,6 +244,12 @@ const Const = {
         rune: "none",
         runeword: "none",
         set: "none",
+        taorobe: "none",
+        magesigil: "none",
+        woodsword: "1h",
+        ugs: "2h",
+        katana: "1h",
+        magestaff: "2h"
     },
     /**@type {Partial<Record<UnitId, Array<Array<ItemSubType>>>>} */
     EQUIP_POLICY: {

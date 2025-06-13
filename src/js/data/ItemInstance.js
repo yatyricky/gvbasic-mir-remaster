@@ -143,7 +143,7 @@ export default class ItemInstance {
                 }
                 const suffixCount = affixCount - prefixCount;
 
-                const candidates = AffixGroupByAvailOn[itemConfig.type].filter(e => (e.ilvl ?? 0) <= ilvl) ?? [];
+                const candidates = AffixGroupByAvailOn[itemConfig.type]?.filter(e => (e.ilvl ?? 0) <= ilvl) ?? [];
                 const placeGroup = arrGroupBy(candidates, "affixType");
                 const loop = [{ type: "prefix", count: prefixCount }, { type: "suffix", count: suffixCount }];
                 for (const iter of loop) {
@@ -195,7 +195,7 @@ export default class ItemInstance {
 
         const commonCount = mathRandomIntIncl(itemConfig.affixCount ?? 0, itemConfig.maxAffixCount ?? 0);
         if (commonCount > 0) {
-            const candidates = AffixGroupByAvailOn[itemConfig.type].filter(e => (e.ilvl ?? 0) <= ilvl) ?? [];
+            const candidates = AffixGroupByAvailOn[itemConfig.type]?.filter(e => (e.ilvl ?? 0) <= ilvl) ?? [];
             if (!arrIsEmpty(itemConfig.excludeAffix)) {
                 for (const forbid of itemConfig.excludeAffix) {
                     const index = candidates.findIndex(e => e.id === forbid);

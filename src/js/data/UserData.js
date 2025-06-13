@@ -79,6 +79,8 @@ class UserData {
         // candidates.push("vomaarmor", "vomaaxe", "womawrist");
         candidates.push("clothglove");
 
+candidates.push("taoistrobe","shamanrobe","heavyarmor","wargodarmor","maraarmor","jihadarmor","soularmor","ghostarmor","venerablerobe","masterrobe","magicrobe","demonrobe","magegodarmor","colorarmor","maneofdevilbeast","northstarboots","magicglove","magusglove","glintswordwill","flamefeatherwisdom","azurecloudmeditation","peachsword","silversword","ultrags","zweihander","tangdao","uchigatana","magusstaff","longstaff","eightwilderness","overwind","brokensoul","horsecleaver","shura","condensefrost","inferno","wellmoon","judgestaff","dragonslayer","halfmoon","subduedemon","silverserpent","nullstaff","dragonsword","seasoul","siezemoon","magicstaff","blooddrink","bonescepter","revelation","ragecleave","dragontooth","elysianfan");
+
         for (let i = 0; i < count; i++) {
             const item = ItemInstance.drop(arrGetOne(candidates), 60, 1000);
             this.anyaGoods.push(item);
