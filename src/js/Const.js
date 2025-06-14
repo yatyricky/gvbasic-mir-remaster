@@ -176,8 +176,10 @@ const Const = {
         helm: "头盔",
         pauldron: "肩甲",
         armor: "护甲",
+        taorobe: "道袍",
         bracelet: "护腕",
         glove: "手套",
+        magesigil: "法印",
         belt: "腰带",
         pant: "腿甲",
         boot: "靴子",
@@ -189,8 +191,11 @@ const Const = {
         charm3: "护身符",
 
         sword: "单手剑",
+        woodsword: "仪式剑",
         sword2h: "双手剑",
+        ugs: "巨剑",
         dao: "单手刀",
+        katana: "武者刀",
         dao2h: "双手刀",
         axe: "单手斧",
         axe2h: "双手斧",
@@ -198,18 +203,13 @@ const Const = {
         mace2h: "双手锤",
         dagger: "匕首",
         staff: "法杖",
+        magestaff: "魔杖",
         polearm: "长柄武器",
         instrument: "法器",
 
         rune: "五行符",
         runeword: "符文之语",
         set: "套装",
-        taorobe: "道袍",
-        magesigil: "法印",
-        woodsword: "仪式剑",
-        ugs: "巨剑",
-        katana: "武者刀",
-        magestaff: "魔杖"
     },
     /**@type {Record<ItemType, ItemSubType>} */
     ITEM_SUBTYPE: {
