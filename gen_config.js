@@ -23,11 +23,7 @@ class Utils {
         return str[0].toUpperCase() + str.slice(1);
     }
 
-    /**
-     * $res1,1.5/fthp/:
-     * @param {string} str 
-     */
-    static strTemplate(str) {
+    static restoreTemplateString(str) {
         if (Utils.strIsEmpty(str)) {
             return str;
         }
@@ -50,6 +46,24 @@ class Utils {
         } else {
             return str;
         }
+    }
+
+    /**
+     * $res1,1.5/fthp/:
+     * @param {string} str 
+     */
+    static strTemplate(str) {
+        if (Utils.strIsEmpty(str)) {
+            return str;
+        }
+
+        if (!str.includes("[")) {
+            return Utils.restoreTemplateString(str);
+        }
+
+        return str.replace(/\[([^\]]+)\]/g, (_, p) => {
+            return Utils.restoreTemplateString(p);
+        })
     }
 }
 

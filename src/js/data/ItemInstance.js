@@ -67,6 +67,53 @@ export default class ItemInstance {
 
     /**
      * 
+     * @param {IAddedAffix[]} extAffixesRaw 
+     * @param {number} affixCount
+     * @param {IItemConfig} itemConfig
+     * @param {number} ilvl
+     */
+    static addCommonAffixes(extAffixesRaw, affixCount, itemConfig, ilvl) {
+        const excludedAffixes = itemConfig.excludeAffix ?? [];
+        const excludedGroups = new Set();
+        for (const e of extAffixesRaw) {
+            if (!arrIsEmpty(e.affix.groupExclusive)) {
+                for (const group of e.affix.groupExclusive) {
+                    excludedGroups.add(group);
+                }
+            }
+        }
+        const candidates = AffixGroupByAvailOn[itemConfig.type]?.filter(e => {
+            if ((e.ilvl ?? 0) > ilvl) {
+                return false; // Affix is not available for this item level
+            }
+            if (excludedAffixes.includes(e.id)) {
+                return false; // Affix is excluded from this item
+            }
+            if (!arrIsEmpty(e.group) && e.group.some(group => excludedGroups.has(group))) {
+                return false; // Affix is in a group that is excluded
+            }
+            return true;
+        }) ?? [];
+        for (let i = 0; i < affixCount; i++) {
+            const affix = arrGetOne(candidates);
+            arrRemove(candidates, affix);
+            extAffixesRaw.push({ affix, qlvl: 0 });
+            if (!arrIsEmpty(affix.group)) {
+                for (let j = candidates.length - 1; j >= 0; j--) {
+                    const currConfig = candidates[j];
+                    if (!arrIsEmpty(currConfig.groupExclusive) && affix.group.some(e => currConfig.groupExclusive.includes(e))) {
+                        candidates.splice(j, 1); // Remove affixes that are exclusive to the current group
+                    }
+                }
+            }
+            if (candidates.length === 0) {
+                break; // No more affixes available for this type
+            }
+        }
+    }
+
+    /**
+     * 
      * @param {ItemId} id
      * @param {number} ilvl 
      * @param {number} luck
@@ -132,34 +179,11 @@ export default class ItemInstance {
                 qualityWeight[i] = val - subtract;
                 luck -= subtract * pow;
             }
+            qualityWeight[qualityWeight.length - 1] = Math.max(qualityWeight[qualityWeight.length - 1], 1); // Ensure the last value is not negative
             let affixCount = Math.max(Math.min(mathWeightedRandom(qualityWeight), Const.LOOT_MAX_AFFIX_BY_QUALITY[itemConfig.maxQuality ?? 4]), minAffixCount);
 
             if (affixCount > 0) {
-                let prefixCount = 0;
-                if (Math.random() < 0.5) {
-                    prefixCount = Math.floor(affixCount / 2);
-                } else {
-                    prefixCount = Math.ceil(affixCount / 2);
-                }
-                const suffixCount = affixCount - prefixCount;
-
-                const candidates = AffixGroupByAvailOn[itemConfig.type]?.filter(e => (e.ilvl ?? 0) <= ilvl) ?? [];
-                const placeGroup = arrGroupBy(candidates, "affixType");
-                const loop = [{ type: "prefix", count: prefixCount }, { type: "suffix", count: suffixCount }];
-                for (const iter of loop) {
-                    const affixConfigs = placeGroup.get(iter.type);
-                    if (affixConfigs == null || affixConfigs.length === 0) {
-                        continue; // No affixes available for this type
-                    }
-                    for (let i = 0; i < iter.count; i++) {
-                        const affix = arrGetOne(affixConfigs);
-                        arrRemove(affixConfigs, affix);
-                        extAffixesRaw.push({ affix, qlvl: 0 });
-                        if (affixConfigs.length === 0) {
-                            break; // No more affixes available for this type
-                        }
-                    }
-                }
+                ItemInstance.addCommonAffixes(extAffixesRaw, affixCount, itemConfig, ilvl);
 
                 /**@type {Record<AffixType, IAddedAffix[]>} */
                 const addedAffixes = extAffixesRaw.reduce((acc, e) => {
@@ -195,16 +219,7 @@ export default class ItemInstance {
 
         const commonCount = mathRandomIntIncl(itemConfig.affixCount ?? 0, itemConfig.maxAffixCount ?? 0);
         if (commonCount > 0) {
-            const candidates = AffixGroupByAvailOn[itemConfig.type]?.filter(e => (e.ilvl ?? 0) <= ilvl) ?? [];
-            if (!arrIsEmpty(itemConfig.excludeAffix)) {
-                for (const forbid of itemConfig.excludeAffix) {
-                    const index = candidates.findIndex(e => e.id === forbid);
-                    if (index > -1) {
-                        candidates.splice(index, 1);
-                    }
-                }
-            }
-            extAffixesRaw.push(...arrGetSome(candidates, commonCount).map(e => ({ affix: e, qlvl: 0 })));
+            ItemInstance.addCommonAffixes(extAffixesRaw, commonCount, itemConfig, ilvl);
         }
 
         let level = itemConfig.level;
@@ -332,17 +347,11 @@ export default class ItemInstance {
 
             const commonCount = mathRandomIntIncl(rwConfig.affixCount ?? 0, rwConfig.maxAffixCount ?? 0);
             if (commonCount > 0) {
-                const candidates = AffixGroupByAvailOn[itemConfig.type] ?? [];
-                const excludeAffix = [...rwConfig.excludeAffix, ...itemConfig.excludeAffix];
-                for (const forbid of excludeAffix) {
-                    const index = candidates.findIndex(e => e.id === forbid);
-                    if (index > -1) {
-                        candidates.splice(index, 1);
-                    }
-                }
-                const affixes = arrGetSome(candidates, commonCount);
-                for (const affix of affixes) {
-                    ItemInstance.collapseAffix(affix, item.runeWordStats, item.ilvl, 0);
+                /**@type {IAddedAffix[]} */
+                const extAffixes = [];
+                ItemInstance.addCommonAffixes(extAffixes, commonCount, itemConfig, item.ilvl);
+                for (const e of extAffixes) {
+                    ItemInstance.collapseAffix(e.affix, item.runeWordStats, item.ilvl, e.qlvl);
                 }
             }
             break;

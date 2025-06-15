@@ -16,7 +16,7 @@ declare global {
         skillChance: number[];
         availOn: ItemType[];
         group: string[];
-        groupExclusive: boolean;
+        groupExclusive: string[];
         ilvl: number;
         level: number;
         weight: number;

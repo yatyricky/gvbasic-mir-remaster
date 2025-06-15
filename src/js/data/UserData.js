@@ -71,18 +71,11 @@ class UserData {
         this.anyaGoods = [];
         /**@type {ItemId[]} */
         const candidates = [];
-        candidates.push("clotharmor", "leatherarmor", "commonnecklace", "commonring");
-        // candidates.push("eightwilderness");
-        // candidates.push("grandcharm", "largecharm", "smallcharm");
         // candidates.push("rune1", "rune2", "rune3", "rune4", "rune5", "rune6", "rune7", "rune8", "rune9", "rune10", "rune11", "rune12", "rune13", "rune14", "rune15", "rune16", "rune17", "rune18", "rune19", "rune20", "rune21", "rune22", "rune23", "rune24", "rune25");
-        // candidates.push("woodsword","bronzesword","ebonywoodsword","greatsword","shortsword","ironsword","bigdao","longdao","dagger","dirk","handaxe","bronzeaxe","hugeaxe","broadaxe","club","mace","steelclub","maul","staff","warstaff","halberd","scythe","magicbag","scriptures");
-        // candidates.push("vomaarmor", "vomaaxe", "womawrist");
-        candidates.push("clothglove");
-
-candidates.push("taoistrobe","shamanrobe","heavyarmor","wargodarmor","maraarmor","jihadarmor","soularmor","ghostarmor","venerablerobe","masterrobe","magicrobe","demonrobe","magegodarmor","colorarmor","maneofdevilbeast","northstarboots","magicglove","magusglove","glintswordwill","flamefeatherwisdom","azurecloudmeditation","peachsword","silversword","ultrags","zweihander","tangdao","uchigatana","magusstaff","longstaff","eightwilderness","overwind","brokensoul","horsecleaver","shura","condensefrost","inferno","wellmoon","judgestaff","dragonslayer","halfmoon","subduedemon","silverserpent","nullstaff","dragonsword","seasoul","siezemoon","magicstaff","blooddrink","bonescepter","revelation","ragecleave","dragontooth","elysianfan");
+        candidates.push("clotharmor", "leatherarmor", "taoistrobe", "shamanrobe", "lightarmor", "bronzearmor", "mediumarmor", "ironarmor", "platearmor", "blackarmor", "heavyarmor", "wargodarmor", "maraarmor", "jihadarmor", "soularmor", "ghostarmor", "venerablerobe", "masterrobe", "magicrobe", "demonrobe", "magegodarmor", "colorarmor", "vomaarmor", "dragonarmor", "archonplate", "ancientarmor", "duskshround", "gladitatorarmor", "mageplate")
 
         for (let i = 0; i < count; i++) {
-            const item = ItemInstance.drop(arrGetOne(candidates), 60, 1000);
+            const item = ItemInstance.drop(arrGetOne(candidates), 60, 0);
             this.anyaGoods.push(item);
         }
 
