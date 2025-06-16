@@ -1,3 +1,5 @@
+import { mathWeightedRandom } from "./data/MathLab";
+
 let c = 1;
 
 export function uuid() {
@@ -82,6 +84,45 @@ export function arrGetSome(arr, count) {
         result[i] = arr[index];
         len--;
         indexes[randomIndex] = indexes[len]; // Swap with the last element
+    }
+
+    return result;
+}
+
+/**
+ * @template T
+ * @param {T[]} arr 
+ * @param {number[]} weights 
+ * @param {number} count 
+ * @returns {Array<T>}
+ */
+export function arrGetSomeWeighted(arr, weights, count) {
+    if (arrIsEmpty(arr)) {
+        return [];
+    }
+
+    if (arr.length === 1) {
+        return [arr[0]];
+    }
+
+    if (weights == null || weights.length !== arr.length) {
+        throw new Error("Weights must be an array of the same length as the input array.");
+    }
+
+    if (weights.some(w => w <= 0)) {
+        throw new Error("Weights must be non-negative.");
+    }
+
+    count = Math.min(count, arr.length);
+    const _arr = [...arr];
+    const _weights = [...weights];
+
+    const result = [];
+    for (let i = 0; i < count; i++) {
+        const idx = mathWeightedRandom(_weights);
+        result.push(_arr[idx]);
+        _arr.splice(idx, 1);
+        _weights.splice(idx, 1);
     }
 
     return result;

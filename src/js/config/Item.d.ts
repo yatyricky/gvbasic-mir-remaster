@@ -13,7 +13,7 @@ declare global {
         type: ItemType;
         fixedAffix: Partial<Record<AffixId, number>>;
         randomAffix: Partial<Record<AffixId, number>>[];
-        randomAffixCount: number;
+        randomAffixCount: number[];
         affixCount: number;
         maxAffixCount: number;
         excludeAffix: AffixId[];

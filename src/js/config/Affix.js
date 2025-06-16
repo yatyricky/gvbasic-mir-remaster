@@ -364,6 +364,7 @@ export const Affixs = [
     { id: "setprisma", name: "setprisma", affixType: "suffix", statId: "setprisma", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0 },
     { id: "setdragon", name: "setdragon", affixType: "suffix", statId: "setdragon", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0 },
     { id: "setempire", name: "setempire", affixType: "suffix", statId: "setempire", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0 },
+    { id: "killtltn1", name: "killtltn1", affixType: "suffix", statId: "prockill", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 2, skill: "tltn", skillChance: [0.03, 0.15] },
 ];
 
 export const AffixById = Object.fromEntries(Affixs.map(e => [e.id, e]));

@@ -3,7 +3,7 @@ import { ItemById, ItemGroupByType } from "../config/Item";
 import { StatById } from "../config/Stat";
 import { UnitById } from "../config/Unit";
 import Const from "../Const";
-import { arrGetOne, arrGetSome, arrGroupBy, arrIsEmpty, arrRemove, objEntries, objIsEmpty, objKeys } from "../Utils";
+import { arrGetOne, arrGetSomeWeighted, arrIsEmpty, arrRemove, objEntries, objIsEmpty } from "../Utils";
 import { mathClamp, mathFluctuate, mathRandomIncl, mathRandomIntIncl, mathWeightedRandom } from "./MathLab";
 
 export default class ItemInstance {
@@ -62,6 +62,26 @@ export default class ItemInstance {
             list.skillList.push({ skill: affix.skill, level: mathRandomIncl(a, b), chance: mathRandomIncl(affix.skillChance[0], affix.skillChance[1]) });
         } else {
             throw new Error(`Unknown stat type ${statConfig.type}`);
+        }
+    }
+
+    /**
+     * 
+     * @param {IAddedAffix[]} extAffixesRaw 
+     * @param {IItemConfig} itemConfig
+     */
+    static addRandomAffixes(extAffixesRaw, itemConfig) {
+        if (!arrIsEmpty(itemConfig.randomAffix)) {
+            for (let i = 0; i < itemConfig.randomAffix.length; i++) {
+                const cfg = itemConfig.randomAffix[i];
+                const count = itemConfig.randomAffixCount[i] ?? 1;
+
+                const cfgs = objEntries(cfg);
+                const weights = cfgs.map(e => AffixById[e[0]].weight ?? 100);
+                for (const [affixId, qlvl] of arrGetSomeWeighted(cfgs, weights, count)) {
+                    extAffixesRaw.push({ affix: AffixById[affixId], qlvl });
+                }
+            }
         }
     }
 
@@ -137,15 +157,7 @@ export default class ItemInstance {
             }
         }
 
-        // random affixes
-        if (!objIsEmpty(itemConfig.randomAffix)) {
-            const randomAffixesKeys = objKeys(itemConfig.randomAffix);
-            const randomAffixesCount = Math.min(itemConfig.randomAffixCount ?? 1, randomAffixesKeys.length);
-            const randomedKeys = arrGetSome(randomAffixesKeys, randomAffixesCount);
-            for (const affixId of randomedKeys) {
-                baseAffixesRaw.push({ affix: AffixById[affixId], qlvl: itemConfig.randomAffix[affixId] });
-            }
-        }
+        ItemInstance.addRandomAffixes(extAffixesRaw, itemConfig);
 
         let name = itemConfig.name;
         let quality = itemConfig.quality;
@@ -332,27 +344,16 @@ export default class ItemInstance {
                 ItemInstance.collapseAffix(affix, item.runeWordStats, item.ilvl, qlvl);
             }
 
-            const randomAffixesKeys = objKeys(rwConfig.randomAffix);
-            if (randomAffixesKeys.length > 0) {
-                const randomKeys = arrGetSome(randomAffixesKeys, Math.min(rwConfig.randomAffixCount ?? 1, randomAffixesKeys.length));
-                for (const affixId of randomKeys) {
-                    const affix = AffixById[affixId];
-                    if (affix == null) {
-                        console.error(`Affix with id ${affixId} not found`);
-                        continue;
-                    }
-                    ItemInstance.collapseAffix(affix, item.runeWordStats, item.ilvl, rwConfig.randomAffix[affixId]);
-                }
-            }
-
+            /**@type {IAddedAffix[]} */
+            const extAffixes = [];
+            ItemInstance.addRandomAffixes(extAffixes, rwConfig);
             const commonCount = mathRandomIntIncl(rwConfig.affixCount ?? 0, rwConfig.maxAffixCount ?? 0);
             if (commonCount > 0) {
-                /**@type {IAddedAffix[]} */
-                const extAffixes = [];
                 ItemInstance.addCommonAffixes(extAffixes, commonCount, itemConfig, item.ilvl);
-                for (const e of extAffixes) {
-                    ItemInstance.collapseAffix(e.affix, item.runeWordStats, item.ilvl, e.qlvl);
-                }
+            }
+
+            for (const { affix, qlvl } of extAffixes) {
+                ItemInstance.collapseAffix(affix, item.runeWordStats, item.ilvl, qlvl);
             }
             break;
         }
