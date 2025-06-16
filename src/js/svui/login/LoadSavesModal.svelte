@@ -146,7 +146,7 @@
         display: none; /* Chrome, Safari, Opera */
     }
     .char-item {
-        width: calc(100%-8px);
+        width: calc(100% - 8px);
         display: flex;
         flex-direction: row;
         justify-content: space-between;
