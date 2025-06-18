@@ -11,6 +11,7 @@
     import { subscribe } from "../../EventBus";
     import { ItemGroupBySetStat, ItemSetGroupBySetStat } from "../../config/ItemEx";
     import { AffixById } from "../../config/Affix";
+    import { StatById } from "../../config/Stat";
 
     /**
      * @type {{close: any, item: ItemSaveData, actions: any}}
@@ -70,6 +71,14 @@
                 }
             }
             return ret;
+        })(),
+    );
+
+    const sortedExtStats = $derived(
+        (() => {
+            const entries = objEntries(it.extStats);
+            entries.sort((a, b) => StatById[/**@type {StatId}*/(a[0])].sort - StatById[/**@type {StatId}*/(b[0])].sort);
+            return entries;
         })(),
     );
 
@@ -138,7 +147,7 @@
             {#each objEntries(it.baseStats) as [k, v], i (i)}
                 <StatEntryFragment style={`color: ${Const.QUALITY_COLOR_FG[0]}`} statId={k} val={v} />
             {/each}
-            {#each objEntries(it.extStats) as [k, v], i (i)}
+            {#each sortedExtStats as [k, v], i (i)}
                 <StatEntryFragment style={`color: ${Const.QUALITY_COLOR_FG[1]}`} statId={k} val={v} />
             {/each}
             {#if !arrIsEmpty(itemConfig.classOnly)}
