@@ -72,7 +72,7 @@ class UserData {
         /**@type {ItemId[]} */
         const candidates = [];
         // candidates.push("rune1", "rune2", "rune3", "rune4", "rune5", "rune6", "rune7", "rune8", "rune9", "rune10", "rune11", "rune12", "rune13", "rune14", "rune15", "rune16", "rune17", "rune18", "rune19", "rune20", "rune21", "rune22", "rune23", "rune24", "rune25");
-        candidates.push("jihadhelm", "jihadpauldr", "jihadarmor", "jihadbrace", "jihadglove", "jihadbelt", "jihadpants", "jihadboots", "jihadugs");
+        candidates.push("jihadugs");
 
         for (let i = 0; i < count; i++) {
             const item = ItemInstance.drop(arrGetOne(candidates), 60, 0);

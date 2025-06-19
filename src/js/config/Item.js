@@ -320,7 +320,7 @@ export const Items = [
     { id: "dragontooth", name: "龙牙", level: 1, quality: 3, classOnly: ["mage"], image: "龙", type: "dagger" },
     { id: "elysianfan", name: "逍遥扇", level: 1, quality: 3, classOnly: ["wlk"], image: "逍", type: "instrument" },
     { id: "layingserpent", name: "卧龙", level: 1, quality: 3, classOnly: ["warr"], image: "卧", type: "dao" },
-    { id: "runemaster", name: "五行斧", level: 21, quality: 3, image: "INV_Axe_83", type: "axe", randomAffix: [{ ["xdmg1"]: 0, ["fdmg1"]: 0, ["tdmg1"]: 0, ["hdmg1"]: 0, ["pdmg1"]: 0 }, { ["rw1"]: 0 }, { ["rwt"]: 0 }, { ["sok5"]: 0 }], randomAffixCount: [1, 1, 1, 1], affixCount: 1, maxAffixCount: 4, isUnique: true },
+    { id: "runemaster", name: "五行斧", level: 21, quality: 3, image: "INV_Axe_83", type: "axe", randomAffix: [{ ["xdmg1"]: 0, ["fdmg1"]: 0, ["tdmg1"]: 0, ["hdmg1"]: 0, ["pdmg1"]: 0 }, { ["rw1"]: 0 }, { ["rwt"]: 0 }, { ["sok5"]: 0 }], randomAffixCount: [1, 1, 1, 1], affixCount: 1, maxAffixCount: 4, sockets: "sokinf", isUnique: true },
     { id: "rune1", name: "销", level: 7, quality: 0, image: "INV_Elemental_Mote_Nether", type: "rune", fixedAffix: { ["xdmgs"]: -0.9 } },
     { id: "rune2", name: "枯", level: 7, quality: 0, image: "INV_Elemental_Mote_Life01", type: "rune", fixedAffix: { ["hdmgs"]: -0.9 } },
     { id: "rune3", name: "淹", level: 7, quality: 0, image: "INV_Elemental_Mote_Water01", type: "rune", fixedAffix: { ["tdmgs"]: -0.9 } },

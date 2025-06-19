@@ -249,15 +249,18 @@ export default class ItemInstance {
             level = Math.max(level, e.affix.level ?? 0);
         }
 
-        if (quality >= 1 && quality <= 2 && extStats.sok != null) {
-            // item type constraint
-            const socketConstraint = ItemById[id].sockets;
-            if (socketConstraint != null) {
-                extStats.sok.value = Math.min(Const.AFFIXID_2_SOCKET_COUNT[socketConstraint], extStats.sok.value);
-            }
+        if (quality >= 1 && extStats.sok != null) {
+            const itemCfg = ItemById[id];
+            if (itemCfg.sockets !== "sokinf") {
+                // item type constraint
+                const socketConstraint = itemCfg.sockets;
+                if (socketConstraint != null) {
+                    extStats.sok.value = Math.min(Const.AFFIXID_2_SOCKET_COUNT[socketConstraint], extStats.sok.value);
+                }
 
-            // item quality constraint
-            extStats.sok.value = Math.min(Const.QUALITY_SOCKET_COUNT[quality], extStats.sok.value);
+                // item quality constraint
+                extStats.sok.value = Math.min(Const.QUALITY_SOCKET_COUNT[quality], extStats.sok.value);
+            }
         }
 
         /**@type {ItemSaveData} */

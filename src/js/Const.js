@@ -266,6 +266,7 @@ const Const = {
         "sok3": 3,
         "sok4": 4,
         "sok5": 5,
+        "sokinf": 5,
     },
     QUALITY_SOCKET_COUNT: [99, 2, 1, 1, 1], // Normal, Magic, Rare, Epic, Legendary
 }
