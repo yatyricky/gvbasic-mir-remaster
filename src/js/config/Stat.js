@@ -96,6 +96,7 @@ export const Stats = [
     { id: "pmh", name: "敌人治疗效果降低", type: "number", description: "敌人治疗效果降低{0.2}%", sort: 291 },
     { id: "sok", name: "插槽数量", type: "int", sort: 292 },
     { id: "rw", name: "允许符文之语", type: "int", sort: 293 },
+    { id: "rwt", name: "允许符文之语-显示", type: "int", description: "可制作五行符", sort: 999 },
     { id: "doge", name: "闪避", type: "number", description: "闪避几率+{0.2}%", sort: 301 },
     { id: "mdoge", name: "法术闪避", type: "number", description: "法术闪避几率+{0.2}%", sort: 302 },
     { id: "hit", name: "准确", type: "number", description: "准确+{0.2}%", sort: 303 },

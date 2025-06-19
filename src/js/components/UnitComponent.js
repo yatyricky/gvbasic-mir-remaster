@@ -87,7 +87,14 @@ export default class UnitComponent extends Component {
         }
         let unequipped = false;
 
-        if (slotType === "arms") {
+        if (itemConfig.isUnique) {
+            // Check if the item is already equipped
+            const existingItem = equipped.find(e => e.id === item.id);
+            if (existingItem) {
+                this.tryUnquip(existingItem, true);
+                unequipped = true; // Mark as unequipped
+            }
+        } else if (slotType === "arms") {
             // 1. must equip current
             const combinations = arrCombinations(equipped);
 

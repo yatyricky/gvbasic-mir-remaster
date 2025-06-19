@@ -157,18 +157,20 @@ const Const = {
     /**@type {Array<ItemType>} */
     EQUIPABLE_TYPES: [
         "armor",
+        "taorobe",
         "belt",
         "boot",
         "charm1",
         "charm2",
         "charm3",
         "glove",
+        "magesigil",
         "helm",
         "necklace",
         "pant",
         "pauldron",
         "ring",
-        "sword", "sword2h", "dao", "dao2h", "dagger", "axe", "axe2h", "mace", "mace2h", "polearm", "staff", "instrument",
+        "sword", "sword2h", "ugs", "dao", "katana", "dao2h", "dagger", "axe", "axe2h", "mace", "mace2h", "polearm", "staff", "instrument",
         "bracelet",
     ],
     /**@type {Record<ItemType, string>} */

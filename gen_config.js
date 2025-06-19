@@ -261,7 +261,7 @@ class TypeLexer {
                 } else if (typeof cell === "string") {
                     return cell.toLowerCase() === "true";
                 } else {
-                    return "Unknown boolean value";
+                    return `Unknown boolean value ${cell}`;
                 }
             case "number":
             case "js":

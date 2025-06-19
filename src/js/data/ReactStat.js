@@ -308,7 +308,7 @@ export default class ReactStat {
         for (const [setId, items] of wornSets) {
             const completion = ItemSetGroupBySetStat[setId];
             for (const entry of completion) {
-                if (items < entry.setCount) {
+                if (items + this.getStat("setany").value < entry.setCount) {
                     continue; // not enough items to complete the set
                 }
                 /**@type {StatData}*/

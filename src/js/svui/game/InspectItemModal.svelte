@@ -65,7 +65,7 @@
                     ret.push({
                         statId,
                         val,
-                        style: `color: ${wornItems.size >= completion.setCount ? Const.QUALITY_COLOR_FG[1] : "#807F86"};`,
+                        style: `color: ${wornItems.size + hero.stat.getStat("setany").value >= completion.setCount ? Const.QUALITY_COLOR_FG[1] : "#807F86"};`,
                         formatter: `(${completion.setCount})套装: {0}`,
                     });
                 }
