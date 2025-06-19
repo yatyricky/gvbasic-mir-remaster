@@ -450,7 +450,8 @@
         color: white;
         right: -6px;
         bottom: -4px;
-        width: 10px;
+        text-align: center;
+        width: 12px;
         height: 10px;
         font-size: 9px;
         padding: 1px;
