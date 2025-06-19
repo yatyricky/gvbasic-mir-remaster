@@ -269,6 +269,7 @@ const Const = {
         "sokinf": 5,
     },
     QUALITY_SOCKET_COUNT: [99, 2, 1, 1, 1], // Normal, Magic, Rare, Epic, Legendary
+    SKILL_MAX_LEVEL: 20,
 }
 
 export default Const;

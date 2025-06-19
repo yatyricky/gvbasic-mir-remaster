@@ -1,11 +1,12 @@
 import { ItemById } from "../config/Item";
+import { SkillById } from "../config/Skill";
 import { UnitById } from "../config/Unit";
 import Const from "../Const";
 import ItemInstance from "../data/ItemInstance";
 import ReactStat from "../data/ReactStat";
 import userData from "../data/UserData";
 import { dispatch } from "../EventBus";
-import { arrCombinations, objEntries } from "../Utils";
+import { arrCombinations, arrIsEmpty, objEntries } from "../Utils";
 import Component from "./Component";
 
 export default class UnitComponent extends Component {
@@ -231,6 +232,43 @@ export default class UnitComponent extends Component {
         dispatch("bag:refresh", null);
         dispatch("inventory:refresh", null);
         dispatch("item:refresh", item.uuid);
+        userData.saveToDisk();
+    }
+
+    /**
+     * 
+     * @param {SkillId} id 
+     */
+    getLearntSkillLevel(id) {
+        return this.persistantData.skills[id] ?? 0;
+    }
+
+    /**
+     * 
+     * @param {SkillId} id 
+     */
+    upgradeSkill(id) {
+        if (this.stat.getStat("skpts").value <= 0) {
+            dispatch("toast", "没有技能点");
+            return false; // No skill points available
+        }
+        const config = SkillById[id];
+        if (this.stat.level < config.level) {
+            dispatch("toast", `技能等级不足，需达到 ${config.level} 级`);
+            return false; // Not enough level to learn this skill
+        }
+        if (!arrIsEmpty(config.prerequisite) && config.prerequisite.some(prereq => this.getLearntSkillLevel(prereq) <= 0)) {
+            dispatch("toast", "技能前置条件未满足");
+            return false; // Prerequisite skills not met
+        }
+        if (this.getLearntSkillLevel(id) >= Const.SKILL_MAX_LEVEL) {
+            dispatch("toast", "技能已满级");
+            return false; // Skill already at max level
+        }
+        // Upgrade the skill
+        this.persistantData.skills[id] = (this.persistantData.skills[id] || 0) + 1;
+        this.stat.subStat("skpts", { value: 1 });
+        dispatch("skill:refresh", null);
         userData.saveToDisk();
     }
 }

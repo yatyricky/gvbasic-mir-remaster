@@ -5,6 +5,7 @@
     import BagModal from "./BagModal.svelte";
     import StatModal from "./StatModal.svelte";
     import AnyaShop from "./AnyaShop.svelte";
+    import SkillModal from "./SkillModal.svelte";
     import MessageBox from "../MessageBox.svelte";
     import { onDestroy, onMount } from "svelte";
 
@@ -52,6 +53,13 @@
         });
     }
 
+    function openSkill() {
+        dispatch("modal:show", {
+            component: SkillModal,
+            props: {},
+        });
+    }
+
     /**@type {any[]}*/
     const subs = [];
 
@@ -94,7 +102,7 @@
     <button class="btn" onclick={openBag} style={`left: ${40 * 3}px; top: ${40 * 9}px;`}>
         背包
     </button>
-    <button class="btn" style={`left: ${40 * 4.5}px; top: ${40 * 9}px;`}> 技能 </button>
+    <button class="btn" onclick={openSkill} style={`left: ${40 * 4.5}px; top: ${40 * 9}px;`}> 技能 </button>
     <button class="btn" onclick={exitGame} style={`left: ${40 * 4.5}px; top: ${40 * 8}px;`}>
         退出
     </button>

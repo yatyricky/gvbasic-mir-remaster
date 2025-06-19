@@ -348,6 +348,20 @@ for (const file of fs.readdirSync(cfgDir)) {
                     entryTypeDef.enumValues.add(enumValue);
                 }
                 enumTypes[entryTypeDef.dtsType] = entryTypeDef;
+            } else if (entryTypeDef.type.type === 'array' && entryTypeDef.type.elementType.type === 'enum') {
+                if (entryTypeDef.type.elementType.enumValues == null) {
+                    entryTypeDef.type.elementType.enumValues = new Set();
+                }
+                for (let r = 4; r <= range.e.r; r++) {
+                    const enumValue = ws[xlsx.utils.encode_cell({ r, c })]?.v;
+                    if (Utils.strIsEmpty(enumValue)) {
+                        continue;
+                    }
+                    for (const e of enumValue.split(",")) {
+                        entryTypeDef.type.elementType.enumValues.add(e);
+                    }
+                }
+                enumTypes[entryTypeDef.type.elementType.enumName] = entryTypeDef.type.elementType;
             }
         }
 
@@ -370,6 +384,8 @@ for (const file of fs.readdirSync(cfgDir)) {
     for (const e of entryType) {
         if (e.type.type === 'enum') {
             dts += `    type ${e.type.enumName} = ${Array.from(e.enumValues).map(v => `"${v}"`).join(' | ')};\n`;
+        } else if (e.type.type === 'array' && e.type.elementType.type === 'enum') {
+            dts += `    type ${e.type.elementType.enumName} = ${Array.from(e.type.elementType.enumValues).map(v => `"${v}"`).join(' | ')};\n`
         }
         // sb += `    ${e.name}: ${TypeLexer.toTypeScriptType(e.type)};\n`;
     }

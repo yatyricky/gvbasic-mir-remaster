@@ -7,6 +7,11 @@ import ItemInstance from "./ItemInstance";
 import { mathRandomIncl, mathRandomIntIncl } from "./MathLab";
 import Range from "./Range";
 
+const ExpTable = [0, 100];
+for (let i = 2; i < 60; i++) {
+    ExpTable[i] = Math.floor(ExpTable[i - 1] * 1.2);
+}
+
 export default class ReactStat {
     /**
      * 
@@ -22,6 +27,8 @@ export default class ReactStat {
      * @param {StatData} baseStat 
      */
     initBaseStat(baseStat) {
+        this.level = 1;
+        this.on("exp", this.updateLevel.bind(this));
         /**@type {StatData} */
         this.data = {};
         for (const statConfig of Stats) {
@@ -323,5 +330,20 @@ export default class ReactStat {
         }
         this.data.rthp.value = Math.min(prevRtHp, this.data.rtmaxhp.value);
         this.data.rtmp.value = Math.min(prevRtMp, this.data.rtmaxmp.value);
+    }
+
+    updateLevel() {
+        const prevLevel = this.level;
+        const exp = this.getStat("exp").value;
+        for (let i = 1; i < ExpTable.length; i++) {
+            if (exp < ExpTable[i]) {
+                this.level = i;
+                break;
+            }
+        }
+        const levelDiff = this.level - prevLevel;
+        if (levelDiff !== 0) {
+            this.addStat("skpts", { value: levelDiff });
+        }
     }
 }

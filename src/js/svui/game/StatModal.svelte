@@ -33,6 +33,7 @@
             <button onclick={close} class="btn close-btn">X</button>
         </div>
         <div class="container">
+            <div>等级: {stat.level}</div>
             <div>{StatById.rthp.name}: {formatStat("rthp")}/{formatStat("rtmaxhp")}</div>
             <div>{StatById.rtmp.name}: {formatStat("rtmp")}/{formatStat("rtmaxmp")}</div>
             <div>{formatStat("str")}</div>

@@ -2,7 +2,7 @@
     /**
      * @type {any}
      */
-    const { close, title = "提示", content, actions } = $props();
+    const { close, title = "提示", content, actions, html = false } = $props();
 </script>
 
 <div class="backdrop">
@@ -13,7 +13,11 @@
         </div>
         <div class="container">
             <div class="content">
-                {content}
+                {#if html}
+                    {@html content}
+                {:else}
+                    {content}
+                {/if}
             </div>
             <div class="actions">
                 {#each actions as { text, action, autoClose }, i (i)}

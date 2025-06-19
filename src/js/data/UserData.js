@@ -44,7 +44,7 @@ class UserData {
             inventory: {},
             charmBag: [],
             bag: [],
-            skills: [],
+            skills: {},
         }
         let chars = this.data.chars;
         if (chars == null) {

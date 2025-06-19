@@ -57,18 +57,13 @@ declare global {
         runeWordStats?: StatData;
     }
 
-    interface SkillSaveData {
-        id: SkillId;
-        level: number;
-    }
-
     interface UnitSaveData {
         unitId: UnitId;
         stats: StatData;
         inventory: Partial<Record<SlotType, ItemSaveData[]>>;
         charmBag: ItemSaveData[];
         bag: ItemSaveData[];
-        skills: SkillSaveData[];
+        skills: Partial<Record<SkillId, number>>;
     }
 
     interface ISaveData {
