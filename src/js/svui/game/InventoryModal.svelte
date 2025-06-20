@@ -70,47 +70,53 @@
 
     /**@type {Record<SlotType, any>}*/
     const positioning = {
-        head: { left: 0, top: 0, leftGrow: 0, topGrow: 0 },
-        neck: { left: 0, top: 40 * 1, leftGrow: 0, topGrow: 0 },
-        shoulder: { left: 0, top: 40 * 2, leftGrow: 0, topGrow: 0 },
-        torso: { left: 0, top: 40 * 3, leftGrow: 0, topGrow: 0 },
-        wrist: { left: 0, top: 40 * 4, leftGrow: 0, topGrow: 0 },
-        hand: { left: 40 * 9, top: 0, leftGrow: 0, topGrow: 0 },
+        head: { left: 12, top: 0, leftGrow: 0, topGrow: 0, cols: 1 },
+        shoulder: { left: 12, top: 44 * 1, leftGrow: 0, topGrow: 0, cols: 1 },
+        torso: { left: 12, top: 44 * 2, leftGrow: 0, topGrow: 0, cols: 1 },
+        wrist: { left: 12, top: 44 * 3, leftGrow: 0, topGrow: 0, cols: 1 },
+        hand: { left: 4 + 40 * 8, top: 0, leftGrow: 0, topGrow: 0, cols: 1 },
         waist: {
-            left: 40 * 9,
-            top: 40 * 1,
+            left: 4 + 40 * 8,
+            top: 44 * 1,
             leftGrow: 0,
             topGrow: 0,
+            cols: 1,
         },
         leg: {
-            left: 40 * 9,
-            top: 40 * 2,
+            left: 4 + 40 * 8,
+            top: 44 * 2,
             leftGrow: 0,
             topGrow: 0,
+            cols: 1,
         },
         foot: {
-            left: 40 * 9,
-            top: 40 * 3,
+            left: 4 + 40 * 8,
+            top: 44 * 3,
             leftGrow: 0,
             topGrow: 0,
+            cols: 1,
         },
+        neck: { left: 80+176, top: 44 * 0, leftGrow: 0, topGrow: 0, cols: 1 },
         finger: {
-            left: 40 * 8,
-            top: 40 * 4,
-            leftGrow: 40,
+            left: 80,
+            top: 44 * 4,
+            leftGrow: 176,
             topGrow: 0,
+            cols: 2,
         },
         arms: {
-            left: 40 * 4,
-            top: 40 * 4,
-            leftGrow: 40,
+            left: 146,
+            top: 44 * 4,
+            leftGrow: 44,
             topGrow: 0,
+            cols: 2,
         },
         accessory: {
-            left: 40 * 0,
-            top: 40 * 5,
-            leftGrow: 40,
-            topGrow: 0,
+            left: 80,
+            top: 44 * 5,
+            leftGrow: 44,
+            topGrow: 44,
+            cols: 5,
         },
         socket: undefined,
         inherit: undefined,
@@ -124,14 +130,18 @@
             <button onclick={close} class="btn close-btn">X</button>
         </div>
         <div class="container">
-            <div style="top: 40px; position:absolute; padding: 0;">
+            <div style="top: 24px; position:absolute; padding: 0;">
                 {#each inventoryData as { slot, arrangement } (slot)}
                     {#each arrangement as { status, item }, j (j)}
                         {@const pos = positioning[slot] || {}}
+                        {@const jy = Math.floor(j / pos.cols)}
+                        {@const jx = j % pos.cols}
+                        {@const left = pos.left + pos.leftGrow * jx}
+                        {@const top = pos.top + pos.topGrow * jy}
                         <ItemFragment
                             {item}
-                            left={pos.left + pos.leftGrow * j}
-                            top={pos.top + pos.topGrow * j}
+                            {left}
+                            {top}
                             width={40}
                             height={40}
                             clickable={status === "equipped"}
@@ -170,9 +180,9 @@
         box-shadow:
             0 0 1px 2px #726e6c,
             inset 0 0 8px 4px #23201f;
-        width: 100%;
+        width: 94%;
         height: 94%;
-        left: 0%;
+        left: 3%;
         top: 3%;
     }
     .title {
