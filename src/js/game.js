@@ -20,19 +20,12 @@ topWrapper.style.transformOrigin = "top center";
 const domSvui = document.getElementById('svui');
 mount(Main, { target: domSvui });
 
-let initedGameScene = false;
-
 /**
  * 
  * @param {GameObject} gameRoot 
  * @param {number} charIndex
  */
 function initGameScene(gameRoot, charIndex) {
-    if (initedGameScene) {
-        return;
-    }
-    initedGameScene = true;
-
     const hero = userData.data.chars[charIndex];
 
     const char = new GameObject("hero", gameRoot).setPosition(5, 2);
@@ -50,15 +43,17 @@ function main() {
     SceneManager.setActiveScene(scene);
 
     // general
-    const gameScene = new GameObject("game");
+    /**@type {GameObject} */
+    let gameScene;
 
     subscribe("scene:game", (charIndex) => {
-        gameScene.setActive(true);
+        gameScene = new GameObject("game")
         initGameScene(gameScene, charIndex);
     })
 
     subscribe("scene:menu", () => {
-        gameScene.setActive(false);
+        gameScene.destroy();
+        gameScene = null;
     })
 }
 

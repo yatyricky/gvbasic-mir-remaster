@@ -23,7 +23,7 @@
     }
 </script>
 
-<div>
+<div class="login-scene">
     <button class="btn" onclick={continueGame}>继续游戏</button>
     <button class="btn" onclick={newHero} style="top: 100px">新游戏</button>
     <button class="btn" onclick={loadSaves} style="top: 200px">加载存档</button>
@@ -51,5 +51,10 @@
         border-radius: 4px;
         padding: 0px;
         color: #ceae0f;
+    }
+    .login-scene {
+        background-color: #403a36;
+        box-shadow:
+            inset 0 0 8px 4px #23201f;
     }
 </style>
