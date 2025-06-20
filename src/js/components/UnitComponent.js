@@ -282,4 +282,42 @@ export default class UnitComponent extends Component {
         }
         userData.saveToDisk();
     }
+
+    /**
+     * 
+     * @param {number} exp 
+     */
+    addExp(exp) {
+        this.stat.addStat("exp", { value: exp });
+        this.save();
+    }
+
+    /**
+     * @param {SkillId} id
+     * @return {SkillTag[]}
+     */
+    getSkillBranches(id) {
+        const cfg = SkillById[id];
+        const tags = [...cfg.tag];
+        for (const e of Stats) {
+            if (arrIsEmpty(e.skillTag)) {
+                continue;
+            }
+            if (this.stat.getStat(e.id).value <= 0) {
+                continue; // Skip if the stat is not positive
+            }
+            tags.push(...e.skillTag);
+        }
+        return tags;
+    }
+
+    /**
+     * 
+     * @param {SkillId} id 
+     * @return {{val: number, base: number, ext: number}}
+     */
+    getSkillLevel(id) {
+        const base = this.getLearntSkillLevel(id);
+
+    }
 }

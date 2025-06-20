@@ -6,6 +6,7 @@
     import { arrIsEmpty } from "../../Utils";
     import { dispatch, subscribe } from "../../EventBus";
     import MessageBox from "../MessageBox.svelte";
+    import Const from "../../Const";
 
     const { close } = $props();
 
@@ -77,7 +78,10 @@
 
             for (const skill of currentBranch) {
                 skills[skill.id] = {
-                    upgrade: hero.stat.level >= skill.level,
+                    upgrade:
+                        hero.stat.level >= skill.level &&
+                        (arrIsEmpty(skill.prerequisite) ||
+                            skill.prerequisite.every((id) => hero.getLearntSkillLevel(id) > 0)),
                 };
             }
             return skills;
@@ -135,7 +139,8 @@
         if (
             hero.stat.getStat("skpts").value > 0 &&
             skillState[skillId]?.upgrade === true &&
-            (config.prerequisite == null || config.prerequisite.every((id) => hero.getLearntSkillLevel(id) > 0))
+            (config.prerequisite == null || config.prerequisite.every((id) => hero.getLearntSkillLevel(id) > 0)) &&
+            hero.getLearntSkillLevel(skillId) < Const.SKILL_MAX_LEVEL
         ) {
             actions.push({
                 text: "升级",
@@ -150,7 +155,7 @@
             props: {
                 title: config.name,
                 content: `<div style="font-size: 14px;">
-                ${config.tag.map((t) => `<span style="color: ${SkillTagColor[t]};">${SkillTagName[t]}</span>`).join(", ")}<br/>
+                ${hero.getSkillBranches(skillId).map((t) => `<span style="color: ${SkillTagColor[t]};">${SkillTagName[t]}</span>`).join(", ")}<br/>
                 技能等级: ${hero.getLearntSkillLevel(skillId)}<br/>
                 ${config.description}<br/>
                 <span style="color:${config.level <= hero.stat.level ? "white" : "red"}">需要等级: ${config.level}</span>

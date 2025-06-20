@@ -11,6 +11,15 @@ const ExpTable = [0, 100];
 for (let i = 2; i < 60; i++) {
     ExpTable[i] = Math.floor(ExpTable[i - 1] * 1.2);
 }
+/**@type {number[]} */
+let ExpTableRunningSum = [];
+for (let i = 0; i < ExpTable.length; i++) {
+    if (i === 0) {
+        ExpTableRunningSum[i] = ExpTable[i];
+    } else {
+        ExpTableRunningSum[i] = ExpTableRunningSum[i - 1] + ExpTable[i];
+    }
+}
 
 export default class ReactStat {
     /**
@@ -335,8 +344,8 @@ export default class ReactStat {
     updateLevel() {
         const prevLevel = this.level;
         const exp = this.getStat("exp").value;
-        for (let i = 1; i < ExpTable.length; i++) {
-            if (exp < ExpTable[i]) {
+        for (let i = 1; i < ExpTableRunningSum.length; i++) {
+            if (exp < ExpTableRunningSum[i]) {
                 this.level = i;
                 break;
             }

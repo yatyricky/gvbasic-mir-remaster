@@ -2,9 +2,11 @@ import { UnitById } from "../config/Unit";
 import Const from "../Const";
 import { dispatch } from "../EventBus";
 import GameObject from "../gameObjs/GameObject";
+import SceneManager from "../SceneManager";
 import Collider from "./Collider";
 import Component from "./Component";
 import TextRenderer from "./TextRenderer";
+import UnitComponent from "./UnitComponent";
 
 export default class GameMap extends Component {
     onInit() {
@@ -16,6 +18,11 @@ export default class GameMap extends Component {
         this.anya.addComponent(Collider).setLayer(Const.LAYER_NPC).setCallback(this.onAnya.bind(this)).setExitCollision(this.offAnya.bind(this));
         const anyaConfig = UnitById.anya;
         this.anya.addComponent(TextRenderer).setText(anyaConfig.image).setQueue(Const.QUEUE_NPC);
+
+        this.expTablet = new GameObject("expTablet", this.town);
+        this.expTablet.setPosition(5, 1);
+        this.expTablet.addComponent(Collider).setLayer(Const.LAYER_NPC).setCallback(this.onExpTablet.bind(this));
+        this.expTablet.addComponent(TextRenderer).setText("📜").setQueue(Const.QUEUE_NPC);
 
         this.wallRange(0, 0, 9, 0, "🌲", this.town);
         this.wallRange(0, 1, 0, 3, "🌲", this.town);
@@ -58,5 +65,9 @@ export default class GameMap extends Component {
     onExit() {
         console.log("Exit clicked");
         // dispatch("scene:login");
+    }
+
+    onExpTablet() {
+        SceneManager.activeScene.find("game/hero").getComponent(UnitComponent).addExp(1000);
     }
 }

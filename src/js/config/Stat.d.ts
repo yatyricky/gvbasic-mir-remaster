@@ -11,6 +11,8 @@ declare global {
         depends: StatId[];
         derived: (d:import("../data/ReactStat").default)=>void;
         save: boolean;
+        targetSkill: SkillId;
+        skillTag: SkillTag[];
     }
 }
 declare const Stats: Array<IStatConfig>;
