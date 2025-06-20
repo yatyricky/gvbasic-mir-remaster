@@ -208,7 +208,7 @@ export const Stats = [
     { id: "skpsdm", name: "召唤神兽", type: "int", description: "召唤神兽+{0}", sort: 502 },
     { id: "silent", name: "无法攻击", type: "int", sort: 801 },
     { id: "stun", name: "昏迷", type: "int", sort: 802 },
-    { id: "skpts", name: "技能点数", type: "int", sort: 803 },
+    { id: "skpts", name: "技能点数", type: "int", sort: 803, save: true },
     { id: "setheavy", name: "重型套装", type: "number", sort: 821 },
     { id: "setwargod", name: "战神套装", type: "number", sort: 822 },
     { id: "setmara", name: "天魔套装", type: "number", sort: 823 },

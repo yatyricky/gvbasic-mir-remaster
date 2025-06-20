@@ -122,6 +122,8 @@
         })(),
     );
 
+    let remainingSkillPoints = $state(hero.stat.getStat("skpts").value);
+
     /**
      *
      * @param {SkillId} skillId
@@ -164,6 +166,7 @@
     onMount(() => {
         unsub = subscribe("skill:refresh", () => {
             skillData = getSkillData();
+            remainingSkillPoints = hero.stat.getStat("skpts").value;
         });
     });
 
@@ -303,7 +306,7 @@
                 {/each}
             </div>
             <div class="skill-points">
-                剩余技能点数: {hero.stat.getStat("skpts").value}
+                剩余技能点数: {remainingSkillPoints}
             </div>
         </div>
     </div>

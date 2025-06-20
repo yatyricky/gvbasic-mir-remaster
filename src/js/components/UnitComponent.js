@@ -1,5 +1,6 @@
 import { ItemById } from "../config/Item";
 import { SkillById } from "../config/Skill";
+import { Stats } from "../config/Stat";
 import { UnitById } from "../config/Unit";
 import Const from "../Const";
 import ItemInstance from "../data/ItemInstance";
@@ -36,7 +37,7 @@ export default class UnitComponent extends Component {
     addBagItem(item) {
         this.persistantData.bag.push(item);
         dispatch("bag:refresh", null);
-        userData.saveToDisk();
+        this.save();
     }
 
     /**
@@ -62,7 +63,7 @@ export default class UnitComponent extends Component {
         this.persistantData.bag.push(item); // Add it back to the bag
         dispatch("bag:refresh", null);
         dispatch("inventory:refresh", null);
-        userData.saveToDisk();
+        this.save();
         return true; // Successfully unequipped
     }
 
@@ -160,7 +161,7 @@ export default class UnitComponent extends Component {
         this.persistantData.bag.splice(indexInBag, 1); // Remove it from the bag
         dispatch("bag:refresh", null);
         dispatch("inventory:refresh", null);
-        userData.saveToDisk();
+        this.save();
     }
 
     getSocketFillers() {
@@ -232,7 +233,7 @@ export default class UnitComponent extends Component {
         dispatch("bag:refresh", null);
         dispatch("inventory:refresh", null);
         dispatch("item:refresh", item.uuid);
-        userData.saveToDisk();
+        this.save();
     }
 
     /**
@@ -269,6 +270,16 @@ export default class UnitComponent extends Component {
         this.persistantData.skills[id] = (this.persistantData.skills[id] || 0) + 1;
         this.stat.subStat("skpts", { value: 1 });
         dispatch("skill:refresh", null);
+        this.save();
+    }
+
+    save() {
+        for (const e of Stats) {
+            if (e.save !== true) {
+                continue; // Skip stats that are not meant to be saved
+            }
+            this.persistantData.stats[e.id] = this.stat.getStat(e.id);
+        }
         userData.saveToDisk();
     }
 }

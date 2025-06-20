@@ -10,6 +10,7 @@ declare global {
         sort: number;
         depends: StatId[];
         derived: (d:import("../data/ReactStat").default)=>void;
+        save: boolean;
     }
 }
 declare const Stats: Array<IStatConfig>;
