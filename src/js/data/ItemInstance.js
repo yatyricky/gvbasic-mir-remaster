@@ -112,6 +112,9 @@ export default class ItemInstance {
             if (!arrIsEmpty(e.group) && e.group.some(group => excludedGroups.has(group))) {
                 return false; // Affix is in a group that is excluded
             }
+            if (extAffixesRaw.some(existingAffix => existingAffix.affix.id === e.id)) {
+                return false; // Affix is already added
+            }
             return true;
         }) ?? [];
         for (let i = 0; i < affixCount; i++) {

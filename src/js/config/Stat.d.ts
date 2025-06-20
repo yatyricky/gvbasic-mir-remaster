@@ -16,6 +16,7 @@ declare global {
         targetTag: SkillTag;
         targetUnit: UnitId[];
         unitConstraint: UnitId[];
+        isSkillMod: boolean;
     }
 }
 declare const Stats: Array<IStatConfig>;

@@ -320,7 +320,7 @@ export default class UnitComponent extends Component {
     getSkillLevel(id) {
         const myBranches = this.getSkillBranches(id);
         const base = this.getLearntSkillLevel(id);
-        const itemAddedSkillLevel = Stats.filter(e => e.targetSkill === id && (arrIsEmpty(e.unitConstraint) || e.unitConstraint.includes(this.persistantData.unitId))).reduce((acc, cur) => acc + this.stat.getStat(cur.id).value, 0);
+        const itemAddedSkillLevel = Stats.filter(e => e.targetSkill === id && e.isSkillMod !== true && (arrIsEmpty(e.unitConstraint) || e.unitConstraint.includes(this.persistantData.unitId))).reduce((acc, cur) => acc + this.stat.getStat(cur.id).value, 0);
         const branchLevels = Stats.filter(e => (e.targetTag !== null && myBranches.includes(e.targetTag) && (arrIsEmpty(e.unitConstraint) || e.unitConstraint.includes(this.persistantData.unitId))) || (!arrIsEmpty(e.targetUnit) && e.targetUnit.includes(this.persistantData.unitId) && (arrIsEmpty(e.unitConstraint) || e.unitConstraint.includes(this.persistantData.unitId)))).reduce((acc, cur) => acc + this.stat.getStat(cur.id).value, 0);
         if (base + itemAddedSkillLevel > 0) {
             return { val: base + itemAddedSkillLevel + branchLevels, base, ext: itemAddedSkillLevel + branchLevels };

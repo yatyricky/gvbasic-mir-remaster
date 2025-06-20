@@ -3,10 +3,12 @@
     import UnitComponent from "../../components/UnitComponent";
     import SceneManager from "../../SceneManager";
     import { SkillById, SkillGroupByKlass } from "../../config/Skill";
-    import { arrIsEmpty } from "../../Utils";
+    import { arrIsEmpty, strFormat, strFormatSaveVal } from "../../Utils";
     import { dispatch, subscribe } from "../../EventBus";
     import MessageBox from "../MessageBox.svelte";
     import Const from "../../Const";
+    import Formula from "../../skill/Formula";
+    import { Stats } from "../../config/Stat";
 
     const { close } = $props();
 
@@ -150,6 +152,20 @@
                 autoClose: true,
             });
         }
+        const mods = [];
+        for (const e of Stats) {
+            if (e.isSkillMod !== true) {
+                continue;
+            }
+            if (e.targetSkill !== skillId) {
+                continue;
+            }
+            const val = hero.stat.getStat(e.id).value;
+            if (val <= 0) {
+                continue;
+            }
+            mods.push(strFormat(e.description, val));
+        }
         const skillLevel = hero.getSkillLevel(skillId);
         dispatch("modal:show", {
             component: MessageBox,
@@ -161,7 +177,8 @@
                     .map((t) => `<span style="color: ${SkillTagColor[t]};">${SkillTagName[t]}</span>`)
                     .join(", ")}<br/>
                 技能等级: ${skillLevel.base}${skillLevel.ext > 0 ? `<span style="color: rgb(30,255,0);">+${skillLevel.ext}</span>` : ""}<br/>
-                ${config.description}<br/>
+                ${strFormat(config.description, ...Formula[skillId](skillLevel.val, hero.stat).map((e) => strFormatSaveVal(e)))}<br/>
+                ${mods.length > 0 ? `<span style="color: rgb(30,255,0);">${mods.join("<br/>")}</span><br/>` : ""}
                 <span style="color:${config.level <= hero.stat.level ? "white" : "red"}">需要等级: ${config.level}</span>
                 </div>`,
                 actions,

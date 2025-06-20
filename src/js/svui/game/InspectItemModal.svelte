@@ -270,6 +270,7 @@
         height: calc(100% - 24px - 32px);
         top: 24;
         left: 0;
+        font-size: 16px;
         overflow: auto;
     }
     .content::-webkit-scrollbar {

@@ -42,7 +42,11 @@
      * @param {number} index
      */
     function loadChar(index) {
-        dispatch("scene:game", index);
+        const arr = userData.data.chars;
+        const tmp = arr[arr.length - 1];
+        arr[arr.length - 1] = arr[index];
+        arr[index] = tmp;
+        dispatch("scene:game", arr.length - 1);
         close();
     }
 

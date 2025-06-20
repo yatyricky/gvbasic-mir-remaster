@@ -8,6 +8,23 @@ export function uuid() {
 
 /**
  * 
+ * @param {number} value 
+ * @param {number} precision 
+ * @returns 
+ */
+export function numFloor(value, precision = 0) {
+    if (value == null) {
+        return 0;
+    }
+    if (precision < 0) {
+        throw new Error("Precision must be a non-negative integer.");
+    }
+    const factor = Math.pow(10, precision);
+    return Math.floor(value * factor) / factor;
+}
+
+/**
+ * 
  * @param {number} seconds 
  * @returns {Promise<void>}
  */
@@ -261,11 +278,25 @@ export function strFormat(str, ...args) {
         const pts = parseInt(groups?.pts ?? "0");
         const val = args[idx];
         if (typeof val === "number") {
-            return val.toFixed(pts);
+            return numFloor(val, pts);
         } else {
             return val;
         }
     });
+}
+
+/**
+ * 
+ * @param {any} val 
+ */
+export function strFormatSaveVal(val) {
+    if (val.value != null) {
+        return val.value.toFixed(0);
+    } else if (val.range != null) {
+        return `${val.range[0].toFixed(0)}-${val.range[1].toFixed(0)}`;
+    } else {
+        return JSON.stringify(val);
+    }
 }
 
 /**

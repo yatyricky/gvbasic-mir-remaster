@@ -11,11 +11,16 @@ declare global {
         name: string;
         description: string;
         level: number;
-        formula: string;
-        num1: number;
-        num2: number;
-        num3: number;
-        num4: number;
+        n1: number;
+        n2: number;
+        n3: number;
+        n4: number;
+        n5: number;
+        n6: number;
+        n7: number;
+        n8: number;
+        n9: number;
+        n10: number;
     }
 }
 declare const Skills: Array<ISkillConfig>;

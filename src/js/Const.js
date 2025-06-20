@@ -170,7 +170,7 @@ const Const = {
         "pant",
         "pauldron",
         "ring",
-        "sword", "sword2h", "ugs", "dao", "katana", "dao2h", "dagger", "axe", "axe2h", "mace", "mace2h", "polearm", "staff", "instrument",
+        "sword", "sword2h", "ugs", "dao", "katana", "dao2h", "dagger", "axe", "axe2h", "mace", "mace2h", "polearm", "staff", "magestaff", "instrument",
         "bracelet",
     ],
     /**@type {Record<ItemType, string>} */
