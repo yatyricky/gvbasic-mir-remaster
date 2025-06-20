@@ -13,6 +13,9 @@ declare global {
         save: boolean;
         targetSkill: SkillId;
         skillTag: SkillTag[];
+        targetTag: SkillTag;
+        targetUnit: UnitId[];
+        unitConstraint: UnitId[];
     }
 }
 declare const Stats: Array<IStatConfig>;

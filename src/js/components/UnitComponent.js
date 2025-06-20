@@ -288,7 +288,8 @@ export default class UnitComponent extends Component {
      * @param {number} exp 
      */
     addExp(exp) {
-        this.stat.addStat("exp", { value: exp });
+        const added = exp * (1 + this.stat.getStat("expex").value / 100);
+        this.stat.addStat("exp", { value: added });
         this.save();
     }
 
@@ -317,7 +318,14 @@ export default class UnitComponent extends Component {
      * @return {{val: number, base: number, ext: number}}
      */
     getSkillLevel(id) {
+        const myBranches = this.getSkillBranches(id);
         const base = this.getLearntSkillLevel(id);
-
+        const itemAddedSkillLevel = Stats.filter(e => e.targetSkill === id && (arrIsEmpty(e.unitConstraint) || e.unitConstraint.includes(this.persistantData.unitId))).reduce((acc, cur) => acc + this.stat.getStat(cur.id).value, 0);
+        const branchLevels = Stats.filter(e => (e.targetTag !== null && myBranches.includes(e.targetTag) && (arrIsEmpty(e.unitConstraint) || e.unitConstraint.includes(this.persistantData.unitId))) || (!arrIsEmpty(e.targetUnit) && e.targetUnit.includes(this.persistantData.unitId) && (arrIsEmpty(e.unitConstraint) || e.unitConstraint.includes(this.persistantData.unitId)))).reduce((acc, cur) => acc + this.stat.getStat(cur.id).value, 0);
+        if (base + itemAddedSkillLevel > 0) {
+            return { val: base + itemAddedSkillLevel + branchLevels, base, ext: itemAddedSkillLevel + branchLevels };
+        } else {
+            return { val: 0, base: 0, ext: 0 };
+        }
     }
 }

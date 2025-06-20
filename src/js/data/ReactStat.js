@@ -36,7 +36,7 @@ export default class ReactStat {
      * @param {StatData} baseStat 
      */
     initBaseStat(baseStat) {
-        this.level = 1;
+        this.level = ReactStat.calcLevel(baseStat.exp?.value ?? 0);
         this.on("exp", this.updateLevel.bind(this));
         /**@type {StatData} */
         this.data = {};
@@ -341,15 +341,22 @@ export default class ReactStat {
         this.data.rtmp.value = Math.min(prevRtMp, this.data.rtmaxmp.value);
     }
 
-    updateLevel() {
-        const prevLevel = this.level;
-        const exp = this.getStat("exp").value;
+    /**
+     * 
+     * @param {number} exp 
+     */
+    static calcLevel(exp) {
         for (let i = 1; i < ExpTableRunningSum.length; i++) {
             if (exp < ExpTableRunningSum[i]) {
-                this.level = i;
-                break;
+                return i;
             }
         }
+        return ExpTableRunningSum.length; // max level
+    }
+
+    updateLevel() {
+        const prevLevel = this.level;
+        this.level = ReactStat.calcLevel(this.getStat("exp").value);
         const levelDiff = this.level - prevLevel;
         if (levelDiff !== 0) {
             this.addStat("skpts", { value: levelDiff });

@@ -20,7 +20,7 @@ export default class GameMap extends Component {
         this.anya.addComponent(TextRenderer).setText(anyaConfig.image).setQueue(Const.QUEUE_NPC);
 
         this.expTablet = new GameObject("expTablet", this.town);
-        this.expTablet.setPosition(5, 1);
+        this.expTablet.setPosition(1, 1);
         this.expTablet.addComponent(Collider).setLayer(Const.LAYER_NPC).setCallback(this.onExpTablet.bind(this));
         this.expTablet.addComponent(TextRenderer).setText("📜").setQueue(Const.QUEUE_NPC);
 

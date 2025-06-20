@@ -150,13 +150,17 @@
                 autoClose: true,
             });
         }
+        const skillLevel = hero.getSkillLevel(skillId);
         dispatch("modal:show", {
             component: MessageBox,
             props: {
                 title: config.name,
                 content: `<div style="font-size: 14px;">
-                ${hero.getSkillBranches(skillId).map((t) => `<span style="color: ${SkillTagColor[t]};">${SkillTagName[t]}</span>`).join(", ")}<br/>
-                技能等级: ${hero.getLearntSkillLevel(skillId)}<br/>
+                ${hero
+                    .getSkillBranches(skillId)
+                    .map((t) => `<span style="color: ${SkillTagColor[t]};">${SkillTagName[t]}</span>`)
+                    .join(", ")}<br/>
+                技能等级: ${skillLevel.base}${skillLevel.ext > 0 ? `<span style="color: rgb(30,255,0);">+${skillLevel.ext}</span>` : ""}<br/>
                 ${config.description}<br/>
                 <span style="color:${config.level <= hero.stat.level ? "white" : "red"}">需要等级: ${config.level}</span>
                 </div>`,
@@ -220,31 +224,6 @@
                 <!-- Add SVG for arrows -->
                 <svg class="arrows">
                     <defs>
-                        {#each currentBranch as skill (skill.id)}
-                            {#if skill.tag.length > 0}
-                                <!-- Create a marker for each skill tag color -->
-                                <marker
-                                    id="arrowhead-lit-{skill.id}"
-                                    markerWidth="5"
-                                    markerHeight="3.5"
-                                    refX="5"
-                                    refY="1.75"
-                                    orient="auto"
-                                >
-                                    <polygon points="0 0, 5 1.75, 0 3.5" fill={SkillTagColor[skill.tag[0]]}></polygon>
-                                </marker>
-                                <marker
-                                    id="arrowhead-unlit-{skill.id}"
-                                    markerWidth="5"
-                                    markerHeight="3.5"
-                                    refX="5"
-                                    refY="1.75"
-                                    orient="auto"
-                                >
-                                    <polygon points="0 0, 5 1.75, 0 3.5" fill="#6d7070"></polygon>
-                                </marker>
-                            {/if}
-                        {/each}
                         <!-- Default markers -->
                         <marker
                             id="arrowhead-lit-default"
@@ -268,24 +247,21 @@
                         </marker>
                     </defs>
                     {#each arrows as arrow}
-                        {@const toSkill = currentBranch.find((s) => s.id === arrow.to)}
-                        {@const markerId = toSkill && toSkill.tag.length > 0 ? toSkill.id : "default"}
                         <line
                             x1={skillPositions[arrow.from].x}
                             y1={skillPositions[arrow.from].y + SkillIconSize / 2}
                             x2={skillPositions[arrow.to].x}
                             y2={skillPositions[arrow.to].y - SkillIconSize / 2}
-                            stroke={arrow.lit ? arrow.color || "#ceae0f" : "#6d7070"}
+                            stroke={arrow.lit ? "#ceae0f" : "#6d7070"}
                             stroke-width="2"
-                            marker-end={arrow.lit
-                                ? `url(#arrowhead-lit-${markerId})`
-                                : `url(#arrowhead-unlit-${markerId})`}
+                            marker-end={arrow.lit ? `url(#arrowhead-lit-default)` : `url(#arrowhead-unlit-default)`}
                         ></line>
                     {/each}
                 </svg>
 
                 {#each currentBranch as skill (skill.id)}
                     {@const status = skillState[skill.id]}
+                    {@const skillLevel = hero.getSkillLevel(skill.id)}
                     <button
                         class="skill"
                         onclick={() => clickSkill(skill.id)}
@@ -301,7 +277,9 @@
                             box-shadow: 0 0 3px ${skill.tag.length > 0 ? SkillTagColor[skill.tag[0]] : '#6d7070'};
                         "
                     >
-                        <div class="skill-level">{hero.getLearntSkillLevel(skill.id)}</div>
+                        <div class="skill-level" style="color: {skillLevel.ext > 0 ? 'rgb(30,255,0)' : 'white'};">
+                            {skillLevel.val}
+                        </div>
                         {#if status == null || !status.upgrade}
                             <div class="mask"></div>
                         {:else if status.upgrade}
