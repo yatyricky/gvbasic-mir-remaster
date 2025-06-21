@@ -175,9 +175,36 @@ const Formula = {
         };
         return vals;
     },
-    bbas: undefined,
-    bcrt: undefined,
-    bthr: undefined,
+    bbas: (level, stat) => {
+        /**@type {StatValueSaveData[]} */
+        const vals = [];
+        const c = SkillById.bbas;
+        vals[0] = { value: c.n1 + level * c.n2 };
+        return vals;
+    },
+    bcrt: (level, stat) => {
+        /**@type {StatValueSaveData[]} */
+        const vals = [];
+        const c = SkillById.bcrt;
+        vals[0] = { value: c.n1 + level * c.n2 };
+        return vals;
+    },
+    bthr: (level, stat) => {
+        /**@type {StatValueSaveData[]} */
+        const vals = [];
+        const c = SkillById.bthr;
+        vals[0] = {
+            range: Range.t(stat.getStat("xdmg").range)
+                .addR(new Range(stat.getStat("xdmglo").value, stat.getStat("xdmghi").value))
+                .multN(c.n5)
+                .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
+                .multN(1 + stat.getStat("xed").value / 100)
+                .multN(1 + stat.getStat("str").value / 100)
+                .tup()
+        };
+        vals[1] = { value: c.n6 + level * c.n7 };
+        return vals;
+    },
     bclv: undefined,
     bcrz: undefined,
     bfbl: undefined,

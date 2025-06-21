@@ -142,7 +142,9 @@
         {:else}
             <div
                 class="icon"
-                style={`background-image: url('${new URL(`../../../assets/images/${itemConfig.image}.jpg`, import.meta.url).href}');`}
+                style={`background-image: url('${new URL(`../../../assets/images/${itemConfig.image}.jpg`, import.meta.url).href}');
+                        background-color: ${itemConfig.tint ?? "white"};
+                `}
             >
                 {#if !clickable}
                     <div class="mask"></div>
@@ -168,6 +170,7 @@
         background-position: center;
         width: 100%;
         height: 100%;
+        background-blend-mode: multiply;
     }
     .mask {
         width: 100%;

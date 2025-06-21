@@ -278,7 +278,7 @@ export function strFormat(str, ...args) {
         const pts = parseInt(groups?.pts ?? "0");
         const val = args[idx];
         if (typeof val === "number") {
-            return numFloor(val, pts);
+            return numFloor(val, pts).toFixed(pts);
         } else {
             return val;
         }

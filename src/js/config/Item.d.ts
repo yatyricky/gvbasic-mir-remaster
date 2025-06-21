@@ -10,6 +10,7 @@ declare global {
         classOnly: UnitId[];
         description: string;
         image: string;
+        tint: string;
         type: ItemType;
         fixedAffix: Partial<Record<AffixId, number>>;
         randomAffix: Partial<Record<AffixId, number>>[];
