@@ -1,3 +1,4 @@
+import Const from "./Const";
 import { mathWeightedRandom } from "./data/MathLab";
 
 let c = 1;
@@ -267,6 +268,37 @@ export function strWrap(str, width) {
 
 /**
  * 
+ * @param {any} val 
+ * @param {number} pts 
+ * @returns {string}
+ */
+function _strFormatter(val, pts) {
+    if (typeof val === "number") {
+        return numFloor(val, pts).toFixed(pts);
+    } else if (typeof val === "object") {
+        if (val == null) {
+            return "NULL";
+        }
+        if (Array.isArray(val)) {
+            if (val[0].dmgType != null) {
+                return val.map(v => `${_strFormatter(v, pts)}${Const.DAMAGE_TYPE_NAME[/**@type {DamageType}*/(v.dmgType)]}`).join("、");
+            }
+            return _strFormatter(val[0], pts);
+        }
+        if (val.value != null) {
+            return numFloor(val.value, pts).toFixed(pts);
+        }
+        if (val.range != null) {
+            return `${numFloor(val.range[0], pts).toFixed(pts)}-${numFloor(val.range[1], pts).toFixed(pts)}`;
+        }
+        return JSON.stringify(val);
+    } else {
+        return val;
+    }
+}
+
+/**
+ * 
  * @param {string} str 
  * @param  {...any} args 
  * @returns 
@@ -277,22 +309,7 @@ export function strFormat(str, ...args) {
         const idx = parseInt(groups?.idx);
         const pts = parseInt(groups?.pts ?? "0");
         const val = args[idx];
-        if (typeof val === "number") {
-            return numFloor(val, pts).toFixed(pts);
-        } else if (typeof val === "object") {
-            if (val == null) {
-                return "NULL";
-            }
-            if (val.value != null) {
-                return numFloor(val.value, pts).toFixed(pts);
-            }
-            if (val.range != null) {
-                return `${numFloor(val.range[0], pts).toFixed(pts)}-${numFloor(val.range[1], pts).toFixed(pts)}`;
-            }
-            return JSON.stringify(val);
-        } else {
-            return val;
-        }
+        return _strFormatter(val, pts);
     });
 }
 

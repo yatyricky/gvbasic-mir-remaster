@@ -270,6 +270,22 @@ const Const = {
     },
     QUALITY_SOCKET_COUNT: [99, 2, 1, 1, 1], // Normal, Magic, Rare, Epic, Legendary
     SKILL_MAX_LEVEL: 20,
+    /**@type {Record<DamageType, string>} */
+    DAMAGE_TYPE_NAME: {
+        phyx: "物理伤害",
+        fire: "火焰伤害",
+        thunder: "风雷伤害",
+        holy: "神圣伤害",
+        poison: "毒素伤害",
+    },
+    /** @type {Record<DamageType, string>} */
+    DAMAGE_TYPE_COLOR : {
+        phyx: "#f57c00",
+        fire: "#ff5722",
+        thunder: "#29b6f6",
+        holy: "#ffd700",
+        poison: "#4caf50"
+    },
 }
 
 export default Const;
