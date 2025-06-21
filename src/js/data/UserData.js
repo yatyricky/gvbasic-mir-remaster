@@ -78,8 +78,13 @@ class UserData {
         //         candidates.push(e.id);
         //     }
         // }
+        // for (const e of Items) {
+        //     if ((e.classOnly ?? []).includes("mage")) {
+        //         candidates.push(e.id);
+        //     }
+        // }
         for (const e of Items) {
-            if ((e.classOnly ?? []).includes("mage")) {
+            if ((e.classOnly ?? []).includes("warr")) {
                 candidates.push(e.id);
             }
         }

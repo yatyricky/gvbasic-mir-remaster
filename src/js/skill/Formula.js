@@ -250,7 +250,25 @@ const Formula = {
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.bfbl;
-        vals[0] = [{ value: c.n1 + level * c.n2 }];
+        const portion = c.n1 + level * c.n2;
+        const xDamage = Range.t(stat.getStat("xdmg").range)
+            .addR(new Range(stat.getStat("xdmglo").value, stat.getStat("xdmghi").value))
+            .multN(1 + stat.getStat("str").value / 100)
+            .multN(portion / 100);
+        vals[0] = [{
+            range: new Range(xDamage.min, xDamage.max)
+                .multN(1 + stat.getStat("fed").value / 100)
+                .tup(),
+            dmgType: "fdmg",
+        }];
+        if (stat.getStat("skbfblm1").value > 0) {
+            vals[0].push({
+            range: new Range(xDamage.min, xDamage.max)
+                .multN(1 + stat.getStat("hed").value / 100)
+                .tup(),
+                dmgType: "hdmg",
+            });
+        }
         return vals;
     },
     xdef: (level, stat) => {
