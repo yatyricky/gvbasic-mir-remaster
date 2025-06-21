@@ -16,7 +16,8 @@ const Formula = {
                 .multN(1 + stat.getStat("fed").value / 100)
                 .multN(1 + stat.getStat("skfbltm1").value / 100)
                 .multN(1 + stat.getStat("int").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "fdmg",
         }];
         return vals;
     },
@@ -31,7 +32,8 @@ const Formula = {
                 .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
                 .multN(1 + stat.getStat("fed").value / 100)
                 .multN(1 + stat.getStat("int").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "fdmg",
         }];
         return vals;
     },
@@ -46,7 +48,8 @@ const Formula = {
                 .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
                 .multN(1 + stat.getStat("fed").value / 100)
                 .multN(1 + stat.getStat("int").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "fdmg",
         }];
         vals[1] = [{ value: Math.floor(c.n6 + level * c.n7) }];
         vals[2] = [{ value: Math.floor(c.n8 + stat.getStat("skfinfm1").value) }];
@@ -63,7 +66,8 @@ const Formula = {
                 .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
                 .multN(1 + stat.getStat("fed").value / 100)
                 .multN(1 + stat.getStat("int").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "fdmg",
         }];
         vals[1] = [{ value: Math.floor(c.n6 + stat.getStat("skfbalm1").value) }];
         return vals;
@@ -79,7 +83,8 @@ const Formula = {
                 .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
                 .multN(1 + stat.getStat("fed").value / 100)
                 .multN(1 + stat.getStat("int").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "fdmg",
         }];
         return vals;
     },
@@ -94,8 +99,10 @@ const Formula = {
                 .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
                 .multN(1 + stat.getStat("fed").value / 100)
                 .multN(1 + stat.getStat("int").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "fdmg",
         }];
+        vals[1] = [{ value: c.n6 }];
         return vals;
     },
     tchm: (level, stat) => {
@@ -118,7 +125,8 @@ const Formula = {
                 .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
                 .multN(1 + stat.getStat("ted").value / 100)
                 .multN(1 + stat.getStat("int").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "tdmg",
         }];
         return vals;
     },
@@ -133,7 +141,8 @@ const Formula = {
                 .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
                 .multN(1 + stat.getStat("ted").value / 100 - stat.getStat("sktltnm1").value / 100)
                 .multN(1 + stat.getStat("int").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "tdmg",
         }];
         return vals;
     },
@@ -148,7 +157,8 @@ const Formula = {
                 .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
                 .multN(1 + stat.getStat("ted").value / 100)
                 .multN(1 + stat.getStat("int").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "tdmg",
         }];
         return vals;
     },
@@ -171,7 +181,8 @@ const Formula = {
                 .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
                 .multN(1 + stat.getStat("ted").value / 100)
                 .multN(1 + stat.getStat("int").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "tdmg",
         }];
         return vals;
     },

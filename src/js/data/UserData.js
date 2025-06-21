@@ -72,11 +72,14 @@ class UserData {
         this.anyaGoods = [];
         /**@type {ItemId[]} */
         const candidates = [];
-        // candidates.push("rune1", "rune2", "rune3", "rune4", "rune5", "rune6", "rune7", "rune8", "rune9", "rune10", "rune11", "rune12", "rune13", "rune14", "rune15", "rune16", "rune17", "rune18", "rune19", "rune20", "rune21", "rune22", "rune23", "rune24", "rune25");
-        // candidates.push("jihadugs");
 
+        // for (const e of Items) {
+        //     if (e.maxQuality != null) {
+        //         candidates.push(e.id);
+        //     }
+        // }
         for (const e of Items) {
-            if (e.maxQuality != null) {
+            if ((e.classOnly ?? []).includes("mage")) {
                 candidates.push(e.id);
             }
         }
