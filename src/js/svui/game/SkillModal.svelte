@@ -19,32 +19,6 @@
         wlk: ["holy", "psyco"],
     };
 
-    /** @type {Record<SkillTag, string>}*/
-    const SkillTagName = {
-        fire: "火焰系",
-        thunder: "风雷系",
-        summon: "召唤系",
-        guardian: "防护系",
-        battle: "战斗系",
-        xskill: "体术系",
-        holy: "神圣系",
-        poison: "毒素系",
-        psyco: "道术系",
-    };
-
-    /** @type {Record<SkillTag, string>}*/
-    const SkillTagColor = {
-        fire: "#ff5722", // Fiery orange-red
-        thunder: "#29b6f6", // Electric blue
-        summon: "#9c27b0", // Mystical purple
-        guardian: "#2e7d32", // Protective green
-        battle: "#d32f2f", // Aggressive red
-        xskill: "#f57c00", // Physical orange
-        holy: "#ffd700", // Golden yellow
-        poison: "#4caf50", // Toxic green
-        psyco: "#7e57c2", // Mystical violet
-    };
-
     const SkillIconSize = 32;
     const GapX = Math.floor((200 - SkillIconSize * 3) / 4);
     const GapY = SkillIconSize / 2;
@@ -174,7 +148,7 @@
                 content: `<div style="font-size: 14px;">
                 ${hero
                     .getSkillBranches(skillId)
-                    .map((t) => `<span style="color: ${SkillTagColor[t]};">${SkillTagName[t]}</span>`)
+                    .map((t) => `<span style="color: ${Const.SKILL_TAG_COLOR[t]};">${Const.SKILL_TAG_NAME[t]}</span>`)
                     .join(", ")}<br/>
                 技能等级: ${skillLevel.base}${skillLevel.ext > 0 ? `<span style="color: rgb(30,255,0);">+${skillLevel.ext}</span>` : ""}<br/>
                 ${strFormat(config.description, ...Formula[skillId](skillLevel.val, hero.stat))}<br/>
@@ -208,7 +182,7 @@
     const getArrowColor = (skillId) => {
         const skill = currentBranch.find((s) => s.id === skillId);
         if (skill && skill.tag.length > 0) {
-            return SkillTagColor[skill.tag[0]];
+            return Const.SKILL_TAG_COLOR[skill.tag[0]];
         }
         return "#6d7070"; // Default gray
     };
@@ -219,7 +193,7 @@
         {#each branches as branch, i}
             <button
                 class="btn toggle {branchToggleState[i] ? 'toggle-active' : ''}"
-                style={branchToggleState[i] ? `--theme-color: ${SkillTagColor[branch]};` : ""}
+                style={branchToggleState[i] ? `--theme-color: ${Const.SKILL_TAG_COLOR[branch]};` : ""}
                 onclick={() => {
                     for (let idx = 0; idx < branches.length; idx++) {
                         branchToggleState[idx] = idx === i;
@@ -227,7 +201,7 @@
                     selectedBranch = i;
                 }}
             >
-                {SkillTagName[branch]}
+                {Const.SKILL_TAG_NAME[branch]}
             </button>
         {/each}
     </div>
@@ -290,8 +264,8 @@
                             top: {Math.floor(skill.level / 7) * (SkillIconSize + GapY) + GapY}px;
                             background-image: url('{new URL(`../../../assets/images/${skill.icon}.jpg`, import.meta.url)
                             .href}');
-                            border: 1px solid ${skill.tag.length > 0 ? SkillTagColor[skill.tag[0]] : '#6d7070'};
-                            box-shadow: 0 0 3px ${skill.tag.length > 0 ? SkillTagColor[skill.tag[0]] : '#6d7070'};
+                            border: 1px solid ${skill.tag.length > 0 ? Const.SKILL_TAG_COLOR[skill.tag[0]] : '#6d7070'};
+                            box-shadow: 0 0 3px ${skill.tag.length > 0 ? Const.SKILL_TAG_COLOR[skill.tag[0]] : '#6d7070'};
                         "
                     >
                         <div class="skill-level" style="color: {skillLevel.ext > 0 ? 'rgb(30,255,0)' : 'white'};">

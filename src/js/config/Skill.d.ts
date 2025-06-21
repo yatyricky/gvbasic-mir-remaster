@@ -1,6 +1,6 @@
 declare global {
     type SkillId = "fblt" | "frng" | "finf" | "fbal" | "fbls" | "fwal" | "tchm" | "tblt" | "tltn" | "tnov" | "tshd" | "tblz" | "bbas" | "bcrt" | "bthr" | "bclv" | "bcrz" | "bfbl" | "xdef" | "xdog" | "xcta" | "xwms" | "xchg" | "xtst" | "hhel" | "hgsd" | "hinv" | "hhsd" | "hlok" | "hmhl" | "pbas" | "ppoi" | "pskl" | "prun" | "pcbl" | "psdm";
-    type SkillTag = "fire" | "thunder" | "summon" | "guardian" | "battle" | "xskill" | "holy" | "psyco" | "poison";
+    type SkillTag = "skmage" | "fire" | "fdmg" | "thunder" | "summon" | "luck" | "tdmg" | "guardian" | "skwarr" | "battle" | "xdmg" | "xskill" | "skwlok" | "holy" | "heal" | "hdmg" | "psyco" | "poison" | "pdmg";
     interface ISkillConfig {
         id: SkillId;
         klass: UnitId;

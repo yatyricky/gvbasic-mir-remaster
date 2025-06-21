@@ -6,7 +6,6 @@ declare global {
     type ItemFragmentOperation = "equip" | "unequip" | "socket" | "socketFill" | "buy";
     type SlotType = "torso" | "waist" | "foot" | "accessory" | "hand" | "head" | "neck" | "leg" | "shoulder" | "finger" | "arms" | "wrist" | "socket" | "inherit";
     type ItemSubType = "none" | "1h" | "2h" | "offhand";
-    type DamageType = "phyx" | "fire" | "thunder" | "holy" | "poison";
 
     interface ItemFragmentProps {
         item: ItemSaveData;
@@ -38,7 +37,7 @@ declare global {
         range?: [number, number];
         set?: Record<string, 1>;
         skillList?: StatSkillItemSaveData[];
-        dmgType?: DamageType;
+        dmgType?: SkillTag;
     }
 
     interface ItemSaveData {

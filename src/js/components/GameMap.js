@@ -68,6 +68,6 @@ export default class GameMap extends Component {
     }
 
     onExpTablet() {
-        SceneManager.activeScene.find("game/hero").getComponent(UnitComponent).addExp(1000);
+        SceneManager.activeScene.find("game/hero").getComponent(UnitComponent).addExp(100000);
     }
 }

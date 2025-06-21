@@ -270,21 +270,49 @@ const Const = {
     },
     QUALITY_SOCKET_COUNT: [99, 2, 1, 1, 1], // Normal, Magic, Rare, Epic, Legendary
     SKILL_MAX_LEVEL: 20,
-    /**@type {Record<DamageType, string>} */
-    DAMAGE_TYPE_NAME: {
-        phyx: "物理伤害",
-        fire: "火焰伤害",
-        thunder: "风雷伤害",
-        holy: "神圣伤害",
-        poison: "毒素伤害",
+    /** @type {Record<SkillTag, string>}*/
+    SKILL_TAG_NAME: {
+        fire: "火焰系",
+        thunder: "风雷系",
+        summon: "召唤系",
+        guardian: "防护系",
+        battle: "战斗系",
+        xskill: "体术系",
+        holy: "神圣系",
+        poison: "毒素系",
+        psyco: "道术系",
+        fdmg: "火焰伤害",
+        tdmg: "风雷伤害",
+        hdmg: "神圣伤害",
+        pdmg: "毒素伤害",
+        xdmg: "物理伤害",
+        luck: "幸运加成",
+        heal: "治疗效果",
+        skmage: "法师技能",
+        skwarr: "战士技能",
+        skwlok: "道士技能",
     },
-    /** @type {Record<DamageType, string>} */
-    DAMAGE_TYPE_COLOR : {
-        phyx: "#f57c00",
-        fire: "#ff5722",
-        thunder: "#29b6f6",
-        holy: "#ffd700",
-        poison: "#4caf50"
+    /** @type {Record<SkillTag, string>}*/
+    SKILL_TAG_COLOR: {
+        fire: "#ff5722", // Fiery orange-red
+        thunder: "#29b6f6", // Electric blue
+        summon: "#9c27b0", // Mystical purple
+        guardian: "#2e7d32", // Protective green
+        battle: "#d32f2f", // Aggressive red
+        xskill: "#f57c00", // Physical orange
+        holy: "#ffd700", // Golden yellow
+        poison: "#4caf50", // Toxic green
+        psyco: "#7e57c2",
+        xdmg: "#d32f2f",
+        fdmg: "#ff5722",
+        tdmg: "#29b6f6",
+        hdmg: "#ffd700",
+        pdmg: "#4caf50",
+        luck: "#ffeb3b", // Bright yellow for luck/fortune
+        heal: "#66bb6a",
+        skmage: "#90caf9", // Light blue for mage
+        skwarr: "#bcaaa4", // Light brown/taupe for warrior
+        skwlok: "#b39ddb", // Light purple for warlock/mystic
     },
 }
 

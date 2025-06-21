@@ -280,16 +280,18 @@ function _strFormatter(val, pts) {
             return "NULL";
         }
         if (Array.isArray(val)) {
-            if (val[0].dmgType != null) {
-                return val.map(v => `${_strFormatter(v, pts)}${Const.DAMAGE_TYPE_NAME[/**@type {DamageType}*/(v.dmgType)]}`).join("、");
-            }
-            return _strFormatter(val[0], pts);
+            return val.map(v => _strFormatter(v, pts)).join("、");
         }
         if (val.value != null) {
             return numFloor(val.value, pts).toFixed(pts);
         }
         if (val.range != null) {
-            return `${numFloor(val.range[0], pts).toFixed(pts)}-${numFloor(val.range[1], pts).toFixed(pts)}`;
+            //<span style="color: ${Const.SKILL_TAG_COLOR[/**@type {SkillTag}*/(v.dmgType)]} ;">
+            if (val.dmgType != null) {
+                return `<span style="color: ${Const.SKILL_TAG_COLOR[/**@type {SkillTag}*/(val.dmgType)]} ;">${numFloor(val.range[0], pts).toFixed(pts)}-${numFloor(val.range[1], pts).toFixed(pts)}${Const.SKILL_TAG_NAME[/**@type {SkillTag}*/(val.dmgType)]}</span>`;
+            } else {
+                return `${numFloor(val.range[0], pts).toFixed(pts)}-${numFloor(val.range[1], pts).toFixed(pts)}`;
+            }
         }
         return JSON.stringify(val);
     } else {

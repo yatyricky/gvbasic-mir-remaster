@@ -46,6 +46,7 @@
         const tmp = arr[arr.length - 1];
         arr[arr.length - 1] = arr[index];
         arr[index] = tmp;
+        userData.saveToDisk();
         dispatch("scene:game", arr.length - 1);
         close();
     }
