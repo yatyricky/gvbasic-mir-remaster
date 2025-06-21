@@ -3,7 +3,7 @@
     import UnitComponent from "../../components/UnitComponent";
     import SceneManager from "../../SceneManager";
     import { SkillById, SkillGroupByKlass } from "../../config/Skill";
-    import { arrIsEmpty, strFormat, strFormatSaveVal } from "../../Utils";
+    import { arrIsEmpty, strFormat } from "../../Utils";
     import { dispatch, subscribe } from "../../EventBus";
     import MessageBox from "../MessageBox.svelte";
     import Const from "../../Const";
@@ -177,7 +177,7 @@
                     .map((t) => `<span style="color: ${SkillTagColor[t]};">${SkillTagName[t]}</span>`)
                     .join(", ")}<br/>
                 技能等级: ${skillLevel.base}${skillLevel.ext > 0 ? `<span style="color: rgb(30,255,0);">+${skillLevel.ext}</span>` : ""}<br/>
-                ${strFormat(config.description, ...Formula[skillId](skillLevel.val, hero.stat).map((e) => strFormatSaveVal(e)))}<br/>
+                ${strFormat(config.description, ...Formula[skillId](skillLevel.val, hero.stat))}<br/>
                 ${mods.length > 0 ? `<span style="color: rgb(30,255,0);">${mods.join("<br/>")}</span><br/>` : ""}
                 <span style="color:${config.level <= hero.stat.level ? "white" : "red"}">需要等级: ${config.level}</span>
                 </div>`,

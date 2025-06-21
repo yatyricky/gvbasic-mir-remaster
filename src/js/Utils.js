@@ -279,24 +279,21 @@ export function strFormat(str, ...args) {
         const val = args[idx];
         if (typeof val === "number") {
             return numFloor(val, pts).toFixed(pts);
+        } else if (typeof val === "object") {
+            if (val == null) {
+                return "NULL";
+            }
+            if (val.value != null) {
+                return numFloor(val.value, pts).toFixed(pts);
+            }
+            if (val.range != null) {
+                return `${numFloor(val.range[0], pts).toFixed(pts)}-${numFloor(val.range[1], pts).toFixed(pts)}`;
+            }
+            return JSON.stringify(val);
         } else {
             return val;
         }
     });
-}
-
-/**
- * 
- * @param {any} val 
- */
-export function strFormatSaveVal(val) {
-    if (val.value != null) {
-        return val.value.toFixed(0);
-    } else if (val.range != null) {
-        return `${val.range[0].toFixed(0)}-${val.range[1].toFixed(0)}`;
-    } else {
-        return JSON.stringify(val);
-    }
 }
 
 /**
