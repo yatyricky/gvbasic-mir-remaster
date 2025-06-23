@@ -231,6 +231,47 @@ const Formula = {
         }];
         return vals;
     },
+    bele: (level, stat) => {
+        /**@type {Array<StatValueSaveData[]>} */
+        const vals = [];
+        const c = SkillById.bele;
+        const portion = c.n1 + level * c.n2;
+        vals[0] = [{ value: portion }];
+        vals[1] = [{
+            range: Range.t(stat.getStat("fdmg").range)
+                .addR(new Range(stat.getStat("fdmglo").value, stat.getStat("fdmghi").value))
+                .multN(portion / 100)
+                .multN(1 + stat.getStat("fed").value / 100)
+                .multN(1 + stat.getStat("int").value / 100)
+                .tup(),
+            dmgType: "fdmg",
+        }, {
+            range: Range.t(stat.getStat("tdmg").range)
+                .addR(new Range(stat.getStat("tdmglo").value, stat.getStat("tdmghi").value))
+                .multN(portion / 100)
+                .multN(1 + stat.getStat("ted").value / 100)
+                .multN(1 + stat.getStat("int").value / 100)
+                .tup(),
+            dmgType: "tdmg",
+        }, {
+            range: Range.t(stat.getStat("hdmg").range)
+                .addR(new Range(stat.getStat("hdmglo").value, stat.getStat("hdmghi").value))
+                .multN(portion / 100)
+                .multN(1 + stat.getStat("hed").value / 100)
+                .multN(1 + stat.getStat("spi").value / 100)
+                .tup(),
+            dmgType: "hdmg",
+        }, {
+            range: Range.t(stat.getStat("pdmg").range)
+                .addR(new Range(stat.getStat("pdmglo").value, stat.getStat("pdmghi").value))
+                .multN(portion / 100)
+                .multN(1 + stat.getStat("ped").value / 100)
+                .multN(1 + stat.getStat("spi").value / 100)
+                .tup(),
+            dmgType: "pdmg",
+        }];
+        return vals;
+    },
     bcrz: (level, stat) => {
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
@@ -263,9 +304,9 @@ const Formula = {
         }];
         if (stat.getStat("skbfblm1").value > 0) {
             vals[0].push({
-            range: new Range(xDamage.min, xDamage.max)
-                .multN(1 + stat.getStat("hed").value / 100)
-                .tup(),
+                range: new Range(xDamage.min, xDamage.max)
+                    .multN(1 + stat.getStat("hed").value / 100)
+                    .tup(),
                 dmgType: "hdmg",
             });
         }
