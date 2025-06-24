@@ -299,17 +299,26 @@ export default class UnitComponent extends Component {
      */
     getSkillBranches(id) {
         const cfg = SkillById[id];
-        const tags = [...cfg.tag];
+        const tags = new Set(cfg.tag);
         for (const e of Stats) {
-            if (arrIsEmpty(e.skillTag)) {
-                continue;
+            if (e.targetSkill !== id) {
+                continue; // Skip if not targeting this skill
             }
             if (this.stat.getStat(e.id).value <= 0) {
                 continue; // Skip if the stat is not positive
             }
-            tags.push(...e.skillTag);
+            if (!arrIsEmpty(e.skillTag)) {
+                for (const tag of e.skillTag) {
+                    tags.add(tag);
+                }
+            }
+            if (!arrIsEmpty(e.rmSkillTag)) {
+                for (const tag of e.rmSkillTag) {
+                    tags.delete(tag);
+                }
+            }
         }
-        return tags;
+        return Array.from(tags);
     }
 
     /**
@@ -321,7 +330,7 @@ export default class UnitComponent extends Component {
         const myBranches = this.getSkillBranches(id);
         const base = this.getLearntSkillLevel(id);
         const itemAddedSkillLevel = Stats.filter(e => e.targetSkill === id && e.isSkillMod !== true && (arrIsEmpty(e.unitConstraint) || e.unitConstraint.includes(this.persistantData.unitId))).reduce((acc, cur) => acc + this.stat.getStat(cur.id).value, 0);
-        const branchLevels = Stats.filter(e => (e.targetTag !== null && myBranches.includes(e.targetTag) && (arrIsEmpty(e.unitConstraint) || e.unitConstraint.includes(this.persistantData.unitId))) || (!arrIsEmpty(e.targetUnit) && e.targetUnit.includes(this.persistantData.unitId) && (arrIsEmpty(e.unitConstraint) || e.unitConstraint.includes(this.persistantData.unitId)))).reduce((acc, cur) => acc + this.stat.getStat(cur.id).value, 0);
+        const branchLevels = Stats.filter(e => ((!arrIsEmpty(e.targetTag) && e.targetTag.some(f => myBranches.includes(f))) && (arrIsEmpty(e.unitConstraint) || e.unitConstraint.includes(this.persistantData.unitId)))).reduce((acc, cur) => acc + this.stat.getStat(cur.id).value, 0);
         if (base + itemAddedSkillLevel > 0) {
             return { val: base + itemAddedSkillLevel + branchLevels, base, ext: itemAddedSkillLevel + branchLevels };
         } else {

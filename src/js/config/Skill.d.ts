@@ -1,16 +1,16 @@
 declare global {
-    type SkillId = "fblt" | "frng" | "finf" | "fbal" | "fbls" | "fwal" | "tchm" | "tblt" | "tltn" | "tnov" | "tshd" | "tblz" | "bbas" | "bcrt" | "bthr" | "bele" | "bclv" | "bcrz" | "bfbl" | "xdef" | "xdog" | "xcta" | "xwms" | "xchg" | "xtst" | "hhel" | "hgsd" | "hinv" | "hhsd" | "hlok" | "hmhl" | "pbas" | "ppoi" | "pskl" | "prun" | "pcbl" | "psdm";
-    type SkillTag = "skmage" | "fire" | "fdmg" | "thunder" | "summon" | "luck" | "tdmg" | "guardian" | "skwarr" | "battle" | "xdmg" | "hdmg" | "pdmg" | "xskill" | "skwlok" | "holy" | "heal" | "psyco" | "poison";
+    type SkillId = "fblt" | "frng" | "finf" | "fbal" | "fbls" | "fwal" | "tchm" | "tblt" | "tltn" | "tnov" | "tshd" | "tblz" | "hwoh" | "bbas" | "bcrt" | "bthr" | "bele" | "bclv" | "bfbl" | "xdef" | "xpos" | "xdog" | "xcta" | "xchg" | "xtst" | "xwms" | "bcrz" | "hhel" | "hgsd" | "hinv" | "hhsd" | "hlok" | "hmhl" | "pbas" | "ppoi" | "pskl" | "prun" | "pcbl" | "psdm";
+    type SkillTag = "skmage" | "fire" | "fdmg" | "thunder" | "summon" | "luck" | "tdmg" | "guardian" | "holy" | "skwarr" | "battle" | "xdmg" | "hdmg" | "pdmg" | "xskill" | "skwlok" | "heal" | "psyco" | "poison";
     interface ISkillConfig {
         id: SkillId;
         klass: UnitId;
         tag: SkillTag[];
         posx: number;
+        level: number;
         prerequisite: SkillId[];
         icon: string;
         name: string;
         description: string;
-        level: number;
         n1: number;
         n2: number;
         n3: number;

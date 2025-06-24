@@ -83,11 +83,18 @@ class UserData {
         //         candidates.push(e.id);
         //     }
         // }
+        // for (const e of Items) {
+        //     if ((e.classOnly ?? []).includes("warr")) {
+        //         candidates.push(e.id);
+        //     }
+        // }
         for (const e of Items) {
-            if ((e.classOnly ?? []).includes("warr")) {
+            if ((e.classOnly ?? []).includes("wlk")) {
                 candidates.push(e.id);
             }
         }
+
+        candidates.push("firespear", "bibleblack");
 
         for (let i = 0; i < count; i++) {
             const item = ItemInstance.drop(arrGetOne(candidates), 60, 0);

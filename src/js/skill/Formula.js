@@ -211,7 +211,8 @@ const Formula = {
                 .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
                 .multN(1 + stat.getStat("xed").value / 100)
                 .multN(1 + stat.getStat("str").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "xdmg",
         }];
         vals[1] = [{ value: c.n6 + level * c.n7 }];
         return vals;
@@ -227,7 +228,8 @@ const Formula = {
                 .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
                 .multN(1 + stat.getStat("xed").value / 100)
                 .multN(1 + stat.getStat("str").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "xdmg",
         }];
         return vals;
     },
@@ -272,6 +274,23 @@ const Formula = {
         }];
         return vals;
     },
+    xpos: (level, stat) => {
+        /**@type {Array<StatValueSaveData[]>} */
+        const vals = [];
+        const c = SkillById.xpos;
+        vals[0] = [{
+            range: Range.t(stat.getStat("xdmg").range)
+                .addR(new Range(stat.getStat("xdmglo").value, stat.getStat("xdmghi").value))
+                .multN(c.n5)
+                .addR(new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)))
+                .multN(1 + stat.getStat("xed").value / 100)
+                .multN(1 + stat.getStat("str").value / 100)
+                .tup(),
+            dmgType: "xdmg",
+        }];
+        vals[1] = [{ value: Math.floor(c.n6 + level * c.n7) }];
+        return vals;
+    },
     bcrz: (level, stat) => {
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
@@ -296,14 +315,15 @@ const Formula = {
             .addR(new Range(stat.getStat("xdmglo").value, stat.getStat("xdmghi").value))
             .multN(1 + stat.getStat("str").value / 100)
             .multN(portion / 100);
-        vals[0] = [{
+        vals[0] = [{ value: portion }];
+        vals[1] = [{
             range: new Range(xDamage.min, xDamage.max)
                 .multN(1 + stat.getStat("fed").value / 100)
                 .tup(),
             dmgType: "fdmg",
         }];
         if (stat.getStat("skbfblm1").value > 0) {
-            vals[0].push({
+            vals[1].push({
                 range: new Range(xDamage.min, xDamage.max)
                     .multN(1 + stat.getStat("hed").value / 100)
                     .tup(),
@@ -335,7 +355,8 @@ const Formula = {
             range: new Range(c.n5, c.n6).addR(new Range(c.n7, c.n8).multN(level))
                 .multN(1 + stat.getStat("xed").value / 100)
                 .multN(1 + stat.getStat("str").value / 100)
-                .tup()
+                .tup(),
+            dmgType: "xdmg",
         }];
         vals[2] = [{ value: c.n9 + level * c.n10 }];
         return vals;
@@ -351,7 +372,17 @@ const Formula = {
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.xchg;
-        vals[0] = [{ value: c.n1 + level * c.n2 }];
+        const portion = c.n1 + level * c.n2;
+        vals[0] = [{ value: portion }];
+        vals[1] = [{
+            range: Range.t(stat.getStat("xdmg").range)
+                .addR(new Range(stat.getStat("xdmglo").value, stat.getStat("xdmghi").value))
+                .multN(portion / 100)
+                .multN(1 + stat.getStat("xed").value / 100)
+                .multN(1 + stat.getStat("str").value / 100)
+                .tup(),
+            dmgType: "xdmg",
+        }]
         return vals;
     },
     xtst: (level, stat) => {
@@ -519,12 +550,14 @@ const Formula = {
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.psdm;
+        const pMod = stat.getStat("skpsdmm1").value;
         vals[0] = [{ value: c.n1 + level * c.n2 }];
         vals[1] = [{
             range: new Range(c.n3, c.n4).addR(new Range(c.n5, c.n6).multN(level))
                 .multN(1 + stat.getStat("spi").value / 100)
+                .multN(1 + stat.getStat("sumed").value / 100)
                 .tup(),
-            dmgType: "fdmg",
+            dmgType: pMod > 0 ? "pdmg" : "fdmg",
         }];
         vals[2] = [{ value: c.n7 }];
         return vals;

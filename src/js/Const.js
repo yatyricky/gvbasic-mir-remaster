@@ -58,7 +58,7 @@ const Const = {
         rune: 1,
         runeword: 1,
         set: 1,
-        taorobe: 0,
+        taorobe: 1,
         woodsword: 1,
         magesigil: 1,
         magestaff: 2,

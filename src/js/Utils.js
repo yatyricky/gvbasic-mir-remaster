@@ -1,5 +1,6 @@
 import Const from "./Const";
 import { mathWeightedRandom } from "./data/MathLab";
+import Range from "./data/Range";
 
 let c = 1;
 
@@ -280,13 +281,16 @@ function _strFormatter(val, pts) {
             return "NULL";
         }
         if (Array.isArray(val)) {
-            return val.map(v => _strFormatter(v, pts)).join("、");
+            return val.map(v => _strFormatter(v, pts)).filter(v => !strIsEmpty(v)).join("、");
         }
         if (val.value != null) {
             return numFloor(val.value, pts).toFixed(pts);
         }
         if (val.range != null) {
             //<span style="color: ${Const.SKILL_TAG_COLOR[/**@type {SkillTag}*/(v.dmgType)]} ;">
+            if (Range.isZero(val.range)) {
+                return "";
+            }
             if (val.dmgType != null) {
                 return `<span style="color: ${Const.SKILL_TAG_COLOR[/**@type {SkillTag}*/(val.dmgType)]} ;">${numFloor(val.range[0], pts).toFixed(pts)}-${numFloor(val.range[1], pts).toFixed(pts)}${Const.SKILL_TAG_NAME[/**@type {SkillTag}*/(val.dmgType)]}</span>`;
             } else {
