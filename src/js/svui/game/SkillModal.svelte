@@ -20,7 +20,7 @@
     };
 
     const SkillIconSize = 32;
-    const GapX = Math.floor((200 - SkillIconSize * 3) / 4);
+    const GapX = Math.floor((270 - SkillIconSize * 3) / 4);
     const GapY = SkillIconSize / 2;
 
     const hero = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent);
@@ -265,7 +265,9 @@
                             background-image: url('{new URL(`../../../assets/images/${skill.icon}.jpg`, import.meta.url)
                             .href}');
                             border: 1px solid ${skill.tag.length > 0 ? Const.SKILL_TAG_COLOR[skill.tag[0]] : '#6d7070'};
-                            box-shadow: 0 0 3px ${skill.tag.length > 0 ? Const.SKILL_TAG_COLOR[skill.tag[0]] : '#6d7070'};
+                            box-shadow: 0 0 3px ${skill.tag.length > 0
+                            ? Const.SKILL_TAG_COLOR[skill.tag[0]]
+                            : '#6d7070'};
                         "
                     >
                         <div class="skill-level" style="color: {skillLevel.ext > 0 ? 'rgb(30,255,0)' : 'white'};">
@@ -312,9 +314,9 @@
         box-shadow:
             0 0 1px 2px #726e6c,
             inset 0 0 8px 4px #23201f;
-        width: 200px;
+        width: 270px;
         height: 86%;
-        left: 100px;
+        left: 65px;
         top: 3%;
     }
     .title {
@@ -369,7 +371,7 @@
     }
     .tabs {
         position: absolute;
-        left: 100px;
+        left: 65px;
         top: 87%;
         display: flex;
         flex-direction: row;
@@ -377,7 +379,7 @@
         justify-content: center;
         height: 32px;
         padding: 6px;
-        gap: 6px;
+        gap: 10px;
     }
     .toggle {
         width: 80px;
