@@ -78,23 +78,13 @@ class UserData {
         //         candidates.push(e.id);
         //     }
         // }
-        // for (const e of Items) {
-        //     if ((e.classOnly ?? []).includes("mage")) {
-        //         candidates.push(e.id);
-        //     }
-        // }
-        // for (const e of Items) {
-        //     if ((e.classOnly ?? []).includes("warr")) {
-        //         candidates.push(e.id);
-        //     }
-        // }
         for (const e of Items) {
-            if ((e.classOnly ?? []).includes("wlk")) {
+            if ((e.classOnly ?? []).includes("mage")) {
                 candidates.push(e.id);
             }
         }
 
-        candidates.push("firespear", "bibleblack");
+        candidates.push("prismademonstaff", "guardhalb", "palmthunder");
 
         for (let i = 0; i < count; i++) {
             const item = ItemInstance.drop(arrGetOne(candidates), 60, 0);

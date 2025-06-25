@@ -291,6 +291,7 @@ const Const = {
         skmage: "法师技能",
         skwarr: "战士技能",
         skwlok: "道士技能",
+        other: "其他",
     },
     /** @type {Record<SkillTag, string>}*/
     SKILL_TAG_COLOR: {
@@ -312,7 +313,8 @@ const Const = {
         heal: "#66bb6a",
         skmage: "#90caf9", // Light blue for mage
         skwarr: "#bcaaa4", // Light brown/taupe for warrior
-        skwlok: "#b39ddb", // Light purple for warlock/mystic
+        skwlok: "#b39ddb",
+        other: "#ffffff",
     },
 }
 

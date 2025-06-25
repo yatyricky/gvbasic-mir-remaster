@@ -38,11 +38,50 @@
                 branchSkills[t].push(skill);
             }
         }
+
+        /**@type {SkillId[]}*/
+        const notMySkills = [];
+        for (const e of Stats) {
+            if (e.targetSkill == null) {
+                continue;
+            }
+            if (e.isSkillMod === true) {
+                continue;
+            }
+            if (!arrIsEmpty(e.unitConstraint)) {
+                continue;
+            }
+            if (SkillGroupByKlass[data.unitId].some((skill) => skill.id === e.targetSkill)) {
+                continue;
+            }
+            if (hero.stat.getStat(e.id).value <= 0) {
+                continue;
+            }
+            notMySkills.push(e.targetSkill);
+        }
+        if (notMySkills.length > 0) {
+            branchSkills["other"] = [];
+            for (const skillId of notMySkills) {
+                const skill = SkillById[skillId];
+                if (skill) {
+                    branchSkills["other"].push(skill);
+                }
+            }
+        }
+
         return branchSkills;
     }
 
     let skillData = $state(getSkillData());
-    const branches = $state(BranchesByClass[data.unitId]);
+    const branches = $derived(
+        (() => {
+            const ret = [...BranchesByClass[data.unitId]];
+            if (!arrIsEmpty(skillData.other)) {
+                ret.push("other");
+            }
+            return ret;
+        })(),
+    );
     const branchToggleState = $state([true, false]);
     let selectedBranch = $state(0);
     const currentBranch = $derived(skillData[branches[selectedBranch]]);
@@ -55,6 +94,7 @@
             for (const skill of currentBranch) {
                 skills[skill.id] = {
                     upgrade:
+                        skillData.other?.some((s) => s.id === skill.id) === true ||
                         hero.stat.level >= skill.level &&
                         (arrIsEmpty(skill.prerequisite) ||
                             skill.prerequisite.every((id) => hero.getLearntSkillLevel(id) > 0)),
@@ -113,6 +153,7 @@
         /**@type {any}*/
         const actions = [];
         if (
+            skillData.other?.some((s) => s.id === skillId) !== true &&
             hero.stat.getStat("skpts").value > 0 &&
             skillState[skillId]?.upgrade === true &&
             (config.prerequisite == null || config.prerequisite.every((id) => hero.getLearntSkillLevel(id) > 0)) &&
@@ -212,47 +253,55 @@
         </div>
         <div class="container">
             <div class="skill-tree">
-                <!-- Add SVG for arrows -->
-                <svg class="arrows">
-                    <defs>
-                        <!-- Default markers -->
-                        <marker
-                            id="arrowhead-lit-default"
-                            markerWidth="5"
-                            markerHeight="3.5"
-                            refX="5"
-                            refY="1.75"
-                            orient="auto"
-                        >
-                            <polygon points="0 0, 5 1.75, 0 3.5" fill="#ceae0f"></polygon>
-                        </marker>
-                        <marker
-                            id="arrowhead-unlit-default"
-                            markerWidth="5"
-                            markerHeight="3.5"
-                            refX="5"
-                            refY="1.75"
-                            orient="auto"
-                        >
-                            <polygon points="0 0, 5 1.75, 0 3.5" fill="#6d7070"></polygon>
-                        </marker>
-                    </defs>
-                    {#each arrows as arrow}
-                        <line
-                            x1={skillPositions[arrow.from].x}
-                            y1={skillPositions[arrow.from].y + SkillIconSize / 2}
-                            x2={skillPositions[arrow.to].x}
-                            y2={skillPositions[arrow.to].y - SkillIconSize / 2}
-                            stroke={arrow.lit ? "#ceae0f" : "#6d7070"}
-                            stroke-width="2"
-                            marker-end={arrow.lit ? `url(#arrowhead-lit-default)` : `url(#arrowhead-unlit-default)`}
-                        ></line>
-                    {/each}
-                </svg>
+                {#if branches[selectedBranch] !== "other"}
+                    <!-- Add SVG for arrows -->
+                    <svg class="arrows">
+                        <defs>
+                            <!-- Default markers -->
+                            <marker
+                                id="arrowhead-lit-default"
+                                markerWidth="5"
+                                markerHeight="3.5"
+                                refX="5"
+                                refY="1.75"
+                                orient="auto"
+                            >
+                                <polygon points="0 0, 5 1.75, 0 3.5" fill="#ceae0f"></polygon>
+                            </marker>
+                            <marker
+                                id="arrowhead-unlit-default"
+                                markerWidth="5"
+                                markerHeight="3.5"
+                                refX="5"
+                                refY="1.75"
+                                orient="auto"
+                            >
+                                <polygon points="0 0, 5 1.75, 0 3.5" fill="#6d7070"></polygon>
+                            </marker>
+                        </defs>
+                        {#each arrows as arrow}
+                            <line
+                                x1={skillPositions[arrow.from].x}
+                                y1={skillPositions[arrow.from].y + SkillIconSize / 2}
+                                x2={skillPositions[arrow.to].x}
+                                y2={skillPositions[arrow.to].y - SkillIconSize / 2}
+                                stroke={arrow.lit ? "#ceae0f" : "#6d7070"}
+                                stroke-width="2"
+                                marker-end={arrow.lit ? `url(#arrowhead-lit-default)` : `url(#arrowhead-unlit-default)`}
+                            ></line>
+                        {/each}
+                    </svg>
+                {/if}
 
-                {#each currentBranch as skill (skill.id)}
+                {#each currentBranch as skill, i (skill.id)}
                     {@const status = skillState[skill.id]}
                     {@const skillLevel = hero.getSkillLevel(skill.id)}
+                    {@const left =
+                        (branches[selectedBranch] === "other" ? i % 3 : skill.posx - 1) * (SkillIconSize + GapX) + GapX}
+                    {@const top =
+                        Math.floor(branches[selectedBranch] === "other" ? i / 3 : skill.level / 7) *
+                            (SkillIconSize + GapY) +
+                        GapY}
                     <button
                         class="skill"
                         onclick={() => clickSkill(skill.id)}
@@ -260,8 +309,8 @@
                         style="
                             width: {SkillIconSize}px;
                             height: {SkillIconSize}px;
-                            left: {(skill.posx - 1) * (SkillIconSize + GapX) + GapX}px;
-                            top: {Math.floor(skill.level / 7) * (SkillIconSize + GapY) + GapY}px;
+                            left: {left}px;
+                            top: {top}px;
                             background-image: url('{new URL(`../../../assets/images/${skill.icon}.jpg`, import.meta.url)
                             .href}');
                             border: 1px solid ${skill.tag.length > 0 ? Const.SKILL_TAG_COLOR[skill.tag[0]] : '#6d7070'};

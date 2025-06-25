@@ -348,6 +348,7 @@ export const Affixs = [
     { id: "skprun1", name: "skprun", affixType: "suffix", statId: "skprun", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0.5, group: ["prun_lvl"], groupExclusive: ["prun_lvl"], ilvl: 19, level: 21 },
     { id: "skpcbl1", name: "skpcbl", affixType: "suffix", statId: "skpcbl", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0.5, group: ["pcbl_lvl"], groupExclusive: ["pcbl_lvl"], ilvl: 25, level: 28 },
     { id: "skpsdm1", name: "skpsdm", affixType: "suffix", statId: "skpsdm", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0.5, group: ["psdm_lvl"], groupExclusive: ["psdm_lvl"], ilvl: 31, level: 35 },
+    { id: "skhwoh1", name: "skhwoh1", affixType: "suffix", statId: "skhwoh", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0.5, group: ["hwoh_lvl"], groupExclusive: ["hwoh_lvl"], ilvl: 32, level: 32 },
     { id: "skfbltmages", name: "火球的", affixType: "suffix", statId: "skfbltmage", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0, ilvlScale: 0, group: ["fblt_lvl"], groupExclusive: ["fblt_lvl"], ilvl: 1, level: 1, weight: 70 },
     { id: "skfrngmages", name: "火环的", affixType: "suffix", statId: "skfrngmage", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0, ilvlScale: 0, group: ["frng_lvl"], groupExclusive: ["frng_lvl"], ilvl: 6, level: 7, weight: 70 },
     { id: "skfinfmages", name: "地狱火的", affixType: "suffix", statId: "skfinfmage", lo: 1, hi: 1, loIlvlDelta: 0, hiIlvlDelta: 0, ilvlScale: 0, group: ["finf_lvl"], groupExclusive: ["finf_lvl"], ilvl: 12, level: 14, weight: 70 },

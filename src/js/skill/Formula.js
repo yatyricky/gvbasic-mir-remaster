@@ -561,7 +561,17 @@ const Formula = {
         }];
         vals[2] = [{ value: c.n7 }];
         return vals;
-    }
+    },
+    hwoh: (level, stat) => {
+        /**@type {Array<StatValueSaveData[]>} */
+        const vals = [];
+        const c = SkillById.hwoh;
+        vals[0] = [{ value: c.n1 + level * c.n2 }];
+        return vals;
+    },
+    _hld: (level, stat) => {
+        return [];
+    },
 }
 
 export default Formula;

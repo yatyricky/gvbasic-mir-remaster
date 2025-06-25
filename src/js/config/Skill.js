@@ -38,6 +38,7 @@ export const Skills = [
     { id: "prun", klass: "wlk", tag: ["skwlok", "psyco", "fire", "fdmg"], posx: 2, level: 21, prerequisite: ["ppoi"], icon: "Spell_Fire_Rune", name: "灵魂火符", description: "对指定行的第一个目标造成{0}。", n1: 54, n2: 190, n3: 27, n4: 95, n5: 2 },
     { id: "pcbl", klass: "wlk", tag: ["skwlok", "psyco", "battle", "hdmg"], posx: 1, level: 28, prerequisite: ["pbas"], icon: "Spell_Holy_WeaponMastery", name: "降魔剑术", description: "使攻击附加{0}，并对妖魔增伤{1.2}%。", n1: 114, n2: 63, n3: 2.2, n4: 50, n5: 20 },
     { id: "psdm", klass: "wlk", tag: ["skwlok", "psyco", "summon", "fire"], posx: 3, level: 35, prerequisite: ["pskl"], icon: "Spell_Fire_Elemental_Totem", name: "召唤神兽", description: "召唤一个生命值{0}，可以造成{1}的神兽为你作战，神兽可攻击{2}格目标。", n1: 350, n2: 180, n3: 44, n4: 72, n5: 21, n6: 30, n7: 2 },
+    { id: "_hld", tag: ["other"], posx: 1, level: 1, icon: "Achievement_Dungeon_TheVioletHold", name: "占位符", description: "占位符" },
 ];
 
 export const SkillById = Object.fromEntries(Skills.map(e => [e.id, e]));
