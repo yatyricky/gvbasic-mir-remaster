@@ -254,7 +254,7 @@ export default class UnitComponent extends Component {
             return false; // No skill points available
         }
         const config = SkillById[id];
-        if (this.stat.level < config.level) {
+        if (this.stat.getStat("level").value < config.level) {
             dispatch("toast", `技能等级不足，需达到 ${config.level} 级`);
             return false; // Not enough level to learn this skill
         }
@@ -288,8 +288,7 @@ export default class UnitComponent extends Component {
      * @param {number} exp 
      */
     addExp(exp) {
-        const added = exp * (1 + this.stat.getStat("expex").value / 100);
-        this.stat.addStat("exp", { value: added });
+        this.stat.addExp(exp);
         this.save();
     }
 

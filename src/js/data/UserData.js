@@ -1,5 +1,6 @@
 import { Items } from "../config/Item";
 import { UnitById } from "../config/Unit";
+import Const from "../Const";
 import { arrGetOne } from "../Utils";
 import ItemInstance from "./ItemInstance";
 import { mathRandomIncl } from "./MathLab";
@@ -33,15 +34,16 @@ class UserData {
     }
 
     /**
-     * 
      * @param {UnitId} id 
+     * @param {string} name
      */
-    addChar(id) {
+    addChar(id, name) {
         const config = UnitById[id];
         /**@type {UnitSaveData} */
         const char = {
+            name,
             unitId: id,
-            stats: ReactStat.collapseConfig(config.baseStat),
+            stats: ReactStat.parseConfig(config.baseStat),
             inventory: {},
             charmBag: [],
             bag: [],
@@ -53,7 +55,8 @@ class UserData {
             this.data.chars = chars;
         }
         // add 1 skill point
-        char.stats.skpts = { value: 1 };
+        char.stats.skpts = { value: Const.INIT_SK_PTS };
+        char.stats.expmax = { value: Const.BASE_EXP_MAX };
         chars.push(char);
         this.saveToDisk();
     }

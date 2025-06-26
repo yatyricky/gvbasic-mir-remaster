@@ -59,6 +59,7 @@ declare global {
     }
 
     interface UnitSaveData {
+        name: string;
         unitId: UnitId;
         stats: StatData;
         inventory: Partial<Record<SlotType, ItemSaveData[]>>;

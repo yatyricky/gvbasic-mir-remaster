@@ -316,6 +316,11 @@ const Const = {
         skwlok: "#b39ddb",
         other: "#ffffff",
     },
+    INIT_SK_PTS: 1,
+    BASE_EXP_MAX: 100,
+    EXP_GROWTH_FACTOR: 0.2,
+    LEVELUP_SK_PTS: 1,
+    LEVELUP_ATT_PTS: 5,
 }
 
 export default Const;

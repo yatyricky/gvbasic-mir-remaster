@@ -95,7 +95,7 @@
                 skills[skill.id] = {
                     upgrade:
                         skillData.other?.some((s) => s.id === skill.id) === true ||
-                        hero.stat.level >= skill.level &&
+                        hero.stat.getStat("level").value >= skill.level &&
                         (arrIsEmpty(skill.prerequisite) ||
                             skill.prerequisite.every((id) => hero.getLearntSkillLevel(id) > 0)),
                 };
@@ -194,7 +194,7 @@
                 技能等级: ${skillLevel.base}${skillLevel.ext > 0 ? `<span style="color: rgb(30,255,0);">+${skillLevel.ext}</span>` : ""}<br/>
                 ${strFormat(config.description.replace(/\n/g, "<br />"), ...Formula[skillId](hero))}<br/>
                 ${mods.length > 0 ? `<span style="color: rgb(30,255,0);">${mods.join("<br/>")}</span><br/>` : ""}
-                <span style="color:${config.level <= hero.stat.level ? "white" : "red"}">需要等级: ${config.level}</span>
+                <span style="color:${config.level <= hero.stat.getStat("level").value ? "white" : "red"}">需要等级: ${config.level}</span>
                 </div>`,
                 actions,
                 html: true,

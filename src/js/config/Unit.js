@@ -1,7 +1,7 @@
 export const Units = [
-    { id: "warr", name: "战士", type: "hero", image: "🥷", baseStat: { ["maxhp"]: [52], ["maxmp"]: [0] } },
-    { id: "mage", name: "法师", type: "hero", image: "🧙", baseStat: { ["maxhp"]: [29], ["maxmp"]: [30] } },
-    { id: "wlk", name: "道士", type: "hero", image: "🧝", baseStat: { ["maxhp"]: [36], ["maxmp"]: [19] } },
+    { id: "warr", name: "战士", type: "hero", image: "🥷", baseStat: { ["maxhp"]: [52], ["maxmp"]: [0], ["xdmg"]: [1, 4], ["str"]: [20], ["int"]: [5], ["spi"]: [5], ["vit"]: [20] } },
+    { id: "mage", name: "法师", type: "hero", image: "🧙", baseStat: { ["maxhp"]: [29], ["maxmp"]: [30], ["xdmg"]: [1, 3], ["str"]: [10], ["int"]: [20], ["spi"]: [10], ["vit"]: [10] } },
+    { id: "wlk", name: "道士", type: "hero", image: "🧝", baseStat: { ["maxhp"]: [36], ["maxmp"]: [19], ["xdmg"]: [1, 3], ["str"]: [10], ["int"]: [10], ["spi"]: [15], ["vit"]: [15] } },
     { id: "clawcat", name: "多钩猫", type: "mob" },
     { id: "corpseking", name: "尸王", type: "elite" },
     { id: "redmoondemon", name: "赤月恶魔", type: "boss" },

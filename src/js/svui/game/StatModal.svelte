@@ -2,54 +2,174 @@
     import UnitComponent from "../../components/UnitComponent";
     import SceneManager from "../../SceneManager";
     import { StatById } from "../../config/Stat";
-    import { strFormat } from "../../Utils";
-    
+    import { numFloor, objEntries } from "../../Utils";
+    import { UnitById } from "../../config/Unit";
+    import Bar from "../comps/Bar.svelte";
+    import { onDestroy, onMount } from "svelte";
+
     const { close } = $props();
 
     const hero = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent);
     const stat = hero.stat;
+    const pd = hero.persistantData;
+
+    const watch = $state({
+        atpts: stat.getStat("atpts").value,
+        level: stat.getStat("level").value,
+        exp: stat.getStat("exp").value,
+        expmax: stat.getStat("expmax").value,
+        rthp: stat.getStat("rthp").value,
+        rtmaxhp: stat.getStat("rtmaxhp").value,
+        rtmp: stat.getStat("rtmp").value,
+        rtmaxmp: stat.getStat("rtmaxmp").value,
+        str: stat.getStat("str").value,
+        int: stat.getStat("int").value,
+        spi: stat.getStat("spi").value,
+        vit: stat.getStat("vit").value,
+    })
+
+    let canAddAtt = $derived(watch.atpts > 0);
 
     /**
      *
-     * @param {StatId} statId
+     * @param {[number, number]} range
      */
-    function formatStat(statId) {
-        const val = stat.getStat(statId);
-        const statConfig = StatById[statId];
-        if (statConfig.type === "int" || statConfig.type === "number") {
-            return strFormat(statConfig.description, val.value);
-        } else if (statConfig.type === "range") {
-            return strFormat(statConfig.description, val.range[0], val.range[1]);
-        } else {
-            throw new Error(`Unknown stat type: ${statConfig.type}`);
+    function formatRange(range, pts = 0) {
+        const vals = range.map(v => numFloor(v, pts).toFixed(pts));
+        return `${vals[0]}-${vals[1]}`;
+    }
+
+    function update() {
+        for (const [key, _] of objEntries(watch)) {
+            watch[key] = stat.getStat(key).value;
         }
     }
+
+    /**
+     * 
+     * @param {StatId} statId
+     */
+    function addAtt(statId) {
+        if (watch.atpts <= 0) {
+            return;
+        }
+        stat.addStat(statId, { value: 1 });
+        stat.subStat("atpts", { value: 1 });
+        hero.save();
+    }
+
+    onMount(() => {
+        stat.on("*", update);
+    });
+    onDestroy(() => {
+        stat.off("*", update);
+    });
 </script>
 
 <div class="backdrop">
     <div class="wrapper">
         <div class="title">
-            <div class="title-text">属性</div>
+            <div class="title-text">{pd.name}</div>
             <button onclick={close} class="btn close-btn">X</button>
         </div>
         <div class="container">
-            <div>等级: {stat.level}</div>
-            <div>{StatById.rthp.name}: {formatStat("rthp")}/{formatStat("rtmaxhp")}</div>
-            <div>{StatById.rtmp.name}: {formatStat("rtmp")}/{formatStat("rtmaxmp")}</div>
-            <div>{formatStat("str")}</div>
-            <div>{formatStat("int")}</div>
-            <div>{formatStat("spi")}</div>
-            <div>{formatStat("vit")}</div>
-            <div>{formatStat("xdmg")}</div>
-            <div>{formatStat("fdmg")}</div>
-            <div>{formatStat("tdmg")}</div>
-            <div>{formatStat("hdmg")}</div>
-            <div>{formatStat("pdmg")}</div>
-            <div>{StatById.rtxres.name}: {formatStat("rtxres")}</div>
-            <div>{StatById.rtfres.name}: {formatStat("rtfres")}</div>
-            <div>{StatById.rttres.name}: {formatStat("rttres")}</div>
-            <div>{StatById.rthres.name}: {formatStat("rthres")}</div>
-            <div>{StatById.rtpres.name}: {formatStat("rtpres")}</div>
+            <div class="row-info">
+                <div class="col-left">等级: {watch.level} {UnitById[pd.unitId].name}</div>
+                <div class="col-right">
+                    <Bar max={watch.expmax} value={watch.exp} />
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row-info">
+                <div class="col-left">{StatById.rthp.name}</div>
+                <div class="col-right" >{watch.rthp}/{watch.rtmaxhp}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.rtmp.name}</div>
+                <div class="col-right">{watch.rtmp}/{watch.rtmaxmp}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.str.name}</div>
+                <div class="col-right">
+                    <span class="w-60">{watch.str}</span>
+                    {#if canAddAtt}
+                        <button class="btn btn-att" onclick={() => addAtt("str")}>+</button>
+                    {/if}
+                </div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.int.name}</div>
+                <div class="col-right">
+                    <span class="w-60">{watch.int}</span>
+                    {#if canAddAtt}
+                        <button class="btn btn-att" onclick={() => addAtt("int")}>+</button>
+                    {/if}
+                </div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.spi.name}</div>
+                <div class="col-right">
+                    <span class="w-60">{watch.spi}</span>
+                    {#if canAddAtt}
+                        <button class="btn btn-att" onclick={() => addAtt("spi")}>+</button>
+                    {/if}
+                </div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.vit.name}</div>
+                <div class="col-right">
+                    <span class="w-60">{watch.vit}</span>
+                    {#if canAddAtt}
+                        <button class="btn btn-att" onclick={() => addAtt("vit")}>+</button>
+                    {/if}
+                </div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.atpts.name}</div>
+                <div class="col-right">{watch.atpts}</div>
+            </div>
+            <div class="divider"></div>
+            <div class="row-info">
+                <div class="col-left">{StatById.xdmg.name}</div>
+                <div class="col-right">{formatRange(stat.getStat("xdmg").range)}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.fdmg.name}</div>
+                <div class="col-right">{formatRange(stat.getStat("fdmg").range)}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.tdmg.name}</div>
+                <div class="col-right">{formatRange(stat.getStat("tdmg").range)}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.hdmg.name}</div>
+                <div class="col-right">{formatRange(stat.getStat("hdmg").range)}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.pdmg.name}</div>
+                <div class="col-right">{formatRange(stat.getStat("pdmg").range)}</div>
+            </div>
+            <div class="divider"></div>
+            <div class="row-info">
+                <div class="col-left">{StatById.rtxres.name}</div>
+                <div class="col-right">{stat.getStat("rtxres").value}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.rtfres.name}</div>
+                <div class="col-right">{stat.getStat("rtfres").value}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.rttres.name}</div>
+                <div class="col-right">{stat.getStat("rttres").value}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.rthres.name}</div>
+                <div class="col-right">{stat.getStat("rthres").value}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.rtpres.name}</div>
+                <div class="col-right">{stat.getStat("rtpres").value}</div>
+            </div>
         </div>
     </div>
 </div>
@@ -67,16 +187,19 @@
         position: absolute;
         display: flex;
         flex-direction: column;
-        background-color: #403A36;
+        background-color: #403a36;
         border-radius: 4px;
         color: #ffffff;
-        text-shadow: 1px 2px 1px #23201F;
-        border: 1px solid #0E0E0B;
-        box-shadow: 0 0 1px 2px #726E6C, inset 0 0 8px 4px #23201F;
+        text-shadow: 1px 2px 1px #23201f;
+        border: 1px solid #0e0e0b;
+        box-shadow:
+            0 0 1px 2px #726e6c,
+            inset 0 0 8px 4px #23201f;
         width: 94%;
         height: 94%;
         left: 3%;
         top: 3%;
+        font-size: 14px;
     }
     .title {
         display: flex;
@@ -84,8 +207,8 @@
         align-items: center;
         font-size: 16px;
         border-radius: 4px;
-        border-bottom: 1px solid #6D7070;
-        box-shadow: inset 0 0 4px 2px #23201F;
+        border-bottom: 1px solid #6d7070;
+        box-shadow: inset 0 0 4px 2px #23201f;
         width: 100%;
         height: 24px;
         padding: 0;
@@ -118,5 +241,37 @@
     }
     .container::-webkit-scrollbar {
         display: none; /* Chrome, Safari, Opera */
+    }
+    .divider {
+        width: 100%;
+        height: 2px;
+        background-color: #6d7070;
+        margin: 8px 0;
+        box-shadow: inset 0 0 2px 1px #23201f;
+        border-radius: 1px;
+    }
+    .row-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+    .col-left {
+        flex: 0 0 160px;
+        width: 160px;
+    }
+    .col-right {
+        flex: 1;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        height: 24px;
+    }
+    .btn-att {
+        width: 24px;
+        height: 24px;
+    }
+    .w-60 {
+        width: 60px;
     }
 </style>

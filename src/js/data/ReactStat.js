@@ -2,24 +2,10 @@ import { AffixById } from "../config/Affix";
 import { ItemById } from "../config/Item";
 import { ItemSetGroupBySetStat } from "../config/ItemEx";
 import { StatById, Stats } from "../config/Stat";
-import { arrGetClamped, objEntries, objKeys } from "../Utils";
+import Const from "../Const";
+import { arrIsEmpty, objEntries, objKeys } from "../Utils";
 import ItemInstance from "./ItemInstance";
-import { mathRandomIncl, mathRandomIntIncl } from "./MathLab";
 import Range from "./Range";
-
-const ExpTable = [0, 100];
-for (let i = 2; i < 60; i++) {
-    ExpTable[i] = Math.floor(ExpTable[i - 1] * 1.2);
-}
-/**@type {number[]} */
-let ExpTableRunningSum = [];
-for (let i = 0; i < ExpTable.length; i++) {
-    if (i === 0) {
-        ExpTableRunningSum[i] = ExpTable[i];
-    } else {
-        ExpTableRunningSum[i] = ExpTableRunningSum[i - 1] + ExpTable[i];
-    }
-}
 
 export default class ReactStat {
     /**
@@ -36,8 +22,6 @@ export default class ReactStat {
      * @param {StatData} baseStat 
      */
     initBaseStat(baseStat) {
-        this.level = ReactStat.calcLevel(baseStat.exp?.value ?? 0);
-        this.on("exp", this.updateLevel.bind(this));
         /**@type {StatData} */
         this.data = {};
         for (const statConfig of Stats) {
@@ -85,7 +69,7 @@ export default class ReactStat {
      * 
      * @param {Partial<Record<StatId, number[]>>} statConfig 
      */
-    static collapseConfig(statConfig) {
+    static parseConfig(statConfig) {
         /**@type {StatData} */
         const ret = {};
         for (const [id, arr] of objEntries(statConfig)) {
@@ -96,13 +80,13 @@ export default class ReactStat {
             }
             switch (config.type) {
                 case "number":
-                    ret[id] = { value: mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)) };
+                    ret[id] = { value: arr[0] };
                     break;
                 case "int":
-                    ret[id] = { value: mathRandomIntIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)) };
+                    ret[id] = { value: Math.floor(arr[0]) };
                     break;
                 case "range":
-                    ret[id] = { range: [mathRandomIncl(arrGetClamped(arr, 0), arrGetClamped(arr, 1)), mathRandomIncl(arrGetClamped(arr, 2), arrGetClamped(arr, 3))] };
+                    ret[id] = { range: [arr[0], arr[1]] };
                     break;
                 case "set":
                     ret[id] = { set: {} };
@@ -139,6 +123,14 @@ export default class ReactStat {
             if (this.eventMap.has(key)) {
                 const callbacks = this.eventMap.get(key);
                 for (const callback of callbacks) {
+                    if (callback != null) {
+                        callback(this);
+                    }
+                }
+            }
+            const asterisk = this.eventMap.get("*");
+            if (!arrIsEmpty(asterisk)) {
+                for (const callback of asterisk) {
                     if (callback != null) {
                         callback(this);
                     }
@@ -235,7 +227,7 @@ export default class ReactStat {
 
     /**
      * 
-     * @param {StatId} key 
+     * @param {StatId | "*"} key 
      * @param {(d: Record<StatId, number[]>) => void} callback 
      */
     on(key, callback) {
@@ -248,7 +240,7 @@ export default class ReactStat {
 
     /**
      * 
-     * @param {StatId} key 
+     * @param {StatId | "*"} key 
      * @param {(d: Record<StatId, number[]>) => void} callback 
      */
     off(key, callback) {
@@ -345,21 +337,25 @@ export default class ReactStat {
      * 
      * @param {number} exp 
      */
-    static calcLevel(exp) {
-        for (let i = 1; i < ExpTableRunningSum.length; i++) {
-            if (exp < ExpTableRunningSum[i]) {
-                return i;
+    addExp(exp) {
+        let added = Math.floor(exp * (1 + this.getStat("expex").value / 100));
+        let leveled = 0;
+        while (added > 0) {
+            const toLevelExp = this.getStat("expmax").value - this.getStat("exp").value;
+            if (added >= toLevelExp) {
+                leveled++;
+                added -= toLevelExp;
+                this.setStat("exp", { value: 0 });
+                this.addStat("expmax", { value: Math.floor(this.getStat("expmax").value * Const.EXP_GROWTH_FACTOR) });
+                this.addStat("level", { value: 1 });
+            } else {
+                this.addStat("exp", { value: added });
+                added = 0;
             }
         }
-        return ExpTableRunningSum.length; // max level
-    }
-
-    updateLevel() {
-        const prevLevel = this.level;
-        this.level = ReactStat.calcLevel(this.getStat("exp").value);
-        const levelDiff = this.level - prevLevel;
-        if (levelDiff !== 0) {
-            this.addStat("skpts", { value: levelDiff });
+        if (leveled !== 0) {
+            this.addStat("skpts", { value: leveled * Const.INIT_SK_PTS });
+            this.addStat("atpts", { value: leveled * Const.LEVELUP_ATT_PTS });
         }
     }
 }

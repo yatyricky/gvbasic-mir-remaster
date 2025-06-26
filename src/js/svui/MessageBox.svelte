@@ -2,7 +2,9 @@
     /**
      * @type {any}
      */
-    const { close, title = "提示", content, actions, html = false } = $props();
+    const { close, title = "提示", content, actions, input, html = false } = $props();
+
+    let inputValue = $state("");
 </script>
 
 <div class="backdrop">
@@ -19,12 +21,22 @@
                     {content}
                 {/if}
             </div>
+            {#if input != null}
+                <div class="input-field">
+                    <input
+                        type="text"
+                        placeholder={input.placeholder ?? "请输入内容"}
+                        maxlength={input.maxLength ?? 10}
+                        bind:value={inputValue}
+                    />
+                </div>
+            {/if}
             <div class="actions">
                 {#each actions as { text, action, autoClose }, i (i)}
                     <button
                         class="btn action-btn"
                         onclick={() => {
-                            action?.();
+                            action?.({ inputValue });
                             if (autoClose) {
                                 close();
                             }
@@ -104,7 +116,7 @@
     .content::-webkit-scrollbar {
         display: none; /* Chrome, Safari, Opera */
     }
-    .content{
+    .content {
         flex: 1;
         padding: 4px;
         overflow-y: auto;
@@ -121,5 +133,12 @@
     .action-btn {
         width: 96px;
         height: 32px;
+    }
+    .input-field {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
     }
 </style>

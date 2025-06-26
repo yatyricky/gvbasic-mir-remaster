@@ -1,6 +1,7 @@
 <script>
     import userData from "../../data/UserData";
     import { dispatch } from "../../EventBus";
+    import MessageBox from "../MessageBox.svelte";
 
     const { close } = $props();
 
@@ -9,9 +10,67 @@
      * @param {UnitId} klass
      */
     function createHero(klass) {
-        userData.addChar(klass);
-        close();
-        dispatch("scene:game", userData.data.chars.length - 1);
+        dispatch("modal:show", {
+            component: MessageBox,
+            props: {
+                title: "创建角色",
+                content: `请输入你的名字：`,
+                input: {
+                    placeholder: "角色名",
+                    maxLength: 10,
+                },
+                actions: [
+                    {
+                        text: "取消",
+                        autoClose: true,
+                    },
+                    {
+                        text: "确定",
+                        /**
+                         * @param {any} param0
+                         */
+                        action: ({ inputValue }) => {
+                            if (inputValue.trim() === "") {
+                                dispatch("modal:show", {
+                                    component: MessageBox,
+                                    props: {
+                                        title: "错误",
+                                        content: "角色名不能为空！",
+                                        actions: [
+                                            {
+                                                text: "确定",
+                                                autoClose: true,
+                                            },
+                                        ],
+                                    },
+                                });
+                                return;
+                            }
+                            if (userData.data.chars.some((c) => c.name === inputValue)) {
+                                dispatch("modal:show", {
+                                    component: MessageBox,
+                                    props: {
+                                        title: "错误",
+                                        content: "角色名已存在，请选择其他名字！",
+                                        actions: [
+                                            {
+                                                text: "确定",
+                                                autoClose: true,
+                                            },
+                                        ],
+                                    },
+                                });
+                                return;
+                            }
+                            userData.addChar(klass, inputValue);
+                            close();
+                            dispatch("scene:game", userData.data.chars.length - 1);
+                        },
+                        autoClose: true,
+                    },
+                ],
+            },
+        });
     }
 </script>
 
