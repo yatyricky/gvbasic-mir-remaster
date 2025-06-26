@@ -192,7 +192,7 @@
                     .map((t) => `<span style="color: ${Const.SKILL_TAG_COLOR[t]};">${Const.SKILL_TAG_NAME[t]}</span>`)
                     .join(", ")}<br/>
                 技能等级: ${skillLevel.base}${skillLevel.ext > 0 ? `<span style="color: rgb(30,255,0);">+${skillLevel.ext}</span>` : ""}<br/>
-                ${strFormat(config.description, ...Formula[skillId](skillLevel.val, hero.stat))}<br/>
+                ${strFormat(config.description.replace(/\n/g, "<br />"), ...Formula[skillId](hero))}<br/>
                 ${mods.length > 0 ? `<span style="color: rgb(30,255,0);">${mods.join("<br/>")}</span><br/>` : ""}
                 <span style="color:${config.level <= hero.stat.level ? "white" : "red"}">需要等级: ${config.level}</span>
                 </div>`,

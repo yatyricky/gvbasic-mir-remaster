@@ -1,10 +1,12 @@
+import UnitComponent from "../components/UnitComponent";
 import { SkillById } from "../config/Skill";
 import Range from "../data/Range";
-import ReactStat from "../data/ReactStat";
 
-/**@type {Record<SkillId, (level: number, stat: ReactStat) => Array<StatValueSaveData[]>>} */
+/**@type {Record<SkillId, (hero: UnitComponent) => Array<StatValueSaveData[]>>} */
 const Formula = {
-    fblt: (level, stat) => {
+    fblt: (hero) => {
+        const level = hero.getSkillLevel("fblt").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.fblt;
@@ -21,7 +23,9 @@ const Formula = {
         }];
         return vals;
     },
-    frng: (level, stat) => {
+    frng: (hero) => {
+        const level = hero.getSkillLevel("frng").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.frng;
@@ -37,7 +41,9 @@ const Formula = {
         }];
         return vals;
     },
-    finf: (level, stat) => {
+    finf: (hero) => {
+        const level = hero.getSkillLevel("finf").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.finf;
@@ -55,7 +61,9 @@ const Formula = {
         vals[2] = [{ value: Math.floor(c.n8 + stat.getStat("skfinfm1").value) }];
         return vals;
     },
-    fbal: (level, stat) => {
+    fbal: (hero) => {
+        const level = hero.getSkillLevel("fbal").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.fbal;
@@ -72,7 +80,9 @@ const Formula = {
         vals[1] = [{ value: Math.floor(c.n6 + stat.getStat("skfbalm1").value) }];
         return vals;
     },
-    fbls: (level, stat) => {
+    fbls: (hero) => {
+        const level = hero.getSkillLevel("fbls").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.fbls;
@@ -88,7 +98,9 @@ const Formula = {
         }];
         return vals;
     },
-    fwal: (level, stat) => {
+    fwal: (hero) => {
+        const level = hero.getSkillLevel("fwal").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.fwal;
@@ -105,7 +117,9 @@ const Formula = {
         vals[1] = [{ value: c.n6 }];
         return vals;
     },
-    tchm: (level, stat) => {
+    tchm: (hero) => {
+        const level = hero.getSkillLevel("tchm").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.tchm;
@@ -114,7 +128,9 @@ const Formula = {
         vals[2] = [{ value: c.n7 }];
         return vals;
     },
-    tblt: (level, stat) => {
+    tblt: (hero) => {
+        const level = hero.getSkillLevel("tblt").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.tblt;
@@ -130,7 +146,9 @@ const Formula = {
         }];
         return vals;
     },
-    tltn: (level, stat) => {
+    tltn: (hero) => {
+        const level = hero.getSkillLevel("tltn").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.tltn;
@@ -146,7 +164,9 @@ const Formula = {
         }];
         return vals;
     },
-    tnov: (level, stat) => {
+    tnov: (hero) => {
+        const level = hero.getSkillLevel("tnov").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.tnov;
@@ -162,7 +182,8 @@ const Formula = {
         }];
         return vals;
     },
-    tshd: (level, stat) => {
+    tshd: (hero) => {
+        const level = hero.getSkillLevel("tshd").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.tshd;
@@ -170,7 +191,9 @@ const Formula = {
         vals[1] = [{ value: Math.floor(c.n3 + level * c.n4) }];
         return vals;
     },
-    tblz: (level, stat) => {
+    tblz: (hero) => {
+        const level = hero.getSkillLevel("tblz").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.tblz;
@@ -186,21 +209,25 @@ const Formula = {
         }];
         return vals;
     },
-    bbas: (level, stat) => {
+    bbas: (hero) => {
+        const level = hero.getSkillLevel("bbas").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.bbas;
         vals[0] = [{ value: c.n1 + level * c.n2 }];
         return vals;
     },
-    bcrt: (level, stat) => {
+    bcrt: (hero) => {
+        const level = hero.getSkillLevel("bcrt").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.bcrt;
         vals[0] = [{ value: c.n1 + level * c.n2 }];
         return vals;
     },
-    bthr: (level, stat) => {
+    bthr: (hero) => {
+        const level = hero.getSkillLevel("bthr").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.bthr;
@@ -217,7 +244,9 @@ const Formula = {
         vals[1] = [{ value: c.n6 + level * c.n7 }];
         return vals;
     },
-    bclv: (level, stat) => {
+    bclv: (hero) => {
+        const level = hero.getSkillLevel("bclv").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.bclv;
@@ -233,7 +262,9 @@ const Formula = {
         }];
         return vals;
     },
-    bele: (level, stat) => {
+    bele: (hero) => {
+        const level = hero.getSkillLevel("bele").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.bele;
@@ -274,7 +305,9 @@ const Formula = {
         }];
         return vals;
     },
-    xpos: (level, stat) => {
+    xpos: (hero) => {
+        const level = hero.getSkillLevel("xpos").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.xpos;
@@ -291,7 +324,9 @@ const Formula = {
         vals[1] = [{ value: Math.floor(c.n6 + level * c.n7) }];
         return vals;
     },
-    bcrz: (level, stat) => {
+    bcrz: (hero) => {
+        const level = hero.getSkillLevel("bcrz").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.bcrz;
@@ -306,11 +341,15 @@ const Formula = {
         }];
         return vals;
     },
-    bfbl: (level, stat) => {
+    bfbl: (hero) => {
+        const level = hero.getSkillLevel("bfbl").val;
+        const s1Level = hero.getSkillLevel("bele").base;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.bfbl;
-        const portion = c.n1 + level * c.n2;
+        const s1Bonus = c.n3 * s1Level;
+        const portion = c.n1 + level * c.n2 + s1Bonus;
         const xDamage = Range.t(stat.getStat("xdmg").range)
             .addR(new Range(stat.getStat("xdmglo").value, stat.getStat("xdmghi").value))
             .multN(1 + stat.getStat("str").value / 100)
@@ -330,23 +369,29 @@ const Formula = {
                 dmgType: "hdmg",
             });
         }
+        vals[2] = [{ value: c.n3 }];
+        vals[3] = [{ value: c.n3 * s1Level }];
         return vals;
     },
-    xdef: (level, stat) => {
+    xdef: (hero) => {
+        const level = hero.getSkillLevel("xdef").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.xdef;
         vals[0] = [{ range: new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)).tup() }];
         return vals;
     },
-    xdog: (level, stat) => {
+    xdog: (hero) => {
+        const level = hero.getSkillLevel("xdog").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.xdog;
         vals[0] = [{ value: c.n1 + level * c.n2 }];
         return vals;
     },
-    xcta: (level, stat) => {
+    xcta: (hero) => {
+        const level = hero.getSkillLevel("xcta").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.xcta;
@@ -361,14 +406,17 @@ const Formula = {
         vals[2] = [{ value: c.n9 + level * c.n10 }];
         return vals;
     },
-    xwms: (level, stat) => {
+    xwms: (hero) => {
+        const level = hero.getSkillLevel("xwms").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.xwms;
         vals[0] = [{ range: new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)).tup() }];
         return vals;
     },
-    xchg: (level, stat) => {
+    xchg: (hero) => {
+        const level = hero.getSkillLevel("xchg").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.xchg;
@@ -385,7 +433,9 @@ const Formula = {
         }]
         return vals;
     },
-    xtst: (level, stat) => {
+    xtst: (hero) => {
+        const level = hero.getSkillLevel("xtst").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.xtst;
@@ -412,7 +462,9 @@ const Formula = {
         }];
         return vals;
     },
-    hhel: (level, stat) => {
+    hhel: (hero) => {
+        const level = hero.getSkillLevel("hhel").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.hhel;
@@ -425,7 +477,8 @@ const Formula = {
         }];
         return vals;
     },
-    hgsd: (level, stat) => {
+    hgsd: (hero) => {
+        const level = hero.getSkillLevel("hgsd").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.hgsd;
@@ -433,14 +486,16 @@ const Formula = {
         vals[1] = [{ value: Math.floor(c.n3 + level * c.n4) }];
         return vals;
     },
-    hinv: (level, stat) => {
+    hinv: (hero) => {
+        const level = hero.getSkillLevel("hinv").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.hinv;
         vals[0] = [{ value: c.n1 + level * c.n2 }];
         return vals;
     },
-    hhsd: (level, stat) => {
+    hhsd: (hero) => {
+        const level = hero.getSkillLevel("hhsd").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.hhsd;
@@ -450,7 +505,8 @@ const Formula = {
         }];
         return vals;
     },
-    hlok: (level, stat) => {
+    hlok: (hero) => {
+        const level = hero.getSkillLevel("hlok").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.hlok;
@@ -458,7 +514,9 @@ const Formula = {
         vals[1] = [{ value: c.n3 + level * c.n4 }];
         return vals;
     },
-    hmhl: (level, stat) => {
+    hmhl: (hero) => {
+        const level = hero.getSkillLevel("hmhl").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.hmhl;
@@ -475,14 +533,17 @@ const Formula = {
         }];
         return vals;
     },
-    pbas: (level, stat) => {
+    pbas: (hero) => {
+        const level = hero.getSkillLevel("pbas").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.pbas;
         vals[0] = [{ value: c.n1 + level * c.n2 }];
         return vals;
     },
-    ppoi: (level, stat) => {
+    ppoi: (hero) => {
+        const level = hero.getSkillLevel("ppoi").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.ppoi;
@@ -499,7 +560,9 @@ const Formula = {
         vals[1] = [{ value: c.n6 }];
         return vals;
     },
-    pskl: (level, stat) => {
+    pskl: (hero) => {
+        const level = hero.getSkillLevel("pskl").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.pskl;
@@ -513,7 +576,9 @@ const Formula = {
         vals[2] = [{ value: Math.floor(c.n7 + level * c.n8) }];
         return vals;
     },
-    prun: (level, stat) => {
+    prun: (hero) => {
+        const level = hero.getSkillLevel("prun").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.prun;
@@ -529,7 +594,9 @@ const Formula = {
         }];
         return vals;
     },
-    pcbl: (level, stat) => {
+    pcbl: (hero) => {
+        const level = hero.getSkillLevel("pcbl").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.pcbl;
@@ -546,7 +613,9 @@ const Formula = {
         vals[1] = [{ value: c.n4 + level * c.n5 }];
         return vals;
     },
-    psdm: (level, stat) => {
+    psdm: (hero) => {
+        const level = hero.getSkillLevel("psdm").val;
+        const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.psdm;
@@ -562,14 +631,15 @@ const Formula = {
         vals[2] = [{ value: c.n7 }];
         return vals;
     },
-    hwoh: (level, stat) => {
+    hwoh: (hero) => {
+        const level = hero.getSkillLevel("hwoh").val;
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.hwoh;
         vals[0] = [{ value: c.n1 + level * c.n2 }];
         return vals;
     },
-    _hld: (level, stat) => {
+    _hld: () => {
         return [];
     },
 }

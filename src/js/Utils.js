@@ -281,15 +281,19 @@ function _strFormatter(val, pts) {
             return "NULL";
         }
         if (Array.isArray(val)) {
-            return val.map(v => _strFormatter(v, pts)).filter(v => !strIsEmpty(v)).join("、");
+            const resp = val.map(v => _strFormatter(v, pts)).filter(v => !strIsEmpty(v) && v !== "无").join("、");
+            if (strIsEmpty(resp)) {
+                return "无";
+            } else {
+                return resp;
+            }
         }
         if (val.value != null) {
             return numFloor(val.value, pts).toFixed(pts);
         }
         if (val.range != null) {
-            //<span style="color: ${Const.SKILL_TAG_COLOR[/**@type {SkillTag}*/(v.dmgType)]} ;">
             if (Range.isZero(val.range)) {
-                return "";
+                return "无";
             }
             if (val.dmgType != null) {
                 return `<span style="color: ${Const.SKILL_TAG_COLOR[/**@type {SkillTag}*/(val.dmgType)]} ;">${numFloor(val.range[0], pts).toFixed(pts)}-${numFloor(val.range[1], pts).toFixed(pts)}${Const.SKILL_TAG_NAME[/**@type {SkillTag}*/(val.dmgType)]}</span>`;
