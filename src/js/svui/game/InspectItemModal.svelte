@@ -200,7 +200,7 @@
                 {/if}
             {/each}
 
-            <div>需要等级 {it.level}</div>
+            <div class="req-lvl" style="--req-lvl-color: {hero.stat.getStat("level").value >= it.level ? "#ffffff" : "#DB333C"};">需要等级 {it.level}</div>
         </div>
         <button
             onclick={close}
@@ -310,5 +310,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+    .req-lvl {
+        color: var(--req-lvl-color, #ffffff);
     }
 </style>

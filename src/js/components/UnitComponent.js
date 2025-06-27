@@ -67,6 +67,10 @@ export default class UnitComponent extends Component {
         return true; // Successfully unequipped
     }
 
+    get level() {
+        return this.stat.getStat("level").value;
+    }
+
     /**
      * 
      * @param {ItemSaveData} item 
@@ -79,7 +83,18 @@ export default class UnitComponent extends Component {
             return false; // Item not found in bag
         }
 
+        if (this.level < item.level) {
+            dispatch("toast", `物品等级要求 ${item.level}，当前等级 ${this.level}`);
+            return false; // Level requirement not met
+        }
+
         const itemConfig = ItemById[item.id];
+        // check if unit class match
+        if (itemConfig.classOnly.includes(this.config.id) === false) {
+            dispatch("toast", "无法装备此物品，职业不匹配");
+            return false; // Class mismatch
+        }
+
         const slotType = Const.ITEM_TYPE_SLOT[itemConfig.type];
         let equipped = this.persistantData.inventory[slotType];
         if (equipped == null) {

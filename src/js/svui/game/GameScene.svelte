@@ -8,6 +8,18 @@
     import SkillModal from "./SkillModal.svelte";
     import MessageBox from "../MessageBox.svelte";
     import { onDestroy, onMount } from "svelte";
+    import SceneManager from "../../SceneManager";
+    import UnitComponent from "../../components/UnitComponent";
+
+    const hero = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent);
+
+    let notifyStats = $state(false);
+    let notifySkill = $state(false);
+
+    function updateNotifications() {
+        notifyStats = hero.stat.getStat("atpts").value > 0;
+        notifySkill = hero.stat.getStat("skpts").value > 0;
+    }
 
     function exitGame() {
         dispatch("modal:show", {
@@ -73,15 +85,23 @@
                 dispatch("modal:close", AnyaShop);
             }),
 
-            subscribe("key:click", (event) => {
-                if (event.key === "esc") {
-                    if (event.used) {
-                        return;
+            subscribe(
+                "key:click",
+                (event) => {
+                    if (event.key === "esc") {
+                        if (event.used) {
+                            return;
+                        }
+                        exitGame();
                     }
-                    exitGame();
-                }
-            }, undefined, -1000)
+                },
+                undefined,
+                -1000,
+            ),
         );
+        hero.stat.on("atpts", updateNotifications);
+        hero.stat.on("skpts", updateNotifications);
+        updateNotifications();
     });
 
     onDestroy(() => {
@@ -89,26 +109,32 @@
             const sub = subs.pop();
             sub?.();
         }
+        hero.stat.off("atpts", updateNotifications);
+        hero.stat.off("skpts", updateNotifications);
     });
 </script>
 
 <div>
-    <button class="btn" onclick={openStats} style={`left: ${40 * 0}px; top: ${40 * 9}px;`}>
-        状态
-    </button>
-    <button class="btn" onclick={openInventory} style={`left: ${40 * 1.5}px; top: ${40 * 9}px;`}>
-        装备
-    </button>
-    <button class="btn" onclick={openBag} style={`left: ${40 * 3}px; top: ${40 * 9}px;`}>
-        背包
-    </button>
-    <button class="btn" onclick={openSkill} style={`left: ${40 * 4.5}px; top: ${40 * 9}px;`}> 技能 </button>
-    <button class="btn" onclick={exitGame} style={`left: ${40 * 4.5}px; top: ${40 * 8}px;`}>
-        退出
-    </button>
-</div>
+    <div>
+        <div>
+            <button class="btn" onclick={openStats} style={`left: ${40 * 0}px; top: ${40 * 9}px;`}> 状态 </button>
+            {#if notifyStats}
+                <div class="notification-icon" style={`left: ${40 * 0 + 35}px; top: ${40 * 9}px;`}>*</div>
+            {/if}
+        </div>
+        <button class="btn" onclick={openInventory} style={`left: ${40 * 1.5}px; top: ${40 * 9}px;`}> 装备 </button>
+        <button class="btn" onclick={openBag} style={`left: ${40 * 3}px; top: ${40 * 9}px;`}> 背包 </button>
+        <div>
+            <button class="btn" onclick={openSkill} style={`left: ${40 * 4.5}px; top: ${40 * 9}px;`}> 技能 </button>
+            {#if notifySkill}
+                <div class="notification-icon" style={`left: ${40 * 4.5 + 35}px; top: ${40 * 9}px;`}>*</div>
+            {/if}
+        </div>
+        <button class="btn" onclick={exitGame} style={`left: ${40 * 4.5}px; top: ${40 * 8}px;`}> 退出 </button>
+    </div>
 
-<JoyStick />
+    <JoyStick />
+</div>
 
 <style>
     .btn {
@@ -120,5 +146,18 @@
         border-radius: 4px;
         padding: 0px;
         color: #ceae0f;
+    }
+
+    .notification-icon {
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        color: #87ceeb;
+        font-size: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        pointer-events: none;
     }
 </style>

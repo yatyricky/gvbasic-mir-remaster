@@ -3,6 +3,7 @@
     import userData from "../../data/UserData";
     import { dispatch } from "../../EventBus";
     import MessageBox from "../MessageBox.svelte";
+    import { UnitById } from "../../config/Unit";
 
     const { close } = $props();
 
@@ -64,8 +65,8 @@
             {#each data as char, i (i)}
                 <div class="char-item">
                     <button class="btn char-btn" onclick={() => loadChar(i)}>
-                        <div class="char-name">{char.unitId}</div>
-                        <div class="char-level">Level: {char.stats?.exp?.value ?? 0}</div>
+                        <div class="char-name">{char.name}</div>
+                        <div class="char-level">等级{char.stats?.level?.value ?? 0} {UnitById[char.unitId].name}</div>
                     </button>
                     <button
                         class="btn delete-btn"

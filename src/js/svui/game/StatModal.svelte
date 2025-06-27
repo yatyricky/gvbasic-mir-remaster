@@ -26,16 +26,17 @@
         int: stat.getStat("int").value,
         spi: stat.getStat("spi").value,
         vit: stat.getStat("vit").value,
-    })
+    });
 
     let canAddAtt = $derived(watch.atpts > 0);
+    let canAddAtt10 = $derived(watch.atpts >= 10);
 
     /**
      *
      * @param {[number, number]} range
      */
     function formatRange(range, pts = 0) {
-        const vals = range.map(v => numFloor(v, pts).toFixed(pts));
+        const vals = range.map((v) => numFloor(v, pts).toFixed(pts));
         return `${vals[0]}-${vals[1]}`;
     }
 
@@ -46,15 +47,15 @@
     }
 
     /**
-     * 
+     *
      * @param {StatId} statId
      */
-    function addAtt(statId) {
-        if (watch.atpts <= 0) {
+    function addAtt(statId, pts = 1) {
+        if (watch.atpts < pts) {
             return;
         }
-        stat.addStat(statId, { value: 1 });
-        stat.subStat("atpts", { value: 1 });
+        stat.addStat(statId, { value: pts });
+        stat.subStat("atpts", { value: pts });
         hero.save();
     }
 
@@ -82,7 +83,7 @@
             <div class="divider"></div>
             <div class="row-info">
                 <div class="col-left">{StatById.rthp.name}</div>
-                <div class="col-right" >{watch.rthp}/{watch.rtmaxhp}</div>
+                <div class="col-right">{watch.rthp}/{watch.rtmaxhp}</div>
             </div>
             <div class="row-info">
                 <div class="col-left">{StatById.rtmp.name}</div>
@@ -95,6 +96,9 @@
                     {#if canAddAtt}
                         <button class="btn btn-att" onclick={() => addAtt("str")}>+</button>
                     {/if}
+                    {#if canAddAtt10}
+                        <button class="btn btn-att w-36" onclick={() => addAtt("str", 10)}>+10</button>
+                    {/if}
                 </div>
             </div>
             <div class="row-info">
@@ -103,6 +107,9 @@
                     <span class="w-60">{watch.int}</span>
                     {#if canAddAtt}
                         <button class="btn btn-att" onclick={() => addAtt("int")}>+</button>
+                    {/if}
+                    {#if canAddAtt10}
+                        <button class="btn btn-att w-36" onclick={() => addAtt("int", 10)}>+10</button>
                     {/if}
                 </div>
             </div>
@@ -113,6 +120,9 @@
                     {#if canAddAtt}
                         <button class="btn btn-att" onclick={() => addAtt("spi")}>+</button>
                     {/if}
+                    {#if canAddAtt10}
+                        <button class="btn btn-att w-36" onclick={() => addAtt("spi", 10)}>+10</button>
+                    {/if}
                 </div>
             </div>
             <div class="row-info">
@@ -121,6 +131,9 @@
                     <span class="w-60">{watch.vit}</span>
                     {#if canAddAtt}
                         <button class="btn btn-att" onclick={() => addAtt("vit")}>+</button>
+                    {/if}
+                    {#if canAddAtt10}
+                        <button class="btn btn-att w-36" onclick={() => addAtt("vit", 10)}>+10</button>
                     {/if}
                 </div>
             </div>
@@ -149,6 +162,29 @@
                 <div class="col-left">{StatById.pdmg.name}</div>
                 <div class="col-right">{formatRange(stat.getStat("pdmg").range)}</div>
             </div>
+            <div class="divider"></div>
+
+            <div class="row-info">
+                <div class="col-left">{StatById.xed.name}</div>
+                <div class="col-right">{stat.getStat("xed").value.toFixed(2)}%</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.fed.name}</div>
+                <div class="col-right">{stat.getStat("fed").value.toFixed(2)}%</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.ted.name}</div>
+                <div class="col-right">{stat.getStat("ted").value.toFixed(2)}%</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.hed.name}</div>
+                <div class="col-right">{stat.getStat("hed").value.toFixed(2)}%</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.ped.name}</div>
+                <div class="col-right">{stat.getStat("ped").value.toFixed(2)}%</div>
+            </div>
+
             <div class="divider"></div>
             <div class="row-info">
                 <div class="col-left">{StatById.rtxres.name}</div>
@@ -273,5 +309,8 @@
     }
     .w-60 {
         width: 60px;
+    }
+    .w-36 {
+        width: 36px;
     }
 </style>

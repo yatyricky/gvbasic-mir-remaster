@@ -1,31 +1,31 @@
 <script>
-    const { 
-        max = 100, 
-        value = 0, 
-        color = "#ceae0f", 
+    import { numFloor } from "../../Utils";
+
+    const {
+        max = 100,
+        value = 0,
+        color = "#ceae0f",
         showText = true,
         backgroundColor = "#6d7070",
-        textSize = "12px"
+        textSize = "12px",
+        showPercentage = true,
     } = $props();
-    
+
     // Calculate percentage for display
     const getPercentage = () => {
         if (max <= 0) return 0;
         const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
-        return Math.round(percentage);
+        return numFloor(percentage, 2);
     };
-    
+
     // Format display text
     const getDisplayText = () => {
-        return `${value}/${max}`;
+        return `${value}/${max}${showPercentage ? ` (${getPercentage()}%)` : ""}`;
     };
 </script>
 
 <div class="pg-background" style="background-color: {backgroundColor}; --text-size: {textSize};">
-    <div 
-        class="pg-progress" 
-        style="width: {getPercentage()}%; background-color: {color};"
-    ></div>
+    <div class="pg-progress" style="width: {getPercentage()}%; background-color: {color};"></div>
     {#if showText}
         <div class="pg-text">{getDisplayText()}</div>
     {/if}
@@ -41,7 +41,7 @@
         border: 1px solid #0e0e0b;
         box-shadow: inset 0 0 4px 2px rgba(0, 0, 0, 0.3);
     }
-    
+
     .pg-progress {
         position: absolute;
         height: 100%;
@@ -50,7 +50,7 @@
         transition: width 0.3s ease;
         box-shadow: inset 0 0 4px 2px rgba(0, 0, 0, 0.3);
     }
-    
+
     .pg-text {
         position: absolute;
         width: 100%;
