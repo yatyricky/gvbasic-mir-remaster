@@ -58,6 +58,12 @@ declare global {
         runeWordStats?: StatData;
     }
 
+    interface IKeyMapSetting {
+        bar: number;
+        pos: number;
+        skillId: SkillId;
+    }
+
     interface UnitSaveData {
         name: string;
         unitId: UnitId;
@@ -66,6 +72,7 @@ declare global {
         charmBag: ItemSaveData[];
         bag: ItemSaveData[];
         skills: Partial<Record<SkillId, number>>;
+        keyMap: Array<IKeyMapSetting>;
     }
 
     interface ISaveData {

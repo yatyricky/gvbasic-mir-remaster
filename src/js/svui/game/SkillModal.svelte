@@ -3,11 +3,10 @@
     import UnitComponent from "../../components/UnitComponent";
     import SceneManager from "../../SceneManager";
     import { SkillById, SkillGroupByKlass } from "../../config/Skill";
-    import { arrIsEmpty, strFormat } from "../../Utils";
+    import { arrIsEmpty } from "../../Utils";
     import { dispatch, subscribe } from "../../EventBus";
     import MessageBox from "../MessageBox.svelte";
     import Const from "../../Const";
-    import Formula from "../../skill/Formula";
     import { Stats } from "../../config/Stat";
 
     const { close } = $props();
@@ -167,35 +166,11 @@
                 autoClose: true,
             });
         }
-        const mods = [];
-        for (const e of Stats) {
-            if (e.isSkillMod !== true) {
-                continue;
-            }
-            if (e.targetSkill !== skillId) {
-                continue;
-            }
-            const val = hero.stat.getStat(e.id).value;
-            if (val <= 0) {
-                continue;
-            }
-            mods.push(strFormat(e.description, val));
-        }
-        const skillLevel = hero.getSkillLevel(skillId);
         dispatch("modal:show", {
             component: MessageBox,
             props: {
                 title: config.name,
-                content: `<div style="font-size: 14px;">
-                ${hero
-                    .getSkillBranches(skillId)
-                    .map((t) => `<span style="color: ${Const.SKILL_TAG_COLOR[t]};">${Const.SKILL_TAG_NAME[t]}</span>`)
-                    .join(", ")}<br/>
-                技能等级: ${skillLevel.base}${skillLevel.ext > 0 ? `<span style="color: rgb(30,255,0);">+${skillLevel.ext}</span>` : ""}<br/>
-                ${strFormat(config.description.replace(/\n/g, "<br />"), ...Formula[skillId](hero))}<br/>
-                ${mods.length > 0 ? `<span style="color: rgb(30,255,0);">${mods.join("<br/>")}</span><br/>` : ""}
-                <span style="color:${config.level <= hero.stat.getStat("level").value ? "white" : "red"}">需要等级: ${config.level}</span>
-                </div>`,
+                content: hero.getSkillHtml(skillId),
                 actions,
                 html: true,
             },

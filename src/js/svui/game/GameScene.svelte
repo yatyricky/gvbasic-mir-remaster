@@ -6,15 +6,49 @@
     import StatModal from "./StatModal.svelte";
     import AnyaShop from "./AnyaShop.svelte";
     import SkillModal from "./SkillModal.svelte";
+    import SkillPicker from "./SkillPicker.svelte";
     import MessageBox from "../MessageBox.svelte";
     import { onDestroy, onMount } from "svelte";
     import SceneManager from "../../SceneManager";
     import UnitComponent from "../../components/UnitComponent";
+    import { SkillById } from "../../config/Skill";
 
     const hero = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent);
 
     let notifyStats = $state(false);
     let notifySkill = $state(false);
+    let modifyingKeys = $state(false);
+
+    /**@type {SkillId[][]}*/
+    let keyMappings = $state([]);
+
+    function updateKeyMappings() {
+        /**@type {SkillId[][]}*/
+        const map = [];
+
+        for (let bar = 0; bar < 3; bar++) {
+            const row = [];
+            for (let pos = 0; pos < 8; pos++) {
+                row.push(null);
+            }
+            map.push(row);
+        }
+
+        for (const kms of hero.persistantData.keyMap) {
+            if (hero.getSkillLevel(kms.skillId).val <= 0) {
+                continue;
+            }
+            if (kms.bar < 0 || kms.bar >= 3 || kms.pos < 0 || kms.pos >= 8) {
+                continue; // Invalid key mapping
+            }
+            if (map[kms.bar][kms.pos] != null) {
+                console.warn(`Key mapping conflict at bar ${kms.bar}, pos ${kms.pos}`);
+            }
+            map[kms.bar][kms.pos] = kms.skillId;
+        }
+
+        keyMappings = map;
+    }
 
     function updateNotifications() {
         notifyStats = hero.stat.getStat("atpts").value > 0;
@@ -72,6 +106,70 @@
         });
     }
 
+    /**
+     * Handle skill selection from SkillPicker
+     * @param {number} bar
+     * @param {number} pos
+     * @param {SkillId} skillId
+     */
+    function onSkillPicked(bar, pos, skillId) {
+        // Remove any existing mapping at this position
+        const existingPositionIndex = hero.persistantData.keyMap.findIndex((kms) => kms.bar === bar && kms.pos === pos);
+        if (existingPositionIndex !== -1) {
+            hero.persistantData.keyMap.splice(existingPositionIndex, 1);
+        }
+
+        // Add new mapping
+        hero.persistantData.keyMap.push({
+            skillId: skillId,
+            bar: bar,
+            pos: pos,
+        });
+
+        // Update the UI
+        updateKeyMappings();
+    }
+
+    /**
+     *
+     * @param {number} bar
+     * @param {number} pos
+     */
+    function onClickActionBar(bar, pos) {
+        const skillId = keyMappings[bar][pos];
+        let config;
+        if (skillId != null) {
+            config = SkillById[skillId];
+        }
+        if (hero.isCombat) {
+            // use skill
+            return;
+        }
+        if (modifyingKeys) {
+            // modify key - show skill picker
+            dispatch("modal:show", {
+                component: SkillPicker,
+                props: {
+                    bar: bar,
+                    pos: pos,
+                    onSkillPicked: onSkillPicked,
+                },
+            });
+            return;
+        }
+        if (config == null) {
+            return;
+        }
+        dispatch("modal:show", {
+            component: MessageBox,
+            props: {
+                title: config?.name,
+                content: hero.getSkillHtml(skillId),
+                html: true,
+            },
+        });
+    }
+
     /**@type {any[]}*/
     const subs = [];
 
@@ -83,6 +181,12 @@
 
             subscribe("exit:anya", () => {
                 dispatch("modal:close", AnyaShop);
+            }),
+
+            subscribe("inventory:refresh", () => {
+                // Update key mappings when inventory changes, as skills can be gained/lost from equipment
+                updateKeyMappings();
+                updateNotifications();
             }),
 
             subscribe(
@@ -102,6 +206,7 @@
         hero.stat.on("atpts", updateNotifications);
         hero.stat.on("skpts", updateNotifications);
         updateNotifications();
+        updateKeyMappings();
     });
 
     onDestroy(() => {
@@ -115,25 +220,78 @@
 </script>
 
 <div>
-    <div>
-        <div>
-            <button class="btn" onclick={openStats} style={`left: ${40 * 0}px; top: ${40 * 9}px;`}> 状态 </button>
-            {#if notifyStats}
-                <div class="notification-icon" style={`left: ${40 * 0 + 35}px; top: ${40 * 9}px;`}>*</div>
-            {/if}
-        </div>
-        <button class="btn" onclick={openInventory} style={`left: ${40 * 1.5}px; top: ${40 * 9}px;`}> 装备 </button>
-        <button class="btn" onclick={openBag} style={`left: ${40 * 3}px; top: ${40 * 9}px;`}> 背包 </button>
-        <div>
-            <button class="btn" onclick={openSkill} style={`left: ${40 * 4.5}px; top: ${40 * 9}px;`}> 技能 </button>
-            {#if notifySkill}
-                <div class="notification-icon" style={`left: ${40 * 4.5 + 35}px; top: ${40 * 9}px;`}>*</div>
-            {/if}
-        </div>
-        <button class="btn" onclick={exitGame} style={`left: ${40 * 4.5}px; top: ${40 * 8}px;`}> 退出 </button>
+    <div class="sk-container">
+        {#each keyMappings as row, bar (bar)}
+            {#each row as skId, pos (pos)}
+                {@const skillConfig = skId == null ? null : SkillById[/**@type {SkillId}*/ (skId)]}
+                <button
+                    aria-label={`技能栏 ${bar + 1} 按钮 ${pos + 1}`}
+                    style={`"
+                        position: absolute;
+                        width: 48px;
+                        height: 48px;
+                        left: ${50 * pos}px;
+                        top: ${50 * bar}px;
+                        margin: 1px;
+                        background-image: url('${skillConfig?.icon ? new URL(`../../../assets/images/${skillConfig.icon}.jpg`, import.meta.url).href : ""}');
+                        background-color: #4d4540;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                    "`}
+                    onclick={() => onClickActionBar(bar, pos)}
+                ></button>
+            {/each}
+        {/each}
     </div>
+    {#if modifyingKeys}
+        <button
+            class="btn"
+            onclick={() => {
+                modifyingKeys = !modifyingKeys;
+            }}
+            style={`width: 120px; left: ${40 * 3 + 20}px; top: ${40 * 8 + 20}px;`}
+        >
+            结束改键
+        </button>
+    {:else}
+        <div>
+            <div>
+                <div>
+                    <button class="btn" onclick={openStats} style={`left: ${40 * 0}px; top: ${40 * 9}px;`}>
+                        状态
+                    </button>
+                    {#if notifyStats}
+                        <div class="notification-icon" style={`left: ${40 * 0 + 35}px; top: ${40 * 9}px;`}>*</div>
+                    {/if}
+                </div>
+                <button class="btn" onclick={openInventory} style={`left: ${40 * 1.5}px; top: ${40 * 9}px;`}>
+                    装备
+                </button>
+                <button class="btn" onclick={openBag} style={`left: ${40 * 3}px; top: ${40 * 9}px;`}> 背包 </button>
+                <div>
+                    <button class="btn" onclick={openSkill} style={`left: ${40 * 4.5}px; top: ${40 * 9}px;`}>
+                        技能
+                    </button>
+                    {#if notifySkill}
+                        <div class="notification-icon" style={`left: ${40 * 4.5 + 35}px; top: ${40 * 9}px;`}>*</div>
+                    {/if}
+                </div>
+                <button class="btn" onclick={exitGame} style={`left: ${40 * 4.5}px; top: ${40 * 8}px;`}> 退出 </button>
+                <button
+                    class="btn"
+                    onclick={() => {
+                        modifyingKeys = !modifyingKeys;
+                    }}
+                    style={`left: ${40 * 3}px; top: ${40 * 8}px;`}
+                >
+                    改键
+                </button>
+            </div>
 
-    <JoyStick />
+            <JoyStick />
+        </div>
+    {/if}
 </div>
 
 <style>
@@ -159,5 +317,13 @@
         justify-content: center;
         border-radius: 50%;
         pointer-events: none;
+    }
+    .sk-container {
+        position: absolute;
+        width: 400px;
+        height: 150px;
+        left: 0;
+        top: 160px;
+        box-shadow: inset 0 0 4px 2px #23201f;
     }
 </style>

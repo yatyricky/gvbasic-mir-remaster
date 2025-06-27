@@ -7,12 +7,14 @@ import ItemInstance from "../data/ItemInstance";
 import ReactStat from "../data/ReactStat";
 import userData from "../data/UserData";
 import { dispatch } from "../EventBus";
-import { arrCombinations, arrIsEmpty, objEntries } from "../Utils";
+import Formula from "../skill/Formula";
+import { arrCombinations, arrIsEmpty, objEntries, strFormat } from "../Utils";
 import Component from "./Component";
 
 export default class UnitComponent extends Component {
     constructor() {
         super();
+        this.isCombat = false;
     }
 
     /**
@@ -90,7 +92,7 @@ export default class UnitComponent extends Component {
 
         const itemConfig = ItemById[item.id];
         // check if unit class match
-        if (itemConfig.classOnly.includes(this.config.id) === false) {
+        if (!arrIsEmpty(itemConfig.classOnly) && itemConfig.classOnly.includes(this.config.id) === false) {
             dispatch("toast", "无法装备此物品，职业不匹配");
             return false; // Class mismatch
         }
@@ -350,5 +352,41 @@ export default class UnitComponent extends Component {
         } else {
             return { val: 0, base: 0, ext: 0 };
         }
+    }
+
+    /**
+     * 
+     * @param {SkillId} skillId 
+     * @returns 
+     */
+    getSkillHtml(skillId) {
+        const skillLevel = this.getSkillLevel(skillId);
+        const config = SkillById[skillId];
+        const mods = [];
+        for (const e of Stats) {
+            if (e.isSkillMod !== true) {
+                continue;
+            }
+            if (e.targetSkill !== skillId) {
+                continue;
+            }
+            const val = this.stat.getStat(e.id).value;
+            if (val <= 0) {
+                continue;
+            }
+            mods.push(strFormat(e.description, val));
+        }
+        return `
+            <div style="font-size: 14px;">
+                ${this
+                .getSkillBranches(skillId)
+                .map((t) => `<span style="color: ${Const.SKILL_TAG_COLOR[t]};">${Const.SKILL_TAG_NAME[t]}</span>`)
+                .join(", ")}<br/>
+                技能等级: ${skillLevel.base}${skillLevel.ext > 0 ? `<span style="color: rgb(30,255,0);">+${skillLevel.ext}</span>` : ""}<br/>
+                ${strFormat(config.description.replace(/\n/g, "<br />"), ...Formula[skillId](this))}<br/>
+                ${mods.length > 0 ? `<span style="color: rgb(30,255,0);">${mods.join("<br/>")}</span><br/>` : ""}
+                <span style="color:${config.level <= this.stat.getStat("level").value ? "white" : "red"}">需要等级: ${config.level}</span>
+            </div>
+        `;
     }
 }

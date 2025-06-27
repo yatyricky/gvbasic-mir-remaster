@@ -48,6 +48,7 @@ class UserData {
             charmBag: [],
             bag: [],
             skills: {},
+            keyMap: [],
         }
         let chars = this.data.chars;
         if (chars == null) {
@@ -55,6 +56,7 @@ class UserData {
             this.data.chars = chars;
         }
         // add 1 skill point
+        char.stats.level = { value: 1 };
         char.stats.skpts = { value: Const.INIT_SK_PTS };
         char.stats.expmax = { value: Const.BASE_EXP_MAX };
         chars.push(char);
@@ -82,7 +84,7 @@ class UserData {
         //     }
         // }
         for (const e of Items) {
-            if ((e.classOnly ?? []).includes("warr")) {
+            if ((e.classOnly ?? []).includes("mage")) {
                 candidates.push(e.id);
             }
         }

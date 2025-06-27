@@ -9,6 +9,7 @@ declare global {
         level: number;
         prerequisite: SkillId[];
         icon: string;
+        passive: boolean;
         name: string;
         description: string;
         n1: number;
