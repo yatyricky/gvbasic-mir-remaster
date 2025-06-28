@@ -170,7 +170,7 @@
             component: MessageBox,
             props: {
                 title: config.name,
-                content: hero.getSkillHtml(skillId),
+                content: hero.getSkillHtml(skillId, true),
                 actions,
                 html: true,
             },

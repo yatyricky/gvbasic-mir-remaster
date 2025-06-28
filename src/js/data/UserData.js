@@ -84,7 +84,7 @@ class UserData {
         //     }
         // }
         for (const e of Items) {
-            if ((e.classOnly ?? []).includes("mage")) {
+            if ((e.classOnly ?? []).includes("warr")) {
                 candidates.push(e.id);
             }
         }

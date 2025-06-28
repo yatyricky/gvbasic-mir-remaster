@@ -5,7 +5,7 @@ export const Stats = [
     { id: "vit", name: "体力", type: "int", description: "体力+{0}", sort: 34 },
     { id: "maxhp", name: "基础生命上限", type: "number", description: "生命上限+{0}", sort: 41 },
     { id: "mhex", name: "生命上限", type: "number", description: "生命上限+{0.2}%", sort: 42 },
-    { id: "rtmaxhp", name: "生命上限", type: "number", description: "{0}", sort: 43, depends: ["maxhp", "mhex", "vit"], derived: (d) => (d.setStat("rtmaxhp", {value:Math.floor(d.getStat("maxhp").value * (1 + d.getStat("mhex").value / 100)+d.getStat("vit").value*10)})) },
+    { id: "rtmaxhp", name: "生命上限", type: "number", description: "{0}", sort: 43, depends: ["maxhp", "mhex", "vit"], derived: (d) => (d.setStat("rtmaxhp", {value:Math.floor(d.getStat("maxhp").value * (1 + d.getStat("mhex").value / 100)+d.getStat("vit").value*2)})) },
     { id: "rthp", name: "生命", type: "number", description: "{0}", sort: 44, depends: ["rtmaxhp"], derived: (d) => (d.setStat("rthp", {value:Math.min(d.getStat("rtmaxhp").value, d.getStat("rthp").value)})), save: true },
     { id: "rthploss", name: "缺失生命", type: "number", description: "{0}", sort: 44, depends: ["rtmaxhp", "rthp"], derived: (d) => (d.getStat("rtmaxhp").value - d.getStat("rthp").value) },
     { id: "maxmp", name: "基础魔法上限", type: "number", description: "魔法上限+{0}", sort: 51 },

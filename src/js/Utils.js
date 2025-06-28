@@ -10,6 +10,15 @@ export function uuid() {
 
 /**
  * 
+ * @param {number} val 
+ * @returns 
+ */
+export function sign(val) {
+    return val > 0 ? 1 : (val < 0 ? -1 : 0);
+}
+
+/**
+ * 
  * @param {number} value 
  * @param {number} precision 
  * @returns 

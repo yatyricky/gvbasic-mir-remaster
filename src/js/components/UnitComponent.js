@@ -273,8 +273,9 @@ export default class UnitComponent extends Component {
             return false; // No skill points available
         }
         const config = SkillById[id];
-        if (this.stat.getStat("level").value < config.level) {
-            dispatch("toast", `技能等级不足，需达到 ${config.level} 级`);
+        const reqLevel = this.getLearnSkillReqLevel(id);
+        if (this.stat.getStat("level").value < reqLevel) {
+            dispatch("toast", `技能等级不足，需达到 ${reqLevel} 级`);
             return false; // Not enough level to learn this skill
         }
         if (!arrIsEmpty(config.prerequisite) && config.prerequisite.some(prereq => this.getLearntSkillLevel(prereq) <= 0)) {
@@ -380,16 +381,45 @@ export default class UnitComponent extends Component {
             }
             mods.push(strFormat(e.description, val));
         }
+
+        // Build skill branches display
+        const skillBranches = this.getSkillBranches(skillId).map((t) => `
+            <span style="
+                display: inline-block;
+                padding: 2px 6px;
+                margin: 1px 2px;
+                color: ${Const.SKILL_TAG_COLOR[t]};
+                border: 1px solid ${Const.SKILL_TAG_COLOR[t]};
+                border-radius: 3px;
+                font-size: 11px;
+                font-weight: bold;
+                background: none;
+            ">${Const.SKILL_TAG_NAME[t]}</span>`).join("");
+
+        // Build current level info
+        const currentLevelInfo = skillLevel.val > 0 ? `
+            <div style="margin: 8px 0;">
+                <div style="margin-bottom: 4px; font-weight: bold;">当前等级: ${skillLevel.base}${skillLevel.ext > 0 ? `<span style="color: rgb(30,255,0);">+${skillLevel.ext}</span>` : ""}</div>
+                <div style="margin: 6px 0; line-height: 1.4;">${strFormat(config.description.replace(/\n/g, "<br />"), ...Formula[skillId](this))}</div>
+                ${mods.length > 0 ? `<div style="margin-top: 6px; color: rgb(30,255,0); line-height: 1.3;">${mods.join("<br/>")}</div>` : ""}
+            </div>
+        ` : "";
+
+        // Build next level info
+        const reqLevel = this.getLearnSkillReqLevel(skillId);
+        const nextLevelInfo = showNextLevel && skillLevel.base < Const.SKILL_MAX_LEVEL ? `
+            <div style="margin: 8px 0; padding: 6px; background-color: rgba(255,255,255,0.05); border-left: 3px solid #ceae0f;">
+                <div style="margin-bottom: 4px; font-weight: bold; color: #ceae0f;">下一等级</div>
+                <div style="line-height: 1.4;">${strFormat(config.description.replace(/\n/g, "<br />"), ...Formula[skillId](this, 1))}</div>
+                <div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.2);"><span style="color:${reqLevel <= this.stat.getStat("level").value ? "white" : "red"}">需要等级: ${reqLevel}</span></div>
+            </div>
+        ` : "";
+
         return `
-            <div style="font-size: 14px;">
-                ${this
-                .getSkillBranches(skillId)
-                .map((t) => `<span style="color: ${Const.SKILL_TAG_COLOR[t]};">${Const.SKILL_TAG_NAME[t]}</span>`)
-                .join(", ")}<br/>
-                技能等级: ${skillLevel.base}${skillLevel.ext > 0 ? `<span style="color: rgb(30,255,0);">+${skillLevel.ext}</span>` : ""}<br/>
-                ${strFormat(config.description.replace(/\n/g, "<br />"), ...Formula[skillId](this))}<br/>
-                ${mods.length > 0 ? `<span style="color: rgb(30,255,0);">${mods.join("<br/>")}</span><br/>` : ""}
-                <span style="color:${config.level <= this.stat.getStat("level").value ? "white" : "red"}">需要等级: ${config.level}</span>
+            <div style="font-size: 14px; padding: 4px;">
+                <div style="margin-bottom: 8px;">${skillBranches}</div>
+                ${currentLevelInfo}
+                ${nextLevelInfo}
             </div>
         `;
     }
@@ -498,5 +528,16 @@ export default class UnitComponent extends Component {
         }
         rs.setStat("rthp", { value: Math.min(prevRtHp, rs.data.rtmaxhp.value) });
         rs.setStat("rtmp", { value: Math.min(prevRtMp, rs.data.rtmaxmp.value) });
+    }
+
+    /**
+     * 
+     * @param {SkillId} skillId 
+     * @returns {number} 
+     */
+    getLearnSkillReqLevel(skillId) {
+        const config = SkillById[skillId];
+        const level = this.getSkillLevel(skillId).base;
+        return (config.level ?? 1) + level; // Default to 1 if no level is specified
     }
 }
