@@ -1,10 +1,6 @@
-import { AffixById } from "../config/Affix";
-import { ItemById } from "../config/Item";
-import { ItemSetGroupBySetStat } from "../config/ItemEx";
 import { StatById, Stats } from "../config/Stat";
 import Const from "../Const";
 import { arrIsEmpty, objEntries, objKeys } from "../Utils";
-import ItemInstance from "./ItemInstance";
 import Range from "./Range";
 
 export default class ReactStat {
@@ -253,86 +249,6 @@ export default class ReactStat {
                 callbacks.splice(index, 1);
             }
         }
-    }
-
-    /**
-     * 
-     * @param {UnitSaveData} saveData 
-     */
-    update(saveData) {
-        const prevRtHp = this.data.rthp.value;
-        const prevRtMp = this.data.rtmp.value;
-        this.initBaseStat(saveData.stats);
-        // skill stats
-        // equip stats
-        /**@type {Map<StatId, number>}*/
-        const wornSets = new Map();
-        for (const [, items] of objEntries(saveData.inventory)) {
-            for (const item of items) {
-                if (item == null) {
-                    continue;
-                }
-                const itemConfig = ItemById[item.id];
-                if (itemConfig == null) {
-                    console.error(`Item ${item.id} not found`);
-                    continue;
-                }
-                for (const [statId, stat] of objEntries(item.baseStats)) {
-                    this.addStat(statId, stat);
-                }
-                for (const [statId, stat] of objEntries(item.extStats)) {
-                    this.addStat(statId, stat);
-                }
-                // socket fillers
-                for (const [, socketItem] of objEntries(item.sockets)) {
-                    if (socketItem == null) {
-                        continue;
-                    }
-                    const socketConfig = ItemById[socketItem.id];
-                    if (socketConfig == null) {
-                        console.error(`Socket item ${socketItem.id} not found`);
-                        continue;
-                    }
-                    for (const [statId, stat] of objEntries(socketItem.baseStats)) {
-                        this.addStat(statId, stat);
-                    }
-                    for (const [statId, stat] of objEntries(socketItem.extStats)) {
-                        this.addStat(statId, stat);
-                    }
-                }
-                // runeword stats
-                for (const [statId, stat] of objEntries(item.runeWordStats)) {
-                    this.addStat(statId, stat);
-                }
-                // set items
-                if (itemConfig.setStat != null) {
-                    if (!wornSets.has(itemConfig.setStat)) {
-                        wornSets.set(itemConfig.setStat, 1);
-                    } else {
-                        wornSets.set(itemConfig.setStat, wornSets.get(itemConfig.setStat) + 1);
-                    }
-                }
-            }
-        }
-        // set item stats
-        for (const [setId, items] of wornSets) {
-            const completion = ItemSetGroupBySetStat[setId];
-            for (const entry of completion) {
-                if (items + this.getStat("setany").value < entry.setCount) {
-                    continue; // not enough items to complete the set
-                }
-                /**@type {StatData}*/
-                const tempStats = {};
-                for (const [affixId, qlvl] of objEntries(entry.fixedAffix)) {
-                    ItemInstance.collapseAffix(AffixById[affixId], tempStats, 0, qlvl);
-                }
-                for (const [statId, val] of objEntries(tempStats)) {
-                    this.addStat(statId, val);
-                }
-            }
-        }
-        this.setStat("rthp", { value: Math.min(prevRtHp, this.data.rtmaxhp.value) });
-        this.setStat("rtmp", { value: Math.min(prevRtMp, this.data.rtmaxmp.value) });
     }
 
     /**

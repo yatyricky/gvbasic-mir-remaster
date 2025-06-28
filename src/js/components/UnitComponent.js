@@ -1,4 +1,6 @@
+import { AffixById } from "../config/Affix";
 import { ItemById } from "../config/Item";
+import { ItemSetGroupBySetStat } from "../config/ItemEx";
 import { SkillById } from "../config/Skill";
 import { Stats } from "../config/Stat";
 import { UnitById } from "../config/Unit";
@@ -7,8 +9,8 @@ import ItemInstance from "../data/ItemInstance";
 import ReactStat from "../data/ReactStat";
 import userData from "../data/UserData";
 import { dispatch } from "../EventBus";
-import Formula from "../skill/Formula";
-import { arrCombinations, arrIsEmpty, objEntries, strFormat } from "../Utils";
+import Formula, { FormulaStats } from "../skill/Formula";
+import { arrCombinations, arrIsEmpty, objEntries, objIsEmpty, strFormat } from "../Utils";
 import Component from "./Component";
 
 export default class UnitComponent extends Component {
@@ -25,7 +27,7 @@ export default class UnitComponent extends Component {
         this.persistantData = persistantData;
         this.config = UnitById[persistantData.unitId];
         this.stat = new ReactStat(persistantData.stats);
-        this.stat.update(this.persistantData);
+        this.updateStat();
         return this;
     }
 
@@ -60,7 +62,7 @@ export default class UnitComponent extends Component {
         // Remove the item from the equipped slot
         equipped.splice(index, 1);
         if (!dontUpdateStat) {
-            this.stat.update(this.persistantData);
+            this.updateStat();
         }
         this.persistantData.bag.push(item); // Add it back to the bag
         dispatch("bag:refresh", null);
@@ -174,7 +176,7 @@ export default class UnitComponent extends Component {
 
         // Add the item to the equipped slot
         equipped.push(item);
-        this.stat.update(this.persistantData);
+        this.updateStat();
         this.persistantData.bag.splice(indexInBag, 1); // Remove it from the bag
         dispatch("bag:refresh", null);
         dispatch("inventory:refresh", null);
@@ -246,7 +248,7 @@ export default class UnitComponent extends Component {
         const indexInBag = this.persistantData.bag.findIndex(e => e.uuid === socketItem.uuid);
         this.persistantData.bag.splice(indexInBag, 1); // Remove it from the bag
         ItemInstance.runeWordCarving(item);
-        this.stat.update(this.persistantData);
+        this.updateStat();
         dispatch("bag:refresh", null);
         dispatch("inventory:refresh", null);
         dispatch("item:refresh", item.uuid);
@@ -287,6 +289,7 @@ export default class UnitComponent extends Component {
         this.persistantData.skills[id] = (this.persistantData.skills[id] || 0) + 1;
         this.stat.subStat("skpts", { value: 1 });
         dispatch("skill:refresh", null);
+        this.updateStat();
         this.save();
     }
 
@@ -357,9 +360,10 @@ export default class UnitComponent extends Component {
     /**
      * 
      * @param {SkillId} skillId 
+     * @param {boolean} [showNextLevel=false]
      * @returns 
      */
-    getSkillHtml(skillId) {
+    getSkillHtml(skillId, showNextLevel = false) {
         const skillLevel = this.getSkillLevel(skillId);
         const config = SkillById[skillId];
         const mods = [];
@@ -401,9 +405,98 @@ export default class UnitComponent extends Component {
         const pdStats = this.persistantData.stats;
         pdStats[statId].value = pdStats[statId].value + value;
         this.stat.subStat("atpts", { value });
-        this.stat.update(this.persistantData);
+        this.updateStat();
         this.stat.setStat("rthp", { value: this.stat.getStat("rtmaxhp").value - rthploss });
         this.stat.setStat("rtmp", { value: this.stat.getStat("rtmaxmp").value - rtmploss });
         this.save();
+    }
+
+    /**
+     */
+    updateStat() {
+        const saveData = this.persistantData;
+        const rs = this.stat;
+        const prevRtHp = rs.data.rthp.value;
+        const prevRtMp = rs.data.rtmp.value;
+        rs.initBaseStat(saveData.stats);
+        // skill stats
+        for (const [_, func] of objEntries(FormulaStats)) {
+            const skillStat = func(this);
+            if (objIsEmpty(skillStat)) {
+                continue; // no stats to apply
+            }
+            for (const [statId, stat] of objEntries(skillStat)) {
+                rs.addStat(statId, stat);
+            }
+        }
+        // equip stats
+        /**@type {Map<StatId, number>}*/
+        const wornSets = new Map();
+        for (const [, items] of objEntries(saveData.inventory)) {
+            for (const item of items) {
+                if (item == null) {
+                    continue;
+                }
+                const itemConfig = ItemById[item.id];
+                if (itemConfig == null) {
+                    console.error(`Item ${item.id} not found`);
+                    continue;
+                }
+                for (const [statId, stat] of objEntries(item.baseStats)) {
+                    rs.addStat(statId, stat);
+                }
+                for (const [statId, stat] of objEntries(item.extStats)) {
+                    rs.addStat(statId, stat);
+                }
+                // socket fillers
+                for (const [, socketItem] of objEntries(item.sockets)) {
+                    if (socketItem == null) {
+                        continue;
+                    }
+                    const socketConfig = ItemById[socketItem.id];
+                    if (socketConfig == null) {
+                        console.error(`Socket item ${socketItem.id} not found`);
+                        continue;
+                    }
+                    for (const [statId, stat] of objEntries(socketItem.baseStats)) {
+                        rs.addStat(statId, stat);
+                    }
+                    for (const [statId, stat] of objEntries(socketItem.extStats)) {
+                        rs.addStat(statId, stat);
+                    }
+                }
+                // runeword stats
+                for (const [statId, stat] of objEntries(item.runeWordStats)) {
+                    rs.addStat(statId, stat);
+                }
+                // set items
+                if (itemConfig.setStat != null) {
+                    if (!wornSets.has(itemConfig.setStat)) {
+                        wornSets.set(itemConfig.setStat, 1);
+                    } else {
+                        wornSets.set(itemConfig.setStat, wornSets.get(itemConfig.setStat) + 1);
+                    }
+                }
+            }
+        }
+        // set item stats
+        for (const [setId, items] of wornSets) {
+            const completion = ItemSetGroupBySetStat[setId];
+            for (const entry of completion) {
+                if (items + rs.getStat("setany").value < entry.setCount) {
+                    continue; // not enough items to complete the set
+                }
+                /**@type {StatData}*/
+                const tempStats = {};
+                for (const [affixId, qlvl] of objEntries(entry.fixedAffix)) {
+                    ItemInstance.collapseAffix(AffixById[affixId], tempStats, 0, qlvl);
+                }
+                for (const [statId, val] of objEntries(tempStats)) {
+                    rs.addStat(statId, val);
+                }
+            }
+        }
+        rs.setStat("rthp", { value: Math.min(prevRtHp, rs.data.rtmaxhp.value) });
+        rs.setStat("rtmp", { value: Math.min(prevRtMp, rs.data.rtmaxmp.value) });
     }
 }

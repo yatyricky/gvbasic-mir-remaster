@@ -214,7 +214,7 @@ const Formula = {
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.bbas;
-        vals[0] = [{ value: c.n1 + level * c.n2 }];
+        vals[0] = [{ value: (level > 0 ? c.n1 : 0) + (level - 1) * c.n2 }];
         return vals;
     },
     bcrt: (hero) => {
@@ -222,7 +222,7 @@ const Formula = {
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.bcrt;
-        vals[0] = [{ value: c.n1 + level * c.n2 }];
+        vals[0] = [{ value: c.n1 * (level > 0 ? 1 : 0) + (level - 1) * c.n2 }];
         return vals;
     },
     bthr: (hero) => {
@@ -378,7 +378,7 @@ const Formula = {
         /**@type {Array<StatValueSaveData[]>} */
         const vals = [];
         const c = SkillById.xdef;
-        vals[0] = [{ range: new Range(c.n1, c.n2).addR(new Range(c.n3, c.n4).multN(level)).tup() }];
+        vals[0] = [{ range: new Range(c.n1, c.n2).multN(level > 0 ? 1 : 0).addR(new Range(c.n3, c.n4).multN(level - 1)).tup() }];
         return vals;
     },
     xdog: (hero) => {
@@ -642,6 +642,133 @@ const Formula = {
     _hld: () => {
         return [];
     },
+}
+
+/**@type {Record<SkillId, (hero: UnitComponent) => StatData>} */
+export const FormulaStats = {
+    fblt: function (hero) {
+        return {};
+    },
+    frng: function (hero) {
+        return {};
+    },
+    finf: function (hero) {
+        return {};
+    },
+    fbal: function (hero) {
+        return {};
+    },
+    fbls: function (hero) {
+        return {};
+    },
+    fwal: function (hero) {
+        return {};
+    },
+    tchm: function (hero) {
+        return {};
+    },
+    tblt: function (hero) {
+        return {};
+    },
+    tltn: function (hero) {
+        return {};
+    },
+    tnov: function (hero) {
+        return {};
+    },
+    tshd: function (hero) {
+        return {};
+    },
+    tblz: function (hero) {
+        return {};
+    },
+    hwoh: function (hero) {
+        return {};
+    },
+    bbas: function (hero) {
+        const vals = Formula.bbas(hero);
+        return { hit: { ...vals[0][0] } };
+    },
+    bcrt: function (hero) {
+        return { crit: { ...Formula.bcrt(hero)[0][0] } };
+    },
+    bthr: function (hero) {
+        return {};
+    },
+    bele: function (hero) {
+        return {};
+    },
+    bclv: function (hero) {
+        return {};
+    },
+    bfbl: function (hero) {
+        return {};
+    },
+    xdef: function (hero) {
+        // const vals = Formula.xdef(hero);
+        // return { xdef: { ...vals[0][0] } };
+        return {};
+    },
+    xpos: function (hero) {
+        return {};
+    },
+    xdog: function (hero) {
+        return {};
+    },
+    xcta: function (hero) {
+        return {};
+    },
+    xchg: function (hero) {
+        return {};
+    },
+    xtst: function (hero) {
+        return {};
+    },
+    xwms: function (hero) {
+        return {};
+    },
+    bcrz: function (hero) {
+        return {};
+    },
+    hhel: function (hero) {
+        return {};
+    },
+    hgsd: function (hero) {
+        return {};
+    },
+    hinv: function (hero) {
+        return {};
+    },
+    hhsd: function (hero) {
+        return {};
+    },
+    hlok: function (hero) {
+        return {};
+    },
+    hmhl: function (hero) {
+        return {};
+    },
+    pbas: function (hero) {
+        return {};
+    },
+    ppoi: function (hero) {
+        return {};
+    },
+    pskl: function (hero) {
+        return {};
+    },
+    prun: function (hero) {
+        return {};
+    },
+    pcbl: function (hero) {
+        return {};
+    },
+    psdm: function (hero) {
+        return {};
+    },
+    _hld: function (hero) {
+        return {};
+    }
 }
 
 export default Formula;
