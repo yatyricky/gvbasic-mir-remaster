@@ -1,6 +1,15 @@
 /**
  * 
  * @param {number} a 
+ * @returns 
+ */
+export function min0(a) {
+    return Math.max(a, 0);
+}
+
+/**
+ * 
+ * @param {number} a 
  * @param {number} b 
  * @param {number} t 0f-1f
  * @returns 

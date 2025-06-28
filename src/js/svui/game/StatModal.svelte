@@ -185,6 +185,64 @@
 
             <div class="divider"></div>
             <div class="row-info">
+                <div class="col-left">{StatById.hit.name}</div>
+                <div class="col-right">{stat.getStat("hit").value.toFixed(2)}%</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.crit.name}</div>
+                <div class="col-right">{stat.getStat("crit").value.toFixed(2)}%</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.critd.name}</div>
+                <div class="col-right">{stat.getStat("critd").value.toFixed(2)}%</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.mhit.name}</div>
+                <div class="col-right">{stat.getStat("mhit").value.toFixed(2)}%</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.scrit.name}</div>
+                <div class="col-right">{stat.getStat("scrit").value.toFixed(2)}%</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.scritd.name}</div>
+                <div class="col-right">{stat.getStat("scritd").value.toFixed(2)}%</div>
+            </div>
+
+            <div class="divider"></div>
+            <div class="row-info">
+                <div class="col-left">{StatById.doge.name}</div>
+                <div class="col-right">{stat.getStat("doge").value.toFixed(2)}%</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.mdoge.name}</div>
+                <div class="col-right">{stat.getStat("mdoge").value.toFixed(2)}%</div>
+            </div>
+
+            <div class="divider"></div>
+            <div class="row-info">
+                <div class="col-left">{StatById.xdr.name}</div>
+                <div class="col-right">{formatRange(stat.getStat("xdr").range)}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.fdr.name}</div>
+                <div class="col-right">{formatRange(stat.getStat("fdr").range)}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.tdr.name}</div>
+                <div class="col-right">{formatRange(stat.getStat("tdr").range)}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.hdr.name}</div>
+                <div class="col-right">{formatRange(stat.getStat("hdr").range)}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.pdr.name}</div>
+                <div class="col-right">{formatRange(stat.getStat("pdr").range)}</div>
+            </div>
+
+            <div class="divider"></div>
+            <div class="row-info">
                 <div class="col-left">{StatById.rtxres.name}</div>
                 <div class="col-right">{stat.getStat("rtxres").value}</div>
             </div>
@@ -203,6 +261,24 @@
             <div class="row-info">
                 <div class="col-left">{StatById.rtpres.name}</div>
                 <div class="col-right">{stat.getStat("rtpres").value}</div>
+            </div>
+
+            <div class="divider"></div>
+            <div class="row-info">
+                <div class="col-left">{StatById.bles.name}-{StatById.curs.name}</div>
+                <div class="col-right">{stat.getStat("bles").value - stat.getStat("curs").value}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.luck.name}</div>
+                <div class="col-right">{stat.getStat("luck").value}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.spd.name}</div>
+                <div class="col-right">{stat.getStat("spd").value}</div>
+            </div>
+            <div class="row-info">
+                <div class="col-left">{StatById.moral.name}</div>
+                <div class="col-right">{stat.getStat("moral").value}</div>
             </div>
         </div>
     </div>
