@@ -61,6 +61,5 @@
         color: #ffffff;
         font-size: var(--text-size, 12px);
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        z-index: 1;
     }
 </style>

@@ -54,9 +54,7 @@
         if (watch.atpts < pts) {
             return;
         }
-        stat.addStat(statId, { value: pts });
-        stat.subStat("atpts", { value: pts });
-        hero.save();
+        hero.addStat(statId, pts);
     }
 
     onMount(() => {
@@ -75,7 +73,7 @@
         </div>
         <div class="container">
             <div class="row-info">
-                <div class="col-left">等级: {watch.level} {UnitById[pd.unitId].name}</div>
+                <div class="col-left">等级 {watch.level} {UnitById[pd.unitId].name}</div>
                 <div class="col-right">
                     <Bar max={watch.expmax} value={watch.exp} />
                 </div>

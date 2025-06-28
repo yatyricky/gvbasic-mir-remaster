@@ -48,8 +48,10 @@ export default class ReactStat {
                     if (!this.eventMap.has(dependency)) {
                         this.eventMap.set(dependency, []);
                     }
-                    this.callbacks = this.eventMap.get(dependency);
-                    this.callbacks.push(statConfig.derived);
+                    const callbacks = this.eventMap.get(dependency);
+                    if (!callbacks.includes(statConfig.derived)) {
+                        callbacks.push(statConfig.derived);
+                    }
                 }
             }
         }
@@ -329,8 +331,8 @@ export default class ReactStat {
                 }
             }
         }
-        this.data.rthp.value = Math.min(prevRtHp, this.data.rtmaxhp.value);
-        this.data.rtmp.value = Math.min(prevRtMp, this.data.rtmaxmp.value);
+        this.setStat("rthp", { value: Math.min(prevRtHp, this.data.rtmaxhp.value) });
+        this.setStat("rtmp", { value: Math.min(prevRtMp, this.data.rtmaxmp.value) });
     }
 
     /**
@@ -356,6 +358,8 @@ export default class ReactStat {
         if (leveled !== 0) {
             this.addStat("skpts", { value: leveled * Const.INIT_SK_PTS });
             this.addStat("atpts", { value: leveled * Const.LEVELUP_ATT_PTS });
+            this.setStat("rthp", { value: this.getStat("rtmaxhp").value });
+            this.setStat("rtmp", { value: this.getStat("rtmaxmp").value });
         }
     }
 }

@@ -12,7 +12,9 @@
     const availableSkills = Object.values(SkillById);
 
     // Filter skills that the hero has learned (skill level > 0)
-    const learnedSkills = availableSkills.filter((skill) => hero.getSkillLevel(skill.id).val > 0);
+    const learnedSkills = availableSkills.filter(
+        (skill) => hero.getSkillLevel(skill.id).val > 0 && SkillById[skill.id].passive !== true,
+    );
 
     /**
      *
@@ -53,6 +55,20 @@
                             </div>
                         </button>
                     {/each}
+                    <!-- Remove skill option -->
+                    <button class="skill-row" onclick={() => pickSkill(null)}>
+                        <div class="skill-icon-container">
+                            <div class="skill-icon remove-skill-icon">
+                                <svg class="remove-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    <line x1="5.17" y1="18.83" x2="18.83" y2="5.17" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="skill-info">
+                            <span class="skill-name">删除技能</span>
+                        </div>
+                    </button>
                     {#if learnedSkills.length === 0}
                         <div class="no-skills">没有可用的技能</div>
                     {/if}
@@ -201,5 +217,18 @@
         color: #999;
         padding: 20px;
         font-style: italic;
+    }
+
+    .remove-skill-icon {
+        background-color: #680000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .remove-icon {
+        color: #ceae0f;
+        width: 20px;
+        height: 20px;
     }
 </style>

@@ -389,4 +389,21 @@ export default class UnitComponent extends Component {
             </div>
         `;
     }
+
+    /**
+     * 
+     * @param {StatId} statId 
+     * @param {number} value 
+     */
+    addStat(statId, value) {
+        const rthploss = this.stat.getStat("rthploss").value;
+        const rtmploss = this.stat.getStat("rtmploss").value;
+        const pdStats = this.persistantData.stats;
+        pdStats[statId].value = pdStats[statId].value + value;
+        this.stat.subStat("atpts", { value });
+        this.stat.update(this.persistantData);
+        this.stat.setStat("rthp", { value: this.stat.getStat("rtmaxhp").value - rthploss });
+        this.stat.setStat("rtmp", { value: this.stat.getStat("rtmaxmp").value - rtmploss });
+        this.save();
+    }
 }

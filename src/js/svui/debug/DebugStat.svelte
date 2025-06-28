@@ -15,15 +15,18 @@
         if (curr == null) {
             return [];
         }
-        const stat = curr.getComponent(UnitComponent).stat.data;
+        const hero = curr.getComponent(UnitComponent);
+        const stat = hero.stat.data;
 
-        /**@type {Array<{ stat: string, name: string, value: StatValueSaveData }>}*/
+        /**@type {Array<{ stat: string, name: string, value: StatValueSaveData, callbacks: function[] }>}*/
         let rows = [];
         for (const cfg of Stats) {
             rows.push({
                 stat: cfg.id,
                 name: cfg.name,
                 value: stat[cfg.id],
+                // @ts-ignore
+                callbacks: (hero.stat.eventMap.get(cfg.id) || []).length,
             });
         }
         return rows;

@@ -357,3 +357,102 @@ export function objKeys(obj) {
     }
     return /**@type {any}*/(Object.keys(obj));
 }
+
+/**
+ * Get debug info for a function - returns file name and line number
+ * @param {Function} func - The function to get debug info for
+ * @returns {string} - String containing file name and line number
+ */
+export function getFunctionDebugInfo(func) {
+    if (typeof func !== 'function') {
+        return 'Not a function';
+    }
+
+    // Method 1: Use function toString() and try to find it in stack trace
+    try {
+        // Create an error to get current stack trace
+        const error = new Error();
+        const stack = error.stack;
+
+        if (stack) {
+            const lines = stack.split('\n');
+
+            // Look for the function name in the stack
+            if (func.name) {
+                for (const line of lines) {
+                    if (line.includes(func.name)) {
+                        const match = line.match(/(.+?):(\d+):(\d+)/);
+                        if (match) {
+                            const fileName = match[1].split('/').pop() || match[1].split('\\').pop();
+                            return `${fileName}:${match[2]} (${func.name})`;
+                        }
+                    }
+                }
+            }
+
+            // Fallback: try to match any relevant file info
+            for (let i = 1; i < Math.min(lines.length, 4); i++) {
+                const line = lines[i];
+                const match = line.match(/at (.+?) \((.+?):(\d+):(\d+)\)/);
+                if (match) {
+                    const fileName = match[2].split('/').pop() || match[2].split('\\').pop();
+                    // Skip if it's this debug file
+                    if (!fileName.includes('DebugStat')) {
+                        return `${fileName}:${match[3]} (context)`;
+                    }
+                }
+            }
+        }
+    } catch (e) {
+        // Continue to fallback
+    }
+
+    // Method 2: Analyze function properties
+    const funcInfo = [];
+
+    if (func.name) {
+        funcInfo.push(`function: ${func.name}`);
+    } else {
+        funcInfo.push('anonymous function');
+    }
+
+    funcInfo.push(`params: ${func.length}`);
+
+    // Try to determine function type from source
+    const source = func.toString();
+    if (source.includes('function')) {
+        funcInfo.push('type: function declaration');
+    } else if (source.includes('=>')) {
+        funcInfo.push('type: arrow function');
+    } else if (source.includes('class')) {
+        funcInfo.push('type: class method');
+    }
+
+    return funcInfo.join(', ');
+}
+
+/**
+ * Enhanced version that tries to get more context about where the function is called from
+ * @param {Function} func - The function to analyze
+ * @returns {string} - Debug information with call context
+ */
+export function getContextualFunctionInfo(func) {
+    const basicInfo = getFunctionDebugInfo(func);
+
+    // Get current call location
+    const stack = new Error().stack;
+    if (stack) {
+        const lines = stack.split('\n');
+        // Skip the first few lines (Error constructor, this function)
+        for (let i = 2; i < Math.min(lines.length, 5); i++) {
+            const line = lines[i];
+            const match = line.match(/at (.+?) \((.+?):(\d+):(\d+)\)/);
+            if (match) {
+                const fileName = match[2].split('/').pop() || match[2].split('\\').pop();
+                return `${basicInfo} | called from: ${fileName}:${match[3]}`;
+            }
+        }
+    }
+
+    return basicInfo;
+}
