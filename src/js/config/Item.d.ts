@@ -12,6 +12,7 @@ declare global {
         image: string;
         tint: string;
         type: ItemType;
+        statTypeWeights: Partial<Record<StatType, number>>;
         fixedAffix: Partial<Record<AffixId, number>>;
         randomAffix: Partial<Record<AffixId, number>>[];
         randomAffixCount: number[];

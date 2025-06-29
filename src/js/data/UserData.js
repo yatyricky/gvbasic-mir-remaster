@@ -78,21 +78,19 @@ class UserData {
         /**@type {ItemId[]} */
         const candidates = [];
 
-        // for (const e of Items) {
-        //     if (e.maxQuality != null) {
-        //         candidates.push(e.id);
-        //     }
-        // }
         for (const e of Items) {
-            if ((e.classOnly ?? []).includes("warr")) {
+            if (e.maxQuality != null) {
                 candidates.push(e.id);
             }
         }
-
-        candidates.push("prismademonstaff", "guardhalb", "palmthunder");
+        // for (const e of Items) {
+        //     if ((e.classOnly ?? []).includes("warr")) {
+        //         candidates.push(e.id);
+        //     }
+        // }
 
         for (let i = 0; i < count; i++) {
-            const item = ItemInstance.drop(arrGetOne(candidates), 60, 0);
+            const item = ItemInstance.drop(arrGetOne(candidates), 60, 1000);
             this.anyaGoods.push(item);
         }
 

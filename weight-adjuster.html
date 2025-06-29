@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Adjuster Tool</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .slider-group {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .category-name {
+            font-size: 16px;
+            color: #333;
+        }
+        .weight-value {
+            font-size: 14px;
+            color: #666;
+            background: #e9e9e9;
+            padding: 4px 8px;
+            border-radius: 3px;
+            min-width: 40px;
+            text-align: center;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        .weight-value:focus {
+            background: #fff;
+            border-color: #4CAF50;
+            box-shadow: 0 0 3px rgba(76, 175, 80, 0.3);
+        }
+        .percentage {
+            font-size: 12px;
+            color: #888;
+        }
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+            border: none;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e8;
+            border-radius: 5px;
+            border-left: 4px solid #4CAF50;
+        }
+        .output-text {
+            font-family: monospace;
+            font-size: 14px;
+            word-break: break-all;
+            line-height: 1.4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #555;
+            margin-bottom: 15px;
+        }
+        #pieChart {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .reset-btn {
+            width: 100%;
+            padding: 10px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .reset-btn:hover {
+            background: #d32f2f;
+        }
+        .parse-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f0f8ff;
+        }
+        .parse-section h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 16px;
+        }
+        .parse-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .parse-input:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 3px rgba(76, 175, 80, 0.3);
+        }
+        .parse-btn {
+            width: 100%;
+            padding: 8px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .parse-btn:hover {
+            background: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weight Adjuster Tool</h1>
+    
+    <div class="container">
+        <div class="controls">
+            <h2>Category Weights</h2>
+            
+            <button class="reset-btn" onclick="resetToDefaults()">Reset to 100</button>
+            
+            <div class="parse-section">
+                <h3>Parse Weight String</h3>
+                <input type="text" class="parse-input" id="parse-input" placeholder="dmg,166:primary,166:secondary,111:offensive,111:defensive,111:utility,140:skill,140:socket,50">
+                <button class="parse-btn" onclick="parseWeightString()">Parse</button>
+            </div>
+            
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span class="category-name">DMG</span>
+                    <div>
+                        <input type="number" min="0" max="1000" value="100" class="weight-value" id="dmg-value">
+                        <span class="percentage" id="dmg-percent">(12.5%)</span>
+                    </div>
+                </div>
+                <input type="range" min="0" max="1000" value="100" class="slider" id="dmg-slider">
+            </div>
+            
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span class="category-name">Primary</span>
+                    <div>
+                        <input type="number" min="0" max="1000" value="100" class="weight-value" id="primary-value">
+                        <span class="percentage" id="primary-percent">(12.5%)</span>
+                    </div>
+                </div>
+                <input type="range" min="0" max="1000" value="100" class="slider" id="primary-slider">
+            </div>
+            
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span class="category-name">Secondary</span>
+                    <div>
+                        <input type="number" min="0" max="1000" value="100" class="weight-value" id="secondary-value">
+                        <span class="percentage" id="secondary-percent">(12.5%)</span>
+                    </div>
+                </div>
+                <input type="range" min="0" max="1000" value="100" class="slider" id="secondary-slider">
+            </div>
+            
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span class="category-name">Offensive</span>
+                    <div>
+                        <input type="number" min="0" max="1000" value="100" class="weight-value" id="offensive-value">
+                        <span class="percentage" id="offensive-percent">(12.5%)</span>
+                    </div>
+                </div>
+                <input type="range" min="0" max="1000" value="100" class="slider" id="offensive-slider">
+            </div>
+            
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span class="category-name">Defensive</span>
+                    <div>
+                        <input type="number" min="0" max="1000" value="100" class="weight-value" id="defensive-value">
+                        <span class="percentage" id="defensive-percent">(12.5%)</span>
+                    </div>
+                </div>
+                <input type="range" min="0" max="1000" value="100" class="slider" id="defensive-slider">
+            </div>
+            
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span class="category-name">Utility</span>
+                    <div>
+                        <input type="number" min="0" max="1000" value="100" class="weight-value" id="utility-value">
+                        <span class="percentage" id="utility-percent">(12.5%)</span>
+                    </div>
+                </div>
+                <input type="range" min="0" max="1000" value="100" class="slider" id="utility-slider">
+            </div>
+            
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span class="category-name">Skill</span>
+                    <div>
+                        <input type="number" min="0" max="1000" value="100" class="weight-value" id="skill-value">
+                        <span class="percentage" id="skill-percent">(12.5%)</span>
+                    </div>
+                </div>
+                <input type="range" min="0" max="1000" value="100" class="slider" id="skill-slider">
+            </div>
+            
+            <div class="slider-group">
+                <div class="slider-label">
+                    <span class="category-name">Socket</span>
+                    <div>
+                        <input type="number" min="0" max="1000" value="100" class="weight-value" id="socket-value">
+                        <span class="percentage" id="socket-percent">(12.5%)</span>
+                    </div>
+                </div>
+                <input type="range" min="0" max="1000" value="100" class="slider" id="socket-slider">
+            </div>
+            
+            <div class="output">
+                <h3>Output String:</h3>
+                <div class="output-text" id="output-string">dmg,100:primary,100:secondary,100:offensive,100:defensive,100:utility,100:skill,100:socket,100</div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h2>Distribution Pie Chart</h2>
+            <canvas id="pieChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const categories = ['dmg', 'primary', 'secondary', 'offensive', 'defensive', 'utility', 'skill', 'socket'];
+        const colors = [
+            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', 
+            '#9966FF', '#FF9F40', '#FF6384', '#C9CBCF'
+        ];
+        
+        let chart;
+        
+        // Initialize chart
+        function initChart() {
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: categories.map(cat => cat.charAt(0).toUpperCase() + cat.slice(1)),
+                    datasets: [{
+                        data: categories.map(() => 100),
+                        backgroundColor: colors,
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label;
+                                    const value = context.raw;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Update chart and display
+        function updateChart() {
+            const values = categories.map(cat => parseInt(document.getElementById(`${cat}-slider`).value));
+            const total = values.reduce((a, b) => a + b, 0);
+            
+            // Update chart data
+            chart.data.datasets[0].data = values;
+            chart.update();
+            
+            // Update value displays and percentages
+            categories.forEach((cat, index) => {
+                const value = values[index];
+                const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                
+                document.getElementById(`${cat}-value`).value = value;
+                document.getElementById(`${cat}-percent`).textContent = `(${percentage}%)`;
+            });
+            
+            // Update output string
+            const outputString = categories.map(cat => `${cat},${document.getElementById(`${cat}-slider`).value}`).join(':');
+            document.getElementById('output-string').textContent = outputString;
+        }
+        
+        // Update from input field
+        function updateFromInput(category) {
+            const inputElement = document.getElementById(`${category}-value`);
+            const sliderElement = document.getElementById(`${category}-slider`);
+            let value = parseInt(inputElement.value);
+            
+            // Validate input
+            if (isNaN(value) || value < 0) {
+                value = 0;
+            } else if (value > 1000) {
+                value = 1000;
+            }
+            
+            // Update both input and slider
+            inputElement.value = value;
+            sliderElement.value = value;
+            
+            // Update chart and display
+            updateChart();
+        }
+        
+        // Reset to defaults
+        function resetToDefaults() {
+            categories.forEach(cat => {
+                document.getElementById(`${cat}-slider`).value = 100;
+                document.getElementById(`${cat}-value`).value = 100;
+            });
+            updateChart();
+        }
+        
+        // Parse weight string
+        function parseWeightString() {
+            const inputElement = document.getElementById('parse-input');
+            const weightString = inputElement.value.trim();
+            
+            if (!weightString) {
+                alert('Please enter a weight string to parse');
+                return;
+            }
+            
+            try {
+                // Split by colon to get individual category:value pairs
+                const pairs = weightString.split(':');
+                const parsedWeights = {};
+                
+                pairs.forEach(pair => {
+                    const [category, value] = pair.split(',');
+                    if (category && value !== undefined) {
+                        const cleanCategory = category.trim().toLowerCase();
+                        const cleanValue = parseInt(value.trim());
+                        
+                        if (!isNaN(cleanValue) && categories.includes(cleanCategory)) {
+                            // Clamp value between 0 and 1000
+                            parsedWeights[cleanCategory] = Math.max(0, Math.min(1000, cleanValue));
+                        }
+                    }
+                });
+                
+                // Update sliders and inputs with parsed values
+                let updatedCount = 0;
+                categories.forEach(cat => {
+                    if (parsedWeights.hasOwnProperty(cat)) {
+                        document.getElementById(`${cat}-slider`).value = parsedWeights[cat];
+                        document.getElementById(`${cat}-value`).value = parsedWeights[cat];
+                        updatedCount++;
+                    }
+                });
+                
+                if (updatedCount > 0) {
+                    updateChart();
+                    alert(`Successfully parsed and updated ${updatedCount} categories`);
+                } else {
+                    alert('No valid categories found in the input string');
+                }
+                
+            } catch (error) {
+                alert('Error parsing weight string. Please check the format: category,value:category,value...');
+            }
+        }
+        
+        // Add event listeners
+        categories.forEach(cat => {
+            // Slider input event
+            document.getElementById(`${cat}-slider`).addEventListener('input', updateChart);
+            
+            // Number input events
+            const inputElement = document.getElementById(`${cat}-value`);
+            
+            // Update on Enter key press
+            inputElement.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    updateFromInput(cat);
+                    this.blur(); // Remove focus
+                }
+            });
+            
+            // Update on focus loss
+            inputElement.addEventListener('blur', function() {
+                updateFromInput(cat);
+            });
+            
+            // Update on input change
+            inputElement.addEventListener('change', function() {
+                updateFromInput(cat);
+            });
+        });
+        
+        // Initialize
+        initChart();
+        updateChart();
+    </script>
+</body>
+</html>

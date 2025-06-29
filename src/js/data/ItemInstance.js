@@ -117,19 +117,34 @@ export default class ItemInstance {
             }
             return true;
         }) ?? [];
+        // count the number of affixes by stat type
+        const grouped = candidates.reduce((acc, e) => {
+            const g = StatById[e.statId].statType;
+            if (!acc[g]) {
+                acc[g] = 0;
+            }
+            acc[g] += 1;
+            return acc;
+        }, /**@type {Record<StatType, number>} */({}));
+        const weightMap = itemConfig.statTypeWeights ?? {};
+        const weightedCandidates = candidates.map(e => {
+            const statType = StatById[e.statId].statType;
+            const weight = (weightMap[statType] ?? e.weight ?? 100) / (grouped[statType] ?? 1);
+            return { affix: e, weight };
+        });
         for (let i = 0; i < affixCount; i++) {
-            const affix = arrGetOne(candidates);
-            arrRemove(candidates, affix);
-            extAffixesRaw.push({ affix, qlvl: 0 });
-            if (!arrIsEmpty(affix.group)) {
-                for (let j = candidates.length - 1; j >= 0; j--) {
-                    const currConfig = candidates[j];
-                    if (!arrIsEmpty(currConfig.groupExclusive) && affix.group.some(e => currConfig.groupExclusive.includes(e))) {
-                        candidates.splice(j, 1); // Remove affixes that are exclusive to the current group
+            const wa = arrGetSomeWeighted(weightedCandidates, weightedCandidates.map(e => e.weight), 1)[0];
+            arrRemove(weightedCandidates, wa);
+            extAffixesRaw.push({ affix: wa.affix, qlvl: 0 });
+            if (!arrIsEmpty(wa.affix.group)) {
+                for (let j = weightedCandidates.length - 1; j >= 0; j--) {
+                    const currConfig = weightedCandidates[j];
+                    if (!arrIsEmpty(currConfig.affix.groupExclusive) && wa.affix.group.some(e => currConfig.affix.groupExclusive.includes(e))) {
+                        weightedCandidates.splice(j, 1); // Remove affixes that are exclusive to the current group
                     }
                 }
             }
-            if (candidates.length === 0) {
+            if (weightedCandidates.length === 0) {
                 break; // No more affixes available for this type
             }
         }
