@@ -640,9 +640,6 @@ const Formula = {
         vals[0] = [{ value: c.n1 * sign(level) + min0(level - 1) * c.n2 }];
         return vals;
     },
-    _hld: () => {
-        return [];
-    },
     atak: function (hero, offset) {
         const stat = hero.stat;
         /**@type {Array<StatValueSaveData[]>} */
@@ -779,9 +776,6 @@ export const FormulaStats = {
         return {};
     },
     psdm: function (hero) {
-        return {};
-    },
-    _hld: function (hero) {
         return {};
     },
     atak: function (hero) {
