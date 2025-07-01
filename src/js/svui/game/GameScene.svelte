@@ -131,6 +131,8 @@
             });
         }
 
+        hero.save();
+
         // Update the UI
         updateKeyMappings();
     }

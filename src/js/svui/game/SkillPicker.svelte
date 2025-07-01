@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div class="skill-info">
-                            <span class="skill-name">删除技能</span>
+                            <span class="skill-name">删除键位</span>
                         </div>
                     </button>
                     {#if learnedSkills.length === 0}

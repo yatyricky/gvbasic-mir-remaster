@@ -432,7 +432,7 @@ const Formula = {
                 .multN(1 + stat.getStat("str").value / 100)
                 .tup(),
             dmgType: "xdmg",
-        }]
+        }];
         return vals;
     },
     xtst: (hero, offset = 0) => {
@@ -643,6 +643,20 @@ const Formula = {
     _hld: () => {
         return [];
     },
+    atak: function (hero, offset) {
+        const stat = hero.stat;
+        /**@type {Array<StatValueSaveData[]>} */
+        const vals = [];
+        vals[0] = [{
+            range: Range.t(stat.getStat("xdmg").range)
+                .addR(new Range(stat.getStat("xdmglo").value, stat.getStat("xdmghi").value))
+                .multN(1 + stat.getStat("xed").value / 100)
+                .multN(1 + stat.getStat("str").value / 100)
+                .tup(),
+            dmgType: "xdmg",
+        }];
+        return vals;
+    }
 }
 
 /**@type {Record<SkillId, (hero: UnitComponent) => StatData>} */
@@ -768,6 +782,9 @@ export const FormulaStats = {
         return {};
     },
     _hld: function (hero) {
+        return {};
+    },
+    atak: function (hero) {
         return {};
     }
 }

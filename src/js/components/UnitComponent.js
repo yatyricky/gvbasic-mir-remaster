@@ -289,9 +289,9 @@ export default class UnitComponent extends Component {
         // Upgrade the skill
         this.persistantData.skills[id] = (this.persistantData.skills[id] || 0) + 1;
         this.stat.subStat("skpts", { value: 1 });
+        this.save();
         dispatch("skill:refresh", null);
         this.updateStat();
-        this.save();
     }
 
     save() {
@@ -435,10 +435,10 @@ export default class UnitComponent extends Component {
         const pdStats = this.persistantData.stats;
         pdStats[statId].value = pdStats[statId].value + value;
         this.stat.subStat("atpts", { value });
+        this.save();
         this.updateStat();
         this.stat.setStat("rthp", { value: this.stat.getStat("rtmaxhp").value - rthploss });
         this.stat.setStat("rtmp", { value: this.stat.getStat("rtmaxmp").value - rtmploss });
-        this.save();
     }
 
     /**

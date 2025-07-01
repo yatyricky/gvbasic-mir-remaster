@@ -59,6 +59,7 @@ class UserData {
         char.stats.level = { value: 1 };
         char.stats.skpts = { value: Const.INIT_SK_PTS };
         char.stats.expmax = { value: Const.BASE_EXP_MAX };
+        char.skills.atak = 1;
         chars.push(char);
         this.saveToDisk();
     }
@@ -88,6 +89,8 @@ class UserData {
         //         candidates.push(e.id);
         //     }
         // }
+
+        candidates.push("prismademonstaff", "duskshround");
 
         for (let i = 0; i < count; i++) {
             const item = ItemInstance.drop(arrGetOne(candidates), 60, 1000);

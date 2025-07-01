@@ -1,4 +1,5 @@
 export const Skills = [
+    { id: "atak", tag: ["xdmg", "other"], posx: 0, level: 0, icon: "Ability_SteelMelee", passive: false, name: "普通攻击", description: "对指定行的第一个目标造成{0}。", n1: 1 },
     { id: "fblt", klass: "mage", tag: ["skmage", "fire", "fdmg"], posx: 1, level: 1, icon: "Spell_Fire_FireBolt", passive: false, name: "火球术", description: "对指定行的第一个目标造成{0}。", n1: 3, n2: 7, n3: 2, n4: 4, n5: 1 },
     { id: "frng", klass: "mage", tag: ["skmage", "fire", "fdmg"], posx: 1, level: 7, prerequisite: ["fblt"], icon: "Spell_Fire_SealOfFire", passive: false, name: "抗拒火环", description: "对第一列所有目标造成{0}，并使其在当前回合无法攻击。", n1: 1, n2: 2, n3: 0.1, n4: 0.2, n5: 0.15 },
     { id: "finf", klass: "mage", tag: ["skmage", "fire", "fdmg"], posx: 2, level: 14, prerequisite: ["frng"], icon: "Spell_Fire_Incinerate", passive: false, name: "地狱火", description: "对任意一个目标造成{0}害并造成{1}回合的点燃效果，并且每回合会引燃临近的{2}个目标。", n1: 12, n2: 29, n3: 8, n4: 17, n5: 1.2, n6: 2, n7: 0.1, n8: 1 },
@@ -38,7 +39,6 @@ export const Skills = [
     { id: "prun", klass: "wlk", tag: ["skwlok", "psyco", "fire", "fdmg"], posx: 2, level: 21, prerequisite: ["ppoi"], icon: "Spell_Fire_Rune", passive: false, name: "灵魂火符", description: "对指定行的第一个目标造成{0}。", n1: 54, n2: 190, n3: 27, n4: 95, n5: 2 },
     { id: "pcbl", klass: "wlk", tag: ["skwlok", "psyco", "battle", "hdmg"], posx: 1, level: 28, prerequisite: ["pbas"], icon: "Spell_Holy_WeaponMastery", passive: false, name: "降魔剑术", description: "使攻击附加{0}，并对妖魔增伤{1.2}%。", n1: 114, n2: 63, n3: 2.2, n4: 50, n5: 20 },
     { id: "psdm", klass: "wlk", tag: ["skwlok", "psyco", "summon", "fire"], posx: 3, level: 35, prerequisite: ["pskl"], icon: "Spell_Fire_Elemental_Totem", passive: false, name: "召唤神兽", description: "召唤一个生命值{0}，可以造成{1}的神兽为你作战，神兽可攻击{2}格目标。", n1: 350, n2: 180, n3: 44, n4: 72, n5: 21, n6: 30, n7: 2 },
-    { id: "_hld", tag: ["other"], posx: 1, level: 1, icon: "Achievement_Dungeon_TheVioletHold", passive: true, name: "占位符", description: "占位符" },
 ];
 
 export const SkillById = Object.fromEntries(Skills.map(e => [e.id, e]));

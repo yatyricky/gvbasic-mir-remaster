@@ -270,7 +270,7 @@
             </div>
             <div class="row-info">
                 <div class="col-left">{StatById.luck.name}</div>
-                <div class="col-right">{stat.getStat("luck").value}</div>
+                <div class="col-right">{Math.floor(stat.getStat("luck").value)}</div>
             </div>
             <div class="row-info">
                 <div class="col-left">{StatById.spd.name}</div>

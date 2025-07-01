@@ -1,6 +1,6 @@
 declare global {
-    type SkillId = "fblt" | "frng" | "finf" | "fbal" | "fbls" | "fwal" | "tchm" | "tblt" | "tltn" | "tnov" | "tshd" | "tblz" | "hwoh" | "bbas" | "bcrt" | "bthr" | "bele" | "bclv" | "bfbl" | "xdef" | "xpos" | "xdog" | "xcta" | "xchg" | "xtst" | "xwms" | "bcrz" | "hhel" | "hgsd" | "hinv" | "hhsd" | "hlok" | "hmhl" | "pbas" | "ppoi" | "pskl" | "prun" | "pcbl" | "psdm" | "_hld";
-    type SkillTag = "skmage" | "fire" | "fdmg" | "thunder" | "summon" | "luck" | "tdmg" | "guardian" | "holy" | "skwarr" | "battle" | "xdmg" | "hdmg" | "pdmg" | "xskill" | "skwlok" | "heal" | "psyco" | "poison" | "other";
+    type SkillId = "atak" | "fblt" | "frng" | "finf" | "fbal" | "fbls" | "fwal" | "tchm" | "tblt" | "tltn" | "tnov" | "tshd" | "tblz" | "hwoh" | "bbas" | "bcrt" | "bthr" | "bele" | "bclv" | "bfbl" | "xdef" | "xpos" | "xdog" | "xcta" | "xchg" | "xtst" | "xwms" | "bcrz" | "hhel" | "hgsd" | "hinv" | "hhsd" | "hlok" | "hmhl" | "pbas" | "ppoi" | "pskl" | "prun" | "pcbl" | "psdm";
+    type SkillTag = "xdmg" | "other" | "skmage" | "fire" | "fdmg" | "thunder" | "summon" | "luck" | "tdmg" | "guardian" | "holy" | "skwarr" | "battle" | "hdmg" | "pdmg" | "xskill" | "skwlok" | "heal" | "psyco" | "poison";
     interface ISkillConfig {
         id: SkillId;
         klass: UnitId;
