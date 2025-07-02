@@ -17,6 +17,7 @@ interface EventBusDefine {
     "modal:close": any;
     "item:refresh": string;
     "key:click": KeyEvent;
+    "map:exit": null;
 }
 
 export function subscribe<T extends keyof EventBusDefine>(event: T, callback: (data: EventBusDefine[T]) => void, fireImmediately = false, priority = 0): () => void;
