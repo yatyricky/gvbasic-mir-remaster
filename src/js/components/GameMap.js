@@ -70,24 +70,21 @@ export default class GameMap extends Component {
     }
 
     onExit() {
-        console.log("Generating new random map...");
-        
         // Destroy the current town
         if (this.map) {
             this.map.destroy();
         }
-        
+
         // Generate a new random map
-        const mapConfig = GameMap.genRandomMap(0.5);
-        console.log(`Generated map: ${mapConfig.name}`);
-        
+        const mapConfig = GameMap.genRandomMap(0.9);
+
         // Create new map GameObject
         this.map = new GameObject("gameMap", this.gameObject);
-        
+
         // Set up the map based on the generated configuration
         this.setupGeneratedMap(mapConfig);
-        
-        dispatch("map:exit", null);
+
+        dispatch("map:exit", /** @type {any} */({ entrance: mapConfig.entrance }));
     }
 
     onExpTablet() {
@@ -102,44 +99,44 @@ export default class GameMap extends Component {
         const cells = mapConfig.cells;
         const HEIGHT = cells.length;
         const WIDTH = cells[0].length;
-        
+
         for (let y = 0; y < HEIGHT; y++) {
             for (let x = 0; x < WIDTH; x++) {
                 const cell = cells[y][x];
-                
+
                 // Skip empty cells with no special setup needed
                 if (cell.type === "empty") {
                     continue;
                 }
-                
+
                 // Create GameObject for this cell
                 const cellObj = new GameObject(`${cell.type}_${x}_${y}`, this.map);
                 cellObj.setPosition(x, y);
-                
+
                 // Get random image from the cell's image array
                 const image = cell.image[Math.floor(Math.random() * cell.image.length)];
-                
+
                 // Set up based on cell type
                 switch (cell.type) {
                     case "wall":
                         cellObj.addComponent(Collider).setLayer(Const.LAYER_WALL);
                         cellObj.addComponent(TextRenderer).setText(image).setQueue(Const.QUEUE_PROPS);
                         break;
-                        
+
                     case "entrance":
                         cellObj.addComponent(TextRenderer).setText(image).setQueue(Const.QUEUE_PROPS);
                         break;
-                        
+
                     case "exit":
                         cellObj.addComponent(Collider).setLayer(Const.LAYER_NPC).setCallback(this.onExit.bind(this));
                         cellObj.addComponent(TextRenderer).setText(image).setQueue(Const.QUEUE_PROPS);
                         break;
-                        
+
                     case "chest":
                         cellObj.addComponent(Collider).setLayer(Const.LAYER_NPC).setCallback(() => this.onChest(cellObj));
                         cellObj.addComponent(TextRenderer).setText(image).setQueue(Const.QUEUE_PROPS);
                         break;
-                        
+
                     case "mob":
                         cellObj.addComponent(Collider).setLayer(Const.LAYER_NPC).setCallback(() => this.onMob(cellObj));
                         cellObj.addComponent(TextRenderer).setText(image).setQueue(Const.QUEUE_NPC);
@@ -158,7 +155,7 @@ export default class GameMap extends Component {
         // Add treasure logic here
         const hero = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent);
         hero.addExp(1000);
-        
+
         // Remove the chest after opening
         chestObj.destroy();
     }
@@ -172,7 +169,7 @@ export default class GameMap extends Component {
         // Add combat logic here
         const hero = SceneManager.activeScene.find("game/hero").getComponent(UnitComponent);
         hero.addExp(500);
-        
+
         // Remove the mob after combat
         mobObj.destroy();
     }
@@ -187,6 +184,7 @@ export default class GameMap extends Component {
      * @typedef {Object} IMapConfig
      * @property {string} name - The name of the map.
      * @property {IMapCell[][]} cells - A 2D array representing the map cells, where each cell is an object containing its type and image.
+     * @property {{x: number, y: number}} entrance - The entrance position.
      */
 
     /**
@@ -199,29 +197,41 @@ export default class GameMap extends Component {
     static genRandomMap(density = 0.3) {
         const WIDTH = 10;
         const HEIGHT = 5;
-        
+
+        /**
+         * Shuffle array in place using Fisher-Yates algorithm
+         * @param {any[]} array - Array to shuffle
+         */
+        const shuffle = (array) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        };
+
         // Initialize empty map
-        const cells = Array(HEIGHT).fill(null).map(() => 
-            Array(WIDTH).fill(null).map(() => /** @type {IMapCell} */ ({
+        const cells = Array(HEIGHT).fill(null).map(() =>
+            Array(WIDTH).fill(null).map(() => /** @type {IMapCell} */({
                 image: ["⬜"],
                 type: "empty"
             }))
         );
-        
-        // Place entrance at top-left and exit at bottom-right
-        const entrance = { x: 0, y: 0 };
-        const exit = { x: WIDTH - 1, y: HEIGHT - 1 };
-        
+
+        // Place entrance at random location on left edge (x=0, y=0-4)
+        const entrance = { x: 0, y: Math.floor(Math.random() * HEIGHT) };
+        // Place exit at random location on right edge (x=9, y=0-4)
+        const exit = { x: WIDTH - 1, y: Math.floor(Math.random() * HEIGHT) };
+
         cells[entrance.y][entrance.x] = /** @type {IMapCell} */ ({
             image: ["🚪"],
             type: "entrance"
         });
-        
+
         cells[exit.y][exit.x] = /** @type {IMapCell} */ ({
             image: ["🚪"],
             type: "exit"
         });
-        
+
         // Generate walls with density, avoiding entrance and exit
         for (let y = 0; y < HEIGHT; y++) {
             for (let x = 0; x < WIDTH; x++) {
@@ -229,7 +239,7 @@ export default class GameMap extends Component {
                 if ((x === entrance.x && y === entrance.y) || (x === exit.x && y === exit.y)) {
                     continue;
                 }
-                
+
                 if (Math.random() < density) {
                     cells[y][x] = /** @type {IMapCell} */ ({
                         image: ["🧱", "🌲", "🪨"],
@@ -238,292 +248,332 @@ export default class GameMap extends Component {
                 }
             }
         }
-        
+
         // Get all reachable cells from entrance using flood fill
         const getReachableCells = () => {
             const visited = Array(HEIGHT).fill(null).map(() => Array(WIDTH).fill(false));
             const queue = [entrance];
             visited[entrance.y][entrance.x] = true;
-            
+
             // Directions: up, down, left, right - shuffle to avoid bias
             const directions = [
-                { x: 0, y: -1 }, { x: 0, y: 1 }, 
+                { x: 0, y: -1 }, { x: 0, y: 1 },
                 { x: -1, y: 0 }, { x: 1, y: 0 }
             ];
-            
+            shuffle(directions);
+
             while (queue.length > 0) {
                 const current = queue.shift();
                 for (const dir of directions) {
                     const newX = current.x + dir.x;
                     const newY = current.y + dir.y;
-                    
+
                     // Check bounds
                     if (newX < 0 || newX >= WIDTH || newY < 0 || newY >= HEIGHT) {
                         continue;
                     }
-                    
+
                     // Skip if already visited, is a wall, or is the exit (treat exit as wall)
                     if (visited[newY][newX] || cells[newY][newX].type === "wall" || cells[newY][newX].type === "exit") {
                         continue;
                     }
-                    
+
                     visited[newY][newX] = true;
                     queue.push({ x: newX, y: newY });
                 }
             }
-            
+
             return visited;
         };
-        
-        // Find all unreachable regions and connect them to reachable areas
+
+        // Find all regions and connect them using MST approach
         const connectUnreachableRegions = () => {
             const reachable = getReachableCells();
             const visited = Array(HEIGHT).fill(null).map(() => Array(WIDTH).fill(false));
             const regions = [];
-            
-            // Step 1: Find all unreachable regions using flood fill
+
+            // Helper function to flood fill a region
             /**
              * @param {number} startX 
              * @param {number} startY 
+             * @param {boolean} isReachable - whether this is the main reachable region
              */
-            const floodFillRegion = (startX, startY) => {
+            const floodFillRegion = (startX, startY, isReachable = false) => {
                 const region = [];
                 const queue = [{ x: startX, y: startY }];
                 visited[startY][startX] = true;
-                
+
                 while (queue.length > 0) {
                     const current = queue.shift();
                     region.push(current);
-                    
+
                     const directions = [
-                        { x: 0, y: -1 }, { x: 0, y: 1 }, 
+                        { x: 0, y: -1 }, { x: 0, y: 1 },
                         { x: -1, y: 0 }, { x: 1, y: 0 }
                     ];
-                    
+                    shuffle(directions);
+
                     for (const dir of directions) {
                         const newX = current.x + dir.x;
                         const newY = current.y + dir.y;
-                        
+
                         if (newX >= 0 && newX < WIDTH && newY >= 0 && newY < HEIGHT &&
-                            !visited[newY][newX] && 
-                            cells[newY][newX].type !== "wall" && 
-                            cells[newY][newX].type !== "exit" &&
-                            !reachable[newY][newX]) {
-                            visited[newY][newX] = true;
-                            queue.push({ x: newX, y: newY });
+                            !visited[newY][newX] &&
+                            cells[newY][newX].type !== "wall" &&
+                            cells[newY][newX].type !== "exit") {
+
+                            // For reachable region, only include reachable cells
+                            // For unreachable regions, only include unreachable cells
+                            if ((isReachable && reachable[newY][newX]) ||
+                                (!isReachable && !reachable[newY][newX])) {
+                                visited[newY][newX] = true;
+                                queue.push({ x: newX, y: newY });
+                            }
                         }
                     }
                 }
-                
+
                 return region;
             };
-            
-            // Find all unreachable regions
+
+            // Step 1: Find the main reachable region
+            let mainReachableRegion = null;
             for (let y = 0; y < HEIGHT; y++) {
                 for (let x = 0; x < WIDTH; x++) {
-                    if (!visited[y][x] && 
-                        cells[y][x].type !== "wall" && 
+                    if (!visited[y][x] && reachable[y][x] && cells[y][x].type !== "wall") {
+                        mainReachableRegion = floodFillRegion(x, y, true);
+                        break;
+                    }
+                }
+                if (mainReachableRegion) break;
+            }
+
+            if (mainReachableRegion) {
+                regions.push({
+                    cells: mainReachableRegion,
+                    type: 'reachable',
+                    id: 0
+                });
+            }
+
+            // Step 2: Find all unreachable regions
+            for (let y = 0; y < HEIGHT; y++) {
+                for (let x = 0; x < WIDTH; x++) {
+                    if (!visited[y][x] &&
+                        cells[y][x].type !== "wall" &&
                         cells[y][x].type !== "exit" &&
                         !reachable[y][x]) {
-                        const region = floodFillRegion(x, y);
+                        const region = floodFillRegion(x, y, false);
                         if (region.length > 0) {
-                            regions.push(region);
+                            regions.push({
+                                cells: region,
+                                type: 'unreachable',
+                                id: regions.length
+                            });
                         }
                     }
                 }
             }
-            
-            console.log(`Found ${regions.length} unreachable regions`);
-            
-            // Step 2: Connect each region to reachable areas
+
+            // Step 3: Add exit as a special region
+            regions.push({
+                cells: [{ x: exit.x, y: exit.y }],
+                type: 'exit',
+                id: regions.length
+            });
+
+            if (regions.length <= 1) {
+                return;
+            }
+
+            // Step 4: Calculate distances between all regions
+            /**
+             * @param {{cells: Array<{x: number, y: number}>, type: string, id: number}} regionA - First region
+             * @param {{cells: Array<{x: number, y: number}>, type: string, id: number}} regionB - Second region
+             * @returns {{fromCell: {x: number, y: number}, toCell: {x: number, y: number}, distance: number}|null} Best connection between regions
+             */
+            const distanceBetweenRegions = (regionA, regionB) => {
+                let minDistance = Infinity;
+                let bestConnection = null;
+
+                for (const cellA of regionA.cells) {
+                    for (const cellB of regionB.cells) {
+                        // Use BFS to find shortest wall-breaking path
+                        const distance = findShortestWallBreakingPath(cellA, cellB);
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            bestConnection = { fromCell: cellA, toCell: cellB, distance };
+                        }
+                    }
+                }
+
+                return bestConnection;
+            };
+
+            // Helper function to find shortest wall-breaking path between two cells
+            /**
+             * @param {{x: number, y: number}} start - Starting cell
+             * @param {{x: number, y: number}} end - Ending cell
+             * @returns {number} Distance (number of walls to break)
+             */
+            const findShortestWallBreakingPath = (start, end) => {
+                const queue = [{ x: start.x, y: start.y, distance: 0 }];
+                const visited = Array(HEIGHT).fill(null).map(() => Array(WIDTH).fill(false));
+                visited[start.y][start.x] = true;
+
+                while (queue.length > 0) {
+                    const current = queue.shift();
+
+                    if (current.x === end.x && current.y === end.y) {
+                        return current.distance;
+                    }
+
+                    // Create and shuffle directions on each probe to avoid bias
+                    const directions = [
+                        { x: 0, y: -1 }, { x: 0, y: 1 },
+                        { x: -1, y: 0 }, { x: 1, y: 0 }
+                    ];
+                    shuffle(directions);
+
+                    for (const dir of directions) {
+                        const newX = current.x + dir.x;
+                        const newY = current.y + dir.y;
+
+                        if (newX >= 0 && newX < WIDTH && newY >= 0 && newY < HEIGHT &&
+                            !visited[newY][newX]) {
+                            visited[newY][newX] = true;
+                            const newDistance = current.distance + (cells[newY][newX].type === "wall" ? 1 : 0);
+                            queue.push({ x: newX, y: newY, distance: newDistance });
+                        }
+                    }
+                }
+
+                return Infinity;
+            };
+
+            // Step 5: Build graph of region connections
+            const edges = [];
             for (let i = 0; i < regions.length; i++) {
-                const region = regions[i];
-                console.log(`Connecting region ${i} with ${region.length} cells`);
-                
-                // Create distance map for this region
-                const distanceMap = Array(HEIGHT).fill(null).map(() => Array(WIDTH).fill(-1));
-                
-                // Mark region cells as 0
-                for (const cell of region) {
-                    distanceMap[cell.y][cell.x] = 0;
-                }
-                
-                // Expand outward marking distances
-                let currentDistance = 0;
-                let foundReachable = false;
-                let pathEndpoints = [];
-                
-                while (!foundReachable && currentDistance < Math.max(WIDTH, HEIGHT)) {
-                    const nextCells = [];
-                    
-                    for (let y = 0; y < HEIGHT; y++) {
-                        for (let x = 0; x < WIDTH; x++) {
-                            if (distanceMap[y][x] === currentDistance) {
-                                const directions = [
-                                    { x: 0, y: -1 }, { x: 0, y: 1 }, 
-                                    { x: -1, y: 0 }, { x: 1, y: 0 }
-                                ];
-                                
-                                for (const dir of directions) {
-                                    const newX = x + dir.x;
-                                    const newY = y + dir.y;
-                                    
-                                    if (newX >= 0 && newX < WIDTH && newY >= 0 && newY < HEIGHT) {
-                                        if (reachable[newY][newX] && cells[newY][newX].type !== "exit") {
-                                            // Found a reachable cell
-                                            pathEndpoints.push({ x: newX, y: newY, fromX: x, fromY: y });
-                                            foundReachable = true;
-                                        } else if (distanceMap[newY][newX] === -1 && cells[newY][newX].type === "wall") {
-                                            // Mark wall as next distance
-                                            distanceMap[newY][newX] = currentDistance + 1;
-                                            nextCells.push({ x: newX, y: newY });
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                for (let j = i + 1; j < regions.length; j++) {
+                    const connection = distanceBetweenRegions(regions[i], regions[j]);
+                    if (connection && connection.distance < Infinity) {
+                        edges.push({
+                            regionA: i,
+                            regionB: j,
+                            distance: connection.distance,
+                            connection: connection
+                        });
                     }
-                    
-                    currentDistance++;
                 }
-                
-                if (foundReachable && pathEndpoints.length > 0) {
-                    // Pick a random endpoint and trace back to create path
-                    const endpoint = pathEndpoints[Math.floor(Math.random() * pathEndpoints.length)];
-                    console.log(`Creating path from region to reachable cell at (${endpoint.x}, ${endpoint.y})`);
-                    
-                    // Trace back and clear walls
-                    let currentX = endpoint.fromX;
-                    let currentY = endpoint.fromY;
-                    
-                    while (distanceMap[currentY][currentX] > 0) {
-                        if (cells[currentY][currentX].type === "wall") {
-                            cells[currentY][currentX] = {
-                                image: ["⬜"],
-                                type: "empty"
-                            };
-                        }
-                        
-                        // Find the cell with the previous distance
-                        const directions = [
-                            { x: 0, y: -1 }, { x: 0, y: 1 }, 
-                            { x: -1, y: 0 }, { x: 1, y: 0 }
-                        ];
-                        
-                        let found = false;
-                        for (const dir of directions) {
-                            const newX = currentX + dir.x;
-                            const newY = currentY + dir.y;
-                            
-                            if (newX >= 0 && newX < WIDTH && newY >= 0 && newY < HEIGHT &&
-                                distanceMap[newY][newX] === distanceMap[currentY][currentX] - 1) {
-                                currentX = newX;
-                                currentY = newY;
-                                found = true;
-                                break;
-                            }
-                        }
-                        
-                        if (!found) break;
+            }
+
+            // Step 6: Sort edges by distance for MST
+            edges.sort((a, b) => a.distance - b.distance);
+
+            // Step 7: Build MST using Kruskal's algorithm
+            const parent = Array(regions.length).fill(null).map((_, i) => i);
+            const rank = Array(regions.length).fill(0);
+
+            /**
+             * @param {number} x - Region index
+             * @returns {number} Root of the set
+             */
+            const find = (x) => {
+                if (parent[x] !== x) {
+                    parent[x] = find(parent[x]);
+                }
+                return parent[x];
+            };
+
+            /**
+             * @param {number} x - First region index
+             * @param {number} y - Second region index
+             * @returns {boolean} Whether union was performed
+             */
+            const union = (x, y) => {
+                const rootX = find(x);
+                const rootY = find(y);
+
+                if (rootX !== rootY) {
+                    if (rank[rootX] < rank[rootY]) {
+                        parent[rootX] = rootY;
+                    } else if (rank[rootX] > rank[rootY]) {
+                        parent[rootY] = rootX;
+                    } else {
+                        parent[rootY] = rootX;
+                        rank[rootX]++;
                     }
-                } else {
-                    console.error(`Region ${i} could not be connected to reachable areas`);
+                    return true;
                 }
+                return false;
+            };
+
+            const mstEdges = [];
+            for (const edge of edges) {
+                if (union(edge.regionA, edge.regionB)) {
+                    mstEdges.push(edge);
+                    if (mstEdges.length === regions.length - 1) {
+                        break;
+                    }
+                }
+            }
+
+            // Step 8: Break walls along MST edges
+            for (const edge of mstEdges) {
+                breakWallsBetweenCells(edge.connection.fromCell, edge.connection.toCell);
             }
         };
-        
-        // Step 4: Handle exit connectivity
-        const connectExit = () => {
-            const reachable = getReachableCells();
-            
-            // Check if exit is already reachable (adjacent to reachable cell)
+
+        // Helper function to break walls between two cells
+        /**
+         * @param {{x: number, y: number}} start - Starting cell
+         * @param {{x: number, y: number}} end - Ending cell
+         */
+        const breakWallsBetweenCells = (start, end) => {
+            /** @type {Array<{x: number, y: number, path: Array<{x: number, y: number}>}>} */
+            const queue = [{ x: start.x, y: start.y, path: [] }];
+            const visited = Array(HEIGHT).fill(null).map(() => Array(WIDTH).fill(false));
+            visited[start.y][start.x] = true;
+
             const directions = [
-                { x: 0, y: -1 }, { x: 0, y: 1 }, 
+                { x: 0, y: -1 }, { x: 0, y: 1 },
                 { x: -1, y: 0 }, { x: 1, y: 0 }
             ];
-            
-            let exitReachable = false;
-            for (const dir of directions) {
-                const newX = exit.x + dir.x;
-                const newY = exit.y + dir.y;
-                
-                if (newX >= 0 && newX < WIDTH && newY >= 0 && newY < HEIGHT &&
-                    reachable[newY][newX]) {
-                    exitReachable = true;
-                    break;
-                }
-            }
-            
-            if (!exitReachable) {
-                console.log("Exit not reachable, creating path to exit");
-                
-                // Create distance map from exit
-                const distanceMap = Array(HEIGHT).fill(null).map(() => Array(WIDTH).fill(-1));
-                distanceMap[exit.y][exit.x] = 0;
-                
-                let currentDistance = 0;
-                let foundReachable = false;
-                let pathEndpoints = [];
-                
-                while (!foundReachable && currentDistance < Math.max(WIDTH, HEIGHT)) {
-                    for (let y = 0; y < HEIGHT; y++) {
-                        for (let x = 0; x < WIDTH; x++) {
-                            if (distanceMap[y][x] === currentDistance) {
-                                for (const dir of directions) {
-                                    const newX = x + dir.x;
-                                    const newY = y + dir.y;
-                                    
-                                    if (newX >= 0 && newX < WIDTH && newY >= 0 && newY < HEIGHT) {
-                                        if (reachable[newY][newX]) {
-                                            pathEndpoints.push({ x: newX, y: newY, fromX: x, fromY: y });
-                                            foundReachable = true;
-                                        } else if (distanceMap[newY][newX] === -1 && cells[newY][newX].type === "wall") {
-                                            distanceMap[newY][newX] = currentDistance + 1;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    currentDistance++;
-                }
-                
-                if (foundReachable && pathEndpoints.length > 0) {
-                    const endpoint = pathEndpoints[Math.floor(Math.random() * pathEndpoints.length)];
-                    console.log(`Creating path from exit to reachable cell at (${endpoint.x}, ${endpoint.y})`);
-                    
-                    // Trace back and clear walls
-                    let currentX = endpoint.fromX;
-                    let currentY = endpoint.fromY;
-                    
-                    while (distanceMap[currentY][currentX] > 0) {
-                        if (cells[currentY][currentX].type === "wall") {
-                            cells[currentY][currentX] = {
+            shuffle(directions);
+
+            while (queue.length > 0) {
+                const current = queue.shift();
+
+                if (current.x === end.x && current.y === end.y) {
+                    // Found path, break walls along it
+                    for (const cell of current.path) {
+                        if (cells[cell.y][cell.x].type === "wall") {
+                            cells[cell.y][cell.x] = {
                                 image: ["⬜"],
                                 type: "empty"
                             };
                         }
-                        
-                        let found = false;
-                        for (const dir of directions) {
-                            const newX = currentX + dir.x;
-                            const newY = currentY + dir.y;
-                            
-                            if (newX >= 0 && newX < WIDTH && newY >= 0 && newY < HEIGHT &&
-                                distanceMap[newY][newX] === distanceMap[currentY][currentX] - 1) {
-                                currentX = newX;
-                                currentY = newY;
-                                found = true;
-                                break;
-                            }
-                        }
-                        
-                        if (!found) break;
+                    }
+                    return;
+                }
+
+                for (const dir of directions) {
+                    const newX = current.x + dir.x;
+                    const newY = current.y + dir.y;
+
+                    if (newX >= 0 && newX < WIDTH && newY >= 0 && newY < HEIGHT &&
+                        !visited[newY][newX]) {
+                        visited[newY][newX] = true;
+                        const newPath = [...current.path, { x: newX, y: newY }];
+                        queue.push({ x: newX, y: newY, path: newPath });
                     }
                 }
             }
         };
-        
+
+        connectUnreachableRegions();
+        // Exit connectivity is now handled by the MST approach in connectUnreachableRegions
+
         // Add some random features to non-wall, non-entrance, non-exit cells
         for (let y = 0; y < HEIGHT; y++) {
             for (let x = 0; x < WIDTH; x++) {
@@ -543,17 +593,28 @@ export default class GameMap extends Component {
                 }
             }
         }
-        
+
         return {
             name: `Random Dungeon ${Math.floor(Math.random() * 1000)}`,
-            cells
+            cells,
+            entrance: { x: entrance.x, y: entrance.y }
         };
     }
 
-    resetHero() {
+    /**
+     * Reset hero position to the entrance of the new map
+     * @param {Object} eventData - Event data containing entrance position
+     * @param {Object} eventData.entrance - Entrance position
+     * @param {number} eventData.entrance.x - X coordinate of entrance
+     * @param {number} eventData.entrance.y - Y coordinate of entrance
+     */
+    resetHero(eventData) {
         const hero = SceneManager.activeScene.find("game/hero");
         if (hero) {
-            hero.setPosition(0, 0);
+            // If entrance position is provided, use it; otherwise default to (0, 0)
+            const entranceX = eventData?.entrance?.x ?? 0;
+            const entranceY = eventData?.entrance?.y ?? 0;
+            hero.setPosition(entranceX, entranceY);
         }
     }
 }
