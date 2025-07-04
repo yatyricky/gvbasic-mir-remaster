@@ -194,7 +194,7 @@ export default class GameMap extends Component {
      * @param {number} density - The density of the map, which determines how many walls and obstacles are present. Ranges from 0 to 1, where 0 means no walls and 1 means maximum walls.
      * @returns {IMapConfig} A random map configuration.
      */
-    static genRandomMap(density = 0.3) {
+    static genRandomMap(density = 0.3, mobsCount = 3, chestCount = 1) {
         const WIDTH = 10;
         const HEIGHT = 5;
 
@@ -574,24 +574,38 @@ export default class GameMap extends Component {
         connectUnreachableRegions();
         // Exit connectivity is now handled by the MST approach in connectUnreachableRegions
 
-        // Add some random features to non-wall, non-entrance, non-exit cells
+        // Collect all empty cells for placing mobs and chests
+        const emptyCells = [];
         for (let y = 0; y < HEIGHT; y++) {
             for (let x = 0; x < WIDTH; x++) {
-                if (cells[y][x].type === "empty" && Math.random() < 0.1) {
-                    const rand = Math.random();
-                    if (rand < 0.5) {
-                        cells[y][x] = /** @type {IMapCell} */ ({
-                            image: ["📦"],
-                            type: "chest"
-                        });
-                    } else {
-                        cells[y][x] = /** @type {IMapCell} */ ({
-                            image: ["👹", "🧌", "💀"],
-                            type: "mob"
-                        });
-                    }
+                if (cells[y][x].type === "empty") {
+                    emptyCells.push({ x, y });
                 }
             }
+        }
+
+        // Shuffle empty cells to ensure random placement
+        shuffle(emptyCells);
+
+        // Place chests (up to available empty cells)
+        const actualChestCount = Math.min(chestCount, emptyCells.length);
+        for (let i = 0; i < actualChestCount; i++) {
+            const cell = emptyCells[i];
+            cells[cell.y][cell.x] = /** @type {IMapCell} */ ({
+                image: ["📦"],
+                type: "chest"
+            });
+        }
+
+        // Place mobs (up to remaining empty cells)
+        const remainingCells = emptyCells.length - actualChestCount;
+        const actualMobsCount = Math.min(mobsCount, remainingCells);
+        for (let i = actualChestCount; i < actualChestCount + actualMobsCount; i++) {
+            const cell = emptyCells[i];
+            cells[cell.y][cell.x] = /** @type {IMapCell} */ ({
+                image: ["👹", "🧌", "💀"],
+                type: "mob"
+            });
         }
 
         return {
