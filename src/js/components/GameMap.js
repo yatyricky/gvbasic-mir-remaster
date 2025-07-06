@@ -13,23 +13,20 @@ export default class GameMap extends Component {
         super.onInit();
         this.map = new GameObject("town", this.gameObject);
 
-        this.anya = new GameObject("anya", this.map);
-        this.anya.setPosition(8, 1);
-        this.anya.addComponent(Collider).setLayer(Const.LAYER_NPC).setCallback(this.onAnya.bind(this)).setExitCollision(this.offAnya.bind(this));
-        const anyaConfig = UnitById.anya;
-        this.anya.addComponent(TextRenderer).setText(anyaConfig.image).setQueue(Const.QUEUE_NPC);
+        this.anya = this.addNpc("anya", 6, 1, this.onAnya.bind(this), this.offAnya.bind(this));
 
         this.expTablet = new GameObject("expTablet", this.map);
         this.expTablet.setPosition(1, 1);
         this.expTablet.addComponent(Collider).setLayer(Const.LAYER_NPC).setCallback(this.onExpTablet.bind(this));
         this.expTablet.addComponent(TextRenderer).setText("📜").setQueue(Const.QUEUE_NPC);
 
+        this.rift = this.addNpc("rift", 9, 2, this.onRift.bind(this), this.offRift.bind(this));
+
         this.wallRange(0, 0, 9, 0, "🌲", this.map);
         this.wallRange(0, 1, 0, 3, "🌲", this.map);
-        this.wallRange(0, 4, 4, 4, "🪵", this.map);
-        this.wallRange(9, 1, 9, 3, "🌲", this.map);
-        this.wallRange(6, 4, 9, 4, "🪵", this.map);
-        this.wallRange(1, 3, 1, 3, "🪨", this.map);
+        this.wallRange(0, 4, 9, 4, "🪵", this.map);
+        this.wallRange(9, 1, 9, 1, "🌲", this.map);
+        this.wallRange(9, 3, 9, 3, "🌲", this.map);
 
         const exit = new GameObject("exit", this.map).setPosition(5, 5);
         exit.addComponent(Collider).setLayer(Const.LAYER_NPC).setCallback(this.onExit.bind(this));
@@ -61,12 +58,43 @@ export default class GameMap extends Component {
         }
     }
 
+    /**
+     * 
+     * @param {UnitId} unitId 
+     * @param {number} x 
+     * @param {number} y 
+     * @param {(other: Collider) => void} interactionCall - Callback for interaction
+     * @param {(other: Collider) => void} byebyeCall - Callback for exit interaction
+     */
+    addNpc(unitId, x, y, interactionCall, byebyeCall) {
+        const config = UnitById[unitId];
+        const npc = new GameObject(config.name, this.map);
+        npc.setPosition(x, y);
+        const collider = npc.addComponent(Collider).setLayer(Const.LAYER_NPC);
+        if (interactionCall) {
+            collider.setCallback(interactionCall);
+        }
+        if (byebyeCall) {
+            collider.setExitCollision(byebyeCall);
+        }
+        npc.addComponent(TextRenderer).setText(config.image).setQueue(Const.QUEUE_NPC);
+        return npc;
+    }
+
     onAnya() {
         dispatch("shop:anya", null);
     }
 
     offAnya() {
         dispatch("exit:anya", null);
+    }
+
+    onRift() {
+        dispatch("shop:rift", null);
+    }
+
+    offRift() {
+        dispatch("exit:rift", null);
     }
 
     onExit() {
@@ -242,7 +270,7 @@ export default class GameMap extends Component {
 
                 if (Math.random() < density) {
                     cells[y][x] = /** @type {IMapCell} */ ({
-                        image: ["🧱", "🌲", "🪨"],
+                        image: ["🧱", "🌲", "🪨", "🪵"],
                         type: "wall"
                     });
                 }

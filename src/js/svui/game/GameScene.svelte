@@ -5,6 +5,7 @@
     import BagModal from "./BagModal.svelte";
     import StatModal from "./StatModal.svelte";
     import AnyaShop from "./AnyaShop.svelte";
+    import RiftShop from "./RiftShop.svelte";
     import SkillModal from "./SkillModal.svelte";
     import SkillPicker from "./SkillPicker.svelte";
     import MessageBox from "../MessageBox.svelte";
@@ -212,6 +213,14 @@
 
             subscribe("exit:anya", () => {
                 dispatch("modal:close", AnyaShop);
+            }),
+
+            subscribe("shop:rift", () => {
+                dispatch("modal:show", { component: RiftShop });
+            }),
+
+            subscribe("exit:rift", () => {
+                dispatch("modal:close", RiftShop);
             }),
 
             subscribe("inventory:refresh", () => {

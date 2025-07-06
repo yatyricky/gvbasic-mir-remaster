@@ -79,6 +79,7 @@ export const Units = [
     { id: "guard", name: "守卫", type: "npc", image: "🛡️" },
     { id: "priest", name: "牧师", type: "npc", image: "⛪" },
     { id: "anya", name: "安雅", type: "npc", image: "🧕" },
+    { id: "rift", name: "秘境", type: "npc", image: "🌀" },
 ];
 
 export const UnitById = Object.fromEntries(Units.map(e => [e.id, e]));

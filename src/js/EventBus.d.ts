@@ -8,6 +8,8 @@ interface EventBusDefine {
     "scene:game": number;
     "shop:anya": null;
     "exit:anya": null;
+    "shop:rift": null;
+    "exit:rift": null;
     "inspect:item": { item: ItemSaveData, actionX?: () => void };
     "panel:show": () => GameObject;
     "bag:refresh": null;
