@@ -27,7 +27,7 @@ export function subscribe(event, callback, fireImmediately, priority) {
         if (findIndex !== -1) {
             callbacks.splice(findIndex, 1);
         }
-        if (callbacks.size === 0) {
+        if (callbacks.length === 0) {
             subscribers.delete(event);
         }
     };

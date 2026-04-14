@@ -18,16 +18,16 @@ export default class Vec2 {
     }
 
     normalizeSelf() {
-        const magSrq = this.x * this.x + this.y * this.y;
-        if (magSrq === 1.0) {
+        const magSqr = this.x * this.x + this.y * this.y;
+        if (magSqr === 1.0) {
             return this;
         }
-        if (magSrq === 0.0) {
+        if (magSqr === 0.0) {
             console.warn("Vec2.normalizeSelf: Cannot normalize a zero vector");
             return this;
         }
 
-        const invSqrt = 1.0 / Math.sqrt(magSrq);
+        const invSqrt = 1.0 / Math.sqrt(magSqr);
         this.x *= invSqrt;
         this.y *= invSqrt;
         return this;
