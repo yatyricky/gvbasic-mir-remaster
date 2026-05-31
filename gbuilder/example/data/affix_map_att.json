@@ -1,0 +1,3698 @@
+[
+  {
+    "affixId": "xdmg1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "fdmg1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "tdmg1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "hdmg1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "pdmg1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "xdmglo1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "fdmglo1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "tdmglo1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "hdmglo1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "pdmglo1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "xdmghi1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "fdmghi1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "tdmghi1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "hdmghi1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "pdmghi1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "xed1",
+    "itemTypes": [
+      "necklace",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "fed1",
+    "itemTypes": [
+      "necklace",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "ted1",
+    "itemTypes": [
+      "necklace",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "hed1",
+    "itemTypes": [
+      "necklace",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "ped1",
+    "itemTypes": [
+      "necklace",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "ued1",
+    "itemTypes": [
+      "necklace",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "ded1",
+    "itemTypes": [
+      "necklace",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "ced1",
+    "itemTypes": [
+      "necklace",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "doted1",
+    "itemTypes": [
+      "necklace",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "hled1",
+    "itemTypes": [
+      "necklace",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "col1ed1",
+    "itemTypes": [
+      "necklace",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "col23ed1",
+    "itemTypes": [
+      "necklace",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "sumed1",
+    "itemTypes": [
+      "necklace",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "xdr1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "fdr1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "tdr1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "hdr1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "pdr1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "xres1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "fres1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "tres1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "hres1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "pres1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "ures1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "dres1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "cres1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "c1res1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "c23res1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "dotres1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "sumres1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "str1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "int1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "spi1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "vit1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "maxhp1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "maxmp1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "mhex1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs"
+    ]
+  },
+  {
+    "affixId": "mpex1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword",
+      "magestaff",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "hreg1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "mreg1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "woodsword",
+      "magestaff",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "sumreg1",
+    "itemTypes": [
+      "helm",
+      "taorobe",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "woodsword",
+      "magestaff",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "ll1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "ml1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "d2m1",
+    "itemTypes": [
+      "pauldron",
+      "taorobe",
+      "magesigil",
+      "belt",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "hit1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "glove",
+      "magesigil",
+      "belt",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "mhit1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "glove",
+      "magesigil",
+      "belt",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm3",
+      "sword",
+      "woodsword",
+      "dao",
+      "axe",
+      "mace",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "doge1",
+    "itemTypes": [
+      "armor",
+      "taorobe",
+      "bracelet",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "dao",
+      "katana",
+      "dagger"
+    ]
+  },
+  {
+    "affixId": "mdoge1",
+    "itemTypes": [
+      "armor",
+      "taorobe",
+      "bracelet",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "dao",
+      "katana",
+      "dagger"
+    ]
+  },
+  {
+    "affixId": "crit1",
+    "itemTypes": [
+      "helm",
+      "glove",
+      "magesigil",
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "critd1",
+    "itemTypes": [
+      "pauldron",
+      "bracelet",
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "scrit1",
+    "itemTypes": [
+      "helm",
+      "glove",
+      "magesigil",
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "dao",
+      "axe",
+      "mace",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "scritd1",
+    "itemTypes": [
+      "pauldron",
+      "bracelet",
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "dao",
+      "axe",
+      "mace",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "resil1",
+    "itemTypes": [
+      "armor",
+      "taorobe",
+      "pant",
+      "necklace",
+      "ring"
+    ]
+  },
+  {
+    "affixId": "curs1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "bles1",
+    "itemTypes": [
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "spd1",
+    "itemTypes": [
+      "boot",
+      "necklace",
+      "ring",
+      "katana",
+      "dagger"
+    ]
+  },
+  {
+    "affixId": "moral1",
+    "itemTypes": [
+      "belt",
+      "necklace",
+      "ring"
+    ]
+  },
+  {
+    "affixId": "pmh1",
+    "itemTypes": [
+      "belt",
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "debuffrd1",
+    "itemTypes": [
+      "armor",
+      "taorobe",
+      "pant",
+      "boot",
+      "necklace"
+    ]
+  },
+  {
+    "affixId": "luck1",
+    "itemTypes": [
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "eg1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "belt",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "expex1",
+    "itemTypes": [
+      "helm",
+      "glove",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "barg1",
+    "itemTypes": [
+      "belt",
+      "pant",
+      "necklace",
+      "charm3"
+    ]
+  },
+  {
+    "affixId": "sok1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "sok2",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "pant",
+      "boot",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "sok3",
+    "itemTypes": [
+      "helm",
+      "armor",
+      "taorobe",
+      "pant",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "sok4",
+    "itemTypes": [
+      "armor",
+      "taorobe",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "staff",
+      "magestaff",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "sok5",
+    "itemTypes": [
+      "sword2h",
+      "ugs",
+      "dao2h",
+      "axe2h",
+      "mace2h",
+      "staff",
+      "magestaff",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "flvlmage1",
+    "itemTypes": [
+      "magesigil",
+      "necklace",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "tlvlmage1",
+    "itemTypes": [
+      "magesigil",
+      "necklace",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "magelvl1",
+    "itemTypes": [
+      "magesigil",
+      "necklace",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "blvlwarr1",
+    "itemTypes": [
+      "necklace",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "xlvlwarr1",
+    "itemTypes": [
+      "necklace",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "warrlvl1",
+    "itemTypes": [
+      "necklace",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "hlvlwlok1",
+    "itemTypes": [
+      "taorobe",
+      "necklace",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "plvlwlok1",
+    "itemTypes": [
+      "taorobe",
+      "necklace",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "wlklvl1",
+    "itemTypes": [
+      "taorobe",
+      "necklace",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "alvl1",
+    "itemTypes": [
+      "necklace",
+      "dagger",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "slvl1",
+    "itemTypes": [
+      "necklace",
+      "mace",
+      "mace2h",
+      "dagger"
+    ]
+  },
+  {
+    "affixId": "glvl1",
+    "itemTypes": [
+      "necklace",
+      "axe",
+      "axe2h",
+      "dagger"
+    ]
+  },
+  {
+    "affixId": "flvlmage2",
+    "itemTypes": [
+      "magesigil",
+      "necklace",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "tlvlmage2",
+    "itemTypes": [
+      "magesigil",
+      "necklace",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "magelvl2",
+    "itemTypes": [
+      "magesigil",
+      "necklace",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "blvlwarr2",
+    "itemTypes": [
+      "necklace",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "xlvlwarr2",
+    "itemTypes": [
+      "necklace",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "warrlvl2",
+    "itemTypes": [
+      "necklace",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "hlvlwlok2",
+    "itemTypes": [
+      "taorobe",
+      "necklace",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "plvlwlok2",
+    "itemTypes": [
+      "taorobe",
+      "necklace",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "wlklvl2",
+    "itemTypes": [
+      "taorobe",
+      "necklace",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "alvl2",
+    "itemTypes": [
+      "necklace",
+      "dagger",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "slvl2",
+    "itemTypes": [
+      "necklace",
+      "mace",
+      "mace2h",
+      "dagger"
+    ]
+  },
+  {
+    "affixId": "glvl2",
+    "itemTypes": [
+      "necklace",
+      "axe",
+      "axe2h",
+      "dagger"
+    ]
+  },
+  {
+    "affixId": "flvlmage3",
+    "itemTypes": [
+      "magesigil",
+      "necklace",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "tlvlmage3",
+    "itemTypes": [
+      "magesigil",
+      "necklace",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "magelvl3",
+    "itemTypes": [
+      "magesigil",
+      "necklace",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "blvlwarr3",
+    "itemTypes": [
+      "necklace",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "xlvlwarr3",
+    "itemTypes": [
+      "necklace",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "warrlvl3",
+    "itemTypes": [
+      "necklace",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "hlvlwlok3",
+    "itemTypes": [
+      "taorobe",
+      "necklace",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "plvlwlok3",
+    "itemTypes": [
+      "taorobe",
+      "necklace",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "wlklvl3",
+    "itemTypes": [
+      "taorobe",
+      "necklace",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "slvl3",
+    "itemTypes": [
+      "necklace",
+      "mace",
+      "mace2h",
+      "dagger"
+    ]
+  },
+  {
+    "affixId": "glvl3",
+    "itemTypes": [
+      "necklace",
+      "axe",
+      "axe2h",
+      "dagger"
+    ]
+  },
+  {
+    "affixId": "skfbltmage1",
+    "itemTypes": [
+      "glove",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfrngmage1",
+    "itemTypes": [
+      "bracelet",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfinfmage1",
+    "itemTypes": [
+      "magesigil",
+      "belt",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfbalmage1",
+    "itemTypes": [
+      "magesigil",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfblsmage1",
+    "itemTypes": [
+      "pauldron",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfwalmage1",
+    "itemTypes": [
+      "helm",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktchmmage1",
+    "itemTypes": [
+      "glove",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktbltmage1",
+    "itemTypes": [
+      "bracelet",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktltnmage1",
+    "itemTypes": [
+      "magesigil",
+      "belt",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktnovmage1",
+    "itemTypes": [
+      "magesigil",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktshdmage1",
+    "itemTypes": [
+      "pauldron",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktblzmage1",
+    "itemTypes": [
+      "helm",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skbbaswarr1",
+    "itemTypes": [
+      "glove",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbcrtwarr1",
+    "itemTypes": [
+      "bracelet",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbthrwarr1",
+    "itemTypes": [
+      "belt",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbclvwarr1",
+    "itemTypes": [
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbcrzwarr1",
+    "itemTypes": [
+      "pauldron",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbfblwarr1",
+    "itemTypes": [
+      "helm",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxdefwarr1",
+    "itemTypes": [
+      "glove",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxdogwarr1",
+    "itemTypes": [
+      "bracelet",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxctawarr1",
+    "itemTypes": [
+      "belt",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxwmswarr1",
+    "itemTypes": [
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxchgwarr1",
+    "itemTypes": [
+      "pauldron",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxtstwarr1",
+    "itemTypes": [
+      "helm",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skhhelwlok1",
+    "itemTypes": [
+      "taorobe",
+      "glove",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhgsdwlok1",
+    "itemTypes": [
+      "taorobe",
+      "bracelet",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhinvwlok1",
+    "itemTypes": [
+      "taorobe",
+      "belt",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhhsdwlok1",
+    "itemTypes": [
+      "taorobe",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhlokwlok1",
+    "itemTypes": [
+      "pauldron",
+      "taorobe",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhmhlwlok1",
+    "itemTypes": [
+      "helm",
+      "taorobe",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpbaswlok1",
+    "itemTypes": [
+      "taorobe",
+      "glove",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skppoiwlok1",
+    "itemTypes": [
+      "taorobe",
+      "bracelet",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpsklwlok1",
+    "itemTypes": [
+      "taorobe",
+      "belt",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skprunwlok1",
+    "itemTypes": [
+      "taorobe",
+      "boot",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpcblwlok1",
+    "itemTypes": [
+      "pauldron",
+      "taorobe",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpsdmwlok1",
+    "itemTypes": [
+      "helm",
+      "taorobe",
+      "necklace",
+      "ring",
+      "charm2",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skfbltmage2",
+    "itemTypes": [
+      "glove",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfrngmage2",
+    "itemTypes": [
+      "bracelet",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfinfmage2",
+    "itemTypes": [
+      "magesigil",
+      "belt",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfbalmage2",
+    "itemTypes": [
+      "magesigil",
+      "boot",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfblsmage2",
+    "itemTypes": [
+      "pauldron",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfwalmage2",
+    "itemTypes": [
+      "helm",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktchmmage2",
+    "itemTypes": [
+      "glove",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktbltmage2",
+    "itemTypes": [
+      "bracelet",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktltnmage2",
+    "itemTypes": [
+      "magesigil",
+      "belt",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktnovmage2",
+    "itemTypes": [
+      "magesigil",
+      "boot",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktshdmage2",
+    "itemTypes": [
+      "pauldron",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktblzmage2",
+    "itemTypes": [
+      "helm",
+      "magesigil",
+      "necklace",
+      "ring",
+      "charm3",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skbbaswarr2",
+    "itemTypes": [
+      "glove",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbcrtwarr2",
+    "itemTypes": [
+      "bracelet",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbthrwarr2",
+    "itemTypes": [
+      "belt",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbclvwarr2",
+    "itemTypes": [
+      "boot",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbcrzwarr2",
+    "itemTypes": [
+      "pauldron",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbfblwarr2",
+    "itemTypes": [
+      "helm",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxdefwarr2",
+    "itemTypes": [
+      "glove",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxdogwarr2",
+    "itemTypes": [
+      "bracelet",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxctawarr2",
+    "itemTypes": [
+      "belt",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxwmswarr2",
+    "itemTypes": [
+      "boot",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxchgwarr2",
+    "itemTypes": [
+      "pauldron",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxtstwarr2",
+    "itemTypes": [
+      "helm",
+      "necklace",
+      "ring",
+      "charm3",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skhhelwlok2",
+    "itemTypes": [
+      "taorobe",
+      "glove",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhgsdwlok2",
+    "itemTypes": [
+      "taorobe",
+      "bracelet",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhinvwlok2",
+    "itemTypes": [
+      "taorobe",
+      "belt",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhhsdwlok2",
+    "itemTypes": [
+      "taorobe",
+      "boot",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhlokwlok2",
+    "itemTypes": [
+      "pauldron",
+      "taorobe",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhmhlwlok2",
+    "itemTypes": [
+      "helm",
+      "taorobe",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpbaswlok2",
+    "itemTypes": [
+      "taorobe",
+      "glove",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skppoiwlok2",
+    "itemTypes": [
+      "taorobe",
+      "bracelet",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpsklwlok2",
+    "itemTypes": [
+      "taorobe",
+      "belt",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skprunwlok2",
+    "itemTypes": [
+      "taorobe",
+      "boot",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpcblwlok2",
+    "itemTypes": [
+      "pauldron",
+      "taorobe",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpsdmwlok2",
+    "itemTypes": [
+      "helm",
+      "taorobe",
+      "necklace",
+      "ring",
+      "charm3",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skfbltmage3",
+    "itemTypes": [
+      "glove",
+      "magesigil",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfrngmage3",
+    "itemTypes": [
+      "bracelet",
+      "magesigil",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfinfmage3",
+    "itemTypes": [
+      "magesigil",
+      "belt",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfbalmage3",
+    "itemTypes": [
+      "magesigil",
+      "boot",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfblsmage3",
+    "itemTypes": [
+      "pauldron",
+      "magesigil",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skfwalmage3",
+    "itemTypes": [
+      "helm",
+      "magesigil",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktchmmage3",
+    "itemTypes": [
+      "glove",
+      "magesigil",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktbltmage3",
+    "itemTypes": [
+      "bracelet",
+      "magesigil",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktltnmage3",
+    "itemTypes": [
+      "magesigil",
+      "belt",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktnovmage3",
+    "itemTypes": [
+      "magesigil",
+      "boot",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktshdmage3",
+    "itemTypes": [
+      "pauldron",
+      "magesigil",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "sktblzmage3",
+    "itemTypes": [
+      "helm",
+      "magesigil",
+      "necklace",
+      "ring",
+      "magestaff"
+    ]
+  },
+  {
+    "affixId": "skbbaswarr3",
+    "itemTypes": [
+      "glove",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbcrtwarr3",
+    "itemTypes": [
+      "bracelet",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbthrwarr3",
+    "itemTypes": [
+      "belt",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbclvwarr3",
+    "itemTypes": [
+      "boot",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbcrzwarr3",
+    "itemTypes": [
+      "pauldron",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skbfblwarr3",
+    "itemTypes": [
+      "helm",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxdefwarr3",
+    "itemTypes": [
+      "glove",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxdogwarr3",
+    "itemTypes": [
+      "bracelet",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxctawarr3",
+    "itemTypes": [
+      "belt",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxwmswarr3",
+    "itemTypes": [
+      "boot",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxchgwarr3",
+    "itemTypes": [
+      "pauldron",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skxtstwarr3",
+    "itemTypes": [
+      "helm",
+      "necklace",
+      "ring",
+      "ugs",
+      "katana"
+    ]
+  },
+  {
+    "affixId": "skhhelwlok3",
+    "itemTypes": [
+      "taorobe",
+      "glove",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhgsdwlok3",
+    "itemTypes": [
+      "taorobe",
+      "bracelet",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhinvwlok3",
+    "itemTypes": [
+      "taorobe",
+      "belt",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhhsdwlok3",
+    "itemTypes": [
+      "taorobe",
+      "boot",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhlokwlok3",
+    "itemTypes": [
+      "pauldron",
+      "taorobe",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skhmhlwlok3",
+    "itemTypes": [
+      "helm",
+      "taorobe",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpbaswlok3",
+    "itemTypes": [
+      "taorobe",
+      "glove",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skppoiwlok3",
+    "itemTypes": [
+      "taorobe",
+      "bracelet",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpsklwlok3",
+    "itemTypes": [
+      "taorobe",
+      "belt",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skprunwlok3",
+    "itemTypes": [
+      "taorobe",
+      "boot",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpcblwlok3",
+    "itemTypes": [
+      "pauldron",
+      "taorobe",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "skpsdmwlok3",
+    "itemTypes": [
+      "helm",
+      "taorobe",
+      "necklace",
+      "ring",
+      "woodsword"
+    ]
+  },
+  {
+    "affixId": "atkfblt1",
+    "itemTypes": [
+      "bracelet",
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "atkfbal1",
+    "itemTypes": [
+      "bracelet",
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "atktblt1",
+    "itemTypes": [
+      "bracelet",
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "atkpcbl1",
+    "itemTypes": [
+      "bracelet",
+      "necklace",
+      "ring",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "hitfrng1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "hithinv1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "hittnov1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "hithhel1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "polearm"
+    ]
+  },
+  {
+    "affixId": "xref1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "axe"
+    ]
+  },
+  {
+    "affixId": "fref1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "axe"
+    ]
+  },
+  {
+    "affixId": "tref1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "axe"
+    ]
+  },
+  {
+    "affixId": "href1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "axe"
+    ]
+  },
+  {
+    "affixId": "pref1",
+    "itemTypes": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "axe"
+    ]
+  },
+  {
+    "affixId": "killfwal1",
+    "itemTypes": [
+      "pauldron",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "killbclv1",
+    "itemTypes": [
+      "pauldron",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "killxcta1",
+    "itemTypes": [
+      "pauldron",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "killpskl1",
+    "itemTypes": [
+      "pauldron",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "killhp1",
+    "itemTypes": [
+      "helm",
+      "magesigil",
+      "pant",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  },
+  {
+    "affixId": "killmp1",
+    "itemTypes": [
+      "helm",
+      "taorobe",
+      "glove",
+      "magesigil",
+      "belt",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "katana",
+      "dao2h",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "dagger",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument"
+    ]
+  }
+]

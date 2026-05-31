@@ -1,0 +1,25 @@
+{
+  "name": "gbuilder",
+  "version": "0.1.0",
+  "description": "Universal smart config table editor",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "node --watch server/index.js",
+    "dev:client": "vite",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.1.0",
+    "concurrently": "^9.1.0",
+    "supertest": "^7.0.0",
+    "svelte": "^5.33.14",
+    "vite": "^6.3.5",
+    "vitest": "^3.1.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
