@@ -1,0 +1,3418 @@
+[
+  {
+    "id": "warr",
+    "name": "战士",
+    "type": "hero",
+    "tlvl": null,
+    "area": null,
+    "description": null,
+    "image": "🥷",
+    "baseStat": {
+      "maxhp": [
+        52
+      ],
+      "maxmp": [
+        0
+      ],
+      "xdmg": [
+        1,
+        4
+      ],
+      "str": [
+        20
+      ],
+      "int": [
+        5
+      ],
+      "spi": [
+        5
+      ],
+      "vit": [
+        20
+      ],
+      "crit": [
+        5
+      ],
+      "critd": [
+        100
+      ],
+      "scrit": [
+        5
+      ],
+      "scritd": [
+        100
+      ]
+    },
+    "maxhp": null,
+    "xdmg": null,
+    "crit": null,
+    "doge": null,
+    "spd": null,
+    "mdoge": null,
+    "xres": null,
+    "fres": null,
+    "tres": null,
+    "hres": null,
+    "pres": null
+  },
+  {
+    "id": "mage",
+    "name": "法师",
+    "type": "hero",
+    "tlvl": null,
+    "area": null,
+    "description": null,
+    "image": "🧙",
+    "baseStat": {
+      "maxhp": [
+        29
+      ],
+      "maxmp": [
+        30
+      ],
+      "xdmg": [
+        1,
+        3
+      ],
+      "str": [
+        10
+      ],
+      "int": [
+        20
+      ],
+      "spi": [
+        10
+      ],
+      "vit": [
+        10
+      ],
+      "crit": [
+        5
+      ],
+      "critd": [
+        100
+      ],
+      "scrit": [
+        5
+      ],
+      "scritd": [
+        100
+      ]
+    },
+    "maxhp": null,
+    "xdmg": null,
+    "crit": null,
+    "doge": null,
+    "spd": null,
+    "mdoge": null,
+    "xres": null,
+    "fres": null,
+    "tres": null,
+    "hres": null,
+    "pres": null
+  },
+  {
+    "id": "wlk",
+    "name": "道士",
+    "type": "hero",
+    "tlvl": null,
+    "area": null,
+    "description": null,
+    "image": "🧝",
+    "baseStat": {
+      "maxhp": [
+        36
+      ],
+      "maxmp": [
+        19
+      ],
+      "xdmg": [
+        1,
+        3
+      ],
+      "str": [
+        10
+      ],
+      "int": [
+        10
+      ],
+      "spi": [
+        15
+      ],
+      "vit": [
+        15
+      ],
+      "crit": [
+        5
+      ],
+      "critd": [
+        100
+      ],
+      "scrit": [
+        5
+      ],
+      "scritd": [
+        100
+      ]
+    },
+    "maxhp": null,
+    "xdmg": null,
+    "crit": null,
+    "doge": null,
+    "spd": null,
+    "mdoge": null,
+    "xres": null,
+    "fres": null,
+    "tres": null,
+    "hres": null,
+    "pres": null
+  },
+  {
+    "id": "deer",
+    "name": "鹿",
+    "type": "mob",
+    "tlvl": 10,
+    "area": "biqi",
+    "description": null,
+    "image": "🦌",
+    "baseStat": null,
+    "maxhp": [
+      15
+    ],
+    "xdmg": [
+      12,
+      18
+    ],
+    "crit": [
+      5
+    ],
+    "doge": [
+      15
+    ],
+    "spd": [
+      8
+    ],
+    "mdoge": [
+      10
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "chicken",
+    "name": "鸡",
+    "type": "mob",
+    "tlvl": 10,
+    "area": "biqi",
+    "description": null,
+    "image": "🐔",
+    "baseStat": null,
+    "maxhp": [
+      10
+    ],
+    "xdmg": [
+      8,
+      12
+    ],
+    "crit": [
+      5
+    ],
+    "doge": [
+      20
+    ],
+    "spd": [
+      12
+    ],
+    "mdoge": [
+      15
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "scarecrow",
+    "name": "稻草人",
+    "type": "mob",
+    "tlvl": 10,
+    "area": "biqi",
+    "description": null,
+    "image": "🎃",
+    "baseStat": null,
+    "maxhp": [
+      25
+    ],
+    "xdmg": [
+      15,
+      20
+    ],
+    "crit": [
+      3
+    ],
+    "doge": [
+      5
+    ],
+    "spd": [
+      4
+    ],
+    "mdoge": [
+      5
+    ],
+    "xres": [
+      5
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "forestrat",
+    "name": "森林雪人",
+    "type": "mob",
+    "tlvl": 10,
+    "area": "biqi",
+    "description": null,
+    "image": "☃️",
+    "baseStat": null,
+    "maxhp": [
+      35
+    ],
+    "xdmg": [
+      18,
+      25
+    ],
+    "crit": [
+      8
+    ],
+    "doge": [
+      8
+    ],
+    "spd": [
+      5
+    ],
+    "mdoge": [
+      8
+    ],
+    "xres": [
+      10
+    ],
+    "fres": [
+      15
+    ],
+    "tres": [
+      5
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "rabbit",
+    "name": "兔子",
+    "type": "mob",
+    "tlvl": 10,
+    "area": "biqi",
+    "description": null,
+    "image": "🐰",
+    "baseStat": null,
+    "maxhp": [
+      8
+    ],
+    "xdmg": [
+      6,
+      10
+    ],
+    "crit": [
+      8
+    ],
+    "doge": [
+      35
+    ],
+    "spd": [
+      15
+    ],
+    "mdoge": [
+      25
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "bee",
+    "name": "蜜蜂",
+    "type": "mob",
+    "tlvl": 10,
+    "area": "biqi",
+    "description": null,
+    "image": "🐝",
+    "baseStat": null,
+    "maxhp": [
+      6
+    ],
+    "xdmg": [
+      10,
+      15
+    ],
+    "crit": [
+      25
+    ],
+    "doge": [
+      40
+    ],
+    "spd": [
+      18
+    ],
+    "mdoge": [
+      30
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      5
+    ]
+  },
+  {
+    "id": "spider",
+    "name": "蜘蛛",
+    "type": "mob",
+    "tlvl": 10,
+    "area": "biqi",
+    "description": null,
+    "image": "🕷️",
+    "baseStat": null,
+    "maxhp": [
+      18
+    ],
+    "xdmg": [
+      12,
+      18
+    ],
+    "crit": [
+      12
+    ],
+    "doge": [
+      12
+    ],
+    "spd": [
+      6
+    ],
+    "mdoge": [
+      10
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      8
+    ]
+  },
+  {
+    "id": "ant",
+    "name": "蚂蚁",
+    "type": "mob",
+    "tlvl": 10,
+    "area": "biqi",
+    "description": null,
+    "image": "🐜",
+    "baseStat": null,
+    "maxhp": [
+      12
+    ],
+    "xdmg": [
+      8,
+      12
+    ],
+    "crit": [
+      15
+    ],
+    "doge": [
+      30
+    ],
+    "spd": [
+      14
+    ],
+    "mdoge": [
+      20
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      3
+    ]
+  },
+  {
+    "id": "clawcat",
+    "name": "多钩猫",
+    "type": "mob",
+    "tlvl": 20,
+    "area": "biqi",
+    "description": null,
+    "image": "🐱",
+    "baseStat": null,
+    "maxhp": [
+      38
+    ],
+    "xdmg": [
+      30,
+      42
+    ],
+    "crit": [
+      25
+    ],
+    "doge": [
+      25
+    ],
+    "spd": [
+      14
+    ],
+    "mdoge": [
+      20
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "rakecat",
+    "name": "钉耙猫",
+    "type": "mob",
+    "tlvl": 20,
+    "area": "biqi",
+    "description": null,
+    "image": "🙀",
+    "baseStat": null,
+    "maxhp": [
+      42
+    ],
+    "xdmg": [
+      28,
+      40
+    ],
+    "crit": [
+      22
+    ],
+    "doge": [
+      22
+    ],
+    "spd": [
+      13
+    ],
+    "mdoge": [
+      18
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "wolf",
+    "name": "狼",
+    "type": "mob",
+    "tlvl": 20,
+    "area": "plains",
+    "description": null,
+    "image": "🐺",
+    "baseStat": null,
+    "maxhp": [
+      45
+    ],
+    "xdmg": [
+      25,
+      35
+    ],
+    "crit": [
+      15
+    ],
+    "doge": [
+      18
+    ],
+    "spd": [
+      12
+    ],
+    "mdoge": [
+      15
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "orc",
+    "name": "半兽人",
+    "type": "mob",
+    "tlvl": 20,
+    "area": "plains",
+    "description": null,
+    "image": "👹",
+    "baseStat": null,
+    "maxhp": [
+      55
+    ],
+    "xdmg": [
+      30,
+      40
+    ],
+    "crit": [
+      12
+    ],
+    "doge": [
+      10
+    ],
+    "spd": [
+      8
+    ],
+    "mdoge": [
+      8
+    ],
+    "xres": [
+      5
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "orcwarrior",
+    "name": "半兽战士",
+    "type": "mob",
+    "tlvl": 20,
+    "area": "plains",
+    "description": null,
+    "image": "👺",
+    "baseStat": null,
+    "maxhp": [
+      70
+    ],
+    "xdmg": [
+      35,
+      50
+    ],
+    "crit": [
+      18
+    ],
+    "doge": [
+      8
+    ],
+    "spd": [
+      7
+    ],
+    "mdoge": [
+      6
+    ],
+    "xres": [
+      8
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "skeleton",
+    "name": "骷髅",
+    "type": "mob",
+    "tlvl": 20,
+    "area": "plains",
+    "description": null,
+    "image": "💀",
+    "baseStat": null,
+    "maxhp": [
+      40
+    ],
+    "xdmg": [
+      28,
+      38
+    ],
+    "crit": [
+      10
+    ],
+    "doge": [
+      15
+    ],
+    "spd": [
+      9
+    ],
+    "mdoge": [
+      12
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      5
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "skeletonarcher",
+    "name": "骷髅弓箭手",
+    "type": "mob",
+    "tlvl": 20,
+    "area": "plains",
+    "description": null,
+    "image": "🏹",
+    "baseStat": null,
+    "maxhp": [
+      35
+    ],
+    "xdmg": [
+      32,
+      45
+    ],
+    "crit": [
+      20
+    ],
+    "doge": [
+      20
+    ],
+    "spd": [
+      11
+    ],
+    "mdoge": [
+      18
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      5
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "skeletonwarrior",
+    "name": "骷髅战士",
+    "type": "mob",
+    "tlvl": 20,
+    "area": "plains",
+    "description": null,
+    "image": "⚔️",
+    "baseStat": null,
+    "maxhp": [
+      60
+    ],
+    "xdmg": [
+      38,
+      52
+    ],
+    "crit": [
+      15
+    ],
+    "doge": [
+      12
+    ],
+    "spd": [
+      8
+    ],
+    "mdoge": [
+      10
+    ],
+    "xres": [
+      5
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      8
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "darkguard",
+    "name": "卫士",
+    "type": "mob",
+    "tlvl": 20,
+    "area": "plains",
+    "description": null,
+    "image": "🛡️",
+    "baseStat": null,
+    "maxhp": [
+      90
+    ],
+    "xdmg": [
+      35,
+      48
+    ],
+    "crit": [
+      10
+    ],
+    "doge": [
+      8
+    ],
+    "spd": [
+      6
+    ],
+    "mdoge": [
+      5
+    ],
+    "xres": [
+      12
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "caveman",
+    "name": "洞蛆",
+    "type": "mob",
+    "tlvl": 30,
+    "area": "plains",
+    "description": null,
+    "image": "🪱",
+    "baseStat": null,
+    "maxhp": [
+      95
+    ],
+    "xdmg": [
+      55,
+      75
+    ],
+    "crit": [
+      12
+    ],
+    "doge": [
+      8
+    ],
+    "spd": [
+      7
+    ],
+    "mdoge": [
+      6
+    ],
+    "xres": [
+      3
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      8
+    ]
+  },
+  {
+    "id": "zombie",
+    "name": "僵尸",
+    "type": "mob",
+    "tlvl": 20,
+    "area": "mine",
+    "description": null,
+    "image": "🧟",
+    "baseStat": null,
+    "maxhp": [
+      80
+    ],
+    "xdmg": [
+      40,
+      55
+    ],
+    "crit": [
+      8
+    ],
+    "doge": [
+      5
+    ],
+    "spd": [
+      5
+    ],
+    "mdoge": [
+      3
+    ],
+    "xres": [
+      8
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      5
+    ]
+  },
+  {
+    "id": "pincer",
+    "name": "钳虫",
+    "type": "mob",
+    "tlvl": 30,
+    "area": "mine",
+    "description": null,
+    "image": "🦂",
+    "baseStat": null,
+    "maxhp": [
+      75
+    ],
+    "xdmg": [
+      60,
+      80
+    ],
+    "crit": [
+      18
+    ],
+    "doge": [
+      15
+    ],
+    "spd": [
+      9
+    ],
+    "mdoge": [
+      12
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      12
+    ]
+  },
+  {
+    "id": "blackant",
+    "name": "黑色恶蛆",
+    "type": "mob",
+    "tlvl": 30,
+    "area": "mine",
+    "description": null,
+    "image": "🐛",
+    "baseStat": null,
+    "maxhp": [
+      85
+    ],
+    "xdmg": [
+      50,
+      70
+    ],
+    "crit": [
+      15
+    ],
+    "doge": [
+      25
+    ],
+    "spd": [
+      11
+    ],
+    "mdoge": [
+      20
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      10
+    ]
+  },
+  {
+    "id": "redant",
+    "name": "红色恶蛆",
+    "type": "mob",
+    "tlvl": 30,
+    "area": "mine",
+    "description": null,
+    "image": "🐛",
+    "baseStat": null,
+    "maxhp": [
+      80
+    ],
+    "xdmg": [
+      65,
+      85
+    ],
+    "crit": [
+      20
+    ],
+    "doge": [
+      20
+    ],
+    "spd": [
+      12
+    ],
+    "mdoge": [
+      15
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      5
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      8
+    ]
+  },
+  {
+    "id": "wedgesnake",
+    "name": "楔蛾",
+    "type": "mob",
+    "tlvl": 30,
+    "area": "mine",
+    "description": null,
+    "image": "🦋",
+    "baseStat": null,
+    "maxhp": [
+      65
+    ],
+    "xdmg": [
+      70,
+      90
+    ],
+    "crit": [
+      25
+    ],
+    "doge": [
+      30
+    ],
+    "spd": [
+      16
+    ],
+    "mdoge": [
+      25
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      8
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "centipede",
+    "name": "蜈蚣",
+    "type": "mob",
+    "tlvl": 30,
+    "area": "mine",
+    "description": null,
+    "image": "🐛",
+    "baseStat": null,
+    "maxhp": [
+      110
+    ],
+    "xdmg": [
+      45,
+      65
+    ],
+    "crit": [
+      10
+    ],
+    "doge": [
+      12
+    ],
+    "spd": [
+      8
+    ],
+    "mdoge": [
+      10
+    ],
+    "xres": [
+      5
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      15
+    ]
+  },
+  {
+    "id": "scorpion",
+    "name": "蝎子",
+    "type": "mob",
+    "tlvl": 30,
+    "area": "mine",
+    "description": null,
+    "image": "🦂",
+    "baseStat": null,
+    "maxhp": [
+      70
+    ],
+    "xdmg": [
+      75,
+      95
+    ],
+    "crit": [
+      22
+    ],
+    "doge": [
+      18
+    ],
+    "spd": [
+      10
+    ],
+    "mdoge": [
+      15
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      20
+    ]
+  },
+  {
+    "id": "mummy",
+    "name": "木乃伊",
+    "type": "mob",
+    "tlvl": 30,
+    "area": "mine",
+    "description": null,
+    "image": "🏺",
+    "baseStat": null,
+    "maxhp": [
+      120
+    ],
+    "xdmg": [
+      55,
+      75
+    ],
+    "crit": [
+      8
+    ],
+    "doge": [
+      5
+    ],
+    "spd": [
+      5
+    ],
+    "mdoge": [
+      3
+    ],
+    "xres": [
+      10
+    ],
+    "fres": [
+      8
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      8
+    ],
+    "pres": [
+      5
+    ]
+  },
+  {
+    "id": "archer",
+    "name": "弓箭手",
+    "type": "mob",
+    "tlvl": 30,
+    "area": "mine",
+    "description": null,
+    "image": "🏹",
+    "baseStat": null,
+    "maxhp": [
+      60
+    ],
+    "xdmg": [
+      80,
+      110
+    ],
+    "crit": [
+      28
+    ],
+    "doge": [
+      25
+    ],
+    "spd": [
+      13
+    ],
+    "mdoge": [
+      20
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "spearman",
+    "name": "枪兵",
+    "type": "mob",
+    "tlvl": 30,
+    "area": "mine",
+    "description": null,
+    "image": "🔱",
+    "baseStat": null,
+    "maxhp": [
+      85
+    ],
+    "xdmg": [
+      70,
+      95
+    ],
+    "crit": [
+      20
+    ],
+    "doge": [
+      15
+    ],
+    "spd": [
+      9
+    ],
+    "mdoge": [
+      12
+    ],
+    "xres": [
+      8
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "tombraider",
+    "name": "盗墓者",
+    "type": "mob",
+    "tlvl": 40,
+    "area": "mine",
+    "description": null,
+    "image": "⚱️",
+    "baseStat": null,
+    "maxhp": [
+      150
+    ],
+    "xdmg": [
+      95,
+      130
+    ],
+    "crit": [
+      25
+    ],
+    "doge": [
+      20
+    ],
+    "spd": [
+      11
+    ],
+    "mdoge": [
+      15
+    ],
+    "xres": [
+      5
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      10
+    ],
+    "pres": [
+      8
+    ]
+  },
+  {
+    "id": "darkmage",
+    "name": "暗黑法师",
+    "type": "mob",
+    "tlvl": 40,
+    "area": "lost",
+    "description": null,
+    "image": "🧙‍♂️",
+    "baseStat": null,
+    "maxhp": [
+      120
+    ],
+    "xdmg": [
+      110,
+      150
+    ],
+    "crit": [
+      30
+    ],
+    "doge": [
+      25
+    ],
+    "spd": [
+      8
+    ],
+    "mdoge": [
+      30
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      15
+    ],
+    "tres": [
+      15
+    ],
+    "hres": [
+      20
+    ],
+    "pres": [
+      5
+    ]
+  },
+  {
+    "id": "darkwarrior",
+    "name": "暗黑战士",
+    "type": "mob",
+    "tlvl": 40,
+    "area": "lost",
+    "description": null,
+    "image": "⚔️",
+    "baseStat": null,
+    "maxhp": [
+      180
+    ],
+    "xdmg": [
+      120,
+      160
+    ],
+    "crit": [
+      25
+    ],
+    "doge": [
+      15
+    ],
+    "spd": [
+      7
+    ],
+    "mdoge": [
+      10
+    ],
+    "xres": [
+      15
+    ],
+    "fres": [
+      5
+    ],
+    "tres": [
+      5
+    ],
+    "hres": [
+      5
+    ],
+    "pres": [
+      0
+    ]
+  },
+  {
+    "id": "evilsnake",
+    "name": "恶魔蛇",
+    "type": "mob",
+    "tlvl": 40,
+    "area": "lost",
+    "description": null,
+    "image": "🐍",
+    "baseStat": null,
+    "maxhp": [
+      130
+    ],
+    "xdmg": [
+      100,
+      140
+    ],
+    "crit": [
+      35
+    ],
+    "doge": [
+      35
+    ],
+    "spd": [
+      15
+    ],
+    "mdoge": [
+      25
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      25
+    ]
+  },
+  {
+    "id": "giantspider",
+    "name": "巨型蜘蛛",
+    "type": "mob",
+    "tlvl": 40,
+    "area": "lost",
+    "description": null,
+    "image": "🕸️",
+    "baseStat": null,
+    "maxhp": [
+      160
+    ],
+    "xdmg": [
+      85,
+      115
+    ],
+    "crit": [
+      20
+    ],
+    "doge": [
+      25
+    ],
+    "spd": [
+      6
+    ],
+    "mdoge": [
+      20
+    ],
+    "xres": [
+      0
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      30
+    ]
+  },
+  {
+    "id": "gargoyle",
+    "name": "石像鬼",
+    "type": "mob",
+    "tlvl": 40,
+    "area": "lost",
+    "description": null,
+    "image": "🗿",
+    "baseStat": null,
+    "maxhp": [
+      220
+    ],
+    "xdmg": [
+      110,
+      150
+    ],
+    "crit": [
+      15
+    ],
+    "doge": [
+      8
+    ],
+    "spd": [
+      5
+    ],
+    "mdoge": [
+      8
+    ],
+    "xres": [
+      25
+    ],
+    "fres": [
+      10
+    ],
+    "tres": [
+      10
+    ],
+    "hres": [
+      10
+    ],
+    "pres": [
+      5
+    ]
+  },
+  {
+    "id": "demon",
+    "name": "恶魔",
+    "type": "mob",
+    "tlvl": 40,
+    "area": "lost",
+    "description": null,
+    "image": "👿",
+    "baseStat": null,
+    "maxhp": [
+      170
+    ],
+    "xdmg": [
+      130,
+      170
+    ],
+    "crit": [
+      30
+    ],
+    "doge": [
+      20
+    ],
+    "spd": [
+      9
+    ],
+    "mdoge": [
+      15
+    ],
+    "xres": [
+      10
+    ],
+    "fres": [
+      8
+    ],
+    "tres": [
+      8
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      10
+    ]
+  },
+  {
+    "id": "flamedemon",
+    "name": "火焰恶魔",
+    "type": "mob",
+    "tlvl": 40,
+    "area": "lost",
+    "description": null,
+    "image": "🔥",
+    "baseStat": null,
+    "maxhp": [
+      155
+    ],
+    "xdmg": [
+      140,
+      180
+    ],
+    "crit": [
+      28
+    ],
+    "doge": [
+      18
+    ],
+    "spd": [
+      8
+    ],
+    "mdoge": [
+      12
+    ],
+    "xres": [
+      5
+    ],
+    "fres": [
+      25
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      8
+    ]
+  },
+  {
+    "id": "icedemon",
+    "name": "冰霜恶魔",
+    "type": "mob",
+    "tlvl": 40,
+    "area": "lost",
+    "description": null,
+    "image": "❄️",
+    "baseStat": null,
+    "maxhp": [
+      165
+    ],
+    "xdmg": [
+      120,
+      160
+    ],
+    "crit": [
+      25
+    ],
+    "doge": [
+      22
+    ],
+    "spd": [
+      7
+    ],
+    "mdoge": [
+      18
+    ],
+    "xres": [
+      8
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      15
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      10
+    ]
+  },
+  {
+    "id": "lightningdemon",
+    "name": "雷电恶魔",
+    "type": "mob",
+    "tlvl": 40,
+    "area": "lost",
+    "description": null,
+    "image": "⚡",
+    "baseStat": null,
+    "maxhp": [
+      145
+    ],
+    "xdmg": [
+      160,
+      200
+    ],
+    "crit": [
+      35
+    ],
+    "doge": [
+      30
+    ],
+    "spd": [
+      12
+    ],
+    "mdoge": [
+      25
+    ],
+    "xres": [
+      3
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      25
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      5
+    ]
+  },
+  {
+    "id": "orcking",
+    "name": "半兽人王",
+    "type": "elite",
+    "tlvl": 60,
+    "area": "lost",
+    "description": null,
+    "image": "👑",
+    "baseStat": null,
+    "maxhp": [
+      450
+    ],
+    "xdmg": [
+      180,
+      240
+    ],
+    "crit": [
+      20
+    ],
+    "doge": [
+      15
+    ],
+    "spd": [
+      6
+    ],
+    "mdoge": [
+      10
+    ],
+    "xres": [
+      20
+    ],
+    "fres": [
+      5
+    ],
+    "tres": [
+      5
+    ],
+    "hres": [
+      5
+    ],
+    "pres": [
+      10
+    ]
+  },
+  {
+    "id": "skeletonking",
+    "name": "骷髅王",
+    "type": "elite",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "💀",
+    "baseStat": null,
+    "maxhp": [
+      380
+    ],
+    "xdmg": [
+      200,
+      260
+    ],
+    "crit": [
+      25
+    ],
+    "doge": [
+      20
+    ],
+    "spd": [
+      8
+    ],
+    "mdoge": [
+      15
+    ],
+    "xres": [
+      15
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      15
+    ],
+    "pres": [
+      5
+    ]
+  },
+  {
+    "id": "zombieking",
+    "name": "僵尸王",
+    "type": "elite",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "🧟‍♂️",
+    "baseStat": null,
+    "maxhp": [
+      520
+    ],
+    "xdmg": [
+      160,
+      220
+    ],
+    "crit": [
+      15
+    ],
+    "doge": [
+      8
+    ],
+    "spd": [
+      4
+    ],
+    "mdoge": [
+      5
+    ],
+    "xres": [
+      25
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      20
+    ]
+  },
+  {
+    "id": "demonking",
+    "name": "恶魔王",
+    "type": "elite",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "😈",
+    "baseStat": null,
+    "maxhp": [
+      420
+    ],
+    "xdmg": [
+      220,
+      280
+    ],
+    "crit": [
+      30
+    ],
+    "doge": [
+      25
+    ],
+    "spd": [
+      7
+    ],
+    "mdoge": [
+      18
+    ],
+    "xres": [
+      18
+    ],
+    "fres": [
+      15
+    ],
+    "tres": [
+      15
+    ],
+    "hres": [
+      10
+    ],
+    "pres": [
+      15
+    ]
+  },
+  {
+    "id": "dragonfly",
+    "name": "蜻蜓",
+    "type": "elite",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "🦗",
+    "baseStat": null,
+    "maxhp": [
+      320
+    ],
+    "xdmg": [
+      240,
+      300
+    ],
+    "crit": [
+      40
+    ],
+    "doge": [
+      45
+    ],
+    "spd": [
+      16
+    ],
+    "mdoge": [
+      35
+    ],
+    "xres": [
+      5
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      20
+    ],
+    "hres": [
+      0
+    ],
+    "pres": [
+      8
+    ]
+  },
+  {
+    "id": "blackknight",
+    "name": "黑暗骑士",
+    "type": "elite",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "⚔️",
+    "baseStat": null,
+    "maxhp": [
+      480
+    ],
+    "xdmg": [
+      200,
+      260
+    ],
+    "crit": [
+      25
+    ],
+    "doge": [
+      12
+    ],
+    "spd": [
+      6
+    ],
+    "mdoge": [
+      8
+    ],
+    "xres": [
+      30
+    ],
+    "fres": [
+      8
+    ],
+    "tres": [
+      8
+    ],
+    "hres": [
+      8
+    ],
+    "pres": [
+      5
+    ]
+  },
+  {
+    "id": "darklord",
+    "name": "暗黑领主",
+    "type": "elite",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "🖤",
+    "baseStat": null,
+    "maxhp": [
+      440
+    ],
+    "xdmg": [
+      240,
+      300
+    ],
+    "crit": [
+      35
+    ],
+    "doge": [
+      20
+    ],
+    "spd": [
+      8
+    ],
+    "mdoge": [
+      20
+    ],
+    "xres": [
+      20
+    ],
+    "fres": [
+      20
+    ],
+    "tres": [
+      20
+    ],
+    "hres": [
+      25
+    ],
+    "pres": [
+      20
+    ]
+  },
+  {
+    "id": "flamelord",
+    "name": "火焰领主",
+    "type": "elite",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "🔥",
+    "baseStat": null,
+    "maxhp": [
+      400
+    ],
+    "xdmg": [
+      260,
+      320
+    ],
+    "crit": [
+      30
+    ],
+    "doge": [
+      18
+    ],
+    "spd": [
+      7
+    ],
+    "mdoge": [
+      15
+    ],
+    "xres": [
+      15
+    ],
+    "fres": [
+      35
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      5
+    ],
+    "pres": [
+      12
+    ]
+  },
+  {
+    "id": "icelord",
+    "name": "冰霜领主",
+    "type": "elite",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "🧊",
+    "baseStat": null,
+    "maxhp": [
+      460
+    ],
+    "xdmg": [
+      220,
+      280
+    ],
+    "crit": [
+      28
+    ],
+    "doge": [
+      25
+    ],
+    "spd": [
+      6
+    ],
+    "mdoge": [
+      22
+    ],
+    "xres": [
+      18
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      25
+    ],
+    "hres": [
+      5
+    ],
+    "pres": [
+      15
+    ]
+  },
+  {
+    "id": "corpseking",
+    "name": "尸王",
+    "type": "elite",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "💀",
+    "baseStat": null,
+    "maxhp": [
+      500
+    ],
+    "xdmg": [
+      180,
+      240
+    ],
+    "crit": [
+      20
+    ],
+    "doge": [
+      10
+    ],
+    "spd": [
+      5
+    ],
+    "mdoge": [
+      8
+    ],
+    "xres": [
+      25
+    ],
+    "fres": [
+      0
+    ],
+    "tres": [
+      0
+    ],
+    "hres": [
+      10
+    ],
+    "pres": [
+      25
+    ]
+  },
+  {
+    "id": "whiteboar",
+    "name": "白野猪",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "🐗",
+    "baseStat": null,
+    "maxhp": [
+      800
+    ],
+    "xdmg": [
+      300,
+      400
+    ],
+    "crit": [
+      25
+    ],
+    "doge": [
+      15
+    ],
+    "spd": [
+      8
+    ],
+    "mdoge": [
+      12
+    ],
+    "xres": [
+      30
+    ],
+    "fres": [
+      10
+    ],
+    "tres": [
+      10
+    ],
+    "hres": [
+      15
+    ],
+    "pres": [
+      20
+    ]
+  },
+  {
+    "id": "redboar",
+    "name": "红野猪",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "🐷",
+    "baseStat": null,
+    "maxhp": [
+      750
+    ],
+    "xdmg": [
+      350,
+      450
+    ],
+    "crit": [
+      30
+    ],
+    "doge": [
+      18
+    ],
+    "spd": [
+      9
+    ],
+    "mdoge": [
+      15
+    ],
+    "xres": [
+      25
+    ],
+    "fres": [
+      20
+    ],
+    "tres": [
+      5
+    ],
+    "hres": [
+      10
+    ],
+    "pres": [
+      15
+    ]
+  },
+  {
+    "id": "bigfoot",
+    "name": "沃玛教主",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "🦍",
+    "baseStat": null,
+    "maxhp": [
+      1200
+    ],
+    "xdmg": [
+      280,
+      380
+    ],
+    "crit": [
+      20
+    ],
+    "doge": [
+      10
+    ],
+    "spd": [
+      5
+    ],
+    "mdoge": [
+      8
+    ],
+    "xres": [
+      35
+    ],
+    "fres": [
+      15
+    ],
+    "tres": [
+      15
+    ],
+    "hres": [
+      20
+    ],
+    "pres": [
+      25
+    ]
+  },
+  {
+    "id": "tentacle",
+    "name": "触龙神",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "🐙",
+    "baseStat": null,
+    "maxhp": [
+      1000
+    ],
+    "xdmg": [
+      320,
+      420
+    ],
+    "crit": [
+      35
+    ],
+    "doge": [
+      25
+    ],
+    "spd": [
+      7
+    ],
+    "mdoge": [
+      20
+    ],
+    "xres": [
+      20
+    ],
+    "fres": [
+      5
+    ],
+    "tres": [
+      30
+    ],
+    "hres": [
+      15
+    ],
+    "pres": [
+      30
+    ]
+  },
+  {
+    "id": "redmoondemon",
+    "name": "赤月恶魔",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "🌙",
+    "baseStat": null,
+    "maxhp": [
+      1100
+    ],
+    "xdmg": [
+      400,
+      500
+    ],
+    "crit": [
+      40
+    ],
+    "doge": [
+      30
+    ],
+    "spd": [
+      10
+    ],
+    "mdoge": [
+      25
+    ],
+    "xres": [
+      25
+    ],
+    "fres": [
+      25
+    ],
+    "tres": [
+      25
+    ],
+    "hres": [
+      30
+    ],
+    "pres": [
+      20
+    ]
+  },
+  {
+    "id": "yellowdemon",
+    "name": "黄泉教主",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "woma",
+    "description": null,
+    "image": "⚡",
+    "baseStat": null,
+    "maxhp": [
+      950
+    ],
+    "xdmg": [
+      450,
+      550
+    ],
+    "crit": [
+      45
+    ],
+    "doge": [
+      35
+    ],
+    "spd": [
+      12
+    ],
+    "mdoge": [
+      30
+    ],
+    "xres": [
+      20
+    ],
+    "fres": [
+      10
+    ],
+    "tres": [
+      40
+    ],
+    "hres": [
+      20
+    ],
+    "pres": [
+      25
+    ]
+  },
+  {
+    "id": "dragon",
+    "name": "神龙",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "🐲",
+    "baseStat": null,
+    "maxhp": [
+      1500
+    ],
+    "xdmg": [
+      380,
+      480
+    ],
+    "crit": [
+      30
+    ],
+    "doge": [
+      20
+    ],
+    "spd": [
+      6
+    ],
+    "mdoge": [
+      15
+    ],
+    "xres": [
+      40
+    ],
+    "fres": [
+      30
+    ],
+    "tres": [
+      30
+    ],
+    "hres": [
+      35
+    ],
+    "pres": [
+      30
+    ]
+  },
+  {
+    "id": "phoenix",
+    "name": "凤凰",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "🔥",
+    "baseStat": null,
+    "maxhp": [
+      1200
+    ],
+    "xdmg": [
+      420,
+      520
+    ],
+    "crit": [
+      35
+    ],
+    "doge": [
+      40
+    ],
+    "spd": [
+      14
+    ],
+    "mdoge": [
+      35
+    ],
+    "xres": [
+      25
+    ],
+    "fres": [
+      45
+    ],
+    "tres": [
+      15
+    ],
+    "hres": [
+      25
+    ],
+    "pres": [
+      20
+    ]
+  },
+  {
+    "id": "unicorn",
+    "name": "麒麟",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "🦄",
+    "baseStat": null,
+    "maxhp": [
+      1300
+    ],
+    "xdmg": [
+      360,
+      460
+    ],
+    "crit": [
+      40
+    ],
+    "doge": [
+      30
+    ],
+    "spd": [
+      11
+    ],
+    "mdoge": [
+      25
+    ],
+    "xres": [
+      35
+    ],
+    "fres": [
+      20
+    ],
+    "tres": [
+      35
+    ],
+    "hres": [
+      40
+    ],
+    "pres": [
+      35
+    ]
+  },
+  {
+    "id": "whitetiger",
+    "name": "白虎",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "🐅",
+    "baseStat": null,
+    "maxhp": [
+      1100
+    ],
+    "xdmg": [
+      480,
+      580
+    ],
+    "crit": [
+      50
+    ],
+    "doge": [
+      45
+    ],
+    "spd": [
+      16
+    ],
+    "mdoge": [
+      40
+    ],
+    "xres": [
+      30
+    ],
+    "fres": [
+      15
+    ],
+    "tres": [
+      20
+    ],
+    "hres": [
+      25
+    ],
+    "pres": [
+      15
+    ]
+  },
+  {
+    "id": "zuma",
+    "name": "祖玛教主",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "👹",
+    "baseStat": null,
+    "maxhp": [
+      1400
+    ],
+    "xdmg": [
+      350,
+      450
+    ],
+    "crit": [
+      25
+    ],
+    "doge": [
+      15
+    ],
+    "spd": [
+      5
+    ],
+    "mdoge": [
+      10
+    ],
+    "xres": [
+      45
+    ],
+    "fres": [
+      20
+    ],
+    "tres": [
+      20
+    ],
+    "hres": [
+      25
+    ],
+    "pres": [
+      35
+    ]
+  },
+  {
+    "id": "womaking",
+    "name": "沃玛王",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "🦍",
+    "baseStat": null,
+    "maxhp": [
+      1600
+    ],
+    "xdmg": [
+      320,
+      420
+    ],
+    "crit": [
+      20
+    ],
+    "doge": [
+      12
+    ],
+    "spd": [
+      4
+    ],
+    "mdoge": [
+      8
+    ],
+    "xres": [
+      50
+    ],
+    "fres": [
+      25
+    ],
+    "tres": [
+      25
+    ],
+    "hres": [
+      30
+    ],
+    "pres": [
+      40
+    ]
+  },
+  {
+    "id": "shadowknight",
+    "name": "暗影骑士",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "🌑",
+    "baseStat": null,
+    "maxhp": [
+      1250
+    ],
+    "xdmg": [
+      500,
+      600
+    ],
+    "crit": [
+      40
+    ],
+    "doge": [
+      35
+    ],
+    "spd": [
+      8
+    ],
+    "mdoge": [
+      30
+    ],
+    "xres": [
+      35
+    ],
+    "fres": [
+      15
+    ],
+    "tres": [
+      15
+    ],
+    "hres": [
+      15
+    ],
+    "pres": [
+      25
+    ]
+  },
+  {
+    "id": "dragoneye",
+    "name": "龙之眼",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "👁️",
+    "baseStat": null,
+    "maxhp": [
+      900
+    ],
+    "xdmg": [
+      550,
+      650
+    ],
+    "crit": [
+      60
+    ],
+    "doge": [
+      50
+    ],
+    "spd": [
+      15
+    ],
+    "mdoge": [
+      45
+    ],
+    "xres": [
+      20
+    ],
+    "fres": [
+      25
+    ],
+    "tres": [
+      35
+    ],
+    "hres": [
+      50
+    ],
+    "pres": [
+      30
+    ]
+  },
+  {
+    "id": "deathgod",
+    "name": "死神",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "💀",
+    "baseStat": null,
+    "maxhp": [
+      1800
+    ],
+    "xdmg": [
+      400,
+      500
+    ],
+    "crit": [
+      35
+    ],
+    "doge": [
+      25
+    ],
+    "spd": [
+      6
+    ],
+    "mdoge": [
+      20
+    ],
+    "xres": [
+      40
+    ],
+    "fres": [
+      10
+    ],
+    "tres": [
+      10
+    ],
+    "hres": [
+      20
+    ],
+    "pres": [
+      50
+    ]
+  },
+  {
+    "id": "flamegod",
+    "name": "火神",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "🔥",
+    "baseStat": null,
+    "maxhp": [
+      1600
+    ],
+    "xdmg": [
+      600,
+      700
+    ],
+    "crit": [
+      45
+    ],
+    "doge": [
+      30
+    ],
+    "spd": [
+      10
+    ],
+    "mdoge": [
+      25
+    ],
+    "xres": [
+      30
+    ],
+    "fres": [
+      50
+    ],
+    "tres": [
+      20
+    ],
+    "hres": [
+      30
+    ],
+    "pres": [
+      25
+    ]
+  },
+  {
+    "id": "thundergod",
+    "name": "雷神",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "⚡",
+    "baseStat": null,
+    "maxhp": [
+      1400
+    ],
+    "xdmg": [
+      650,
+      750
+    ],
+    "crit": [
+      55
+    ],
+    "doge": [
+      40
+    ],
+    "spd": [
+      14
+    ],
+    "mdoge": [
+      35
+    ],
+    "xres": [
+      25
+    ],
+    "fres": [
+      15
+    ],
+    "tres": [
+      50
+    ],
+    "hres": [
+      25
+    ],
+    "pres": [
+      20
+    ]
+  },
+  {
+    "id": "seagod",
+    "name": "海神",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "🌊",
+    "baseStat": null,
+    "maxhp": [
+      1700
+    ],
+    "xdmg": [
+      500,
+      600
+    ],
+    "crit": [
+      40
+    ],
+    "doge": [
+      35
+    ],
+    "spd": [
+      9
+    ],
+    "mdoge": [
+      30
+    ],
+    "xres": [
+      35
+    ],
+    "fres": [
+      20
+    ],
+    "tres": [
+      40
+    ],
+    "hres": [
+      45
+    ],
+    "pres": [
+      35
+    ]
+  },
+  {
+    "id": "dragonemperor",
+    "name": "龙皇",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "🐉",
+    "baseStat": null,
+    "maxhp": [
+      2000
+    ],
+    "xdmg": [
+      700,
+      800
+    ],
+    "crit": [
+      50
+    ],
+    "doge": [
+      35
+    ],
+    "spd": [
+      8
+    ],
+    "mdoge": [
+      25
+    ],
+    "xres": [
+      50
+    ],
+    "fres": [
+      40
+    ],
+    "tres": [
+      40
+    ],
+    "hres": [
+      45
+    ],
+    "pres": [
+      40
+    ]
+  },
+  {
+    "id": "demonemperor",
+    "name": "魔皇",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "👹",
+    "baseStat": null,
+    "maxhp": [
+      1900
+    ],
+    "xdmg": [
+      750,
+      800
+    ],
+    "crit": [
+      55
+    ],
+    "doge": [
+      40
+    ],
+    "spd": [
+      10
+    ],
+    "mdoge": [
+      30
+    ],
+    "xres": [
+      45
+    ],
+    "fres": [
+      35
+    ],
+    "tres": [
+      35
+    ],
+    "hres": [
+      40
+    ],
+    "pres": [
+      45
+    ]
+  },
+  {
+    "id": "immortal",
+    "name": "仙帝",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "✨",
+    "baseStat": null,
+    "maxhp": [
+      2200
+    ],
+    "xdmg": [
+      600,
+      700
+    ],
+    "crit": [
+      45
+    ],
+    "doge": [
+      45
+    ],
+    "spd": [
+      12
+    ],
+    "mdoge": [
+      40
+    ],
+    "xres": [
+      60
+    ],
+    "fres": [
+      50
+    ],
+    "tres": [
+      50
+    ],
+    "hres": [
+      60
+    ],
+    "pres": [
+      50
+    ]
+  },
+  {
+    "id": "voidlord",
+    "name": "虚空领主",
+    "type": "boss",
+    "tlvl": 60,
+    "area": "zuma",
+    "description": null,
+    "image": "🌌",
+    "baseStat": null,
+    "maxhp": [
+      2500
+    ],
+    "xdmg": [
+      800,
+      800
+    ],
+    "crit": [
+      60
+    ],
+    "doge": [
+      50
+    ],
+    "spd": [
+      15
+    ],
+    "mdoge": [
+      45
+    ],
+    "xres": [
+      55
+    ],
+    "fres": [
+      45
+    ],
+    "tres": [
+      45
+    ],
+    "hres": [
+      55
+    ],
+    "pres": [
+      55
+    ]
+  },
+  {
+    "id": "shopkeeper",
+    "name": "商店老板",
+    "type": "npc",
+    "tlvl": null,
+    "area": null,
+    "description": null,
+    "image": "🏪",
+    "baseStat": null,
+    "maxhp": null,
+    "xdmg": null,
+    "crit": null,
+    "doge": null,
+    "spd": null,
+    "mdoge": null,
+    "xres": null,
+    "fres": null,
+    "tres": null,
+    "hres": null,
+    "pres": null
+  },
+  {
+    "id": "blacksmith",
+    "name": "铁匠",
+    "type": "npc",
+    "tlvl": null,
+    "area": null,
+    "description": null,
+    "image": "🔨",
+    "baseStat": null,
+    "maxhp": null,
+    "xdmg": null,
+    "crit": null,
+    "doge": null,
+    "spd": null,
+    "mdoge": null,
+    "xres": null,
+    "fres": null,
+    "tres": null,
+    "hres": null,
+    "pres": null
+  },
+  {
+    "id": "alchemist",
+    "name": "炼金师",
+    "type": "npc",
+    "tlvl": null,
+    "area": null,
+    "description": null,
+    "image": "⚗️",
+    "baseStat": null,
+    "maxhp": null,
+    "xdmg": null,
+    "crit": null,
+    "doge": null,
+    "spd": null,
+    "mdoge": null,
+    "xres": null,
+    "fres": null,
+    "tres": null,
+    "hres": null,
+    "pres": null
+  },
+  {
+    "id": "sage",
+    "name": "智者",
+    "type": "npc",
+    "tlvl": null,
+    "area": null,
+    "description": null,
+    "image": "👴",
+    "baseStat": null,
+    "maxhp": null,
+    "xdmg": null,
+    "crit": null,
+    "doge": null,
+    "spd": null,
+    "mdoge": null,
+    "xres": null,
+    "fres": null,
+    "tres": null,
+    "hres": null,
+    "pres": null
+  },
+  {
+    "id": "guard",
+    "name": "守卫",
+    "type": "npc",
+    "tlvl": null,
+    "area": null,
+    "description": null,
+    "image": "🛡️",
+    "baseStat": null,
+    "maxhp": null,
+    "xdmg": null,
+    "crit": null,
+    "doge": null,
+    "spd": null,
+    "mdoge": null,
+    "xres": null,
+    "fres": null,
+    "tres": null,
+    "hres": null,
+    "pres": null
+  },
+  {
+    "id": "priest",
+    "name": "牧师",
+    "type": "npc",
+    "tlvl": null,
+    "area": null,
+    "description": null,
+    "image": "⛪",
+    "baseStat": null,
+    "maxhp": null,
+    "xdmg": null,
+    "crit": null,
+    "doge": null,
+    "spd": null,
+    "mdoge": null,
+    "xres": null,
+    "fres": null,
+    "tres": null,
+    "hres": null,
+    "pres": null
+  },
+  {
+    "id": "anya",
+    "name": "安雅",
+    "type": "npc",
+    "tlvl": null,
+    "area": null,
+    "description": null,
+    "image": "🧕",
+    "baseStat": null,
+    "maxhp": null,
+    "xdmg": null,
+    "crit": null,
+    "doge": null,
+    "spd": null,
+    "mdoge": null,
+    "xres": null,
+    "fres": null,
+    "tres": null,
+    "hres": null,
+    "pres": null
+  },
+  {
+    "id": "rift",
+    "name": "秘境",
+    "type": "npc",
+    "tlvl": null,
+    "area": null,
+    "description": null,
+    "image": "🌀",
+    "baseStat": null,
+    "maxhp": null,
+    "xdmg": null,
+    "crit": null,
+    "doge": null,
+    "spd": null,
+    "mdoge": null,
+    "xres": null,
+    "fres": null,
+    "tres": null,
+    "hres": null,
+    "pres": null
+  }
+]

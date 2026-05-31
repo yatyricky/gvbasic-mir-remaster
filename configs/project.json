@@ -128,8 +128,7 @@
         },
         {
           "name": "image",
-          "type": "image",
-          "imageBase": "../../src/assets/images"
+          "type": "string"
         },
         {
           "name": "tint",
@@ -237,7 +236,7 @@
         {
           "name": "icon",
           "type": "image",
-          "imageBase": "../../src/assets/images"
+          "imageBase": "C:\\Users\\nef\\workspace\\gvbasic-mir-remaster\\src\\assets\\images\\"
         },
         {
           "name": "passive",
@@ -404,12 +403,11 @@
         },
         {
           "name": "image",
-          "type": "image",
-          "imageBase": "../../src/assets/images"
+          "type": "string"
         },
         {
           "name": "baseStat",
-          "type": "Map<Enum:StatId, number[]>"
+          "type": "Map<FK:Stat, number>"
         },
         {
           "name": "maxhp",
@@ -477,10 +475,10 @@
     }
   },
   "enums": {
-    "AffixType": [
-      "prefix",
-      "suffix"
-    ],
+    "AffixType": {
+      "prefix": "前缀",
+      "suffix": "后缀"
+    },
     "StatValueType": [
       "int",
       "number",
@@ -529,106 +527,42 @@
       "psyco",
       "poison"
     ],
-    "StatId": [
-      "str",
-      "int",
-      "spi",
-      "vit",
-      "maxhp",
-      "mhex",
-      "maxmp",
-      "mpex",
-      "xdmg",
-      "fdmg",
-      "tdmg",
-      "hdmg",
-      "pdmg"
-    ],
-    "SkillId": [
-      "fblt",
-      "frng",
-      "finf",
-      "fbal",
-      "fbls",
-      "fwal",
-      "tchm",
-      "tblt",
-      "tltn",
-      "tnov",
-      "tshd",
-      "tblz",
-      "hwoh",
-      "bbas",
-      "bcrt",
-      "bthr",
-      "bclv",
-      "bele",
-      "bfbl",
-      "bcrz",
-      "xdef",
-      "xpos",
-      "xdog",
-      "xcta",
-      "xwms",
-      "xchg",
-      "xtst",
-      "hhel",
-      "hgsd",
-      "hinv",
-      "hhsd",
-      "hlok",
-      "hmhl",
-      "pbas",
-      "ppoi",
-      "pskl",
-      "prun",
-      "pcbl",
-      "psdm",
-      "atak"
-    ],
-    "UnitId": [
-      "warr",
-      "mage",
-      "wlk"
-    ],
-    "AffixId": [],
-    "ItemId": [],
-    "ItemType": {
-      "helm": "头盔",
-      "pauldron": "肩甲",
-      "armor": "护甲",
-      "taorobe": "道袍",
-      "bracelet": "护腕",
-      "glove": "手套",
-      "magesigil": "法印",
-      "belt": "腰带",
-      "pant": "腿甲",
-      "boot": "靴子",
-      "necklace": "项链",
-      "ring": "戒指",
-      "charm1": "护身符",
-      "charm2": "护身符",
-      "charm3": "护身符",
-      "sword": "单手剑",
-      "woodsword": "仪式剑",
-      "sword2h": "双手剑",
-      "ugs": "巨剑",
-      "dao": "单手刀",
-      "katana": "武者刀",
-      "dao2h": "双手刀",
-      "dagger": "匕首",
-      "axe": "单手斧",
-      "axe2h": "双手斧",
-      "mace": "单手锤",
-      "mace2h": "双手锤",
-      "staff": "法杖",
-      "magestaff": "魔杖",
-      "polearm": "长柄武器",
-      "instrument": "法器",
-      "rune": "五行符",
-      "runeword": "符文之语",
-      "set": "套装"
-    }
+    "ItemType": [
+      "helm",
+      "pauldron",
+      "armor",
+      "taorobe",
+      "bracelet",
+      "glove",
+      "magesigil",
+      "belt",
+      "pant",
+      "boot",
+      "necklace",
+      "ring",
+      "charm1",
+      "charm2",
+      "charm3",
+      "sword",
+      "woodsword",
+      "sword2h",
+      "ugs",
+      "dao",
+      "dao2h",
+      "katana",
+      "dagger",
+      "axe",
+      "axe2h",
+      "mace",
+      "mace2h",
+      "staff",
+      "magestaff",
+      "polearm",
+      "instrument",
+      "rune",
+      "runeword",
+      "set"
+    ]
   },
-  "_path": "C:\\Users\\nef\\workspace\\gvbasic-mir-remaster\\gbuilder\\example"
+  "_path": "C:\\Users\\nef\\workspace\\gvbasic-mir-remaster\\configs"
 }

@@ -9,6 +9,7 @@
     import MapEditor from "./editors/MapEditor.svelte";
     import ArrayOfMapEditor from "./editors/ArrayOfMapEditor.svelte";
     import ArrayEditor from "./editors/ArrayEditor.svelte";
+    import ImagePicker from "./editors/ImagePicker.svelte";
 
     /**
      * @type {{
@@ -94,6 +95,12 @@
                 {enums}
                 {onOpenFK}
                 tableConfig={parsed.key.kind === "fk" ? getTableConfig(parsed.key.target) : undefined}
+            />
+        {:else if parsed.kind === "image"}
+            <ImagePicker
+                value={value ?? ""}
+                imageBase={column.imageBase || ""}
+                {onChange}
             />
         {:else}
             <div class="field-readonly">{formatDisplay(value)}</div>

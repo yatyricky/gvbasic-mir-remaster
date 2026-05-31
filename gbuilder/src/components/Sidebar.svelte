@@ -1,8 +1,9 @@
 <script>
     import { validate, exportTable } from "../lib/api-client.js";
+    import WorkspaceSwitcher from "./project/WorkspaceSwitcher.svelte";
 
-    /** @type {{ tables: Array<{name: string, rowCount: number}>, activeTable: string, onSelect: (name: string) => void }} */
-    let { tables, activeTable, onSelect } = $props();
+    /** @type {{ tables: Array<{name: string, rowCount: number}>, activeTable: string, onSelect: (name: string) => void, projectPath?: string, onSwitchWorkspace?: (project: any) => void }} */
+    let { tables, activeTable, onSelect, projectPath, onSwitchWorkspace } = $props();
 
     let errors = $state([]);
     let showErrors = $state(false);
@@ -26,7 +27,10 @@
 </script>
 
 <div class="sidebar-inner">
-    <div class="logo">gbuilder</div>
+    <WorkspaceSwitcher
+        currentPath={projectPath || ""}
+        onSwitch={onSwitchWorkspace}
+    />
     <div class="table-list">
         {#each tables as table}
             <button
@@ -72,13 +76,6 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-    }
-    .logo {
-        padding: 12px 16px;
-        font-size: 16px;
-        font-weight: 700;
-        color: var(--accent);
-        border-bottom: 1px solid var(--border);
     }
     .table-list {
         flex: 1;

@@ -1,9 +1,12 @@
 import express from "express";
-import { join } from "path";
-import { mkdirSync, existsSync } from "fs";
+import { join, resolve } from "path";
+import { mkdirSync, existsSync, readdirSync } from "fs";
+import { execSync } from "child_process";
 import { readFile, writeFile } from "./file-io.js";
 import { FKResolver } from "./fk-resolver.js";
 import { validateProject } from "./validate.js";
+import { findEnumReferences, findFKReferences } from "./references.js";
+import { loadConfig, addRecentWorkspace, removeRecentWorkspace } from "./app-config.js";
 
 const app = express();
 app.use(express.json());
@@ -40,7 +43,61 @@ function rebuildFKCache() {
 app.get("/api/project", (req, res) => {
     const project = getProject();
     if (!project) return res.status(400).json({ error: "No project loaded" });
-    res.json(project);
+    res.json({ ...project, _path: getProjectDir() });
+});
+
+// GET /api/config
+app.get("/api/config", (req, res) => {
+    res.json(loadConfig());
+});
+
+// GET /api/references/enum/:enumName - find ALL references to an enum (all values)
+app.get("/api/references/enum/:enumName", (req, res) => {
+    const dir = getProjectDir();
+    if (!dir) return res.status(400).json({ error: "No project loaded" });
+    // Check all values of this enum across all tables
+    const project = readFile(join(dir, "project.json"));
+    if (!project) return res.status(400).json({ error: "No project" });
+    const enumDef = project.enums?.[req.params.enumName];
+    if (!enumDef) return res.json([]);
+    const values = Array.isArray(enumDef) ? enumDef : Object.keys(enumDef);
+    const allRefs = [];
+    for (const val of values) {
+        const refs = findEnumReferences(dir, req.params.enumName, val);
+        for (const r of refs) allRefs.push({ ...r, enumValue: val });
+    }
+    res.json(allRefs);
+});
+
+// GET /api/references/fk/:table/:id - find references to a FK target row
+app.get("/api/references/fk/:table/:id", (req, res) => {
+    const dir = getProjectDir();
+    if (!dir) return res.status(400).json({ error: "No project loaded" });
+    const refs = findFKReferences(dir, req.params.table, req.params.id);
+    res.json(refs);
+});
+
+// GET /api/pick-folder - open native folder picker dialog
+app.get("/api/pick-folder", (req, res) => {
+    try {
+        const ps = `Add-Type -AssemblyName System.Windows.Forms; $d = New-Object System.Windows.Forms.FolderBrowserDialog; $d.ShowNewFolderButton = $false; if ($d.ShowDialog() -eq 'OK') { $d.SelectedPath } else { '' }`;
+        const result = execSync(`powershell -NoProfile -Command "${ps}"`, { encoding: "utf-8", timeout: 60000 }).trim();
+        if (result) {
+            res.json({ path: result });
+        } else {
+            res.json({ path: null });
+        }
+    } catch (e) {
+        res.json({ path: null });
+    }
+});
+
+// DELETE /api/config/recent - remove a recent workspace
+app.delete("/api/config/recent", (req, res) => {
+    const { path } = req.body;
+    if (!path) return res.status(400).json({ error: "Missing path" });
+    removeRecentWorkspace(path);
+    res.json({ ok: true });
 });
 
 // GET /api/tables
@@ -116,8 +173,9 @@ app.post("/api/project/open", (req, res) => {
     const project = readFile(projectPath);
     if (!project) return res.status(404).json({ error: "No project.json found" });
     process.env.GBUILDER_PROJECT = path;
+    addRecentWorkspace(path);
     rebuildFKCache();
-    res.json(project);
+    res.json({ ...project, _path: path });
 });
 
 // POST /api/project/create { path, name }
@@ -131,7 +189,8 @@ app.post("/api/project/create", (req, res) => {
     const project = { name, dataDir: "./data", tables: {}, enums: {} };
     writeFile(join(projectDir, "project.json"), project);
     process.env.GBUILDER_PROJECT = projectDir;
-    res.json(project);
+    addRecentWorkspace(projectDir);
+    res.json({ ...project, _path: projectDir });
 });
 
 // ===== Schema Management =====
@@ -140,6 +199,12 @@ app.post("/api/project/create", (req, res) => {
 app.put("/api/schema", (req, res) => {
     const dir = getProjectDir();
     if (!dir) return res.status(400).json({ error: "No project loaded" });
+    // Auto-backup before any schema change
+    const current = readFile(join(dir, "project.json"));
+    if (current) {
+        const ts = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
+        writeFile(join(dir, `project.backup.${ts}.json`), current);
+    }
     writeFile(join(dir, "project.json"), req.body);
     rebuildFKCache();
     res.json({ ok: true });
@@ -251,6 +316,41 @@ app.get("/api/fk/search/:table", (req, res) => {
     const q = req.query.q || "";
     const results = fkResolver.search(req.params.table, q);
     res.json(results);
+});
+
+// GET /api/image - serve image files, tries .jpg then .png
+app.get("/api/image", (req, res) => {
+    const relPath = req.query.path;
+    if (!relPath) return res.status(400).json({ error: "Missing path" });
+    const dir = getProjectDir();
+    if (!dir) return res.status(400).json({ error: "No project loaded" });
+
+    const candidates = [relPath, relPath + ".jpg", relPath + ".png"];
+    for (const candidate of candidates) {
+        const absPath = resolve(dir, candidate);
+        if (existsSync(absPath)) {
+            return res.sendFile(absPath);
+        }
+    }
+    return res.status(404).json({ error: "File not found" });
+});
+
+// GET /api/images?dir=relative/path - list image files in a directory
+app.get("/api/images", (req, res) => {
+    const relDir = req.query.dir;
+    if (!relDir) return res.status(400).json({ error: "Missing dir" });
+    const dir = getProjectDir();
+    if (!dir) return res.status(400).json({ error: "No project loaded" });
+    const absDir = resolve(dir, relDir);
+    if (!existsSync(absDir)) return res.json([]);
+    try {
+        const files = readdirSync(absDir)
+            .filter(f => /\.(jpg|png)$/i.test(f))
+            .map(f => f.replace(/\.(jpg|png)$/i, ""));
+        res.json(files);
+    } catch {
+        res.json([]);
+    }
 });
 
 // Rebuild cache on startup

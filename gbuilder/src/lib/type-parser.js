@@ -21,6 +21,7 @@ export function parseType(typeStr) {
 
     if (s.startsWith("Enum:")) return { kind: "enum", name: s.slice(5) };
     if (s.startsWith("FK:")) return { kind: "fk", target: s.slice(3) };
+    if (s === "image") return { kind: "image" };
 
     if (s === "string" || s === "number" || s === "boolean") {
         return { kind: "primitive", base: s };

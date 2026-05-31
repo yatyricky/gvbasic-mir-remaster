@@ -6,7 +6,7 @@
     import InspectorChain from "./components/InspectorChain.svelte";
     import WelcomeScreen from "./components/project/WelcomeScreen.svelte";
     import SchemaEditor from "./components/schema/SchemaEditor.svelte";
-    import { getProject, getTable, getTables, updateRow, getRow } from "./lib/api-client.js";
+    import { getProject, getTable, getTables, updateRow, getRow, openProject } from "./lib/api-client.js";
 
     let project = $state(null);
     let tables = $state([]);
@@ -134,6 +134,15 @@
         }
     }
 
+    async function handleSwitchWorkspace(p) {
+        project = p;
+        activeTable = null;
+        selectedRow = null;
+        chainPanels = [];
+        tableData = null;
+        await loadProject();
+    }
+
     function onProjectReady(p) {
         project = p;
         ready = true;
@@ -157,7 +166,13 @@
 {:else}
     <div class="app">
         <aside class="sidebar">
-            <Sidebar {tables} {activeTable} onSelect={selectTable} />
+            <Sidebar
+                {tables}
+                {activeTable}
+                onSelect={selectTable}
+                projectPath={project?._path}
+                onSwitchWorkspace={handleSwitchWorkspace}
+            />
             <div class="sidebar-footer">
                 <button class="settings-btn" onclick={() => view = "schema"}>⚙ Schema</button>
             </div>
@@ -232,11 +247,14 @@
     }
     .sidebar {
         width: var(--sidebar-width);
+        min-width: var(--sidebar-width);
         background: var(--bg-secondary);
         border-right: 1px solid var(--border);
-        overflow-y: auto;
+        overflow: visible;
         display: flex;
         flex-direction: column;
+        position: relative;
+        z-index: 10;
     }
     .sidebar-footer {
         padding: 8px;
@@ -260,6 +278,8 @@
     .grid-area {
         flex: 1;
         overflow: auto;
+        position: relative;
+        z-index: 1;
     }
     .inspector-area {
         display: flex;

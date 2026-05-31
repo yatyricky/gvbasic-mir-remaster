@@ -47,6 +47,30 @@ export function searchFK(table, query) {
     return request("GET", `/fk/search/${encodeURIComponent(table)}?q=${encodeURIComponent(query)}`);
 }
 
+export function getConfig() {
+    return request("GET", "/config");
+}
+
+export function pickFolder() {
+    return request("GET", "/pick-folder");
+}
+
+export function listImages(dir) {
+    return request("GET", `/images?dir=${encodeURIComponent(dir)}`);
+}
+
+export function removeRecentWorkspace(path) {
+    return request("DELETE", "/config/recent", { path });
+}
+
+export function findEnumRefs(enumName) {
+    return request("GET", `/references/enum/${encodeURIComponent(enumName)}`);
+}
+
+export function findFKRefs(table, id) {
+    return request("GET", `/references/fk/${encodeURIComponent(table)}/${encodeURIComponent(id)}`);
+}
+
 export function createProject(path, name) {
     return request("POST", "/project/create", { path, name });
 }

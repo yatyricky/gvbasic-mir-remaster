@@ -44,6 +44,13 @@
         next[name] = { ...next[name], displayField: field };
         onUpdate(next);
     }
+
+    function updateDisplayTemplate(tableIdx, template) {
+        const name = tableNames[tableIdx];
+        const next = { ...tables };
+        next[name] = { ...next[name], displayTemplate: template || undefined };
+        onUpdate(next);
+    }
 </script>
 
 <div class="table-manager">
@@ -69,7 +76,6 @@
                 <span class="table-meta">
                     {tables[name].columns?.length ?? 0} cols
                     · PK: {tables[name].primaryKey}
-                    · display: {tables[name].displayField}
                 </span>
                 <button class="remove-btn" onclick={(e) => { e.stopPropagation(); removeTable(name); }}>×</button>
             </div>
@@ -77,7 +83,18 @@
                 <div class="table-body">
                     <div class="table-props">
                         <label>
-                            <span>Display Field</span>
+                            <span>Display Template</span>
+                            <input
+                                type="text"
+                                class="template-input"
+                                value={tables[name].displayTemplate || ""}
+                                placeholder={'e.g. ({id}){name}'}
+                                oninput={(e) => updateDisplayTemplate(i, e.currentTarget.value)}
+                            />
+                            <span class="template-help">{'{fieldName}'} references column values</span>
+                        </label>
+                        <label>
+                            <span>Fallback Field</span>
                             <select
                                 class="select"
                                 value={tables[name].displayField}
@@ -201,5 +218,24 @@
         color: var(--text-primary);
         font-size: 12px;
         outline: none;
+    }
+    .template-input {
+        flex: 1;
+        padding: 4px 8px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        color: var(--text-primary);
+        font-size: 12px;
+        font-family: monospace;
+        outline: none;
+    }
+    .template-input:focus {
+        border-color: var(--accent);
+    }
+    .template-help {
+        font-size: 10px;
+        color: var(--text-muted);
+        margin-left: 4px;
     }
 </style>

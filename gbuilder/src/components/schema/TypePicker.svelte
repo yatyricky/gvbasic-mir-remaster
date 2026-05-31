@@ -1,36 +1,49 @@
 <script>
-    /** @type {{ value: string, tables: string[], enums: string[], onChange: (v: string) => void }} */
-    let { value, tables, enums, onChange } = $props();
+    /** @type {{ value: string, tables: string[], enums: string[], onChange: (v: string) => void, onImageBaseChange?: (v: string) => void, imageBase?: string }} */
+    let { value, tables, enums, onChange, onImageBaseChange, imageBase } = $props();
 
-    let category = $state("primitive"); // primitive | enum | fk | map
-    let isArray = $state(false);
+    // Categories: primitive | enum | fk | list | map | image
+    let category = $state("primitive");
     let selectedPrimitive = $state("string");
-    let mapKeyType = $state("string");
-    let mapValueType = $state("string");
     let selectedEnum = $state("");
     let selectedFK = $state("");
+    let listElemType = $state("string");
+    let mapKeyType = $state("string");
+    let mapValueType = $state("number");
 
-    // Parse current value on mount
+    // Parse current value
     $effect(() => {
         const v = value || "";
-        isArray = v.endsWith("[]");
-        const base = isArray ? v.slice(0, -2) : v;
 
-        if (base.startsWith("Map<")) {
+        if (v.startsWith("Map<")) {
             category = "map";
-            const inner = base.slice(4, -1);
+            const inner = v.slice(4, -1);
             const parts = inner.split(",").map(s => s.trim());
             mapKeyType = parts[0] || "string";
-            mapValueType = parts[1] || "string";
-        } else if (base.startsWith("Enum:")) {
+            mapValueType = parts[1] || "number";
+        } else if (v.endsWith("[]")) {
+            const base = v.slice(0, -2);
+            if (base.startsWith("Enum:")) {
+                category = "list";
+                listElemType = base;
+            } else if (base.startsWith("FK:")) {
+                category = "list";
+                listElemType = base;
+            } else {
+                category = "list";
+                listElemType = base;
+            }
+        } else if (v.startsWith("Enum:")) {
             category = "enum";
-            selectedEnum = base.slice(5);
-        } else if (base.startsWith("FK:")) {
+            selectedEnum = v.slice(5);
+        } else if (v.startsWith("FK:")) {
             category = "fk";
-            selectedFK = base.slice(3);
+            selectedFK = v.slice(3);
+        } else if (v === "image") {
+            category = "image";
         } else {
             category = "primitive";
-            selectedPrimitive = base || "string";
+            selectedPrimitive = v || "string";
         }
     });
 
@@ -42,45 +55,20 @@
             type = `Enum:${selectedEnum}`;
         } else if (category === "fk") {
             type = `FK:${selectedFK}`;
+        } else if (category === "list") {
+            type = `${listElemType}[]`;
         } else if (category === "map") {
             type = `Map<${mapKeyType}, ${mapValueType}>`;
+        } else if (category === "image") {
+            type = "image";
         }
-        if (isArray) type += "[]";
         onChange(type);
-    }
-
-    function onPrimitiveChange(e) {
-        selectedPrimitive = e.currentTarget.value;
-        emit();
     }
 
     function onCategoryChange(e) {
         category = e.currentTarget.value;
-        emit();
-    }
-
-    function onArrayToggle(e) {
-        isArray = e.currentTarget.checked;
-        emit();
-    }
-
-    function onEnumChange(e) {
-        selectedEnum = e.currentTarget.value;
-        emit();
-    }
-
-    function onFKChange(e) {
-        selectedFK = e.currentTarget.value;
-        emit();
-    }
-
-    function onMapKeyChange(e) {
-        mapKeyType = e.currentTarget.value;
-        emit();
-    }
-
-    function onMapValueChange(e) {
-        mapValueType = e.currentTarget.value;
+        // Set sensible defaults for each category
+        if (category === "list" && !listElemType) listElemType = "string";
         emit();
     }
 </script>
@@ -91,33 +79,39 @@
             <option value="primitive">Primitive</option>
             <option value="enum">Enum</option>
             <option value="fk">FK</option>
+            <option value="list">List</option>
             <option value="map">Map</option>
+            <option value="image">Image</option>
         </select>
 
         {#if category === "primitive"}
-            <select class="select" value={selectedPrimitive} onchange={onPrimitiveChange}>
+            <select class="select" value={selectedPrimitive} onchange={(e) => { selectedPrimitive = e.currentTarget.value; emit(); }}>
                 <option value="string">string</option>
                 <option value="number">number</option>
                 <option value="boolean">boolean</option>
             </select>
+
         {:else if category === "enum"}
-            <select class="select" value={selectedEnum} onchange={onEnumChange}>
+            <select class="select" value={selectedEnum} onchange={(e) => { selectedEnum = e.currentTarget.value; emit(); }}>
                 <option value="">-- select --</option>
                 {#each enums as e}
                     <option value={e}>{e}</option>
                 {/each}
             </select>
+
         {:else if category === "fk"}
-            <select class="select" value={selectedFK} onchange={onFKChange}>
+            <select class="select" value={selectedFK} onchange={(e) => { selectedFK = e.currentTarget.value; emit(); }}>
                 <option value="">-- select --</option>
                 {#each tables as t}
                     <option value={t}>{t}</option>
                 {/each}
             </select>
-        {:else if category === "map"}
-            <span class="map-label">Map&lt;</span>
-            <select class="select narrow" value={mapKeyType} onchange={onMapKeyChange}>
+
+        {:else if category === "list"}
+            <span class="label">List&lt;</span>
+            <select class="select narrow" value={listElemType} onchange={(e) => { listElemType = e.currentTarget.value; emit(); }}>
                 <option value="string">string</option>
+                <option value="number">number</option>
                 {#each enums as e}
                     <option value={`Enum:${e}`}>Enum:{e}</option>
                 {/each}
@@ -125,18 +119,36 @@
                     <option value={`FK:${t}`}>FK:{t}</option>
                 {/each}
             </select>
-            <span class="map-label">,</span>
-            <select class="select narrow" value={mapValueType} onchange={onMapValueChange}>
+            <span class="label">&gt;</span>
+
+        {:else if category === "map"}
+            <span class="label">Map&lt;</span>
+            <select class="select narrow" value={mapKeyType} onchange={(e) => { mapKeyType = e.currentTarget.value; emit(); }}>
+                <option value="string">string</option>
+                <option value="number">number</option>
+                {#each enums as e}
+                    <option value={`Enum:${e}`}>Enum:{e}</option>
+                {/each}
+                {#each tables as t}
+                    <option value={`FK:${t}`}>FK:{t}</option>
+                {/each}
+            </select>
+            <span class="label">,</span>
+            <select class="select narrow" value={mapValueType} onchange={(e) => { mapValueType = e.currentTarget.value; emit(); }}>
                 <option value="number">number</option>
                 <option value="string">string</option>
             </select>
-            <span class="map-label">&gt;</span>
-        {/if}
+            <span class="label">&gt;</span>
 
-        <label class="array-toggle">
-            <input type="checkbox" checked={isArray} onchange={onArrayToggle} />
-            <span>[]</span>
-        </label>
+        {:else if category === "image"}
+            <input
+                type="text"
+                class="img-input"
+                placeholder="Image base path..."
+                value={imageBase || ""}
+                oninput={(e) => onImageBaseChange?.(e.currentTarget.value)}
+            />
+        {/if}
     </div>
     <div class="preview">{value}</div>
 </div>
@@ -161,23 +173,30 @@
         font-size: 12px;
         outline: none;
     }
-    .select.narrow {
-        max-width: 100px;
+    .select:focus {
+        border-color: var(--accent);
     }
-    .map-label {
+    .select.narrow {
+        max-width: 120px;
+    }
+    .label {
         color: var(--text-muted);
         font-size: 12px;
+        flex-shrink: 0;
     }
-    .array-toggle {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        color: var(--text-secondary);
+    .img-input {
+        padding: 4px 8px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        color: var(--text-primary);
         font-size: 12px;
-        cursor: pointer;
+        font-family: monospace;
+        outline: none;
+        width: 140px;
     }
-    .array-toggle input {
-        accent-color: var(--accent);
+    .img-input:focus {
+        border-color: var(--accent);
     }
     .preview {
         color: var(--text-muted);

@@ -1,12 +1,16 @@
 <script>
-    /** @type {{ value: string, options: string[], onChange: (v: string) => void }} */
+    import { getEnumEntries } from "../../lib/enum-utils.js";
+
+    /** @type {{ value: string, options: string[] | Record<string, string>, onChange: (v: string) => void }} */
     let { value, options, onChange } = $props();
+
+    let entries = $derived(getEnumEntries(options));
 </script>
 
 <select class="editor-select" onchange={(e) => onChange(e.currentTarget.value)}>
     <option value="">-- select --</option>
-    {#each options as opt}
-        <option value={opt} selected={value === opt}>{opt}</option>
+    {#each entries as { value: v, label }}
+        <option value={v} selected={value === v}>{label}{label !== v ? ` (${v})` : ""}</option>
     {/each}
 </select>
 

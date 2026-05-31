@@ -46,6 +46,7 @@
 <div class="col-editor">
     <div class="col-header">
         <span class="col-h col-h-name">Name</span>
+        <span class="col-h col-h-dname">Label</span>
         <span class="col-h col-h-type">Type</span>
         <span class="col-h col-h-meta">Meta</span>
         <span class="col-h col-h-linked">Linked</span>
@@ -59,12 +60,21 @@
                 value={col.name}
                 oninput={(e) => updateCol(i, "name", e.currentTarget.value)}
             />
+            <input
+                class="col-input col-dname"
+                type="text"
+                value={col.displayName || ""}
+                placeholder={col.name}
+                oninput={(e) => updateCol(i, "displayName", e.currentTarget.value || undefined)}
+            />
             <div class="col-type">
                 <TypePicker
                     value={col.type}
                     tables={tableNames}
                     enums={enumNames}
                     onChange={(v) => updateCol(i, "type", v)}
+                    imageBase={col.imageBase}
+                    onImageBaseChange={(v) => updateCol(i, "imageBase", v || undefined)}
                 />
             </div>
             <div class="col-meta">
@@ -114,7 +124,7 @@
     }
     .col-header {
         display: grid;
-        grid-template-columns: 120px 1fr 200px 100px 80px;
+        grid-template-columns: 120px 100px 1fr 200px 100px 80px;
         gap: 8px;
         padding: 4px 0;
         border-bottom: 1px solid var(--border);
@@ -126,7 +136,7 @@
     }
     .col-row {
         display: grid;
-        grid-template-columns: 120px 1fr 200px 100px 80px;
+        grid-template-columns: 120px 100px 1fr 200px 100px 80px;
         gap: 8px;
         align-items: start;
         padding: 4px 0;

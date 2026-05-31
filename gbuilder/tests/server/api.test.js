@@ -202,3 +202,80 @@ describe("GET /api/fk/search/:table", () => {
         expect(res.body).toEqual([{ id: "h1", display: "Warrior" }]);
     });
 });
+
+describe("GET /api/references/enum/:enumName", () => {
+    it("finds all enum references across all values", async () => {
+        writeProject({
+            ...SIMPLE_PROJECT,
+            enums: { HeroClass: ["warrior", "mage"] },
+            tables: {
+                Hero: {
+                    file: "Hero.json", primaryKey: "id", displayField: "name",
+                    columns: [
+                        { name: "id", type: "string" },
+                        { name: "name", type: "string" },
+                        { name: "class", type: "Enum:HeroClass" },
+                    ],
+                },
+            },
+        });
+        writeTable("Hero", [
+            { id: "h1", name: "Warrior", class: "warrior" },
+            { id: "h2", name: "Mage", class: "mage" },
+        ]);
+
+        const res = await request(app).get("/api/references/enum/HeroClass");
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveLength(2);
+        expect(res.body[0].table).toBe("Hero");
+        expect(res.body[0].enumValue).toBe("warrior");
+        expect(res.body[1].enumValue).toBe("mage");
+    });
+
+    it("returns empty for unreferenced enum", async () => {
+        writeProject({
+            ...SIMPLE_PROJECT,
+            enums: { HeroClass: ["warrior", "mage"], Unused: ["a", "b"] },
+            tables: {
+                Hero: {
+                    file: "Hero.json", primaryKey: "id", displayField: "name",
+                    columns: [
+                        { name: "id", type: "string" },
+                        { name: "class", type: "Enum:HeroClass" },
+                    ],
+                },
+            },
+        });
+        writeTable("Hero", [
+            { id: "h1", name: "Warrior", class: "warrior" },
+        ]);
+
+        const res = await request(app).get("/api/references/enum/Unused");
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveLength(0);
+    });
+
+    it("finds enum array references", async () => {
+        writeProject({
+            ...SIMPLE_PROJECT,
+            enums: { Tag: ["fire", "ice", "lightning"] },
+            tables: {
+                Skill: {
+                    file: "Skill.json", primaryKey: "id", displayField: "name",
+                    columns: [
+                        { name: "id", type: "string" },
+                        { name: "tags", type: "Enum:Tag[]" },
+                    ],
+                },
+            },
+        });
+        writeTable("Skill", [
+            { id: "s1", name: "Fireball", tags: ["fire"] },
+            { id: "s2", name: "Blizzard", tags: ["ice", "lightning"] },
+        ]);
+
+        const res = await request(app).get("/api/references/enum/Tag");
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveLength(3); // fire in s1, ice in s2, lightning in s2
+    });
+});
