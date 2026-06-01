@@ -3,8 +3,8 @@
     import EnumManager from "./EnumManager.svelte";
     import { saveSchema } from "../../lib/api-client.js";
 
-    /** @type {{ project: any, onUpdate: (p: any) => void, onBack: () => void }} */
-    let { project, onUpdate, onBack } = $props();
+    /** @type {{ project: any, activeTable: string|null, onUpdate: (p: any) => void, onBack: () => void }} */
+    let { project, activeTable, onUpdate, onBack } = $props();
 
     let tab = $state("tables"); // tables | enums
     let saveStatus = $state(null);
@@ -44,7 +44,7 @@
     </div>
     <div class="schema-body">
         {#if tab === "tables"}
-            <TableManager tables={project.tables} enums={project.enums} onUpdate={updateTables} />
+            <TableManager tables={project.tables} enums={project.enums} activeTable={activeTable} onUpdate={updateTables} />
         {:else}
             <EnumManager enums={project.enums} onUpdate={updateEnums} />
         {/if}

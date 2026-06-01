@@ -162,7 +162,7 @@
 {:else if !project}
     <WelcomeScreen onReady={onProjectReady} />
 {:else if view === "schema"}
-    <SchemaEditor {project} onUpdate={onSchemaUpdate} onBack={() => view = "data"} />
+    <SchemaEditor {project} {activeTable} onUpdate={onSchemaUpdate} onBack={() => view = "data"} />
 {:else}
     <div class="app">
         <aside class="sidebar">

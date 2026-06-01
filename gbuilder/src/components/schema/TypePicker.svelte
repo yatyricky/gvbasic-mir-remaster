@@ -144,10 +144,11 @@
             <input
                 type="text"
                 class="img-input"
-                placeholder="Image base path..."
+                placeholder="e.g. ./assets/images"
                 value={imageBase || ""}
                 oninput={(e) => onImageBaseChange?.(e.currentTarget.value)}
             />
+            <span class="hint">(relative to project.json)</span>
         {/if}
     </div>
     <div class="preview">{value}</div>
@@ -202,5 +203,10 @@
         color: var(--text-muted);
         font-size: 11px;
         font-family: monospace;
+    }
+    .hint {
+        color: var(--text-muted);
+        font-size: 10px;
+        white-space: nowrap;
     }
 </style>

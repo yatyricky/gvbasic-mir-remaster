@@ -1,13 +1,19 @@
 <script>
     import ColumnEditor from "./ColumnEditor.svelte";
 
-    /** @type {{ tables: Record<string, any>, enums: Record<string, string[]>, onUpdate: (tables: Record<string, any>) => void }} */
-    let { tables, enums, onUpdate } = $props();
-
-    let expandedTable = $state(null);
-    let newTableName = $state("");
+    /** @type {{ tables: Record<string, any>, enums: Record<string, string[]>, activeTable: string|null, onUpdate: (tables: Record<string, any>) => void }} */
+    let { tables, enums, activeTable, onUpdate } = $props();
 
     const tableNames = $derived(Object.keys(tables));
+    let expandedTable = $state(null);
+
+    $effect(() => {
+        if (activeTable) {
+            const idx = tableNames.indexOf(activeTable);
+            if (idx !== -1) expandedTable = idx;
+        }
+    });
+    let newTableName = $state("");
 
     function addTable() {
         if (!newTableName.trim()) return;
