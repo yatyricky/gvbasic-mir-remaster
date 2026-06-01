@@ -1,12 +1,14 @@
 <script>
-    import { validate, exportTable } from "../lib/api-client.js";
+    import { validate, exportTable, renameTable } from "../lib/api-client.js";
     import WorkspaceSwitcher from "./project/WorkspaceSwitcher.svelte";
 
-    /** @type {{ tables: Array<{name: string, rowCount: number}>, activeTable: string, onSelect: (name: string) => void, projectPath?: string, onSwitchWorkspace?: (project: any) => void }} */
-    let { tables, activeTable, onSelect, projectPath, onSwitchWorkspace } = $props();
+    /** @type {{ tables: Array<{name: string, rowCount: number}>, activeTable: string, onSelect: (name: string) => void, projectPath?: string, onSwitchWorkspace?: (project: any) => void, onRename?: (oldName: string, newName: string) => void }} */
+    let { tables, activeTable, onSelect, projectPath, onSwitchWorkspace, onRename } = $props();
 
     let errors = $state([]);
     let showErrors = $state(false);
+    let renamingTable = $state(null);
+    let renameInput = $state("");
 
     async function runValidate() {
         errors = await validate();
@@ -24,6 +26,35 @@
         a.click();
         URL.revokeObjectURL(url);
     }
+
+    function startRename(name) {
+        renamingTable = name;
+        renameInput = name;
+    }
+
+    async function confirmRename() {
+        const oldName = renamingTable;
+        const newName = renameInput.trim();
+        if (!oldName || !newName || newName === oldName) {
+            renamingTable = null;
+            return;
+        }
+        if (tables.some(t => t.name === newName)) {
+            renamingTable = null;
+            return;
+        }
+        try {
+            await renameTable(oldName, newName);
+            renamingTable = null;
+            onRename?.(oldName, newName);
+        } catch {
+            renamingTable = null;
+        }
+    }
+
+    function cancelRename() {
+        renamingTable = null;
+    }
 </script>
 
 <div class="sidebar-inner">
@@ -36,9 +67,25 @@
             <button
                 class="table-item"
                 class:active={activeTable === table.name}
-                onclick={() => onSelect(table.name)}
+                onclick={() => renamingTable !== table.name && onSelect(table.name)}
+                ondblclick={() => startRename(table.name)}
             >
-                <span class="table-name">{table.name}</span>
+                {#if renamingTable === table.name}
+                    <input
+                        class="rename-input"
+                        type="text"
+                        value={renameInput}
+                        oninput={(e) => renameInput = e.currentTarget.value}
+                        onkeydown={(e) => {
+                            if (e.key === "Enter") confirmRename();
+                            if (e.key === "Escape") cancelRename();
+                        }}
+                        onblur={() => confirmRename()}
+                        autofocus
+                    />
+                {:else}
+                    <span class="table-name">{table.name}</span>
+                {/if}
                 <span class="table-count">{table.rowCount}</span>
             </button>
         {/each}
@@ -102,6 +149,16 @@
         background: var(--bg-surface);
         color: var(--accent);
         border-left: 3px solid var(--accent);
+    }
+    .rename-input {
+        flex: 1;
+        padding: 2px 6px;
+        background: var(--bg-primary);
+        border: 1px solid var(--accent);
+        border-radius: 3px;
+        color: var(--text-primary);
+        font-size: 13px;
+        outline: none;
     }
     .table-count {
         font-size: 11px;

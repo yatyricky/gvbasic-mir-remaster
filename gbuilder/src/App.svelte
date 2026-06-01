@@ -154,6 +154,11 @@
         loadProject();
     }
 
+    async function handleRename(oldName, newName) {
+        if (activeTable === oldName) activeTable = newName;
+        await loadProject();
+    }
+
     loadProject();
 </script>
 
@@ -172,6 +177,7 @@
                 onSelect={selectTable}
                 projectPath={project?._path}
                 onSwitchWorkspace={handleSwitchWorkspace}
+                onRename={handleRename}
             />
             <div class="sidebar-footer">
                 <button class="settings-btn" onclick={() => view = "schema"}>⚙ Schema</button>

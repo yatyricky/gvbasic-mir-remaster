@@ -91,6 +91,10 @@ export function updateTable(name, updates) {
     return request("PUT", `/schema/tables/${name}`, updates);
 }
 
+export function renameTable(oldName, newName) {
+    return request("PATCH", `/schema/tables/${oldName}/rename`, { newName });
+}
+
 export function deleteTable(name) {
     return request("DELETE", `/schema/tables/${name}`);
 }

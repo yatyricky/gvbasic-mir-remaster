@@ -1,6 +1,6 @@
 import express from "express";
-import { join, resolve } from "path";
-import { mkdirSync, existsSync, readdirSync } from "fs";
+import { join, resolve, basename } from "path";
+import { mkdirSync, existsSync, readdirSync, renameSync } from "fs";
 import { execSync } from "child_process";
 import { readFile, writeFile } from "./file-io.js";
 import { FKResolver } from "./fk-resolver.js";
@@ -43,7 +43,7 @@ function rebuildFKCache() {
 app.get("/api/project", (req, res) => {
     const project = getProject();
     if (!project) return res.status(400).json({ error: "No project loaded" });
-    res.json({ ...project, _path: getProjectDir() });
+    res.json({ ...project, name: basename(getProjectDir()), _path: getProjectDir() });
 });
 
 // GET /api/config
@@ -238,6 +238,40 @@ app.put("/api/schema/tables/:name", (req, res) => {
     Object.assign(cfg, req.body);
     writeFile(join(getProjectDir(), "project.json"), project);
     res.json(cfg);
+});
+
+// PATCH /api/schema/tables/:name/rename { newName }
+app.patch("/api/schema/tables/:name/rename", (req, res) => {
+    const project = getProject();
+    if (!project) return res.status(400).json({ error: "No project loaded" });
+    const oldName = req.params.name;
+    const { newName } = req.body;
+    if (!newName || !newName.trim()) return res.status(400).json({ error: "Missing new name" });
+    if (!project.tables[oldName]) return res.status(404).json({ error: "Table not found" });
+    if (project.tables[newName]) return res.status(409).json({ error: "Table name already exists" });
+
+    // Rename data file
+    const dataDir = getDataDir();
+    const oldFile = join(dataDir, `${oldName}.json`);
+    const newFile = join(dataDir, `${newName}.json`);
+    if (existsSync(oldFile)) renameSync(oldFile, newFile);
+
+    // Move table entry to new key, update file reference
+    const cfg = project.tables[oldName];
+    cfg.file = `${newName}.json`;
+    delete project.tables[oldName];
+    project.tables[newName] = cfg;
+
+    // Update FK references in other tables
+    for (const [, tblCfg] of Object.entries(project.tables)) {
+        for (const col of tblCfg.columns) {
+            col.type = col.type.replace(new RegExp(`FK:${oldName}(?=[\\]>,\\s]|$)`, "g"), `FK:${newName}`);
+        }
+    }
+
+    writeFile(join(getProjectDir(), "project.json"), project);
+    rebuildFKCache();
+    res.json(project);
 });
 
 // DELETE /api/schema/tables/:name
