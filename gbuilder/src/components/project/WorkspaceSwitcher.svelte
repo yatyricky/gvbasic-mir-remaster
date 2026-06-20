@@ -95,7 +95,7 @@
     </button>
 
     {#if open}
-        <div class="ws-dropdown" onclick={(e) => e.stopPropagation()}>
+        <div class="ws-dropdown" role="presentation" onclick={(e) => e.stopPropagation()}>
             <div class="ws-current">{currentPath || "None"}</div>
 
             {#if recent.length > 0}

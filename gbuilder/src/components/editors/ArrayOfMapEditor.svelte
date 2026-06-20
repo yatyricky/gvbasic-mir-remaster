@@ -18,8 +18,16 @@
      */
     let { value, keyType, valueType, onChange, enums, onOpenFK, tableConfig, linkedField, linkedValue, onLinkedChange } = $props();
 
-    let pools = $state(value ? [...value.map(p => ({ ...p }))] : []);
-    let counts = $state(linkedValue ? [...linkedValue] : []);
+    let pools = $state([]);
+    let counts = $state([]);
+
+    // Sync from parent
+    $effect(() => {
+        pools = value ? [...value.map(p => ({ ...p }))] : [];
+    });
+    $effect(() => {
+        counts = linkedValue ? [...linkedValue] : [];
+    });
 
     function syncPools(newPools) {
         pools = newPools;

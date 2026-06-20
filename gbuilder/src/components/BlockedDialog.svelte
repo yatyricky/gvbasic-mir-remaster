@@ -3,8 +3,8 @@
     let { title, message, details, onClose } = $props();
 </script>
 
-<div class="overlay" onclick={onClose}>
-    <div class="dialog" onclick={(e) => e.stopPropagation()}>
+<div class="overlay" role="button" tabindex="0" onclick={onClose} onkeydown={(e) => e.key === 'Enter' && onClose()}>
+    <div class="dialog" role="presentation" onclick={(e) => e.stopPropagation()}>
         <div class="dialog-title">{title}</div>
         <div class="dialog-message">{message}</div>
         <div class="dialog-details">

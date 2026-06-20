@@ -20,7 +20,12 @@
      */
     let { value, keyType, valueType, onChange, enums, onOpenFK, tableConfig } = $props();
 
-    let entries = $state(Object.entries(value || {}));
+    let entries = $state([]);
+
+    // Sync from parent
+    $effect(() => {
+        entries = Object.entries(value || {});
+    });
     let parsedKey = $derived(parseType(keyType));
     let parsedValue = $derived(parseType(valueType));
     let keyDisplayMap = $state(new Map());

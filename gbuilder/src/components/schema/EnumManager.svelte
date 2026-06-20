@@ -130,7 +130,10 @@
         <div class="enum-card">
             <div
                 class="enum-header"
+                role="button"
+                tabindex="0"
                 onclick={() => expandedEnum = expandedEnum === i ? null : i}
+                onkeydown={(e) => e.key === 'Enter' && (expandedEnum = expandedEnum === i ? null : i)}
             >
                 <span class="enum-name">{name}</span>
                 <span class="enum-label">{getEnumTypeLabel(enums[name])}</span>

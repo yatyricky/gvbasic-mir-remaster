@@ -13,7 +13,7 @@
      */
     let { value, targetTable, tableConfig, onChange, onOpenFK } = $props();
 
-    let items = $state(value ? [...value] : []);
+    let items = $state([]);
     let query = $state("");
     let results = $state([]);
     let open = $state(false);

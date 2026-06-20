@@ -17,7 +17,12 @@
     let query = $state("");
     let results = $state([]);
     let open = $state(false);
-    let displayText = $state(value || "");
+    let displayText = $state("");
+
+    // Sync from parent
+    $effect(() => {
+        displayText = value || "";
+    });
 
     // Resolve current value display
     $effect(() => {

@@ -7,7 +7,12 @@
     /** @type {{ value: any[], elementType: string, onChange: (v: any[]) => void, enums?: Record<string, string[]> }} */
     let { value, elementType, onChange, enums } = $props();
 
-    let items = $state(value ? [...value] : []);
+    let items = $state([]);
+
+    // Sync from parent
+    $effect(() => {
+        items = value ? [...value] : [];
+    });
     let parsed = $derived(parseType(elementType));
 
     function sync(newItems) {

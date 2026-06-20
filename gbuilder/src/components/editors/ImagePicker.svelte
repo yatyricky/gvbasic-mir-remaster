@@ -58,7 +58,7 @@
     </div>
 
     {#if open}
-        <div class="dropdown" onclick={(e) => e.stopPropagation()}>
+        <div class="dropdown" role="presentation" onclick={(e) => e.stopPropagation()}>
             <input
                 type="text"
                 class="dd-filter"

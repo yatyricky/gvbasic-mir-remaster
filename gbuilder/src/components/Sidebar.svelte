@@ -9,6 +9,11 @@
     let showErrors = $state(false);
     let renamingTable = $state(null);
     let renameInput = $state("");
+    let renameEl = $state(null);
+
+    $effect(() => {
+        if (renamingTable && renameEl) renameEl.focus();
+    });
 
     async function runValidate() {
         errors = await validate();
@@ -81,7 +86,7 @@
                             if (e.key === "Escape") cancelRename();
                         }}
                         onblur={() => confirmRename()}
-                        autofocus
+                        bind:this={renameEl}
                     />
                 {:else}
                     <span class="table-name">{table.name}</span>

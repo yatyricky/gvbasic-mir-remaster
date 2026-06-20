@@ -76,7 +76,10 @@
         <div class="table-card">
             <div
                 class="table-header"
+                role="button"
+                tabindex="0"
                 onclick={() => expandedTable = expandedTable === i ? null : i}
+                onkeydown={(e) => e.key === 'Enter' && (expandedTable = expandedTable === i ? null : i)}
             >
                 <span class="table-name">{name}</span>
                 <span class="table-meta">

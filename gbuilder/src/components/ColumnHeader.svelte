@@ -54,7 +54,7 @@
         {/if}
     </button>
     {#if open}
-        <div class="dropdown" onclick={(e) => e.stopPropagation()}>
+        <div class="dropdown" role="presentation" onclick={(e) => e.stopPropagation()}>
             <div class="dd-section">
                 <button class="dd-btn" class:selected={sortDir === 'asc'} onclick={() => handleSort('asc')}>↑ Ascending</button>
                 <button class="dd-btn" class:selected={sortDir === 'desc'} onclick={() => handleSort('desc')}>↓ Descending</button>
