@@ -40,7 +40,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 1
   },
   {
     "id": "mhit1",
@@ -80,7 +81,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 2
   },
   {
     "id": "xdmg1",
@@ -124,7 +126,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 3
   },
   {
     "id": "fdmg1",
@@ -168,7 +171,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 4
   },
   {
     "id": "tdmg1",
@@ -212,7 +216,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 5
   },
   {
     "id": "hdmg1",
@@ -256,7 +261,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 6
   },
   {
     "id": "pdmg1",
@@ -300,7 +306,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 7
   },
   {
     "id": "xdmgs",
@@ -324,7 +331,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 8
   },
   {
     "id": "fdmgs",
@@ -348,7 +356,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 9
   },
   {
     "id": "tdmgs",
@@ -372,7 +381,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 10
   },
   {
     "id": "hdmgs",
@@ -396,7 +406,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 11
   },
   {
     "id": "pdmgs",
@@ -420,7 +431,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 12
   },
   {
     "id": "xdmglo1",
@@ -460,7 +472,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 13
   },
   {
     "id": "fdmglo1",
@@ -500,7 +513,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 14
   },
   {
     "id": "tdmglo1",
@@ -540,7 +554,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 15
   },
   {
     "id": "hdmglo1",
@@ -580,7 +595,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 16
   },
   {
     "id": "pdmglo1",
@@ -620,7 +636,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 17
   },
   {
     "id": "xdmghi1",
@@ -660,7 +677,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 18
   },
   {
     "id": "fdmghi1",
@@ -700,7 +718,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 19
   },
   {
     "id": "tdmghi1",
@@ -740,7 +759,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 20
   },
   {
     "id": "hdmghi1",
@@ -780,7 +800,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 21
   },
   {
     "id": "pdmghi1",
@@ -820,7 +841,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 22
   },
   {
     "id": "xed1",
@@ -865,7 +887,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 23
   },
   {
     "id": "fed1",
@@ -910,7 +933,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 24
   },
   {
     "id": "ted1",
@@ -955,7 +979,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 25
   },
   {
     "id": "hed1",
@@ -1000,7 +1025,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 26
   },
   {
     "id": "ped1",
@@ -1045,7 +1071,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 27
   },
   {
     "id": "xeds",
@@ -1069,7 +1096,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 28
   },
   {
     "id": "feds",
@@ -1093,7 +1121,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 29
   },
   {
     "id": "teds",
@@ -1117,7 +1146,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 30
   },
   {
     "id": "heds",
@@ -1141,7 +1171,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 31
   },
   {
     "id": "peds",
@@ -1165,7 +1196,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 32
   },
   {
     "id": "ued1",
@@ -1205,7 +1237,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 120
+    "weight": 120,
+    "_id": 33
   },
   {
     "id": "ded1",
@@ -1245,7 +1278,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 120
+    "weight": 120,
+    "_id": 34
   },
   {
     "id": "ced1",
@@ -1285,7 +1319,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 120
+    "weight": 120,
+    "_id": 35
   },
   {
     "id": "doted1",
@@ -1325,7 +1360,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 120
+    "weight": 120,
+    "_id": 36
   },
   {
     "id": "hled1",
@@ -1365,7 +1401,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 120
+    "weight": 120,
+    "_id": 37
   },
   {
     "id": "col1ed1",
@@ -1405,7 +1442,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 120
+    "weight": 120,
+    "_id": 38
   },
   {
     "id": "col23ed1",
@@ -1445,7 +1483,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 120
+    "weight": 120,
+    "_id": 39
   },
   {
     "id": "sumed1",
@@ -1485,7 +1524,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 120
+    "weight": 120,
+    "_id": 40
   },
   {
     "id": "xdr1",
@@ -1523,7 +1563,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 41
   },
   {
     "id": "fdr1",
@@ -1561,7 +1602,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 42
   },
   {
     "id": "tdr1",
@@ -1599,7 +1641,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 43
   },
   {
     "id": "hdr1",
@@ -1637,7 +1680,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 44
   },
   {
     "id": "pdr1",
@@ -1675,7 +1719,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 45
   },
   {
     "id": "xdrs",
@@ -1699,7 +1744,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 46
   },
   {
     "id": "fdrs",
@@ -1723,7 +1769,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 47
   },
   {
     "id": "tdrs",
@@ -1747,7 +1794,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 48
   },
   {
     "id": "hdrs",
@@ -1771,7 +1819,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 49
   },
   {
     "id": "pdrs",
@@ -1795,7 +1844,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 50
   },
   {
     "id": "xref1",
@@ -1832,7 +1882,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 51
   },
   {
     "id": "fref1",
@@ -1869,7 +1920,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 52
   },
   {
     "id": "tref1",
@@ -1906,7 +1958,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 53
   },
   {
     "id": "href1",
@@ -1943,7 +1996,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 54
   },
   {
     "id": "pref1",
@@ -1980,7 +2034,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 55
   },
   {
     "id": "maxhp1",
@@ -2016,7 +2071,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 200
+    "weight": 200,
+    "_id": 56
   },
   {
     "id": "maxmp1",
@@ -2052,7 +2108,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 200
+    "weight": 200,
+    "_id": 57
   },
   {
     "id": "sumreg1",
@@ -2084,7 +2141,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 58
   },
   {
     "id": "xres1",
@@ -2124,7 +2182,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 59
   },
   {
     "id": "fres1",
@@ -2164,7 +2223,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 60
   },
   {
     "id": "tres1",
@@ -2204,7 +2264,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 61
   },
   {
     "id": "hres1",
@@ -2244,7 +2305,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 62
   },
   {
     "id": "pres1",
@@ -2284,7 +2346,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 63
   },
   {
     "id": "xress",
@@ -2308,7 +2371,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 64
   },
   {
     "id": "fress",
@@ -2332,7 +2396,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 65
   },
   {
     "id": "tress",
@@ -2356,7 +2421,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 66
   },
   {
     "id": "hress",
@@ -2380,7 +2446,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 67
   },
   {
     "id": "press",
@@ -2404,7 +2471,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 68
   },
   {
     "id": "mxxres1",
@@ -2424,7 +2492,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 69
   },
   {
     "id": "mxfres1",
@@ -2444,7 +2513,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 70
   },
   {
     "id": "mxtres1",
@@ -2464,7 +2534,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 71
   },
   {
     "id": "mxhres1",
@@ -2484,7 +2555,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 72
   },
   {
     "id": "mxpres1",
@@ -2504,7 +2576,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 73
   },
   {
     "id": "ures1",
@@ -2539,7 +2612,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 120
+    "weight": 120,
+    "_id": 74
   },
   {
     "id": "dres1",
@@ -2574,7 +2648,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 120
+    "weight": 120,
+    "_id": 75
   },
   {
     "id": "cres1",
@@ -2609,7 +2684,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 76
   },
   {
     "id": "c1res1",
@@ -2644,7 +2720,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 77
   },
   {
     "id": "c23res1",
@@ -2679,7 +2756,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 78
   },
   {
     "id": "dotres1",
@@ -2714,7 +2792,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 79
   },
   {
     "id": "sumres1",
@@ -2749,7 +2828,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 80
   },
   {
     "id": "flvl1",
@@ -2773,7 +2853,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 81
   },
   {
     "id": "tlvl1",
@@ -2797,7 +2878,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 82
   },
   {
     "id": "maglvl1",
@@ -2821,7 +2903,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 83
   },
   {
     "id": "flvlmage1",
@@ -2850,7 +2933,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 84
   },
   {
     "id": "tlvlmage1",
@@ -2879,7 +2963,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 85
   },
   {
     "id": "magelvl1",
@@ -2907,7 +2992,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 86
   },
   {
     "id": "blvl1",
@@ -2931,7 +3017,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 87
   },
   {
     "id": "xlvl1",
@@ -2955,7 +3042,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 88
   },
   {
     "id": "warlvl1",
@@ -2979,7 +3067,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 89
   },
   {
     "id": "blvlwarr1",
@@ -3008,7 +3097,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 90
   },
   {
     "id": "xlvlwarr1",
@@ -3037,7 +3127,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 91
   },
   {
     "id": "warrlvl1",
@@ -3065,7 +3156,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 92
   },
   {
     "id": "hlvl1",
@@ -3089,7 +3181,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 93
   },
   {
     "id": "plvl1",
@@ -3113,7 +3206,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 94
   },
   {
     "id": "wloklvl1",
@@ -3137,7 +3231,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 95
   },
   {
     "id": "hlvlwlok1",
@@ -3166,7 +3261,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 96
   },
   {
     "id": "plvlwlok1",
@@ -3195,7 +3291,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 97
   },
   {
     "id": "wlklvl1",
@@ -3223,7 +3320,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 98
   },
   {
     "id": "alvl1",
@@ -3251,7 +3349,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 99
   },
   {
     "id": "slvl1",
@@ -3280,7 +3379,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 100
   },
   {
     "id": "glvl1",
@@ -3309,7 +3409,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 101
   },
   {
     "id": "zlvl1",
@@ -3329,7 +3430,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 102
   },
   {
     "id": "flvl2",
@@ -3353,7 +3455,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 103
   },
   {
     "id": "tlvl2",
@@ -3377,7 +3480,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 104
   },
   {
     "id": "maglvl2",
@@ -3401,7 +3505,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 105
   },
   {
     "id": "flvlmage2",
@@ -3429,7 +3534,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 106
   },
   {
     "id": "tlvlmage2",
@@ -3457,7 +3563,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 107
   },
   {
     "id": "magelvl2",
@@ -3485,7 +3592,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 50
+    "weight": 50,
+    "_id": 108
   },
   {
     "id": "blvl2",
@@ -3509,7 +3617,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 109
   },
   {
     "id": "xlvl2",
@@ -3533,7 +3642,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 110
   },
   {
     "id": "warlvl2",
@@ -3557,7 +3667,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 111
   },
   {
     "id": "blvlwarr2",
@@ -3585,7 +3696,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 112
   },
   {
     "id": "xlvlwarr2",
@@ -3613,7 +3725,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 113
   },
   {
     "id": "warrlvl2",
@@ -3641,7 +3754,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 50
+    "weight": 50,
+    "_id": 114
   },
   {
     "id": "hlvl2",
@@ -3665,7 +3779,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 115
   },
   {
     "id": "plvl2",
@@ -3689,7 +3804,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 116
   },
   {
     "id": "wloklvl2",
@@ -3713,7 +3829,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 117
   },
   {
     "id": "hlvlwlok2",
@@ -3741,7 +3858,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 118
   },
   {
     "id": "plvlwlok2",
@@ -3769,7 +3887,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 119
   },
   {
     "id": "wlklvl2",
@@ -3797,7 +3916,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 50
+    "weight": 50,
+    "_id": 120
   },
   {
     "id": "alvl2",
@@ -3825,7 +3945,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 50
+    "weight": 50,
+    "_id": 121
   },
   {
     "id": "slvl2",
@@ -3854,7 +3975,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 50
+    "weight": 50,
+    "_id": 122
   },
   {
     "id": "glvl2",
@@ -3883,7 +4005,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 50
+    "weight": 50,
+    "_id": 123
   },
   {
     "id": "zlvl2",
@@ -3903,7 +4026,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 124
   },
   {
     "id": "flvl3",
@@ -3927,7 +4051,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 125
   },
   {
     "id": "tlvl3",
@@ -3951,7 +4076,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 126
   },
   {
     "id": "maglvl3",
@@ -3975,7 +4101,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 127
   },
   {
     "id": "flvlmage3",
@@ -4003,7 +4130,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 128
   },
   {
     "id": "tlvlmage3",
@@ -4031,7 +4159,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 129
   },
   {
     "id": "magelvl3",
@@ -4059,7 +4188,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 50
+    "weight": 50,
+    "_id": 130
   },
   {
     "id": "blvl3",
@@ -4083,7 +4213,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 131
   },
   {
     "id": "xlvl3",
@@ -4107,7 +4238,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 132
   },
   {
     "id": "warlvl3",
@@ -4131,7 +4263,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 133
   },
   {
     "id": "blvlwarr3",
@@ -4159,7 +4292,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 134
   },
   {
     "id": "xlvlwarr3",
@@ -4187,7 +4321,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 135
   },
   {
     "id": "warrlvl3",
@@ -4215,7 +4350,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 50
+    "weight": 50,
+    "_id": 136
   },
   {
     "id": "hlvl3",
@@ -4239,7 +4375,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 137
   },
   {
     "id": "plvl3",
@@ -4263,7 +4400,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 138
   },
   {
     "id": "wloklvl3",
@@ -4287,7 +4425,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 139
   },
   {
     "id": "hlvlwlok3",
@@ -4315,7 +4454,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 140
   },
   {
     "id": "plvlwlok3",
@@ -4343,7 +4483,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 141
   },
   {
     "id": "wlklvl3",
@@ -4371,7 +4512,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 50
+    "weight": 50,
+    "_id": 142
   },
   {
     "id": "slvl3",
@@ -4400,7 +4542,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 50
+    "weight": 50,
+    "_id": 143
   },
   {
     "id": "glvl3",
@@ -4429,7 +4572,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 50
+    "weight": 50,
+    "_id": 144
   },
   {
     "id": "zlvl3",
@@ -4449,7 +4593,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 145
   },
   {
     "id": "flvls",
@@ -4473,7 +4618,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 146
   },
   {
     "id": "tlvls",
@@ -4497,7 +4643,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 147
   },
   {
     "id": "maglvls",
@@ -4521,7 +4668,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 148
   },
   {
     "id": "flvlmages",
@@ -4545,7 +4693,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 149
   },
   {
     "id": "tlvlmages",
@@ -4569,7 +4718,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 150
   },
   {
     "id": "magelvls",
@@ -4593,7 +4743,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 151
   },
   {
     "id": "blvls",
@@ -4617,7 +4768,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 152
   },
   {
     "id": "xlvls",
@@ -4641,7 +4793,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 153
   },
   {
     "id": "warlvls",
@@ -4665,7 +4818,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 154
   },
   {
     "id": "blvlwarrs",
@@ -4689,7 +4843,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 155
   },
   {
     "id": "xlvlwarrs",
@@ -4713,7 +4868,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 156
   },
   {
     "id": "warrlvls",
@@ -4737,7 +4893,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 157
   },
   {
     "id": "hlvls",
@@ -4761,7 +4918,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 158
   },
   {
     "id": "plvls",
@@ -4785,7 +4943,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 159
   },
   {
     "id": "wloklvls",
@@ -4809,7 +4968,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 160
   },
   {
     "id": "hlvlwloks",
@@ -4833,7 +4993,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 161
   },
   {
     "id": "plvlwloks",
@@ -4857,7 +5018,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 162
   },
   {
     "id": "wlklvls",
@@ -4881,7 +5043,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 163
   },
   {
     "id": "alvls",
@@ -4905,7 +5068,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 164
   },
   {
     "id": "slvls",
@@ -4929,7 +5093,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 165
   },
   {
     "id": "glvls",
@@ -4953,7 +5118,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 50
+    "weight": 50,
+    "_id": 166
   },
   {
     "id": "luck1",
@@ -4987,7 +5153,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 167
   },
   {
     "id": "eg1",
@@ -5020,7 +5187,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 168
   },
   {
     "id": "expex1",
@@ -5047,7 +5215,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 169
   },
   {
     "id": "barg1",
@@ -5072,7 +5241,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 170
   },
   {
     "id": "sok1",
@@ -5125,7 +5295,8 @@
     ],
     "ilvl": 7,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 171
   },
   {
     "id": "sok2",
@@ -5175,7 +5346,8 @@
     ],
     "ilvl": 14,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 172
   },
   {
     "id": "sok3",
@@ -5219,7 +5391,8 @@
     ],
     "ilvl": 21,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 173
   },
   {
     "id": "sok4",
@@ -5260,7 +5433,8 @@
     ],
     "ilvl": 28,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 174
   },
   {
     "id": "sok5",
@@ -5293,7 +5467,8 @@
     ],
     "ilvl": 35,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 175
   },
   {
     "id": "sokinf",
@@ -5313,7 +5488,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 176
   },
   {
     "id": "rw1",
@@ -5333,7 +5509,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 177
   },
   {
     "id": "rwt",
@@ -5353,7 +5530,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 178
   },
   {
     "id": "mhex1",
@@ -5389,7 +5567,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 179
   },
   {
     "id": "mpex1",
@@ -5427,7 +5606,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 180
   },
   {
     "id": "hreg1",
@@ -5465,7 +5645,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 181
   },
   {
     "id": "mreg1",
@@ -5504,7 +5685,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 182
   },
   {
     "id": "spd1",
@@ -5530,7 +5712,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 70
+    "weight": 70,
+    "_id": 183
   },
   {
     "id": "doge1",
@@ -5563,7 +5746,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 184
   },
   {
     "id": "mdoge1",
@@ -5596,7 +5780,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 185
   },
   {
     "id": "crit1",
@@ -5635,7 +5820,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 186
   },
   {
     "id": "critd1",
@@ -5673,7 +5859,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 187
   },
   {
     "id": "scrit1",
@@ -5709,7 +5896,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 188
   },
   {
     "id": "scritd1",
@@ -5744,7 +5932,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 189
   },
   {
     "id": "resil1",
@@ -5774,7 +5963,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 190
   },
   {
     "id": "resils",
@@ -5798,7 +5988,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 191
   },
   {
     "id": "str1",
@@ -5854,7 +6045,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 200
+    "weight": 200,
+    "_id": 192
   },
   {
     "id": "strs",
@@ -5878,7 +6070,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 193
   },
   {
     "id": "int1",
@@ -5934,7 +6127,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 200
+    "weight": 200,
+    "_id": 194
   },
   {
     "id": "ints",
@@ -5958,7 +6152,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 195
   },
   {
     "id": "spi1",
@@ -6010,7 +6205,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 200
+    "weight": 200,
+    "_id": 196
   },
   {
     "id": "spis",
@@ -6030,7 +6226,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 197
   },
   {
     "id": "vit1",
@@ -6086,7 +6283,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": 200
+    "weight": 200,
+    "_id": 198
   },
   {
     "id": "vits",
@@ -6110,7 +6308,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 199
   },
   {
     "id": "ll1",
@@ -6146,7 +6345,8 @@
     "groupExclusive": null,
     "ilvl": 12,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 200
   },
   {
     "id": "ml1",
@@ -6182,7 +6382,8 @@
     "groupExclusive": null,
     "ilvl": 12,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 201
   },
   {
     "id": "d2m1",
@@ -6213,7 +6414,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 202
   },
   {
     "id": "killhp1",
@@ -6258,7 +6460,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 203
   },
   {
     "id": "killmp1",
@@ -6305,7 +6508,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 204
   },
   {
     "id": "debuffrd1",
@@ -6331,7 +6535,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 205
   },
   {
     "id": "skfbltmage1",
@@ -6363,7 +6568,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 206
   },
   {
     "id": "skfrngmage1",
@@ -6395,7 +6601,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 207
   },
   {
     "id": "skfinfmage1",
@@ -6427,7 +6634,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 208
   },
   {
     "id": "skfbalmage1",
@@ -6459,7 +6667,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 209
   },
   {
     "id": "skfblsmage1",
@@ -6491,7 +6700,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 210
   },
   {
     "id": "skfwalmage1",
@@ -6523,7 +6733,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 211
   },
   {
     "id": "sktchmmage1",
@@ -6555,7 +6766,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 212
   },
   {
     "id": "sktbltmage1",
@@ -6587,7 +6799,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 213
   },
   {
     "id": "sktltnmage1",
@@ -6619,7 +6832,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 214
   },
   {
     "id": "sktnovmage1",
@@ -6651,7 +6865,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 215
   },
   {
     "id": "sktshdmage1",
@@ -6683,7 +6898,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 216
   },
   {
     "id": "sktblzmage1",
@@ -6715,7 +6931,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 217
   },
   {
     "id": "skbbaswarr1",
@@ -6747,7 +6964,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 218
   },
   {
     "id": "skbcrtwarr1",
@@ -6779,7 +6997,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 219
   },
   {
     "id": "skbthrwarr1",
@@ -6811,7 +7030,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 220
   },
   {
     "id": "skbclvwarr1",
@@ -6843,7 +7063,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 221
   },
   {
     "id": "skbcrzwarr1",
@@ -6875,7 +7096,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 222
   },
   {
     "id": "skbfblwarr1",
@@ -6907,7 +7129,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 223
   },
   {
     "id": "skxdefwarr1",
@@ -6939,7 +7162,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 224
   },
   {
     "id": "skxdogwarr1",
@@ -6971,7 +7195,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 225
   },
   {
     "id": "skxctawarr1",
@@ -7003,7 +7228,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 226
   },
   {
     "id": "skxwmswarr1",
@@ -7035,7 +7261,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 227
   },
   {
     "id": "skxchgwarr1",
@@ -7067,7 +7294,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 228
   },
   {
     "id": "skxtstwarr1",
@@ -7099,7 +7327,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 229
   },
   {
     "id": "skhhelwlok1",
@@ -7131,7 +7360,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 230
   },
   {
     "id": "skhgsdwlok1",
@@ -7163,7 +7393,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 231
   },
   {
     "id": "skhinvwlok1",
@@ -7195,7 +7426,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 232
   },
   {
     "id": "skhhsdwlok1",
@@ -7227,7 +7459,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 233
   },
   {
     "id": "skhlokwlok1",
@@ -7259,7 +7492,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 234
   },
   {
     "id": "skhmhlwlok1",
@@ -7291,7 +7525,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 235
   },
   {
     "id": "skpbaswlok1",
@@ -7323,7 +7558,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 236
   },
   {
     "id": "skppoiwlok1",
@@ -7355,7 +7591,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 237
   },
   {
     "id": "skpsklwlok1",
@@ -7387,7 +7624,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 238
   },
   {
     "id": "skprunwlok1",
@@ -7419,7 +7657,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 239
   },
   {
     "id": "skpcblwlok1",
@@ -7451,7 +7690,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 240
   },
   {
     "id": "skpsdmwlok1",
@@ -7483,7 +7723,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 241
   },
   {
     "id": "skfbltmage2",
@@ -7514,7 +7755,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 242
   },
   {
     "id": "skfrngmage2",
@@ -7545,7 +7787,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 243
   },
   {
     "id": "skfinfmage2",
@@ -7576,7 +7819,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 244
   },
   {
     "id": "skfbalmage2",
@@ -7607,7 +7851,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 245
   },
   {
     "id": "skfblsmage2",
@@ -7638,7 +7883,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 246
   },
   {
     "id": "skfwalmage2",
@@ -7669,7 +7915,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 247
   },
   {
     "id": "sktchmmage2",
@@ -7700,7 +7947,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 248
   },
   {
     "id": "sktbltmage2",
@@ -7731,7 +7979,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 249
   },
   {
     "id": "sktltnmage2",
@@ -7762,7 +8011,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 250
   },
   {
     "id": "sktnovmage2",
@@ -7793,7 +8043,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 251
   },
   {
     "id": "sktshdmage2",
@@ -7824,7 +8075,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 252
   },
   {
     "id": "sktblzmage2",
@@ -7855,7 +8107,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 253
   },
   {
     "id": "skbbaswarr2",
@@ -7886,7 +8139,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 254
   },
   {
     "id": "skbcrtwarr2",
@@ -7917,7 +8171,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 255
   },
   {
     "id": "skbthrwarr2",
@@ -7948,7 +8203,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 256
   },
   {
     "id": "skbclvwarr2",
@@ -7979,7 +8235,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 257
   },
   {
     "id": "skbcrzwarr2",
@@ -8010,7 +8267,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 258
   },
   {
     "id": "skbfblwarr2",
@@ -8041,7 +8299,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 259
   },
   {
     "id": "skxdefwarr2",
@@ -8072,7 +8331,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 260
   },
   {
     "id": "skxdogwarr2",
@@ -8103,7 +8363,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 261
   },
   {
     "id": "skxctawarr2",
@@ -8134,7 +8395,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 262
   },
   {
     "id": "skxwmswarr2",
@@ -8165,7 +8427,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 263
   },
   {
     "id": "skxchgwarr2",
@@ -8196,7 +8459,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 264
   },
   {
     "id": "skxtstwarr2",
@@ -8227,7 +8491,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 265
   },
   {
     "id": "skhhelwlok2",
@@ -8258,7 +8523,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 266
   },
   {
     "id": "skhgsdwlok2",
@@ -8289,7 +8555,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 267
   },
   {
     "id": "skhinvwlok2",
@@ -8320,7 +8587,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 268
   },
   {
     "id": "skhhsdwlok2",
@@ -8351,7 +8619,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 269
   },
   {
     "id": "skhlokwlok2",
@@ -8382,7 +8651,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 270
   },
   {
     "id": "skhmhlwlok2",
@@ -8413,7 +8683,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 271
   },
   {
     "id": "skpbaswlok2",
@@ -8444,7 +8715,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 272
   },
   {
     "id": "skppoiwlok2",
@@ -8475,7 +8747,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 273
   },
   {
     "id": "skpsklwlok2",
@@ -8506,7 +8779,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 274
   },
   {
     "id": "skprunwlok2",
@@ -8537,7 +8811,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 275
   },
   {
     "id": "skpcblwlok2",
@@ -8568,7 +8843,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 276
   },
   {
     "id": "skpsdmwlok2",
@@ -8599,7 +8875,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 277
   },
   {
     "id": "skfbltmage3",
@@ -8629,7 +8906,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 278
   },
   {
     "id": "skfrngmage3",
@@ -8659,7 +8937,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 279
   },
   {
     "id": "skfinfmage3",
@@ -8689,7 +8968,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 280
   },
   {
     "id": "skfbalmage3",
@@ -8719,7 +8999,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 281
   },
   {
     "id": "skfblsmage3",
@@ -8749,7 +9030,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 282
   },
   {
     "id": "skfwalmage3",
@@ -8779,7 +9061,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 283
   },
   {
     "id": "sktchmmage3",
@@ -8809,7 +9092,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 284
   },
   {
     "id": "sktbltmage3",
@@ -8839,7 +9123,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 285
   },
   {
     "id": "sktltnmage3",
@@ -8869,7 +9154,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 286
   },
   {
     "id": "sktnovmage3",
@@ -8899,7 +9185,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 287
   },
   {
     "id": "sktshdmage3",
@@ -8929,7 +9216,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 288
   },
   {
     "id": "sktblzmage3",
@@ -8959,7 +9247,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 289
   },
   {
     "id": "skbbaswarr3",
@@ -8989,7 +9278,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 290
   },
   {
     "id": "skbcrtwarr3",
@@ -9019,7 +9309,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 291
   },
   {
     "id": "skbthrwarr3",
@@ -9049,7 +9340,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 292
   },
   {
     "id": "skbclvwarr3",
@@ -9079,7 +9371,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 293
   },
   {
     "id": "skbcrzwarr3",
@@ -9109,7 +9402,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 294
   },
   {
     "id": "skbfblwarr3",
@@ -9139,7 +9433,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 295
   },
   {
     "id": "skxdefwarr3",
@@ -9169,7 +9464,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 296
   },
   {
     "id": "skxdogwarr3",
@@ -9199,7 +9495,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 297
   },
   {
     "id": "skxctawarr3",
@@ -9229,7 +9526,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 298
   },
   {
     "id": "skxwmswarr3",
@@ -9259,7 +9557,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 299
   },
   {
     "id": "skxchgwarr3",
@@ -9289,7 +9588,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 300
   },
   {
     "id": "skxtstwarr3",
@@ -9319,7 +9619,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 301
   },
   {
     "id": "skhhelwlok3",
@@ -9349,7 +9650,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 302
   },
   {
     "id": "skhgsdwlok3",
@@ -9379,7 +9681,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 303
   },
   {
     "id": "skhinvwlok3",
@@ -9409,7 +9712,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 304
   },
   {
     "id": "skhhsdwlok3",
@@ -9439,7 +9743,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 305
   },
   {
     "id": "skhlokwlok3",
@@ -9469,7 +9774,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 306
   },
   {
     "id": "skhmhlwlok3",
@@ -9499,7 +9805,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 307
   },
   {
     "id": "skpbaswlok3",
@@ -9529,7 +9836,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 308
   },
   {
     "id": "skppoiwlok3",
@@ -9559,7 +9867,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 309
   },
   {
     "id": "skpsklwlok3",
@@ -9589,7 +9898,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 310
   },
   {
     "id": "skprunwlok3",
@@ -9619,7 +9929,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 311
   },
   {
     "id": "skpcblwlok3",
@@ -9649,7 +9960,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 312
   },
   {
     "id": "skpsdmwlok3",
@@ -9679,7 +9991,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 313
   },
   {
     "id": "skfblt1",
@@ -9703,7 +10016,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": null
+    "weight": null,
+    "_id": 314
   },
   {
     "id": "skfrng1",
@@ -9727,7 +10041,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": null
+    "weight": null,
+    "_id": 315
   },
   {
     "id": "skfinf1",
@@ -9751,7 +10066,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 316
   },
   {
     "id": "skfbal1",
@@ -9775,7 +10091,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": null
+    "weight": null,
+    "_id": 317
   },
   {
     "id": "skfbls1",
@@ -9799,7 +10116,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 318
   },
   {
     "id": "skfwal1",
@@ -9823,7 +10141,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 319
   },
   {
     "id": "sktchm1",
@@ -9847,7 +10166,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": null
+    "weight": null,
+    "_id": 320
   },
   {
     "id": "sktblt1",
@@ -9871,7 +10191,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": null
+    "weight": null,
+    "_id": 321
   },
   {
     "id": "sktltn1",
@@ -9895,7 +10216,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 322
   },
   {
     "id": "sktnov1",
@@ -9919,7 +10241,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": null
+    "weight": null,
+    "_id": 323
   },
   {
     "id": "sktshd1",
@@ -9943,7 +10266,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 324
   },
   {
     "id": "sktblz1",
@@ -9967,7 +10291,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 325
   },
   {
     "id": "skbbas1",
@@ -9991,7 +10316,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": null
+    "weight": null,
+    "_id": 326
   },
   {
     "id": "skbcrt1",
@@ -10015,7 +10341,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": null
+    "weight": null,
+    "_id": 327
   },
   {
     "id": "skbthr1",
@@ -10039,7 +10366,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 328
   },
   {
     "id": "skbclv1",
@@ -10063,7 +10391,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": null
+    "weight": null,
+    "_id": 329
   },
   {
     "id": "skbcrz1",
@@ -10087,7 +10416,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 330
   },
   {
     "id": "skbfbl1",
@@ -10111,7 +10441,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 331
   },
   {
     "id": "skxdef1",
@@ -10135,7 +10466,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": null
+    "weight": null,
+    "_id": 332
   },
   {
     "id": "skxdog1",
@@ -10159,7 +10491,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": null
+    "weight": null,
+    "_id": 333
   },
   {
     "id": "skxcta1",
@@ -10183,7 +10516,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 334
   },
   {
     "id": "skxwms1",
@@ -10207,7 +10541,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": null
+    "weight": null,
+    "_id": 335
   },
   {
     "id": "skxchg1",
@@ -10231,7 +10566,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 336
   },
   {
     "id": "skxtst1",
@@ -10255,7 +10591,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 337
   },
   {
     "id": "skhhel1",
@@ -10279,7 +10616,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": null
+    "weight": null,
+    "_id": 338
   },
   {
     "id": "skhgsd1",
@@ -10303,7 +10641,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": null
+    "weight": null,
+    "_id": 339
   },
   {
     "id": "skhinv1",
@@ -10327,7 +10666,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 340
   },
   {
     "id": "skhhsd1",
@@ -10351,7 +10691,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": null
+    "weight": null,
+    "_id": 341
   },
   {
     "id": "skhlok1",
@@ -10375,7 +10716,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 342
   },
   {
     "id": "skhmhl1",
@@ -10399,7 +10741,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 343
   },
   {
     "id": "skpbas1",
@@ -10423,7 +10766,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": null
+    "weight": null,
+    "_id": 344
   },
   {
     "id": "skppoi1",
@@ -10447,7 +10791,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": null
+    "weight": null,
+    "_id": 345
   },
   {
     "id": "skpskl1",
@@ -10471,7 +10816,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": null
+    "weight": null,
+    "_id": 346
   },
   {
     "id": "skprun1",
@@ -10495,7 +10841,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": null
+    "weight": null,
+    "_id": 347
   },
   {
     "id": "skpcbl1",
@@ -10519,7 +10866,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 348
   },
   {
     "id": "skpsdm1",
@@ -10543,7 +10891,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": null
+    "weight": null,
+    "_id": 349
   },
   {
     "id": "skhwoh1",
@@ -10567,7 +10916,8 @@
     ],
     "ilvl": 32,
     "level": 32,
-    "weight": null
+    "weight": null,
+    "_id": 350
   },
   {
     "id": "skfbltmages",
@@ -10591,7 +10941,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 351
   },
   {
     "id": "skfrngmages",
@@ -10615,7 +10966,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 352
   },
   {
     "id": "skfinfmages",
@@ -10639,7 +10991,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 353
   },
   {
     "id": "skfbalmages",
@@ -10663,7 +11016,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 354
   },
   {
     "id": "skfblsmages",
@@ -10687,7 +11041,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 355
   },
   {
     "id": "skfwalmages",
@@ -10711,7 +11066,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 356
   },
   {
     "id": "sktchmmages",
@@ -10735,7 +11091,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 357
   },
   {
     "id": "sktbltmages",
@@ -10759,7 +11116,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 358
   },
   {
     "id": "sktltnmages",
@@ -10783,7 +11141,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 359
   },
   {
     "id": "sktnovmages",
@@ -10807,7 +11166,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 360
   },
   {
     "id": "sktshdmages",
@@ -10831,7 +11191,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 361
   },
   {
     "id": "sktblzmages",
@@ -10855,7 +11216,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 362
   },
   {
     "id": "skbbaswarrs",
@@ -10879,7 +11241,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 363
   },
   {
     "id": "skbcrtwarrs",
@@ -10903,7 +11266,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 364
   },
   {
     "id": "skbthrwarrs",
@@ -10927,7 +11291,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 365
   },
   {
     "id": "skbclvwarrs",
@@ -10951,7 +11316,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 366
   },
   {
     "id": "skbcrzwarrs",
@@ -10975,7 +11341,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 367
   },
   {
     "id": "skbfblwarrs",
@@ -10999,7 +11366,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 368
   },
   {
     "id": "skxdefwarrs",
@@ -11023,7 +11391,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 369
   },
   {
     "id": "skxdogwarrs",
@@ -11047,7 +11416,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 370
   },
   {
     "id": "skxctawarrs",
@@ -11071,7 +11441,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 371
   },
   {
     "id": "skxwmswarrs",
@@ -11095,7 +11466,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 372
   },
   {
     "id": "skxchgwarrs",
@@ -11119,7 +11491,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 373
   },
   {
     "id": "skxtstwarrs",
@@ -11143,7 +11516,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 374
   },
   {
     "id": "skhhelwloks",
@@ -11167,7 +11541,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 375
   },
   {
     "id": "skhgsdwloks",
@@ -11191,7 +11566,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 376
   },
   {
     "id": "skhinvwloks",
@@ -11215,7 +11591,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 377
   },
   {
     "id": "skhhsdwloks",
@@ -11239,7 +11616,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 378
   },
   {
     "id": "skhlokwloks",
@@ -11263,7 +11641,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 379
   },
   {
     "id": "skhmhlwloks",
@@ -11287,7 +11666,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 380
   },
   {
     "id": "skpbaswloks",
@@ -11311,7 +11691,8 @@
     ],
     "ilvl": 1,
     "level": 1,
-    "weight": 70
+    "weight": 70,
+    "_id": 381
   },
   {
     "id": "skppoiwloks",
@@ -11335,7 +11716,8 @@
     ],
     "ilvl": 6,
     "level": 7,
-    "weight": 70
+    "weight": 70,
+    "_id": 382
   },
   {
     "id": "skpsklwloks",
@@ -11359,7 +11741,8 @@
     ],
     "ilvl": 12,
     "level": 14,
-    "weight": 70
+    "weight": 70,
+    "_id": 383
   },
   {
     "id": "skprunwloks",
@@ -11383,7 +11766,8 @@
     ],
     "ilvl": 19,
     "level": 21,
-    "weight": 70
+    "weight": 70,
+    "_id": 384
   },
   {
     "id": "skpcblwloks",
@@ -11407,7 +11791,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": 70
+    "weight": 70,
+    "_id": 385
   },
   {
     "id": "skpsdmwloks",
@@ -11431,7 +11816,8 @@
     ],
     "ilvl": 31,
     "level": 35,
-    "weight": 70
+    "weight": 70,
+    "_id": 386
   },
   {
     "id": "atkfblt1",
@@ -11474,7 +11860,8 @@
     "groupExclusive": null,
     "ilvl": 6,
     "level": 7,
-    "weight": 100
+    "weight": 100,
+    "_id": 387
   },
   {
     "id": "atkfbal1",
@@ -11517,7 +11904,8 @@
     "groupExclusive": null,
     "ilvl": 25,
     "level": 28,
-    "weight": 100
+    "weight": 100,
+    "_id": 388
   },
   {
     "id": "atktblt1",
@@ -11560,7 +11948,8 @@
     "groupExclusive": null,
     "ilvl": 12,
     "level": 14,
-    "weight": 100
+    "weight": 100,
+    "_id": 389
   },
   {
     "id": "atkpcbl1",
@@ -11603,7 +11992,8 @@
     "groupExclusive": null,
     "ilvl": 31,
     "level": 35,
-    "weight": 100
+    "weight": 100,
+    "_id": 390
   },
   {
     "id": "hitfrng1",
@@ -11640,7 +12030,8 @@
     "groupExclusive": null,
     "ilvl": 12,
     "level": 14,
-    "weight": 100
+    "weight": 100,
+    "_id": 391
   },
   {
     "id": "hittnov1",
@@ -11677,7 +12068,8 @@
     "groupExclusive": null,
     "ilvl": 25,
     "level": 28,
-    "weight": 100
+    "weight": 100,
+    "_id": 392
   },
   {
     "id": "hithhel1",
@@ -11714,7 +12106,8 @@
     "groupExclusive": null,
     "ilvl": 6,
     "level": 7,
-    "weight": 100
+    "weight": 100,
+    "_id": 393
   },
   {
     "id": "hithinv1",
@@ -11751,7 +12144,8 @@
     "groupExclusive": null,
     "ilvl": 19,
     "level": 21,
-    "weight": 100
+    "weight": 100,
+    "_id": 394
   },
   {
     "id": "killfwal1",
@@ -11792,7 +12186,8 @@
     "groupExclusive": null,
     "ilvl": 37,
     "level": 42,
-    "weight": 100
+    "weight": 100,
+    "_id": 395
   },
   {
     "id": "killbclv1",
@@ -11833,7 +12228,8 @@
     "groupExclusive": null,
     "ilvl": 25,
     "level": 28,
-    "weight": 100
+    "weight": 100,
+    "_id": 396
   },
   {
     "id": "killxcta1",
@@ -11874,7 +12270,8 @@
     "groupExclusive": null,
     "ilvl": 19,
     "level": 21,
-    "weight": 100
+    "weight": 100,
+    "_id": 397
   },
   {
     "id": "killpskl1",
@@ -11915,7 +12312,8 @@
     "groupExclusive": null,
     "ilvl": 19,
     "level": 21,
-    "weight": 100
+    "weight": 100,
+    "_id": 398
   },
   {
     "id": "curs1",
@@ -11954,7 +12352,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 399
   },
   {
     "id": "bles1",
@@ -11993,7 +12392,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 400
   },
   {
     "id": "moral1",
@@ -12017,7 +12417,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": 100
+    "weight": 100,
+    "_id": 401
   },
   {
     "id": "cb1",
@@ -12041,7 +12442,8 @@
     ],
     "ilvl": 28,
     "level": 32,
-    "weight": null
+    "weight": null,
+    "_id": 402
   },
   {
     "id": "cbs",
@@ -12065,7 +12467,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 403
   },
   {
     "id": "pmh1",
@@ -12105,7 +12508,8 @@
     "groupExclusive": null,
     "ilvl": 30,
     "level": 34,
-    "weight": 20
+    "weight": 20,
+    "_id": 404
   },
   {
     "id": "xlr1",
@@ -12129,7 +12533,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 405
   },
   {
     "id": "flr1",
@@ -12153,7 +12558,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 406
   },
   {
     "id": "tlr1",
@@ -12177,7 +12583,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 407
   },
   {
     "id": "hlr1",
@@ -12201,7 +12608,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 408
   },
   {
     "id": "plr1",
@@ -12225,7 +12633,8 @@
     ],
     "ilvl": 25,
     "level": 28,
-    "weight": null
+    "weight": null,
+    "_id": 409
   },
   {
     "id": "xlrs",
@@ -12249,7 +12658,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 410
   },
   {
     "id": "flrs",
@@ -12273,7 +12683,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 411
   },
   {
     "id": "tlrs",
@@ -12297,7 +12708,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 412
   },
   {
     "id": "hlrs",
@@ -12321,7 +12733,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 413
   },
   {
     "id": "plrs",
@@ -12345,7 +12758,8 @@
     ],
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 414
   },
   {
     "id": "setheavy",
@@ -12365,7 +12779,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 415
   },
   {
     "id": "setwargod",
@@ -12385,7 +12800,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 416
   },
   {
     "id": "setmara",
@@ -12405,7 +12821,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 417
   },
   {
     "id": "setjihad",
@@ -12425,7 +12842,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 418
   },
   {
     "id": "setsoul",
@@ -12445,7 +12863,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 419
   },
   {
     "id": "setghost",
@@ -12465,7 +12884,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 420
   },
   {
     "id": "setvenerable",
@@ -12485,7 +12905,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 421
   },
   {
     "id": "setmaster",
@@ -12505,7 +12926,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 422
   },
   {
     "id": "setmagic",
@@ -12525,7 +12947,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 423
   },
   {
     "id": "setdemon",
@@ -12545,7 +12968,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 424
   },
   {
     "id": "setmagegod",
@@ -12565,7 +12989,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 425
   },
   {
     "id": "setcolorful",
@@ -12585,7 +13010,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 426
   },
   {
     "id": "setblackiron",
@@ -12605,7 +13031,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 427
   },
   {
     "id": "setmysterious",
@@ -12625,7 +13052,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 428
   },
   {
     "id": "setmemory",
@@ -12645,7 +13073,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 429
   },
   {
     "id": "setvoma",
@@ -12665,7 +13094,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 430
   },
   {
     "id": "setzuma",
@@ -12685,7 +13115,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 431
   },
   {
     "id": "setredmoon",
@@ -12705,7 +13136,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 432
   },
   {
     "id": "setprisma",
@@ -12725,7 +13157,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 433
   },
   {
     "id": "setdragon",
@@ -12745,7 +13178,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 434
   },
   {
     "id": "setempire",
@@ -12765,7 +13199,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 435
   },
   {
     "id": "killtltn1",
@@ -12788,7 +13223,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 436
   },
   {
     "id": "setanys",
@@ -12808,7 +13244,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 437
   },
   {
     "id": "skfbltm1",
@@ -12828,7 +13265,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 438
   },
   {
     "id": "skfrngm1",
@@ -12848,7 +13286,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 439
   },
   {
     "id": "skfinfm1",
@@ -12868,7 +13307,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 440
   },
   {
     "id": "skfbalm1",
@@ -12888,7 +13328,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 441
   },
   {
     "id": "skfblsm1",
@@ -12908,7 +13349,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 442
   },
   {
     "id": "skfblsm2",
@@ -12928,7 +13370,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 443
   },
   {
     "id": "skfwalm1",
@@ -12948,7 +13391,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 444
   },
   {
     "id": "skfwalm2",
@@ -12968,7 +13412,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 445
   },
   {
     "id": "sktchmm1",
@@ -12988,7 +13433,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 446
   },
   {
     "id": "sktbltm1",
@@ -13008,7 +13454,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 447
   },
   {
     "id": "sktltnm1",
@@ -13028,7 +13475,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 448
   },
   {
     "id": "sktltnm2",
@@ -13048,7 +13496,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 449
   },
   {
     "id": "sktnovm1",
@@ -13068,7 +13517,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 450
   },
   {
     "id": "sktshdm1",
@@ -13088,7 +13538,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 451
   },
   {
     "id": "sktshdm2",
@@ -13108,7 +13559,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 452
   },
   {
     "id": "sktblzm1",
@@ -13128,7 +13580,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 453
   },
   {
     "id": "sktblzm2",
@@ -13148,7 +13601,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 454
   },
   {
     "id": "skbbasm1",
@@ -13168,7 +13622,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 455
   },
   {
     "id": "skbbasm2",
@@ -13188,7 +13643,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 456
   },
   {
     "id": "skbbasm3",
@@ -13208,7 +13664,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 457
   },
   {
     "id": "skbbasm4",
@@ -13228,7 +13685,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 458
   },
   {
     "id": "skbbasm5",
@@ -13248,7 +13706,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 459
   },
   {
     "id": "skbbasm6",
@@ -13268,7 +13727,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 460
   },
   {
     "id": "skbcrtm1",
@@ -13288,7 +13748,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 461
   },
   {
     "id": "skbthrm1",
@@ -13308,7 +13769,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 462
   },
   {
     "id": "skbclvm1",
@@ -13328,7 +13790,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 463
   },
   {
     "id": "skbfblm1",
@@ -13348,7 +13811,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 464
   },
   {
     "id": "skbfblm2",
@@ -13368,7 +13832,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 465
   },
   {
     "id": "skxdefm1",
@@ -13388,7 +13853,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 466
   },
   {
     "id": "skxdogm1",
@@ -13408,7 +13874,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 467
   },
   {
     "id": "skxposm1",
@@ -13428,7 +13895,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 468
   },
   {
     "id": "skxctam1",
@@ -13448,7 +13916,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 469
   },
   {
     "id": "skxchgm1",
@@ -13468,7 +13937,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 470
   },
   {
     "id": "skxtstm1",
@@ -13488,7 +13958,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 471
   },
   {
     "id": "skxtstm2",
@@ -13508,7 +13979,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 472
   },
   {
     "id": "skhhelm1",
@@ -13528,7 +14000,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 473
   },
   {
     "id": "skhhelm2",
@@ -13548,7 +14021,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 474
   },
   {
     "id": "skhgsdm1",
@@ -13568,7 +14042,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 475
   },
   {
     "id": "skhinvm1",
@@ -13588,7 +14063,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 476
   },
   {
     "id": "skhhsdm1",
@@ -13608,7 +14084,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 477
   },
   {
     "id": "skhlokm1",
@@ -13628,7 +14105,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 478
   },
   {
     "id": "skhlokm2",
@@ -13648,7 +14126,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 479
   },
   {
     "id": "skhmhlm1",
@@ -13668,7 +14147,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 480
   },
   {
     "id": "skhmhlm2",
@@ -13688,7 +14168,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 481
   },
   {
     "id": "skpbasm1",
@@ -13708,7 +14189,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 482
   },
   {
     "id": "skppoim1",
@@ -13728,7 +14210,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 483
   },
   {
     "id": "skpsklm1",
@@ -13748,7 +14231,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 484
   },
   {
     "id": "skprunm1",
@@ -13768,7 +14252,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 485
   },
   {
     "id": "skpcblm1",
@@ -13788,7 +14273,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 486
   },
   {
     "id": "skpcblm2",
@@ -13808,7 +14294,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 487
   },
   {
     "id": "skpsdmm1",
@@ -13828,7 +14315,8 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 488
   },
   {
     "id": "skpsdmm2",
@@ -13848,6 +14336,7 @@
     "groupExclusive": null,
     "ilvl": null,
     "level": null,
-    "weight": null
+    "weight": null,
+    "_id": 489
   }
 ]

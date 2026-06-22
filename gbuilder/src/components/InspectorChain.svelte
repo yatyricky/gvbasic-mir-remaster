@@ -29,7 +29,7 @@
                 <button class="panel-close" onclick={() => onClose(i)}>×</button>
             </div>
             <div class="panel-body">
-                {#each panel.columns as col}
+                {#each panel.columns.filter(c => c.name !== "_id") as col}
                     {@const isHighlight = panel.highlightField === col.name}
                     <div class="panel-field" class:highlight={isHighlight}>
                         <InspectorField

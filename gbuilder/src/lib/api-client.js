@@ -20,10 +20,10 @@ export function getTable(name) {
     return request("GET", `/tables/${name}`);
 }
 
-export async function getRow(tableName, id) {
+export async function getRow(tableName, pkValue, pkField) {
     const table = await getTable(tableName);
-    const pk = table.columns[0]?.name || "id";
-    const row = table.rows.find(r => String(r[pk]) === String(id));
+    const pk = pkField || table.columns[0]?.name || "id";
+    const row = table.rows.find(r => String(r[pk]) === String(pkValue));
     return { columns: table.columns, row };
 }
 

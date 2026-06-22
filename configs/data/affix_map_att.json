@@ -21,7 +21,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 1
   },
   {
     "affixId": "fdmg1",
@@ -45,7 +46,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 2
   },
   {
     "affixId": "tdmg1",
@@ -69,7 +71,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 3
   },
   {
     "affixId": "hdmg1",
@@ -93,7 +96,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 4
   },
   {
     "affixId": "pdmg1",
@@ -117,7 +121,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 5
   },
   {
     "affixId": "xdmglo1",
@@ -141,7 +146,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 6
   },
   {
     "affixId": "fdmglo1",
@@ -165,7 +171,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 7
   },
   {
     "affixId": "tdmglo1",
@@ -189,7 +196,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 8
   },
   {
     "affixId": "hdmglo1",
@@ -213,7 +221,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 9
   },
   {
     "affixId": "pdmglo1",
@@ -237,7 +246,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 10
   },
   {
     "affixId": "xdmghi1",
@@ -261,7 +271,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 11
   },
   {
     "affixId": "fdmghi1",
@@ -285,7 +296,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 12
   },
   {
     "affixId": "tdmghi1",
@@ -309,7 +321,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 13
   },
   {
     "affixId": "hdmghi1",
@@ -333,7 +346,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 14
   },
   {
     "affixId": "pdmghi1",
@@ -357,7 +371,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 15
   },
   {
     "affixId": "xed1",
@@ -382,7 +397,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 16
   },
   {
     "affixId": "fed1",
@@ -407,7 +423,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 17
   },
   {
     "affixId": "ted1",
@@ -432,7 +449,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 18
   },
   {
     "affixId": "hed1",
@@ -457,7 +475,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 19
   },
   {
     "affixId": "ped1",
@@ -482,7 +501,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 20
   },
   {
     "affixId": "ued1",
@@ -506,7 +526,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 21
   },
   {
     "affixId": "ded1",
@@ -530,7 +551,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 22
   },
   {
     "affixId": "ced1",
@@ -554,7 +576,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 23
   },
   {
     "affixId": "doted1",
@@ -578,7 +601,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 24
   },
   {
     "affixId": "hled1",
@@ -602,7 +626,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 25
   },
   {
     "affixId": "col1ed1",
@@ -626,7 +651,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 26
   },
   {
     "affixId": "col23ed1",
@@ -650,7 +676,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 27
   },
   {
     "affixId": "sumed1",
@@ -674,7 +701,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 28
   },
   {
     "affixId": "xdr1",
@@ -692,7 +720,8 @@
       "necklace",
       "ring",
       "charm3"
-    ]
+    ],
+    "_id": 29
   },
   {
     "affixId": "fdr1",
@@ -710,7 +739,8 @@
       "necklace",
       "ring",
       "charm3"
-    ]
+    ],
+    "_id": 30
   },
   {
     "affixId": "tdr1",
@@ -728,7 +758,8 @@
       "necklace",
       "ring",
       "charm3"
-    ]
+    ],
+    "_id": 31
   },
   {
     "affixId": "hdr1",
@@ -746,7 +777,8 @@
       "necklace",
       "ring",
       "charm3"
-    ]
+    ],
+    "_id": 32
   },
   {
     "affixId": "pdr1",
@@ -764,7 +796,8 @@
       "necklace",
       "ring",
       "charm3"
-    ]
+    ],
+    "_id": 33
   },
   {
     "affixId": "xres1",
@@ -784,7 +817,8 @@
       "charm1",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 34
   },
   {
     "affixId": "fres1",
@@ -804,7 +838,8 @@
       "charm1",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 35
   },
   {
     "affixId": "tres1",
@@ -824,7 +859,8 @@
       "charm1",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 36
   },
   {
     "affixId": "hres1",
@@ -844,7 +880,8 @@
       "charm1",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 37
   },
   {
     "affixId": "pres1",
@@ -864,7 +901,8 @@
       "charm1",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 38
   },
   {
     "affixId": "ures1",
@@ -883,7 +921,8 @@
       "ring",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 39
   },
   {
     "affixId": "dres1",
@@ -902,7 +941,8 @@
       "ring",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 40
   },
   {
     "affixId": "cres1",
@@ -921,7 +961,8 @@
       "ring",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 41
   },
   {
     "affixId": "c1res1",
@@ -940,7 +981,8 @@
       "ring",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 42
   },
   {
     "affixId": "c23res1",
@@ -959,7 +1001,8 @@
       "ring",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 43
   },
   {
     "affixId": "dotres1",
@@ -978,7 +1021,8 @@
       "ring",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 44
   },
   {
     "affixId": "sumres1",
@@ -997,7 +1041,8 @@
       "ring",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 45
   },
   {
     "affixId": "str1",
@@ -1033,7 +1078,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 46
   },
   {
     "affixId": "int1",
@@ -1069,7 +1115,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 47
   },
   {
     "affixId": "spi1",
@@ -1105,7 +1152,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 48
   },
   {
     "affixId": "vit1",
@@ -1141,7 +1189,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 49
   },
   {
     "affixId": "maxhp1",
@@ -1161,7 +1210,8 @@
       "charm1",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 50
   },
   {
     "affixId": "maxmp1",
@@ -1181,7 +1231,8 @@
       "charm1",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 51
   },
   {
     "affixId": "mhex1",
@@ -1201,7 +1252,8 @@
       "charm2",
       "charm3",
       "ugs"
-    ]
+    ],
+    "_id": 52
   },
   {
     "affixId": "mpex1",
@@ -1223,7 +1275,8 @@
       "woodsword",
       "magestaff",
       "instrument"
-    ]
+    ],
+    "_id": 53
   },
   {
     "affixId": "hreg1",
@@ -1245,7 +1298,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 54
   },
   {
     "affixId": "mreg1",
@@ -1268,7 +1322,8 @@
       "woodsword",
       "magestaff",
       "instrument"
-    ]
+    ],
+    "_id": 55
   },
   {
     "affixId": "sumreg1",
@@ -1284,7 +1339,8 @@
       "woodsword",
       "magestaff",
       "instrument"
-    ]
+    ],
+    "_id": 56
   },
   {
     "affixId": "ll1",
@@ -1304,7 +1360,8 @@
       "mace2h",
       "dagger",
       "polearm"
-    ]
+    ],
+    "_id": 57
   },
   {
     "affixId": "ml1",
@@ -1324,7 +1381,8 @@
       "mace2h",
       "dagger",
       "polearm"
-    ]
+    ],
+    "_id": 58
   },
   {
     "affixId": "d2m1",
@@ -1339,7 +1397,8 @@
       "charm1",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 59
   },
   {
     "affixId": "hit1",
@@ -1366,7 +1425,8 @@
       "mace2h",
       "dagger",
       "polearm"
-    ]
+    ],
+    "_id": 60
   },
   {
     "affixId": "mhit1",
@@ -1390,7 +1450,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 61
   },
   {
     "affixId": "doge1",
@@ -1407,7 +1468,8 @@
       "dao",
       "katana",
       "dagger"
-    ]
+    ],
+    "_id": 62
   },
   {
     "affixId": "mdoge1",
@@ -1424,7 +1486,8 @@
       "dao",
       "katana",
       "dagger"
-    ]
+    ],
+    "_id": 63
   },
   {
     "affixId": "crit1",
@@ -1447,7 +1510,8 @@
       "mace2h",
       "dagger",
       "polearm"
-    ]
+    ],
+    "_id": 64
   },
   {
     "affixId": "critd1",
@@ -1469,7 +1533,8 @@
       "mace2h",
       "dagger",
       "polearm"
-    ]
+    ],
+    "_id": 65
   },
   {
     "affixId": "scrit1",
@@ -1489,7 +1554,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 66
   },
   {
     "affixId": "scritd1",
@@ -1508,7 +1574,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 67
   },
   {
     "affixId": "resil1",
@@ -1518,7 +1585,8 @@
       "pant",
       "necklace",
       "ring"
-    ]
+    ],
+    "_id": 68
   },
   {
     "affixId": "curs1",
@@ -1541,7 +1609,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 69
   },
   {
     "affixId": "bles1",
@@ -1564,7 +1633,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 70
   },
   {
     "affixId": "spd1",
@@ -1574,7 +1644,8 @@
       "ring",
       "katana",
       "dagger"
-    ]
+    ],
+    "_id": 71
   },
   {
     "affixId": "moral1",
@@ -1582,7 +1653,8 @@
       "belt",
       "necklace",
       "ring"
-    ]
+    ],
+    "_id": 72
   },
   {
     "affixId": "pmh1",
@@ -1606,7 +1678,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 73
   },
   {
     "affixId": "debuffrd1",
@@ -1616,7 +1689,8 @@
       "pant",
       "boot",
       "necklace"
-    ]
+    ],
+    "_id": 74
   },
   {
     "affixId": "luck1",
@@ -1634,7 +1708,8 @@
       "charm1",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 75
   },
   {
     "affixId": "eg1",
@@ -1651,7 +1726,8 @@
       "charm1",
       "charm2",
       "charm3"
-    ]
+    ],
+    "_id": 76
   },
   {
     "affixId": "expex1",
@@ -1662,7 +1738,8 @@
       "necklace",
       "ring",
       "charm3"
-    ]
+    ],
+    "_id": 77
   },
   {
     "affixId": "barg1",
@@ -1671,7 +1748,8 @@
       "pant",
       "necklace",
       "charm3"
-    ]
+    ],
+    "_id": 78
   },
   {
     "affixId": "sok1",
@@ -1704,7 +1782,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 79
   },
   {
     "affixId": "sok2",
@@ -1734,7 +1813,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 80
   },
   {
     "affixId": "sok3",
@@ -1758,7 +1838,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 81
   },
   {
     "affixId": "sok4",
@@ -1779,7 +1860,8 @@
       "staff",
       "magestaff",
       "polearm"
-    ]
+    ],
+    "_id": 82
   },
   {
     "affixId": "sok5",
@@ -1792,7 +1874,8 @@
       "staff",
       "magestaff",
       "polearm"
-    ]
+    ],
+    "_id": 83
   },
   {
     "affixId": "flvlmage1",
@@ -1801,7 +1884,8 @@
       "necklace",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 84
   },
   {
     "affixId": "tlvlmage1",
@@ -1810,7 +1894,8 @@
       "necklace",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 85
   },
   {
     "affixId": "magelvl1",
@@ -1818,7 +1903,8 @@
       "magesigil",
       "necklace",
       "magestaff"
-    ]
+    ],
+    "_id": 86
   },
   {
     "affixId": "blvlwarr1",
@@ -1827,7 +1913,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 87
   },
   {
     "affixId": "xlvlwarr1",
@@ -1836,7 +1923,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 88
   },
   {
     "affixId": "warrlvl1",
@@ -1844,7 +1932,8 @@
       "necklace",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 89
   },
   {
     "affixId": "hlvlwlok1",
@@ -1853,7 +1942,8 @@
       "necklace",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 90
   },
   {
     "affixId": "plvlwlok1",
@@ -1862,7 +1952,8 @@
       "necklace",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 91
   },
   {
     "affixId": "wlklvl1",
@@ -1870,7 +1961,8 @@
       "taorobe",
       "necklace",
       "woodsword"
-    ]
+    ],
+    "_id": 92
   },
   {
     "affixId": "alvl1",
@@ -1878,7 +1970,8 @@
       "necklace",
       "dagger",
       "polearm"
-    ]
+    ],
+    "_id": 93
   },
   {
     "affixId": "slvl1",
@@ -1887,7 +1980,8 @@
       "mace",
       "mace2h",
       "dagger"
-    ]
+    ],
+    "_id": 94
   },
   {
     "affixId": "glvl1",
@@ -1896,7 +1990,8 @@
       "axe",
       "axe2h",
       "dagger"
-    ]
+    ],
+    "_id": 95
   },
   {
     "affixId": "flvlmage2",
@@ -1904,7 +1999,8 @@
       "magesigil",
       "necklace",
       "magestaff"
-    ]
+    ],
+    "_id": 96
   },
   {
     "affixId": "tlvlmage2",
@@ -1912,7 +2008,8 @@
       "magesigil",
       "necklace",
       "magestaff"
-    ]
+    ],
+    "_id": 97
   },
   {
     "affixId": "magelvl2",
@@ -1920,7 +2017,8 @@
       "magesigil",
       "necklace",
       "magestaff"
-    ]
+    ],
+    "_id": 98
   },
   {
     "affixId": "blvlwarr2",
@@ -1928,7 +2026,8 @@
       "necklace",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 99
   },
   {
     "affixId": "xlvlwarr2",
@@ -1936,7 +2035,8 @@
       "necklace",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 100
   },
   {
     "affixId": "warrlvl2",
@@ -1944,7 +2044,8 @@
       "necklace",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 101
   },
   {
     "affixId": "hlvlwlok2",
@@ -1952,7 +2053,8 @@
       "taorobe",
       "necklace",
       "woodsword"
-    ]
+    ],
+    "_id": 102
   },
   {
     "affixId": "plvlwlok2",
@@ -1960,7 +2062,8 @@
       "taorobe",
       "necklace",
       "woodsword"
-    ]
+    ],
+    "_id": 103
   },
   {
     "affixId": "wlklvl2",
@@ -1968,7 +2071,8 @@
       "taorobe",
       "necklace",
       "woodsword"
-    ]
+    ],
+    "_id": 104
   },
   {
     "affixId": "alvl2",
@@ -1976,7 +2080,8 @@
       "necklace",
       "dagger",
       "polearm"
-    ]
+    ],
+    "_id": 105
   },
   {
     "affixId": "slvl2",
@@ -1985,7 +2090,8 @@
       "mace",
       "mace2h",
       "dagger"
-    ]
+    ],
+    "_id": 106
   },
   {
     "affixId": "glvl2",
@@ -1994,7 +2100,8 @@
       "axe",
       "axe2h",
       "dagger"
-    ]
+    ],
+    "_id": 107
   },
   {
     "affixId": "flvlmage3",
@@ -2002,7 +2109,8 @@
       "magesigil",
       "necklace",
       "magestaff"
-    ]
+    ],
+    "_id": 108
   },
   {
     "affixId": "tlvlmage3",
@@ -2010,7 +2118,8 @@
       "magesigil",
       "necklace",
       "magestaff"
-    ]
+    ],
+    "_id": 109
   },
   {
     "affixId": "magelvl3",
@@ -2018,7 +2127,8 @@
       "magesigil",
       "necklace",
       "magestaff"
-    ]
+    ],
+    "_id": 110
   },
   {
     "affixId": "blvlwarr3",
@@ -2026,7 +2136,8 @@
       "necklace",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 111
   },
   {
     "affixId": "xlvlwarr3",
@@ -2034,7 +2145,8 @@
       "necklace",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 112
   },
   {
     "affixId": "warrlvl3",
@@ -2042,7 +2154,8 @@
       "necklace",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 113
   },
   {
     "affixId": "hlvlwlok3",
@@ -2050,7 +2163,8 @@
       "taorobe",
       "necklace",
       "woodsword"
-    ]
+    ],
+    "_id": 114
   },
   {
     "affixId": "plvlwlok3",
@@ -2058,7 +2172,8 @@
       "taorobe",
       "necklace",
       "woodsword"
-    ]
+    ],
+    "_id": 115
   },
   {
     "affixId": "wlklvl3",
@@ -2066,7 +2181,8 @@
       "taorobe",
       "necklace",
       "woodsword"
-    ]
+    ],
+    "_id": 116
   },
   {
     "affixId": "slvl3",
@@ -2075,7 +2191,8 @@
       "mace",
       "mace2h",
       "dagger"
-    ]
+    ],
+    "_id": 117
   },
   {
     "affixId": "glvl3",
@@ -2084,7 +2201,8 @@
       "axe",
       "axe2h",
       "dagger"
-    ]
+    ],
+    "_id": 118
   },
   {
     "affixId": "skfbltmage1",
@@ -2096,7 +2214,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 119
   },
   {
     "affixId": "skfrngmage1",
@@ -2108,7 +2227,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 120
   },
   {
     "affixId": "skfinfmage1",
@@ -2120,7 +2240,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 121
   },
   {
     "affixId": "skfbalmage1",
@@ -2132,7 +2253,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 122
   },
   {
     "affixId": "skfblsmage1",
@@ -2144,7 +2266,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 123
   },
   {
     "affixId": "skfwalmage1",
@@ -2156,7 +2279,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 124
   },
   {
     "affixId": "sktchmmage1",
@@ -2168,7 +2292,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 125
   },
   {
     "affixId": "sktbltmage1",
@@ -2180,7 +2305,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 126
   },
   {
     "affixId": "sktltnmage1",
@@ -2192,7 +2318,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 127
   },
   {
     "affixId": "sktnovmage1",
@@ -2204,7 +2331,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 128
   },
   {
     "affixId": "sktshdmage1",
@@ -2216,7 +2344,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 129
   },
   {
     "affixId": "sktblzmage1",
@@ -2228,7 +2357,8 @@
       "charm2",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 130
   },
   {
     "affixId": "skbbaswarr1",
@@ -2240,7 +2370,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 131
   },
   {
     "affixId": "skbcrtwarr1",
@@ -2252,7 +2383,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 132
   },
   {
     "affixId": "skbthrwarr1",
@@ -2264,7 +2396,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 133
   },
   {
     "affixId": "skbclvwarr1",
@@ -2276,7 +2409,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 134
   },
   {
     "affixId": "skbcrzwarr1",
@@ -2288,7 +2422,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 135
   },
   {
     "affixId": "skbfblwarr1",
@@ -2300,7 +2435,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 136
   },
   {
     "affixId": "skxdefwarr1",
@@ -2312,7 +2448,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 137
   },
   {
     "affixId": "skxdogwarr1",
@@ -2324,7 +2461,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 138
   },
   {
     "affixId": "skxctawarr1",
@@ -2336,7 +2474,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 139
   },
   {
     "affixId": "skxwmswarr1",
@@ -2348,7 +2487,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 140
   },
   {
     "affixId": "skxchgwarr1",
@@ -2360,7 +2500,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 141
   },
   {
     "affixId": "skxtstwarr1",
@@ -2372,7 +2513,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 142
   },
   {
     "affixId": "skhhelwlok1",
@@ -2384,7 +2526,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 143
   },
   {
     "affixId": "skhgsdwlok1",
@@ -2396,7 +2539,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 144
   },
   {
     "affixId": "skhinvwlok1",
@@ -2408,7 +2552,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 145
   },
   {
     "affixId": "skhhsdwlok1",
@@ -2420,7 +2565,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 146
   },
   {
     "affixId": "skhlokwlok1",
@@ -2432,7 +2578,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 147
   },
   {
     "affixId": "skhmhlwlok1",
@@ -2444,7 +2591,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 148
   },
   {
     "affixId": "skpbaswlok1",
@@ -2456,7 +2604,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 149
   },
   {
     "affixId": "skppoiwlok1",
@@ -2468,7 +2617,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 150
   },
   {
     "affixId": "skpsklwlok1",
@@ -2480,7 +2630,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 151
   },
   {
     "affixId": "skprunwlok1",
@@ -2492,7 +2643,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 152
   },
   {
     "affixId": "skpcblwlok1",
@@ -2504,7 +2656,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 153
   },
   {
     "affixId": "skpsdmwlok1",
@@ -2516,7 +2669,8 @@
       "charm2",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 154
   },
   {
     "affixId": "skfbltmage2",
@@ -2527,7 +2681,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 155
   },
   {
     "affixId": "skfrngmage2",
@@ -2538,7 +2693,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 156
   },
   {
     "affixId": "skfinfmage2",
@@ -2549,7 +2705,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 157
   },
   {
     "affixId": "skfbalmage2",
@@ -2560,7 +2717,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 158
   },
   {
     "affixId": "skfblsmage2",
@@ -2571,7 +2729,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 159
   },
   {
     "affixId": "skfwalmage2",
@@ -2582,7 +2741,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 160
   },
   {
     "affixId": "sktchmmage2",
@@ -2593,7 +2753,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 161
   },
   {
     "affixId": "sktbltmage2",
@@ -2604,7 +2765,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 162
   },
   {
     "affixId": "sktltnmage2",
@@ -2615,7 +2777,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 163
   },
   {
     "affixId": "sktnovmage2",
@@ -2626,7 +2789,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 164
   },
   {
     "affixId": "sktshdmage2",
@@ -2637,7 +2801,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 165
   },
   {
     "affixId": "sktblzmage2",
@@ -2648,7 +2813,8 @@
       "ring",
       "charm3",
       "magestaff"
-    ]
+    ],
+    "_id": 166
   },
   {
     "affixId": "skbbaswarr2",
@@ -2659,7 +2825,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 167
   },
   {
     "affixId": "skbcrtwarr2",
@@ -2670,7 +2837,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 168
   },
   {
     "affixId": "skbthrwarr2",
@@ -2681,7 +2849,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 169
   },
   {
     "affixId": "skbclvwarr2",
@@ -2692,7 +2861,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 170
   },
   {
     "affixId": "skbcrzwarr2",
@@ -2703,7 +2873,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 171
   },
   {
     "affixId": "skbfblwarr2",
@@ -2714,7 +2885,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 172
   },
   {
     "affixId": "skxdefwarr2",
@@ -2725,7 +2897,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 173
   },
   {
     "affixId": "skxdogwarr2",
@@ -2736,7 +2909,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 174
   },
   {
     "affixId": "skxctawarr2",
@@ -2747,7 +2921,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 175
   },
   {
     "affixId": "skxwmswarr2",
@@ -2758,7 +2933,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 176
   },
   {
     "affixId": "skxchgwarr2",
@@ -2769,7 +2945,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 177
   },
   {
     "affixId": "skxtstwarr2",
@@ -2780,7 +2957,8 @@
       "charm3",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 178
   },
   {
     "affixId": "skhhelwlok2",
@@ -2791,7 +2969,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 179
   },
   {
     "affixId": "skhgsdwlok2",
@@ -2802,7 +2981,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 180
   },
   {
     "affixId": "skhinvwlok2",
@@ -2813,7 +2993,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 181
   },
   {
     "affixId": "skhhsdwlok2",
@@ -2824,7 +3005,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 182
   },
   {
     "affixId": "skhlokwlok2",
@@ -2835,7 +3017,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 183
   },
   {
     "affixId": "skhmhlwlok2",
@@ -2846,7 +3029,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 184
   },
   {
     "affixId": "skpbaswlok2",
@@ -2857,7 +3041,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 185
   },
   {
     "affixId": "skppoiwlok2",
@@ -2868,7 +3053,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 186
   },
   {
     "affixId": "skpsklwlok2",
@@ -2879,7 +3065,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 187
   },
   {
     "affixId": "skprunwlok2",
@@ -2890,7 +3077,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 188
   },
   {
     "affixId": "skpcblwlok2",
@@ -2901,7 +3089,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 189
   },
   {
     "affixId": "skpsdmwlok2",
@@ -2912,7 +3101,8 @@
       "ring",
       "charm3",
       "woodsword"
-    ]
+    ],
+    "_id": 190
   },
   {
     "affixId": "skfbltmage3",
@@ -2922,7 +3112,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 191
   },
   {
     "affixId": "skfrngmage3",
@@ -2932,7 +3123,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 192
   },
   {
     "affixId": "skfinfmage3",
@@ -2942,7 +3134,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 193
   },
   {
     "affixId": "skfbalmage3",
@@ -2952,7 +3145,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 194
   },
   {
     "affixId": "skfblsmage3",
@@ -2962,7 +3156,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 195
   },
   {
     "affixId": "skfwalmage3",
@@ -2972,7 +3167,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 196
   },
   {
     "affixId": "sktchmmage3",
@@ -2982,7 +3178,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 197
   },
   {
     "affixId": "sktbltmage3",
@@ -2992,7 +3189,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 198
   },
   {
     "affixId": "sktltnmage3",
@@ -3002,7 +3200,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 199
   },
   {
     "affixId": "sktnovmage3",
@@ -3012,7 +3211,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 200
   },
   {
     "affixId": "sktshdmage3",
@@ -3022,7 +3222,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 201
   },
   {
     "affixId": "sktblzmage3",
@@ -3032,7 +3233,8 @@
       "necklace",
       "ring",
       "magestaff"
-    ]
+    ],
+    "_id": 202
   },
   {
     "affixId": "skbbaswarr3",
@@ -3042,7 +3244,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 203
   },
   {
     "affixId": "skbcrtwarr3",
@@ -3052,7 +3255,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 204
   },
   {
     "affixId": "skbthrwarr3",
@@ -3062,7 +3266,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 205
   },
   {
     "affixId": "skbclvwarr3",
@@ -3072,7 +3277,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 206
   },
   {
     "affixId": "skbcrzwarr3",
@@ -3082,7 +3288,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 207
   },
   {
     "affixId": "skbfblwarr3",
@@ -3092,7 +3299,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 208
   },
   {
     "affixId": "skxdefwarr3",
@@ -3102,7 +3310,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 209
   },
   {
     "affixId": "skxdogwarr3",
@@ -3112,7 +3321,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 210
   },
   {
     "affixId": "skxctawarr3",
@@ -3122,7 +3332,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 211
   },
   {
     "affixId": "skxwmswarr3",
@@ -3132,7 +3343,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 212
   },
   {
     "affixId": "skxchgwarr3",
@@ -3142,7 +3354,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 213
   },
   {
     "affixId": "skxtstwarr3",
@@ -3152,7 +3365,8 @@
       "ring",
       "ugs",
       "katana"
-    ]
+    ],
+    "_id": 214
   },
   {
     "affixId": "skhhelwlok3",
@@ -3162,7 +3376,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 215
   },
   {
     "affixId": "skhgsdwlok3",
@@ -3172,7 +3387,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 216
   },
   {
     "affixId": "skhinvwlok3",
@@ -3182,7 +3398,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 217
   },
   {
     "affixId": "skhhsdwlok3",
@@ -3192,7 +3409,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 218
   },
   {
     "affixId": "skhlokwlok3",
@@ -3202,7 +3420,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 219
   },
   {
     "affixId": "skhmhlwlok3",
@@ -3212,7 +3431,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 220
   },
   {
     "affixId": "skpbaswlok3",
@@ -3222,7 +3442,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 221
   },
   {
     "affixId": "skppoiwlok3",
@@ -3232,7 +3453,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 222
   },
   {
     "affixId": "skpsklwlok3",
@@ -3242,7 +3464,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 223
   },
   {
     "affixId": "skprunwlok3",
@@ -3252,7 +3475,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 224
   },
   {
     "affixId": "skpcblwlok3",
@@ -3262,7 +3486,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 225
   },
   {
     "affixId": "skpsdmwlok3",
@@ -3272,7 +3497,8 @@
       "necklace",
       "ring",
       "woodsword"
-    ]
+    ],
+    "_id": 226
   },
   {
     "affixId": "atkfblt1",
@@ -3296,7 +3522,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 227
   },
   {
     "affixId": "atkfbal1",
@@ -3320,7 +3547,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 228
   },
   {
     "affixId": "atktblt1",
@@ -3344,7 +3572,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 229
   },
   {
     "affixId": "atkpcbl1",
@@ -3368,7 +3597,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 230
   },
   {
     "affixId": "hitfrng1",
@@ -3386,7 +3616,8 @@
       "necklace",
       "ring",
       "polearm"
-    ]
+    ],
+    "_id": 231
   },
   {
     "affixId": "hithinv1",
@@ -3404,7 +3635,8 @@
       "necklace",
       "ring",
       "polearm"
-    ]
+    ],
+    "_id": 232
   },
   {
     "affixId": "hittnov1",
@@ -3422,7 +3654,8 @@
       "necklace",
       "ring",
       "polearm"
-    ]
+    ],
+    "_id": 233
   },
   {
     "affixId": "hithhel1",
@@ -3440,7 +3673,8 @@
       "necklace",
       "ring",
       "polearm"
-    ]
+    ],
+    "_id": 234
   },
   {
     "affixId": "xref1",
@@ -3461,7 +3695,8 @@
       "charm2",
       "charm3",
       "axe"
-    ]
+    ],
+    "_id": 235
   },
   {
     "affixId": "fref1",
@@ -3482,7 +3717,8 @@
       "charm2",
       "charm3",
       "axe"
-    ]
+    ],
+    "_id": 236
   },
   {
     "affixId": "tref1",
@@ -3503,7 +3739,8 @@
       "charm2",
       "charm3",
       "axe"
-    ]
+    ],
+    "_id": 237
   },
   {
     "affixId": "href1",
@@ -3524,7 +3761,8 @@
       "charm2",
       "charm3",
       "axe"
-    ]
+    ],
+    "_id": 238
   },
   {
     "affixId": "pref1",
@@ -3545,7 +3783,8 @@
       "charm2",
       "charm3",
       "axe"
-    ]
+    ],
+    "_id": 239
   },
   {
     "affixId": "killfwal1",
@@ -3567,7 +3806,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 240
   },
   {
     "affixId": "killbclv1",
@@ -3589,7 +3829,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 241
   },
   {
     "affixId": "killxcta1",
@@ -3611,7 +3852,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 242
   },
   {
     "affixId": "killpskl1",
@@ -3633,7 +3875,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 243
   },
   {
     "affixId": "killhp1",
@@ -3662,7 +3905,8 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 244
   },
   {
     "affixId": "killmp1",
@@ -3693,6 +3937,7 @@
       "magestaff",
       "polearm",
       "instrument"
-    ]
+    ],
+    "_id": 245
   }
 ]

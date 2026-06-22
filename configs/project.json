@@ -1,5 +1,5 @@
 {
-  "name": "Generated Config",
+  "name": "configs",
   "dataDir": "./data",
   "tables": {
     "Affix": {
@@ -464,9 +464,7 @@
         {
           "name": "affixId",
           "type": "FK:Affix",
-          "meta": [
-            "Index"
-          ]
+          "meta": []
         },
         {
           "name": "itemTypes",

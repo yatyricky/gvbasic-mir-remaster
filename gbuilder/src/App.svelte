@@ -57,15 +57,14 @@
 
     async function handleFieldChange(columnName, newValue) {
         if (!selectedRow || !activeTable) return;
+        const id = selectedRow._id;
         selectedRow[columnName] = newValue;
         selectedRow = { ...selectedRow };
-        const pk = getPK();
-        const id = selectedRow[pk];
         try {
             await updateRow(activeTable, id, selectedRow);
             saveStatus = "saved";
             if (tableData) {
-                const idx = tableData.rows.findIndex(r => r[pk] === id);
+                const idx = tableData.rows.findIndex(r => r._id === id);
                 if (idx !== -1) tableData.rows[idx] = { ...selectedRow };
             }
             setTimeout(() => saveStatus = null, 1500);
@@ -80,13 +79,14 @@
     // Destroys all panels AFTER fromPanelIndex, then appends the new one
     async function openFKInChain(targetTable, targetId, fromPanelIndex) {
         try {
-            const { columns, row } = await getRow(targetTable, targetId);
+            const pk = project.tables[targetTable]?.primaryKey || "id";
+            const { columns, row } = await getRow(targetTable, targetId, pk);
             if (!row) return;
             // Keep panels 0..fromPanelIndex, destroy everything after, then append
             const newPanels = chainPanels.slice(0, fromPanelIndex + 1);
             newPanels.push({
                 table: targetTable,
-                id: targetId,
+                id: row._id,
                 row: { ...row },
                 columns,
                 highlightField: null,
@@ -100,11 +100,12 @@
     // Open a FK from the main inspector (panelIndex = -1 means from main)
     async function openFKFromMain(targetTable, targetId) {
         try {
-            const { columns, row } = await getRow(targetTable, targetId);
+            const pk = project.tables[targetTable]?.primaryKey || "id";
+            const { columns, row } = await getRow(targetTable, targetId, pk);
             if (!row) return;
             chainPanels = [{
                 table: targetTable,
-                id: targetId,
+                id: row._id,
                 row: { ...row },
                 columns,
                 highlightField: null,
@@ -210,7 +211,7 @@
                         {/if}
                     </div>
                     <div class="inspector-content">
-                        {#each tableData.columns as col}
+                        {#each tableData.columns.filter(c => c.name !== "_id") as col}
                             {@const linked = col.linkedColumn
                                 ? {
                                     name: col.linkedColumn,

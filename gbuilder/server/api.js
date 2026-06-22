@@ -29,12 +29,29 @@ function getDataDir() {
     return join(getProjectDir(), project.dataDir || "./data");
 }
 
+function ensureIds(rows) {
+    let maxId = 0;
+    for (const r of rows) {
+        if (r._id != null && r._id > maxId) maxId = r._id;
+    }
+    let changed = false;
+    for (const r of rows) {
+        if (r._id == null) {
+            r._id = ++maxId;
+            changed = true;
+        }
+    }
+    return changed;
+}
+
 function rebuildFKCache() {
     const project = getProject();
     if (!project) return;
     const dataDir = getDataDir();
     for (const [name, cfg] of Object.entries(project.tables)) {
-        const rows = readFile(join(dataDir, cfg.file)) || [];
+        const filePath = join(dataDir, cfg.file);
+        const rows = readFile(filePath) || [];
+        if (ensureIds(rows)) writeFile(filePath, rows);
         fkResolver.loadTable(name, cfg.primaryKey, cfg.displayField, rows);
     }
 }
@@ -130,9 +147,11 @@ app.patch("/api/tables/:name/:id", (req, res) => {
     if (!cfg) return res.status(404).json({ error: "Table not found" });
     const filePath = join(getDataDir(), cfg.file);
     const rows = readFile(filePath) || [];
-    const idx = rows.findIndex((r) => r[cfg.primaryKey] === req.params.id);
+    const id = Number(req.params.id);
+    const idx = rows.findIndex((r) => r._id === id);
     if (idx === -1) return res.status(404).json({ error: "Row not found" });
     rows[idx] = req.body.row;
+    rows[idx]._id = id;
     writeFile(filePath, rows);
     res.json({ ok: true });
 });
@@ -145,6 +164,8 @@ app.post("/api/tables/:name", (req, res) => {
     if (!cfg) return res.status(404).json({ error: "Table not found" });
     const filePath = join(getDataDir(), cfg.file);
     const rows = readFile(filePath) || [];
+    const maxId = rows.reduce((max, r) => r._id > max ? r._id : max, 0);
+    req.body.row._id = maxId + 1;
     rows.push(req.body.row);
     writeFile(filePath, rows);
     res.status(201).json({ ok: true });
@@ -157,8 +178,9 @@ app.delete("/api/tables/:name/:id", (req, res) => {
     const cfg = project.tables[req.params.name];
     if (!cfg) return res.status(404).json({ error: "Table not found" });
     const filePath = join(getDataDir(), cfg.file);
+    const id = Number(req.params.id);
     let rows = readFile(filePath) || [];
-    rows = rows.filter((r) => r[cfg.primaryKey] !== req.params.id);
+    rows = rows.filter((r) => r._id !== id);
     writeFile(filePath, rows);
     res.json({ ok: true });
 });

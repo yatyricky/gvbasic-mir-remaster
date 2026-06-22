@@ -15,8 +15,10 @@
     /** @type {{ column: string, dir: 'asc'|'desc' } | null} */
     let sort = $state(null);
 
+    const visibleColumns = $derived(columns.filter(c => c.name !== "_id"));
+
     function isSelected(row) {
-        return selectedRow && columns.length > 0 && row[columns[0].name] === selectedRow[columns[0].name];
+        return selectedRow && row._id === selectedRow._id;
     }
 
     function matchesFilter(val, filter, colType, colName) {
@@ -71,7 +73,7 @@
         if (activeFilters.length > 0) {
             result = result.filter(row =>
                 activeFilters.every(([colName, filter]) => {
-                    const col = columns.find(c => c.name === colName);
+                    const col = visibleColumns.find(c => c.name === colName);
                     return col ? matchesFilter(row[colName], filter, col.type, colName) : true;
                 })
             );
@@ -79,7 +81,7 @@
 
         // Sort
         if (sort) {
-            const col = columns.find(c => c.name === sort.column);
+            const col = visibleColumns.find(c => c.name === sort.column);
             if (col) {
                 const t = parseType(col.type);
                 const dir = sort.dir === 'asc' ? 1 : -1;
@@ -106,7 +108,7 @@
 
     // Batch resolve FKs with template support
     $effect(() => {
-        const fkColumns = columns.filter(c => {
+        const fkColumns = visibleColumns.filter(c => {
             const t = parseType(c.type);
             return t.kind === "fk" || (t.kind === "array" && t.element.kind === "fk");
         });
@@ -159,7 +161,7 @@
     <table class="grid">
         <thead>
             <tr>
-                {#each columns as col}
+                {#each visibleColumns as col}
                     <th>
                         <ColumnHeader
                             column={col}
@@ -181,12 +183,12 @@
             </tr>
         </thead>
         <tbody>
-            {#each processedRows as row (row[columns[0]?.name] ?? Math.random())}
+            {#each processedRows as row (row._id)}
                 <tr
                     class:selected={isSelected(row)}
                     onclick={() => onSelectRow(row)}
                 >
-                    {#each columns as col}
+                    {#each visibleColumns as col}
                         <td>
                             <GridCell value={row[col.name]} column={col} {getFKDisplay} enums={project?.enums} />
                         </td>
