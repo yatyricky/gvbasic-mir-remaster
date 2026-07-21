@@ -1,74 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    background-color: #8A8782;
-    touch-action: manipulation;
-    font-family: Arial, Helvetica, sans-serif;
+  background: #11111b;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  font-family: "Courier New", "SimHei", monospace;
+}
 
-    /* Disable text selection */
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-
-    /* Disable touch callout on iOS */
-    -webkit-touch-callout: none;
-
-    margin: 0;
+#wrapper {
+  position: relative;
+  margin-top: 10px;
 }
 
 #app {
-    margin: 0 auto;
-    background-color: #337048;
+  display: block;
+  image-rendering: pixelated;
+}
+
+/* Virtual D-Pad (mobile) */
+#vpad {
+  display: none;
+  position: relative;
+  width: 400px;
+  height: 80px;
+  margin: 0 auto;
+  background: #181825;
+}
+
+@media (pointer: coarse) {
+  #vpad {
     display: block;
-    width: 400px;
-    height: 200px;
-}
-
-#svui {
-    margin: 0 auto;
-    display: block;
-    background-color: #4d4540;
-    position: relative;
-    font-size: 20px;
-    width: 400px;
-    height: 400px;
-}
-
-#debugPanels {
-    display: flex;
-    width: 100%;
-    margin-top: 10px;
-    max-height: 600px;
-    overflow: auto;
-}
-
-#hierarchyTree {
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    width: 33%;
-    height: 50%;
-    border: 1px solid #000;
-    overflow: auto;
-}
-
-#inspector {
-    position: absolute;
-    bottom: 0;
-    top: 50%;
-    left: 0;
-    width: 33%;
-    height: 49.9%;
-    border: 1px solid #000;
-    overflow: auto;
-}
-
-#watch {
-    position: absolute;
-    bottom: 0;
-    top: 850px;
-    left: 33%;
-    width: 33.9%;
-    border: 1px solid #000;
-    overflow: auto;
+  }
 }
